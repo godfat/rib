@@ -2,13 +2,13 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-desc 'Run test'
+desc 'Run tests'
 task :test do
   sh("#{Gem.ruby} -I lib -S bacon test/test_*.rb")
 end
 
 desc 'Generate gemspec'
-task 'gemspec' do
+task :gemspec do
   File.open('ripl-rc.gemspec', 'w'){ |f|
     f <<
       Gem::Specification.new do |s|
