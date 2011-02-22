@@ -23,10 +23,16 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<ripl>, [">= 0"])
+      s.add_development_dependency(%q<bacon>, [">= 0"])
+      s.add_development_dependency(%q<rr>, [">= 0"])
     else
       s.add_dependency(%q<ripl>, [">= 0"])
+      s.add_dependency(%q<bacon>, [">= 0"])
+      s.add_dependency(%q<rr>, [">= 0"])
     end
   else
     s.add_dependency(%q<ripl>, [">= 0"])
+    s.add_dependency(%q<bacon>, [">= 0"])
+    s.add_dependency(%q<rr>, [">= 0"])
   end
 end

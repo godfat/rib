@@ -17,6 +17,9 @@ task :gemspec do
         s.version = Ripl::Rc::VERSION
 
         s.add_dependency('ripl')
+        %w[bacon rr].each{ |g|
+          s.add_development_dependency(g)
+        }
 
         s.authors     = ['Lin Jen-Shin (godfat)']
         s.email       = ['godfat (XD) godfat.org']
