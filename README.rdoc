@@ -1,6 +1,6 @@
 = ripl-rc 0.1.0
 by Lin Jen-Shin (godfat[http://godfat.org])
-  godfat (XD) godfat.org
+godfat (XD) godfat.org
 
 == LINKS:
 
