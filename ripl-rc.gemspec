@@ -1,26 +1,31 @@
-# encoding: utf-8
-
-($LOAD_PATH << "#{File.dirname(__FILE__)}/lib").uniq!
-require 'ripl/rc/version'
+# -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name    = 'ripl-rc'
-  s.version = Ripl::Rc::VERSION
+  s.name = %q{ripl-rc}
+  s.version = "0.1.0"
 
-  s.add_dependency('ripl')
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.authors = ["Lin Jen-Shin (godfat)"]
+  s.date = %q{2011-02-23}
+  s.description = %q{ripl plugins collection}
+  s.email = ["godfat (XD) godfat.org"]
+  s.extra_rdoc_files = ["CHANGES", "README", "ripl-rc.gemspec"]
+  s.files = [".gitignore", "CHANGES", "Gemfile", "LICENSE", "README", "README.rdoc", "Rakefile", "TODO", "lib/ripl/rc.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/version.rb", "ripl-rc.gemspec"]
+  s.homepage = %q{http://github.com/godfat/ripl-rc}
+  s.rdoc_options = ["--main", "README"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.5.2}
+  s.summary = %q{ripl plugins collection}
 
-  s.authors     = ['Lin Jen-Shin (godfat)']
-  s.email       = ['godfat (XD) godfat.org']
-  s.homepage    = "http://github.com/godfat/#{s.name}"
-  s.summary     = File.read("#{File.dirname(__FILE__)}/README").match(
-                  /== DESCRIPTION:\n\n(.+)?\n\n== FEATURES:/m)[1]
-  s.description = s.summary
+  if s.respond_to? :specification_version then
+    s.specification_version = 3
 
-  s.date             = Time.now.strftime('%Y-%m-%d')
-  s.rubygems_version = Gem::VERSION
-  s.files            = `git ls-files`.split("\n")
-  s.test_files       = `git ls-files -- test/test_*.rb`.split("\n")
-  s.extra_rdoc_files = ['CHANGES', 'README', "#{s.name}.gemspec"]
-  s.rdoc_options     = ['--main', 'README']
-  s.require_paths    = ['lib']
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<ripl>, [">= 0"])
+    else
+      s.add_dependency(%q<ripl>, [">= 0"])
+    end
+  else
+    s.add_dependency(%q<ripl>, [">= 0"])
+  end
 end
