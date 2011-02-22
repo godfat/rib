@@ -9,6 +9,7 @@ end
 
 desc 'Generate gemspec'
 task :gemspec do
+  require 'ripl/rc/version'
   File.open('ripl-rc.gemspec', 'w'){ |f|
     f <<
       Gem::Specification.new do |s|
