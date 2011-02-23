@@ -19,7 +19,7 @@ if File.exist?(gemspec) && File.read(gemspec).strip != ''
 
   desc "Create tag #{b.version_tag} and build and push " \
        "#{b.name}-#{b.version}.gem to Rubygems"
-  task :release => [:check_version, :gemspec] do
+  task :release => [:gemspec, :check_version] do
     b.release_gem
   end
 
