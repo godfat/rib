@@ -1,6 +1,10 @@
 
-require 'bundler'
-Bundler::GemHelper.install_tasks
+gemspec = "#{File.dirname(__FILE__)}/ripl-rc.gemspec"
+
+if File.exist?(gemspec) && File.read(gemspec).strip != ''
+  require 'bundler'
+  Bundler::GemHelper.install_tasks
+end
 
 desc 'Run tests'
 task :test do
