@@ -25,14 +25,14 @@ if File.exist?(gemspec) && File.read(gemspec).strip != ''
 
   task :check_version do
     if ENV['VERSION'].nil?
-      puts("\x1b[33mPlease provide "                     \
-           "\x1b[36mVERSION\x1b[33m=\x1b[36mx.y.z\x1b[m")
+      puts("\x1b[32mPlease provide "                     \
+           "\x1b[36mVERSION\x1b[32m=\x1b[36mx.y.z\x1b[m")
       exit(1)
 
     elsif ENV['VERSION'] != b.version.to_s
-      puts("\x1b[33mYou gave \x1b[36mVERSION\x1b[33m=\x1b[36m#{b.version} " \
-           "\x1b[33mbut got\n         \x1b[36m"                             \
-           "VERSION\x1b[33m=\x1b[36m#{ENV['VERSION']}\x1b[m")
+      puts("\x1b[32mYou gave \x1b[36mVERSION\x1b[32m=\x1b[36m#{b.version} " \
+           "\x1b[32mbut got\n         \x1b[36m"                             \
+           "VERSION\x1b[32m=\x1b[36m#{ENV['VERSION']}\x1b[m")
       exit(2)
     end
   end
