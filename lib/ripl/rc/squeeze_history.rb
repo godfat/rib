@@ -1,23 +1,9 @@
 
 require 'ripl'
 
-module Ripl::Rc
-  module Imp
-    def squeeze_history history
-      history.to_a.inject([]){ |result, item|
-        if result.last == item
-          result
-        else
-          result << item
-        end
-      }
-    end
-  end
-  module U; extend Imp; end
-end
-
+module Ripl::Rc; end
 module Ripl::Rc::SqueezeHistory
-  include Ripl::Rc
+  include Ripl::Rc # makes U avaliable
 
   # write squeezed history
   def write_history
@@ -32,6 +18,20 @@ module Ripl::Rc::SqueezeHistory
                   (history.size > 1 && input == history[-2])
     super
   end
+
+  module Imp
+    def squeeze_history history
+      history.to_a.inject([]){ |result, item|
+        if result.last == item
+          result
+        else
+          result << item
+        end
+      }
+    end
+  end
 end
+
+module Ripl::Rc::U; extend Ripl::Rc::SqueezeHistory::Imp; end
 
 Ripl::Shell.include(Ripl::Rc::SqueezeHistory)

@@ -1,7 +1,15 @@
 
 require 'ripl'
 
-module Ripl::Rc
+module Ripl::Rc; end
+module Ripl::Rc::StripBacktrace
+  include Ripl::Rc # makes U avaliable
+
+  # strip backtrace until ripl
+  def format_error e
+    "#{e.class}: #{e.message}\n  #{U.strip_backtrace(e).join("\n  ")}"
+  end
+
   module Imp
     module_function
     def strip_backtrace e
@@ -21,16 +29,8 @@ module Ripl::Rc
                      -1]
     end
   end
-  module U; extend Imp; end
 end
 
-module Ripl::Rc::StripBacktrace
-  include Ripl::Rc
-
-  # strip backtrace until ripl
-  def format_error e
-    "#{e.class}: #{e.message}\n  #{U.strip_backtrace(e).join("\n  ")}"
-  end
-end
+module Ripl::Rc::U; extend Ripl::Rc::StripBacktrace::Imp; end
 
 Ripl::Shell.include(Ripl::Rc::StripBacktrace)

@@ -1,31 +1,9 @@
 
 require 'ripl'
 
-module Ripl::Rc
-  module Imp
-    def colors
-      Ripl.config[:rc_color]
-    end
-
-    def color rgb
-      "\x1b[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
-    end
-
-    def   black &block; color(30, &block); end
-    def     red &block; color(31, &block); end
-    def   green &block; color(32, &block); end
-    def  yellow &block; color(33, &block); end
-    def    blue &block; color(34, &block); end
-    def magenta &block; color(35, &block); end
-    def    cyan &block; color(36, &block); end
-    def   white &block; color(37, &block); end
-    def   reset &block; color('', &block); end
-  end
-  module U; extend Imp; end
-end
-
+module Ripl::Rc; end
 module Ripl::Rc::Color
-  include Ripl::Rc
+  include Ripl::Rc # makes U avaliable
 
   def format_result result
     case result
@@ -49,7 +27,29 @@ module Ripl::Rc::Color
                     end
     end
   end
+
+  module Imp
+    def colors
+      Ripl.config[:rc_color]
+    end
+
+    def color rgb
+      "\x1b[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
+    end
+
+    def   black &block; color(30, &block); end
+    def     red &block; color(31, &block); end
+    def   green &block; color(32, &block); end
+    def  yellow &block; color(33, &block); end
+    def    blue &block; color(34, &block); end
+    def magenta &block; color(35, &block); end
+    def    cyan &block; color(36, &block); end
+    def   white &block; color(37, &block); end
+    def   reset &block; color('', &block); end
+  end
 end
+
+module Ripl::Rc::U; extend Ripl::Rc::Color::Imp; end
 
 Ripl::Shell.include(Ripl::Rc::Color)
 Ripl.config[:rc_color] ||= {
