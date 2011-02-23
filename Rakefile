@@ -3,7 +3,39 @@ gemspec = "#{File.dirname(__FILE__)}/ripl-rc.gemspec"
 
 if File.exist?(gemspec) && File.read(gemspec).strip != ''
   require 'bundler'
-  Bundler::GemHelper.install_tasks
+  # please do me a favor, don't use thor!!
+  b = Bundler::GemHelper.new(File.dirname(__FILE__))
+  Bundler::GemHelper.send(:public, :name, :version, :version_tag)
+
+  desc "Build #{b.name}-#{b.version}.gem into the pkg directory"
+  task :build => [:gemspec] do
+    b.build_gem
+  end
+
+  desc "Build and install #{b.name}-#{b.version}.gem into system gems"
+  task :install => [:gemspec] do
+    b.install_gem
+  end
+
+  desc "Create tag #{b.version_tag} and build and push " \
+       "#{b.name}-#{b.version}.gem to Rubygems"
+  task :release => [:check_version, :gemspec] do
+    b.release_gem
+  end
+
+  task :check_version do
+    if ENV['VERSION'].nil?
+      puts("\x1b[33mPlease provide "                     \
+           "\x1b[36mVERSION\x1b[33m=\x1b[36mx.y.z\x1b[m")
+      exit(1)
+
+    elsif ENV['VERSION'] != b.version.to_s
+      puts("\x1b[33mYou gave \x1b[36mVERSION\x1b[33m=\x1b[36m#{b.version} " \
+           "\x1b[33mbut got\n         \x1b[36m"                             \
+           "VERSION\x1b[33m=\x1b[36m#{ENV['VERSION']}\x1b[m")
+      exit(2)
+    end
+  end
 end
 
 desc 'Run tests'
