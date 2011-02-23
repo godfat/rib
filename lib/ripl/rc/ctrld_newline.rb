@@ -1,6 +1,7 @@
 
 require 'ripl'
 
+module Ripl::Rc; end
 module Ripl::Rc::CtrldNewline
   # make ctrl-d end with a newline
   def after_loop
