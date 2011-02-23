@@ -3,19 +3,11 @@ require 'ripl'
 
 module Ripl::Rc; end
 module Ripl::Rc::Color
-  def format_result result
-    colors = {
-      String     => :green  ,
-      Numeric    => :red    ,
-      Symbol     => :cyan   ,
-      Array      => :blue   ,
-      Hash       => :blue   ,
-      NilClass   => :magenta,
-      TrueClass  => :magenta,
-      FalseClass => :magenta,
-      Object     => :yellow
-    }
+  def colors
+    config[:rc_color]
+  end
 
+  def format_result result
     case result
       when String ; send(colors[String      ]){ "'#{result}'"  }
       when Numeric; send(colors[Numeric     ]){ result         }
@@ -54,3 +46,14 @@ module Ripl::Rc::Color
 end
 
 Ripl::Shell.include(Ripl::Rc::Color)
+Ripl.config[:rc_color] ||= {
+  String     => :green  ,
+  Numeric    => :red    ,
+  Symbol     => :cyan   ,
+  Array      => :blue   ,
+  Hash       => :blue   ,
+  NilClass   => :magenta,
+  TrueClass  => :magenta,
+  FalseClass => :magenta,
+  Object     => :yellow
+}
