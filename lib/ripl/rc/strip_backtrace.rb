@@ -1,4 +1,6 @@
 
+require 'ripl'
+
 module Ripl::Rc::StripBacktrace
   # strip backtrace until ripl
   def format_error e
