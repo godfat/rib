@@ -18,7 +18,7 @@ module Ripl::Rc::Color
                                        format_result(v) }.join(
                     U.send(U.colors[Hash        ]){ ', '           }) +
                     U.send(U.colors[Hash        ]){ '}'            }
-      else        ; if colors[result.class]
+      else        ; if U.colors[result.class]
                     U.send(U.colors[result.class]){ result.inspect }
                     else
                     U.send(U.colors[Object      ]){ result.inspect }
