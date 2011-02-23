@@ -11,7 +11,6 @@ module Ripl::Rc::StripBacktrace
   end
 
   module Imp
-    module_function
     def strip_backtrace e
       home(cwd(snip(e)))
     end
