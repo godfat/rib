@@ -5,7 +5,9 @@ module Ripl::Rc; end
 module Ripl::Rc::SqueezeHistory
   # write squeezed history
   def write_history
-    File.open(history_file, 'w'){ |f| f.puts squeeze_history.join("\n") }
+    File.open(history_file, 'w'){ |f|
+      f.puts U.squeeze_history(history).join("\n")
+    }
   end
 
   # squeeze history on memory too
@@ -15,14 +17,17 @@ module Ripl::Rc::SqueezeHistory
     super
   end
 
-  def squeeze_history
-    history.to_a.inject([]){ |result, item|
-      if result.last == item
-        result
-      else
-        result << item
-      end
-    }
+  module U
+    module_function
+    def squeeze_history history
+      history.to_a.inject([]){ |result, item|
+        if result.last == item
+          result
+        else
+          result << item
+        end
+      }
+    end
   end
 end
 
