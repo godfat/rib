@@ -1,5 +1,11 @@
 = ripl-rc changes history
 
+== ripl-rc 0.1.1 -- 2011-02-24
+
+* [ plugin] added strip_backtrace
+* [general] now use Ripl::Rc::U.include(YourExtension) to customize details
+* [  color] use Ripl.config[:rc_color] to configure color schema
+
 == ripl-rc 0.1.0 -- 2011-02-23
 
 * release early, release often

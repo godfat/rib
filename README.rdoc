@@ -1,6 +1,6 @@
-= ripl-rc 0.1.0
+= ripl-rc 0.1.1
 by Lin Jen-Shin (godfat[http://godfat.org])
-godfat (XD) godfat.org
+ godfat (XD) godfat.org
 
 == LINKS:
 
@@ -17,6 +17,7 @@ ripl plugins collection
 * require 'ripl/rc/ctrld_newline'
 * require 'ripl/rc/eat_whites'
 * require 'ripl/rc/color'
+* require 'ripl/rc/strip_backtrace'
 * require 'ripl/rc' # for all of above
 
 == REQUIREMENTS:
