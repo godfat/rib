@@ -6,7 +6,8 @@ module Ripl::Rc::StripBacktrace
   end
 
   def strip_backtrace e
-    e.backtrace[0..e.backtrace.rindex{ |l| l =~ /\(ripl\):\d+:in `.+?'/ }]
+    e.backtrace[0..e.backtrace.rindex{ |l| l =~ /\(ripl\):\d+:in `.+?'/ } ||
+                   -1]
   end
 end
 
