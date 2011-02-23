@@ -9,40 +9,43 @@ module Ripl::Rc::Color
 
   def format_result result
     case result
-      when String ; send(colors[String      ]){ "'#{result}'"  }
-      when Numeric; send(colors[Numeric     ]){ result         }
-      when Symbol ; send(colors[Symbol      ]){ ":#{result}"   }
-      when Array  ; send(colors[Array       ]){ '['            }  +
-                    result.map{ |e| format_result(e) }.join(
-                    send(colors[Array       ]){ ', '           }) +
-                    send(colors[Array       ]){ ']'            }
-      when Hash   ; send(colors[Hash        ]){ '{'            }  +
-                    result.map{ |k, v| format_result(k)           +
-                    send(colors[Hash        ]){ '=>'           }  +
+      when String ; C.send(colors[String      ]){ "'#{result}'"  }
+      when Numeric; C.send(colors[Numeric     ]){ result         }
+      when Symbol ; C.send(colors[Symbol      ]){ ":#{result}"   }
+      when Array  ; C.send(colors[Array       ]){ '['            }  +
+                      result.map{ |e| format_result(e) }.join(
+                    C.send(colors[Array       ]){ ', '           }) +
+                    C.send(colors[Array       ]){ ']'            }
+      when Hash   ; C.send(colors[Hash        ]){ '{'            }  +
+                      result.map{ |k, v| format_result(k)           +
+                    C.send(colors[Hash        ]){ '=>'           }  +
                                        format_result(v) }.join(
-                    send(colors[Hash        ]){ ', '           }) +
-                    send(colors[Hash        ]){ '}'            }
+                    C.send(colors[Hash        ]){ ', '           }) +
+                    C.send(colors[Hash        ]){ '}'            }
       else        ; if colors[result.class]
-                    send(colors[result.class]){ result.inspect }
+                    C.send(colors[result.class]){ result.inspect }
                     else
-                    send(colors[Object      ]){ result.inspect }
+                    C.send(colors[Object      ]){ result.inspect }
                     end
     end
   end
 
-  def color rgb
-    "\x1b[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
-  end
+  module C
+    module_function
+    def color rgb
+      "\x1b[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
+    end
 
-  def   black &block; color(30, &block); end
-  def     red &block; color(31, &block); end
-  def   green &block; color(32, &block); end
-  def  yellow &block; color(33, &block); end
-  def    blue &block; color(34, &block); end
-  def magenta &block; color(35, &block); end
-  def    cyan &block; color(36, &block); end
-  def   white &block; color(37, &block); end
-  def   reset &block; color('', &block); end
+    def   black &block; color(30, &block); end
+    def     red &block; color(31, &block); end
+    def   green &block; color(32, &block); end
+    def  yellow &block; color(33, &block); end
+    def    blue &block; color(34, &block); end
+    def magenta &block; color(35, &block); end
+    def    cyan &block; color(36, &block); end
+    def   white &block; color(37, &block); end
+    def   reset &block; color('', &block); end
+  end
 end
 
 Ripl::Shell.include(Ripl::Rc::Color)
