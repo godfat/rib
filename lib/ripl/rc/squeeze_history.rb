@@ -2,8 +2,7 @@
 require 'ripl'
 
 module Ripl::Rc
-  module U
-    module_function
+  module Imp
     def squeeze_history history
       history.to_a.inject([]){ |result, item|
         if result.last == item
@@ -14,6 +13,7 @@ module Ripl::Rc
       }
     end
   end
+  module U; extend Imp; end
 end
 
 module Ripl::Rc::SqueezeHistory

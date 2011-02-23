@@ -2,8 +2,7 @@
 require 'ripl'
 
 module Ripl::Rc
-  module U
-    module_function
+  module Imp
     def colors
       Ripl.config[:rc_color]
     end
@@ -22,6 +21,7 @@ module Ripl::Rc
     def   white &block; color(37, &block); end
     def   reset &block; color('', &block); end
   end
+  module U; extend Imp; end
 end
 
 module Ripl::Rc::Color

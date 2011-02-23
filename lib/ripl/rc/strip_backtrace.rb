@@ -2,7 +2,7 @@
 require 'ripl'
 
 module Ripl::Rc
-  module U
+  module Imp
     module_function
     def strip_backtrace e
       home(cwd(snip(e)))
@@ -21,6 +21,7 @@ module Ripl::Rc
                      -1]
     end
   end
+  module U; extend Imp; end
 end
 
 module Ripl::Rc::StripBacktrace
