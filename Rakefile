@@ -13,7 +13,39 @@ end
 
 desc 'Generate gemspec'
 task :gemspec do
+  require 'pathname'
   require 'ripl/rc/version'
+
+  def dir
+    @dir ||= File.dirname(__FILE__)
+  end
+
+  def to_regexpes pathes
+    pathes.map{ |ignore|
+      if ignore =~ /\*/
+        to_regexpes(Dir["**/#{ignore}"])
+      else
+        Regexp.new("^#{Regexp.escape(ignore)}")
+      end
+    }.flatten
+  end
+
+  def ignore_files
+    @ignore_files ||= to_regexpes(
+      File.read("#{dir}/.gitignore").split("\n") + ['.git/'])
+  end
+
+  def gem_files
+    @gem_files ||= gem_files_find(Pathname.new(File.dirname(__FILE__)))
+  end
+
+  def gem_files_find path
+    path.children.select(&:file?).map{ |file| file.to_s[(dir.size+1)..-1] }.
+      reject{ |file| ignore_files.find{ |ignore| file.to_s =~ ignore }}    +
+
+    path.children.select(&:directory?).map{ |dir| gem_files_find(dir)}.flatten
+  end
+
   File.open('ripl-rc.gemspec', 'w'){ |f|
     f <<
       Gem::Specification.new do |s|
@@ -34,8 +66,8 @@ task :gemspec do
 
         s.date             = Time.now.strftime('%Y-%m-%d')
         s.rubygems_version = Gem::VERSION
-        s.files            = `git ls-files`.split("\n")
-        s.test_files       = `git ls-files -- test/test_*.rb`.split("\n")
+        s.files            = gem_files
+        s.test_files       = gem_files.grep(/test_.+?\.rb$/)
         s.extra_rdoc_files = ['CHANGES', 'README', "#{s.name}.gemspec"]
         s.rdoc_options     = ['--main', 'README']
         s.require_paths    = ['lib']
