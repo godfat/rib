@@ -1,4 +1,6 @@
 
+($LOAD_PATH << File.expand_path("#{File.dirname(__FILE__)}/lib")).uniq!
+
 gemspec = "#{File.dirname(__FILE__)}/ripl-rc.gemspec"
 
 if File.exist?(gemspec) && File.read(gemspec).strip != ''
