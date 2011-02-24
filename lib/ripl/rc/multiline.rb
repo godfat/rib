@@ -47,7 +47,7 @@ module Ripl::Rc::Multiline
 
   def loop_eval(input)
     if @buffer
-      super @buffer*"\n" + "\n" + input
+      super "#{@buffer.join("\n")}\n#{input}"
     else
       super input
     end
