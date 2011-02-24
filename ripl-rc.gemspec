@@ -9,10 +9,9 @@ Gem::Specification.new do |s|
   s.date = %q{2011-02-25}
   s.description = %q{ripl plugins collection}
   s.email = ["godfat (XD) godfat.org"]
-  s.extra_rdoc_files = ["CHANGES", "README", "ripl-rc.gemspec"]
-  s.files = [".gitignore", "CHANGES", "Gemfile", "LICENSE", "README.rdoc", "Rakefile", "TODO", "ripl-rc.gemspec", "lib/ripl/rc.rb", "lib/ripl/rc/anchor.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/mkdir_history.rb", "lib/ripl/rc/multiline.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/strip_backtrace.rb", "lib/ripl/rc/version.rb", "test/test_squeeze_history.rb", "README"]
+  s.files = [".gitignore", "CHANGES", "Gemfile", "LICENSE", "README.rdoc", "Rakefile", "TODO", "ripl-rc.gemspec", "lib/ripl/rc.rb", "lib/ripl/rc/anchor.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/mkdir_history.rb", "lib/ripl/rc/multiline.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/strip_backtrace.rb", "lib/ripl/rc/version.rb", "test/test_squeeze_history.rb"]
   s.homepage = %q{http://github.com/godfat/ripl-rc}
-  s.rdoc_options = ["--main", "README"]
+  s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.5.2}
   s.summary = %q{ripl plugins collection}

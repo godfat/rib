@@ -107,8 +107,8 @@ task :gemspec do
         s.rubygems_version = Gem::VERSION
         s.files            = gem_files
         s.test_files       = gem_files.grep(/test_.+?\.rb$/)
-        s.extra_rdoc_files = ['CHANGES', 'README', "#{s.name}.gemspec"]
-        s.rdoc_options     = ['--main', 'README']
+        s.extra_rdoc_files = []
+        s.rdoc_options     = ['--main', 'README.rdoc']
         s.require_paths    = ['lib']
       end.to_ruby
   }
