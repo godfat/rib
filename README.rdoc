@@ -1,4 +1,4 @@
-= ripl-rc 0.1.1
+= ripl-rc
 by Lin Jen-Shin (godfat[http://godfat.org])
 
 == LINKS:
