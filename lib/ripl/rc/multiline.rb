@@ -16,8 +16,8 @@ module Ripl::Rc::Multiline
     ]*'|' }/
 
   def before_loop
-    super
     @rc_multiline_buffer = []
+    super
   end
 
   def prompt
