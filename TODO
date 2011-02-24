@@ -2,7 +2,3 @@
 
 * tests for each plugin
 * doc
-
-* fix Ripl.anchor with Readline::HISTORY
-
-* fix nested Readline::HISTORY
