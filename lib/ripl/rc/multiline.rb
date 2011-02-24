@@ -56,11 +56,11 @@ module Ripl::Rc::Multiline
     if @rc_multiline_buffer.empty?
       super
     else
-      @rc_multiline_buffer.pop
+      line = @rc_multiline_buffer.pop
       if @rc_multiline_buffer.empty?
         super
       else
-        puts "[previous line removed]"
+        puts "[removed this line: #{line}]"
         throw :rc_multiline_cont
       end
     end
