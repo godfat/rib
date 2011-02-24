@@ -31,7 +31,7 @@ module Ripl::Rc::SqueezeHistory
         else
           result << item
         end
-      }
+      }.last(Ripl.config[:rc_squeeze_history_size] ||= 500)
     end
   end
 end
