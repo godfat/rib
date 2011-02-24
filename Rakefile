@@ -97,8 +97,8 @@ task :gemspec do
         s.authors     = ['Lin Jen-Shin (godfat)']
         s.email       = ['godfat (XD) godfat.org']
         s.homepage    = "http://github.com/godfat/#{s.name}"
-        s.summary     = File.read("#{File.dirname(__FILE__)}/README").match(
-                        /== DESCRIPTION:\n\n(.+)?\n\n== FEATURES:/m)[1]
+        s.summary     = File.read("#{File.dirname(__FILE__)}/README.rdoc").
+                        match(/== DESCRIPTION:\n\n(.+)?\n\n== FEATURES:/m)[1]
         s.description = s.summary
 
         s.date             = Time.now.strftime('%Y-%m-%d')
