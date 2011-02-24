@@ -1,5 +1,13 @@
 = ripl-rc changes history
 
+== ripl-rc 0.1.2 -- 2011-02-25
+
+* [     rc] rearranged require order
+* [ plugin] added anchor, like pry. usage: Ripl.anchor(binding) # or obj
+* [ plugin] added multiline, which works better with anchor
+* [ plugin] added mkdir_history, which tries to mkdir -p on history directory
+* [strip_backtrace] fix functionality for custom name (anchor)
+
 == ripl-rc 0.1.1 -- 2011-02-24
 
 * [ plugin] added strip_backtrace
