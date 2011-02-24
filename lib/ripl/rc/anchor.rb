@@ -27,6 +27,12 @@ module Ripl::Rc::Anchor
     end
   end
 
+  # if the object is the same, then we're exiting from an anchor,
+  # so don't print anything.
+  def print_result result
+    super unless result.object_id == Ripl.config[:rc_anchor_last].object_id
+  end
+
   module Imp
     def anchor obj_or_binding
       if Ripl.config[:rc_init].nil?
@@ -40,7 +46,9 @@ module Ripl::Rc::Anchor
         :prompt => obj_or_binding.inspect              +
                    "(#{Ripl.config[:rc_anchor].size})" +
                    Ripl.config[:prompt])).loop
-      Ripl.config[:rc_anchor].pop
+
+      # stores to check if we're exiting from an anchor
+      Ripl.config[:rc_anchor_last] = Ripl.config[:rc_anchor].pop
     end
   end
 end
