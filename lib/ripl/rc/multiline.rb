@@ -17,56 +17,52 @@ module Ripl::Rc::Multiline
 
   def before_loop
     super
-    @buffer = nil
+    @rc_multiline_buffer = []
   end
 
   def prompt
-    if @buffer
-      ' '*(@prompt.size-2) + '| '
-    else
+    if @rc_multiline_buffer.empty?
       super
+    else
+      "#{' '*(@prompt.size-2)}| "
     end
   end
 
   def loop_once
-    catch(:multiline) do
+    catch(:rc_multiline_cont) do
       super
-      @buffer = nil
+      @rc_multiline_buffer.clear
     end
   end
 
   def print_eval_error(e)
     if e.is_a?(SyntaxError) && e.message =~ ERROR_REGEXP
-      @buffer ||= []
-      @buffer << @input
-      throw :multiline
+      @rc_multiline_buffer << @input
+      throw :rc_multiline_cont
     else
       super
     end
   end
 
   def loop_eval(input)
-    if @buffer
-      super "#{@buffer.join("\n")}\n#{input}"
+    if @rc_multiline_buffer.empty?
+      super
     else
-      super input
+      super "#{@rc_multiline_buffer.join("\n")}\n#{input}"
     end
   end
 
-  # remove last line from buffer
-  # TODO: nicer interface (rewriting?)
   def handle_interrupt
-    if @buffer
-      @buffer.pop
-      if @buffer.empty?
-        @buffer = nil
-        return super
+    if @rc_multiline_buffer.empty?
+      super
+    else
+      @rc_multiline_buffer.pop
+      if @rc_multiline_buffer.empty?
+        super
       else
         puts "[previous line removed]"
-        throw :multiline
+        throw :rc_multiline_cont
       end
-    else
-      super
     end
   end
 end
