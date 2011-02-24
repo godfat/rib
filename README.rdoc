@@ -17,6 +17,8 @@ ripl plugins collection
 * require 'ripl/rc/eat_whites'
 * require 'ripl/rc/color'
 * require 'ripl/rc/strip_backtrace'
+* require 'ripl/rc/anchor' # pry like, use: Ripl.anchor(binding) # or obj
+* require 'ripl/rc/multiline' # work better with anchor...
 * require 'ripl/rc' # for all of above
 
 == REQUIREMENTS:
