@@ -12,13 +12,23 @@ ripl plugins collection
 
 == FEATURES:
 
+# when session ends
 * require 'ripl/rc/squeeze_history'
+* require 'ripl/rc/mkdir_history'
 * require 'ripl/rc/ctrld_newline'
-* require 'ripl/rc/eat_whites'
-* require 'ripl/rc/color'
+
+# result format
 * require 'ripl/rc/strip_backtrace'
-* require 'ripl/rc/anchor' # pry like, use: Ripl.anchor(binding) # or obj
+* require 'ripl/rc/color'
+
+# input modification
 * require 'ripl/rc/multiline' # work better with anchor...
+* require 'ripl/rc/eat_whites'
+
+# speical tool
+* require 'ripl/rc/anchor' # pry like, use: Ripl.anchor(binding) # or obj
+
+# for lazies
 * require 'ripl/rc' # for all of above
 
 == REQUIREMENTS:
