@@ -38,6 +38,11 @@ if File.exist?(gemspec) && File.read(gemspec).strip != ''
   end
 end
 
+desc 'Generate rdoc'
+task :rdoc do
+  sh('rdoc --output rdoc --main README.rdoc')
+end
+
 desc 'Run tests'
 task :test do
   sh("#{Gem.ruby} -I lib -S bacon test/test_*.rb")
