@@ -9,7 +9,7 @@ module Ripl::Rc::SqueezeHistory
   def write_history
     File.open(history_file, 'w'){ |f|
       f.puts U.squeeze_history(history).join("\n")
-    }
+    } if (Ripl.config[:rc_anchor] || []).empty?
   end
 
   # squeeze history on memory too
@@ -17,6 +17,10 @@ module Ripl::Rc::SqueezeHistory
     history.pop if input.strip == '' ||
                   (history.size > 1 && input == history[-2])
     super
+  end
+
+  def before_loop
+    super if (Ripl.config[:rc_anchor] || []).empty?
   end
 
   module Imp
