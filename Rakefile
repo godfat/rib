@@ -102,6 +102,7 @@ task :gemspec do
         s.summary     = File.read("#{File.dirname(__FILE__)}/README.rdoc").
                         match(/== DESCRIPTION:\n\n(.+)?\n\n== FEATURES:/m)[1]
         s.description = s.summary
+        s.executables = [s.name]
 
         s.date             = Time.now.strftime('%Y-%m-%d')
         s.rubygems_version = Gem::VERSION
