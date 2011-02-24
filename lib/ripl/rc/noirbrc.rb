@@ -1,0 +1,2 @@
+
+Ripl.config[:irbrc] = nil

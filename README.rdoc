@@ -28,6 +28,9 @@ ripl plugins collection
 # speical tool
 * require 'ripl/rc/anchor' # pry like, use: Ripl.anchor(binding) # or obj
 
+# config
+* require 'ripl/rc/noirbrc'
+
 # for lazies
 * require 'ripl/rc' # for all of above
 

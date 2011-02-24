@@ -14,3 +14,6 @@ require 'ripl/rc/eat_whites'
 
 # speical tool
 require 'ripl/rc/anchor'
+
+# config
+require 'ripl/rc/noirbrc'
