@@ -3,3 +3,6 @@
 * tests for each plugin
 * refactoring color
 * doc
+
+* fix Ripl.anchor and .riplrc
+* fix Ripl.anchor with Readline::HISTORY
