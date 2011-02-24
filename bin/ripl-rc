@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'ripl/rc'
-Ripl.start
+if ARGV.size > 0
+  load(`which #{Ripl::Runner.app}-#{ARGV.shift}`.chomp)
+else
+  Ripl.start
+end
