@@ -25,7 +25,7 @@ module Ripl::Rc::Anchor
       end
 
       (Ripl.config[:rc_anchor] ||= []) << obj_or_binding
-      Ripl::Shell.new(Ripl.config.merge(
+      Ripl::Shell.create(Ripl.config.merge(
         :name   => obj_or_binding.inspect,
         :prompt => obj_or_binding.inspect              +
                    "(#{Ripl.config[:rc_anchor].size})" +
