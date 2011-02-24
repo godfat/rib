@@ -7,6 +7,8 @@ module Ripl::Rc::SqueezeHistory
 
   # write squeezed history
   def write_history
+    require 'fileutils'
+    FileUtils.mkdir_p(File.dirname(history_file))
     File.open(history_file, 'w'){ |f|
       f.puts U.squeeze_history(history).join("\n")
     }
