@@ -18,7 +18,7 @@ module Ripl::Rc::Anchor
   end
 
   def prompt
-    if kind_of?(Ripl::Rc::Color) &&
+    if Ripl::Rc.const_defined?(:Color) && kind_of?(Ripl::Rc::Color) &&
        obj_or_binding = (config[:rc_anchor] ||= []).last
 
       super.sub(obj_or_binding.inspect, format_result(obj_or_binding))
