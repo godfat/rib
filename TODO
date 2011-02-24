@@ -6,3 +6,5 @@
 
 * fix Ripl.anchor and .riplrc
 * fix Ripl.anchor with Readline::HISTORY
+
+* fix nested Readline::HISTORY
