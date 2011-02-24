@@ -7,12 +7,12 @@ module Ripl::Rc::StripBacktrace
 
   # strip backtrace until ripl
   def format_error e
-    "#{e.class}: #{e.message}\n  #{U.strip_backtrace(e).join("\n  ")}"
+    "#{e.class}: #{e.message}\n  #{U.strip_backtrace(e, @name).join("\n  ")}"
   end
 
   module Imp
-    def strip_backtrace e
-      home(cwd(snip(e)))
+    def strip_backtrace e, name
+      home(cwd(snip(e, name)))
     end
 
     def home b
@@ -23,9 +23,10 @@ module Ripl::Rc::StripBacktrace
       b.map{ |p| p.sub(Dir.pwd, './') }
     end
 
-    def snip e
-      e.backtrace[0..e.backtrace.rindex{ |l| l =~ /\(ripl\):\d+:in `.+?'/ } ||
-                     -1]
+    def snip e, name
+      e.backtrace[
+        0..
+        e.backtrace.rindex{ |l| l =~ /\(#{name}\):\d+:in `.+?'/ } || -1]
     end
   end
 end
