@@ -24,6 +24,7 @@ module Ripl::Rc::StripBacktrace
     end
 
     def snip e, name
+      return [] if e.kind_of?(SyntaxError)
       e.backtrace[
         0..
         e.backtrace.rindex{ |l| l =~ /\(#{name}\):\d+:in `.+?'/ } || -1]
