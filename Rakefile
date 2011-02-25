@@ -41,8 +41,8 @@ if File.exist?(gemspec) && File.read(gemspec).strip != ''
 end
 
 desc 'Generate rdoc'
-task :doc do
-  sh('yardoc')
+task :doc => [:gemspec] do
+  sh("yardoc --files #{@gemspec.extra_rdoc_files.join(',')}")
 end
 
 desc 'Run tests'
@@ -86,7 +86,7 @@ task :gemspec do
   end
 
   File.open('ripl-rc.gemspec', 'w'){ |f|
-    f <<
+    f << (@gemspec =
       Gem::Specification.new do |s|
         s.name    = 'ripl-rc'
         s.version = Ripl::Rc::VERSION
@@ -108,9 +108,9 @@ task :gemspec do
         s.rubygems_version = Gem::VERSION
         s.files            = gem_files
         s.test_files       = gem_files.grep(/test_.+?\.rb$/)
-        s.extra_rdoc_files = []
-        s.rdoc_options     = ['--main', 'README.md']
-        s.require_paths    = ['lib']
-      end.to_ruby
+        s.extra_rdoc_files = %w[CHANGES LICENSE TODO]
+        s.rdoc_options     = %w[--main README.md]
+        s.require_paths    = %w[lib]
+      end).to_ruby
   }
 end
