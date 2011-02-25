@@ -28,12 +28,14 @@ module Gemgem
 
   def ignore_files
     @ignore_files ||= to_regexpes(
-      File.read("#{dir}/.gitignore").split("\n") + ['.git/'])
+      File.read("#{dir}/.gitignore").split("\n") + ['.git/']).compact
   end
 
   def to_regexpes pathes
     pathes.map{ |ignore|
-      if ignore =~ /\*/
+      if ignore.strip == ''
+        nil
+      elsif ignore =~ /\*/
         to_regexpes(Dir["**/#{ignore}"])
       else
         Regexp.new("^#{Regexp.escape(ignore)}")
