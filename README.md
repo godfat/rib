@@ -36,7 +36,7 @@ If you want to enable all plugins, the use this:
     require 'ripl/rc'
 
 Another thing which might worth to be mentioned is
-`ripl/rc/anchor`, which is a pry like feature built into
+`ripl/rc/anchor`, which is a _pry_ like feature built into
 ripl. You can embed two things into ripl, one is any object:
 
     Ripl.anchor your_object_want_to_be_observed
