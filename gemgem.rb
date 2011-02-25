@@ -9,6 +9,28 @@ module Gemgem
     "#{spec.name}-#{spec.version}"
   end
 
+  def write
+    File.open("#{spec.name}.gemspec", 'w'){ |f| f << spec.to_ruby }
+  end
+
+  def gem_files
+    require 'pathname'
+    @gem_files ||= gem_files_find(Pathname.new(dir))
+  end
+
+  private
+  def gem_files_find path
+    path.children.select(&:file?).map{ |file| file.to_s[(dir.size+1)..-1] }.
+      reject{ |file| ignore_files.find{ |ignore| file.to_s =~ ignore }}    +
+
+    path.children.select(&:directory?).map{ |dir| gem_files_find(dir)}.flatten
+  end
+
+  def ignore_files
+    @ignore_files ||= to_regexpes(
+      File.read("#{dir}/.gitignore").split("\n") + ['.git/'])
+  end
+
   def to_regexpes pathes
     pathes.map{ |ignore|
       if ignore =~ /\*/
@@ -17,23 +39,6 @@ module Gemgem
         Regexp.new("^#{Regexp.escape(ignore)}")
       end
     }.flatten
-  end
-
-  def ignore_files
-    @ignore_files ||= to_regexpes(
-      File.read("#{dir}/.gitignore").split("\n") + ['.git/'])
-  end
-
-  def gem_files
-    require 'pathname'
-    @gem_files ||= gem_files_find(Pathname.new(dir))
-  end
-
-  def gem_files_find path
-    path.children.select(&:file?).map{ |file| file.to_s[(dir.size+1)..-1] }.
-      reject{ |file| ignore_files.find{ |ignore| file.to_s =~ ignore }}    +
-
-    path.children.select(&:directory?).map{ |dir| gem_files_find(dir)}.flatten
   end
 end
 
