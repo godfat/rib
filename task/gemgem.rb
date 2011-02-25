@@ -92,6 +92,11 @@ task :doc => ['gem:spec'] do
   sh("yardoc --files #{Gemgem.spec.extra_rdoc_files.join(',')}")
 end
 
+task :default do
+  Rake.application.options.show_task_pattern = /./
+  Rake.application.display_tasks_and_comments
+end
+
 require 'rake/clean'
   CLEAN.include Dir['**/*.rbc']
 CLOBBER.include Dir['{doc,pkg}']
