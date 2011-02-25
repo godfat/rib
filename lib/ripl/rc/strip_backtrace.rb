@@ -7,12 +7,12 @@ module Ripl::Rc::StripBacktrace
 
   # strip backtrace until ripl
   def format_error e
-    klass, message, backtrace = get_error(e, U.strip_backtrace(e, @name))
-    "#{klass}: #{message}\n  #{backtrace.join("\n  ")}"
+    message, backtrace = get_error(e, U.strip_backtrace(e, @name))
+    "#{message}\n  #{backtrace.join("\n  ")}"
   end
 
   def get_error e, backtrace=e.backtrace
-    [e.class, e.message, backtrace]
+    ["#{e.class}: #{e.message}", backtrace]
   end
 
   module Imp

@@ -32,8 +32,7 @@ module Ripl::Rc::Color
   end
 
   def get_error e, backtrace=e.backtrace
-    [format_result(e, e.class.to_s),
-     U.magenta{e.message},
+    [format_result(e, "#{e.class.to_s}: #{e.message}"),
      backtrace.map{ |b|
        path, rest = File.split(b)
        name, msgs = rest.split(':', 2)
@@ -68,7 +67,6 @@ module Ripl::Rc::U; extend Ripl::Rc::Color::Imp; end
 
 Ripl::Shell.include(Ripl::Rc::Color)
 Ripl.config[:rc_color] ||= {
-  Exception  => :red    ,
   Numeric    => :red    ,
   String     => :green  ,
   Symbol     => :cyan   ,
@@ -77,5 +75,6 @@ Ripl.config[:rc_color] ||= {
   NilClass   => :magenta,
   TrueClass  => :magenta,
   FalseClass => :magenta,
+  Exception  => :magenta,
   Object     => :yellow
 }
