@@ -15,7 +15,7 @@ module Gemgem
 
   def gem_files
     require 'pathname'
-    @gem_files ||= gem_files_find(Pathname.new(dir))
+    @gem_files ||= gem_files_find(Pathname.new(dir)).sort
   end
 
   # protected
