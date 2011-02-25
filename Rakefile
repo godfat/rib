@@ -20,7 +20,7 @@ task 'gem:spec' do
     s.authors     = ['Lin Jen-Shin (godfat)']
     s.email       = ['godfat (XD) godfat.org']
     s.homepage    = "http://github.com/godfat/#{s.name}"
-    s.summary     = File.read("#{File.dirname(__FILE__)}/README.md").
+    s.summary     = File.read("#{Gemgem.dir}/README.md").
                     match(/## DESCRIPTION:\n\n(.+)?\n\n## SYNOPSIS:/m)[1]
     s.description = s.summary
     s.executables = [s.name]
