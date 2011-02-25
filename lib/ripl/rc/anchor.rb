@@ -63,6 +63,6 @@ end
 module Ripl::Rc::U; extend Ripl::Rc::Anchor::Imp; end
 
 Ripl::Shell.include(Ripl::Rc::Anchor)
-
-Ripl.extend(Ripl::Rc::Anchor::AnchorImp)
 Ripl.config[:prompt] ||= Ripl::Shell::OPTIONS[:prompt]
+
+Ripl.extend(Ripl::Rc::Anchor::AnchorImp) # define Ripl.anchor
