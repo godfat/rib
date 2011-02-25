@@ -5,27 +5,36 @@ module Ripl::Rc; end
 module Ripl::Rc::Color
   include Ripl::Rc # makes U avaliable
 
-  def format_result result
+  def format_result result, display=result.inspect
     case result
-      when String ; U.send(U.colors[String      ]){ "'#{result}'"  }
-      when Numeric; U.send(U.colors[Numeric     ]){ result         }
-      when Symbol ; U.send(U.colors[Symbol      ]){ ":#{result}"   }
-      when Array  ; U.send(U.colors[Array       ]){ '['            }  +
+      when String ; U.send(U.colors[String      ]){ display }
+      when Numeric; U.send(U.colors[Numeric     ]){ display }
+      when Symbol ; U.send(U.colors[Symbol      ]){ display }
+
+      when Array  ; U.send(U.colors[Array       ]){ '['     }  +
                       result.map{ |e| format_result(e) }.join(
-                    U.send(U.colors[Array       ]){ ', '           }) +
-                    U.send(U.colors[Array       ]){ ']'            }
-      when Hash   ; U.send(U.colors[Hash        ]){ '{'            }  +
-                      result.map{ |k, v| format_result(k)             +
-                    U.send(U.colors[Hash        ]){ '=>'           }  +
+                    U.send(U.colors[Array       ]){ ', '    }) +
+                    U.send(U.colors[Array       ]){ ']'     }
+
+      when Hash   ; U.send(U.colors[Hash        ]){ '{'     }  +
+                      result.map{ |k, v| format_result(k)      +
+                    U.send(U.colors[Hash        ]){ '=>'    }  +
                                        format_result(v) }.join(
-                    U.send(U.colors[Hash        ]){ ', '           }) +
-                    U.send(U.colors[Hash        ]){ '}'            }
-      else        ; if U.colors[result.class]
-                    U.send(U.colors[result.class]){ result.inspect }
+                    U.send(U.colors[Hash        ]){ ', '    }) +
+                    U.send(U.colors[Hash        ]){ '}'     }
+
+      else        ; if pair = U.colors.find{|klass, _|result.kind_of?(klass)}
+                    U.send(pair.last){ display }
                     else
-                    U.send(U.colors[Object      ]){ result.inspect }
+                    U.send(U.colors[Object      ]){ display }
                     end
     end
+  end
+
+  def get_error e, backtrace=e.backtrace
+    [format_result(e, e.class.to_s),
+     e.message,
+     backtrace.map{ |b| b.gsub('/'){ U.blue{ '/' } } }]
   end
 
   module Imp
@@ -53,8 +62,9 @@ module Ripl::Rc::U; extend Ripl::Rc::Color::Imp; end
 
 Ripl::Shell.include(Ripl::Rc::Color)
 Ripl.config[:rc_color] ||= {
-  String     => :green  ,
+  Exception  => :red    ,
   Numeric    => :red    ,
+  String     => :green  ,
   Symbol     => :cyan   ,
   Array      => :blue   ,
   Hash       => :blue   ,
