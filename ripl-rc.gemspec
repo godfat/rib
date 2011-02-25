@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["ripl-rc"]
   s.extra_rdoc_files = ["CHANGES", "LICENSE", "TODO"]
-  s.files = [".gitignore", "CHANGES", "Gemfile", "LICENSE", "README.md", "Rakefile", "TODO", "ripl-rc.gemspec", "screenshot.png", "bin/ripl-rc", "lib/ripl/rc.rb", "lib/ripl/rc/anchor.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/mkdir_history.rb", "lib/ripl/rc/multiline.rb", "lib/ripl/rc/noirbrc.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/strip_backtrace.rb", "lib/ripl/rc/version.rb", "test/test_squeeze_history.rb"]
+  s.files = [".gitignore", "CHANGES", "Gemfile", "LICENSE", "README.md", "Rakefile", "TODO", "ripl-rc.gemspec", "screenshot.png", "bin/ripl-rc", "lib/ripl/rc.rb", "lib/ripl/rc/anchor.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/mkdir_history.rb", "lib/ripl/rc/multiline.rb", "lib/ripl/rc/noirbrc.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/strip_backtrace.rb", "lib/ripl/rc/version.rb", "task/gem.rb", "task/gemgem.rb", "test/test_squeeze_history.rb"]
   s.homepage = %q{http://github.com/godfat/ripl-rc}
   s.rdoc_options = ["--main", "README.md"]
   s.require_paths = ["lib"]
