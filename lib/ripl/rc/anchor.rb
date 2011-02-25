@@ -21,7 +21,7 @@ module Ripl::Rc::Anchor
     if Ripl::Rc.const_defined?(:Color) && kind_of?(Ripl::Rc::Color) &&
        obj_or_binding = (config[:rc_anchor] ||= []).last
 
-      super.sub(obj_or_binding.inspect, format_result(obj_or_binding))
+      super.sub(@name, format_result(obj_or_binding, @name))
     else
       super
     end
@@ -43,8 +43,8 @@ module Ripl::Rc::Anchor
 
       (Ripl.config[:rc_anchor] ||= []) << obj_or_binding
       Ripl::Shell.create(Ripl.config.merge(
-        :name   => obj_or_binding.inspect,
-        :prompt => obj_or_binding.inspect              +
+        :name   => obj_or_binding.inspect[0..9],
+        :prompt => obj_or_binding.inspect[0..9]        +
                    "(#{Ripl.config[:rc_anchor].size})" +
                    Ripl.config[:prompt])).loop
 
