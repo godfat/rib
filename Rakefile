@@ -41,8 +41,8 @@ if File.exist?(gemspec) && File.read(gemspec).strip != ''
 end
 
 desc 'Generate rdoc'
-task :rdoc do
-  sh('rdoc --output rdoc --main README.rdoc')
+task :doc do
+  sh('yardoc')
 end
 
 desc 'Run tests'
@@ -99,8 +99,8 @@ task :gemspec do
         s.authors     = ['Lin Jen-Shin (godfat)']
         s.email       = ['godfat (XD) godfat.org']
         s.homepage    = "http://github.com/godfat/#{s.name}"
-        s.summary     = File.read("#{File.dirname(__FILE__)}/README.rdoc").
-                        match(/== DESCRIPTION:\n\n(.+)?\n\n== FEATURES:/m)[1]
+        s.summary     = File.read("#{File.dirname(__FILE__)}/README.md").
+                        match(/## DESCRIPTION:\n\n(.+)?\n\n## SYNOPSIS:/m)[1]
         s.description = s.summary
         s.executables = [s.name]
 
@@ -109,7 +109,7 @@ task :gemspec do
         s.files            = gem_files
         s.test_files       = gem_files.grep(/test_.+?\.rb$/)
         s.extra_rdoc_files = []
-        s.rdoc_options     = ['--main', 'README.rdoc']
+        s.rdoc_options     = ['--main', 'README.md']
         s.require_paths    = ['lib']
       end.to_ruby
   }
