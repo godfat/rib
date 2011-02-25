@@ -8,7 +8,47 @@ by Lin Jen-Shin (godfat[http://godfat.org])
 
 == DESCRIPTION:
 
-ripl plugins collection
+ripl plugins collection, take you want, leave you don't.
+
+== SYNOPSIS:
+
+If you don't know what is ripl, or just want to have an
+overview of what does ripl-rc do, then you can use it as
+a command line tool:
+
+    ripl rc
+
+This can be used to run rails console, too. First install
+ripl-rails by `gem install ripl-rails` then run this:
+
+    ripl rc rails
+
+Then you'll have a ripl-rc flavored rails console without
+setting anything (i.e. ~/.riplrc)
+
+If you already know what is ripl, you might want to setup
+yourself, to be better control what you might want and what
+you might not want. Then checkout FEATURES for all plugins
+you can put in ~/.riplrc.
+
+If you want to enable all plugins, the use this:
+
+    require 'ripl/rc'
+
+Another thing which might worth to be mentioned is
+ripl/rc/anchor, which is a pry like feature built into
+ripl. You can embed two things into ripl, one is any object:
+
+    Ripl.anchor your_object_want_to_be_observed
+
+Another one is local binding inside a method:
+
+    Ripl.anchor binding
+
+Then you can look through local variables inside a method
+with an interactive environment. Anchor could be nested, too.
+You can anchor another object inside a ripl session. The number
+shown in prompt is the level of anchors, started from 1.
 
 == FEATURES:
 
