@@ -33,8 +33,14 @@ module Ripl::Rc::Color
 
   def get_error e, backtrace=e.backtrace
     [format_result(e, e.class.to_s),
-     e.message,
-     backtrace.map{ |b| b.gsub('/'){ U.blue{ '/' } } }]
+     U.magenta{e.message},
+     backtrace.map{ |b|
+       path, rest = File.split(b)
+       name, msgs = rest.split(':', 2)
+       msg = msgs.sub(/(\d+):/){U.red{$1}+':'}.sub(/`.+?'/){U.green{$&}}
+
+       "#{path+'/'}#{U.yellow{name}}:#{msg}"
+     }]
   end
 
   module Imp
