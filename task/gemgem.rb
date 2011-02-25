@@ -18,7 +18,7 @@ module Gemgem
     @gem_files ||= gem_files_find(Pathname.new(dir))
   end
 
-  private
+  # protected
   def gem_files_find path
     path.children.select(&:file?).map{ |file| file.to_s[(dir.size+1)..-1] }.
       reject{ |file| ignore_files.find{ |ignore| file.to_s =~ ignore }}    +
@@ -58,19 +58,21 @@ end
 
 desc 'Release gem'
 task :release => [:spec, :check, :build] do
-  sh("git tag -f #{Gemgem.gem_tag}")
+  sh("git tag #{Gemgem.gem_tag}")
   sh("git push")
   sh("git push --tags")
   sh("gem push pkg/#{Gemgem.gem_tag}")
 end
 
 task :check do
+  ver = Gemgem.spec.version.to_s
+
   if ENV['VERSION'].nil?
     puts("\x1b[32mExpected "                                        \
-         "\x1b[36mVERSION\x1b[32m=\x1b[36mx.y.z\x1b[m")
+         "\x1b[36mVERSION\x1b[32m=\x1b[36m#{ver}\x1b[m")
     exit(1)
 
-  elsif ENV['VERSION'] != (ver = Gemgem.spec.version.to_s)
+  elsif ENV['VERSION'] != ver
     puts("\x1b[32mExpected \x1b[36mVERSION\x1b[32m=\x1b[36m#{ver} " \
          "\x1b[32mbut got\n         "                               \
          "\x1b[36mVERSION\x1b[32m=\x1b[36m#{ENV['VERSION']}\x1b[m")
