@@ -20,7 +20,7 @@ module Ripl::Rc::StripBacktrace
     end
 
     def cwd b
-      b.map{ |p| p.sub(Dir.pwd, './') }
+      b.map{ |p| p.sub(Dir.pwd, '.') }
     end
 
     def snip e, name
