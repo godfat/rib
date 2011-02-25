@@ -34,5 +34,5 @@ task 'gem:spec' do
     s.require_paths    = %w[lib]
   end
 
-  File.open("#{Gemgem.spec.name}.gemspec", 'w'){|f| f << Gemgem.spec.to_ruby}
+  Gemgem.write
 end
