@@ -35,6 +35,12 @@ module Ripl::Rc::Anchor
   end
 
   module Imp
+    def short_inspect obj_or_binding
+      obj_or_binding.inspect[0..9]
+    end
+  end
+
+  module AnchorImp
     def anchor obj_or_binding
       if Ripl.config[:rc_init].nil?
         Ripl::Runner.load_rc(Ripl.config[:riplrc])
@@ -42,10 +48,10 @@ module Ripl::Rc::Anchor
       end
 
       (Ripl.config[:rc_anchor] ||= []) << obj_or_binding
+      name = Ripl::Rc::U.short_inspect(obj_or_binding)
       Ripl::Shell.create(Ripl.config.merge(
-        :name   => obj_or_binding.inspect[0..9],
-        :prompt => obj_or_binding.inspect[0..9]        +
-                   "(#{Ripl.config[:rc_anchor].size})" +
+        :name   => name,
+        :prompt => "#{name}(#{Ripl.config[:rc_anchor].size})" +
                    Ripl.config[:prompt])).loop
 
       # stores to check if we're exiting from an anchor
@@ -54,7 +60,9 @@ module Ripl::Rc::Anchor
   end
 end
 
+module Ripl::Rc::U; extend Ripl::Rc::Anchor::Imp; end
+
 Ripl::Shell.include(Ripl::Rc::Anchor)
 
-Ripl.extend(Ripl::Rc::Anchor::Imp)
+Ripl.extend(Ripl::Rc::Anchor::AnchorImp)
 Ripl.config[:prompt] ||= Ripl::Shell::OPTIONS[:prompt]
