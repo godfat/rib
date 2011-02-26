@@ -17,8 +17,8 @@ module Gemgem
                       match(/DESCRIPTION:\n\n(.+?)\n\n/m)[1]
       s.description = s.summary
 
-      s.extra_rdoc_files = %w[CHANGES LICENSE TODO]
-      s.rdoc_options     = %w[--main README.md]
+      s.extra_rdoc_files = %w[CHANGES CONTRIBUTORS LICENSE TODO]
+      s.rdoc_options     = %w[--main README]
       s.rubygems_version = Gem::VERSION
       s.date             = Time.now.strftime('%Y-%m-%d')
       s.files            = gem_files
@@ -119,7 +119,8 @@ end
 
 desc 'Generate rdoc'
 task :doc => ['gem:spec'] do
-  sh("yardoc -o rdoc --files #{Gemgem.spec.extra_rdoc_files.join(',')}")
+  sh("yardoc -o rdoc --main README.md" \
+     " --files #{Gemgem.spec.extra_rdoc_files.join(',')}")
 end
 
 task :default do
