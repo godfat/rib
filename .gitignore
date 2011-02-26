@@ -1,5 +1,5 @@
 pkg
-doc
+rdoc
 *.rbc
 .bundle
 .yardoc
