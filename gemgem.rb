@@ -129,5 +129,5 @@ task :default do
 end
 
 require 'rake/clean'
-  CLEAN.include Gemgem.find_files(['*.rbc'])
-CLOBBER.include Dir['{doc,pkg}']
+  CLEAN.include Gemgem.find_files(['*.rbc', '.yardoc'])
+CLOBBER.include Dir['{pkg,rdoc}']
