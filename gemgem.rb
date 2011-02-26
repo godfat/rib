@@ -60,7 +60,7 @@ module Gemgem
   def find_files pathes
     pathes.map{ |ignore|
       if ignore !~ /\*/
-        ignore
+        ignore if File.exist?(ignore)
       else
         find_files(Dir[ignore] +
                     Pathname.new(File.dirname(ignore)).children.
@@ -68,7 +68,7 @@ module Gemgem
                         "#{p}/#{File.basename(ignore)}"
                       })
       end
-    }.flatten
+    }.flatten.compact
   end
 end
 
