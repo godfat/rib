@@ -6,14 +6,14 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = %q{2011-02-26}
+  s.date = %q{2011-02-27}
   s.default_executable = %q{ripl-rc}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["ripl-rc"]
   s.extra_rdoc_files = ["CHANGES", "LICENSE", "TODO"]
-  s.files = [".gitignore", "CHANGES", "Gemfile", "LICENSE", "README.md", "Rakefile", "TODO", "bin/ripl-rc", "lib/ripl/rc.rb", "lib/ripl/rc/anchor.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/mkdir_history.rb", "lib/ripl/rc/multiline.rb", "lib/ripl/rc/noirbrc.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/strip_backtrace.rb", "lib/ripl/rc/version.rb", "ripl-rc.gemspec", "screenshot.png", "task/gemgem.rb", "test/test_squeeze_history.rb"]
-  s.homepage = %q{http://github.com/godfat/ripl-rc}
+  s.files = [".gitignore", "CHANGES", "Gemfile", "LICENSE", "README", "README.md", "Rakefile", "TODO", "bin/ripl-rc", "lib/ripl/rc.rb", "lib/ripl/rc/anchor.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/mkdir_history.rb", "lib/ripl/rc/multiline.rb", "lib/ripl/rc/noirbrc.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/strip_backtrace.rb", "lib/ripl/rc/version.rb", "ripl-rc.gemspec", "screenshot.png", "task/gemgem.rb", "test/test_squeeze_history.rb"]
+  s.homepage = %q{http://github.com/godfat/}
   s.rdoc_options = ["--main", "README.md"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.5.2}

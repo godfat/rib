@@ -7,6 +7,27 @@ module Gemgem
   end
 
   module_function
+  def create
+    yield(spec = Gem::Specification.new{ |s|
+      s.authors     = ['Lin Jen-Shin (godfat)']
+      s.email       = ['godfat (XD) godfat.org']
+      s.homepage    = "http://github.com/godfat/#{s.name}"
+
+      s.summary     = File.read("#{Gemgem.dir}/README").
+                      match(/DESCRIPTION:\n\n(.+?)\n\n/m)[1]
+      s.description = s.summary
+
+      s.extra_rdoc_files = %w[CHANGES LICENSE TODO]
+      s.rdoc_options     = %w[--main README.md]
+      s.rubygems_version = Gem::VERSION
+      s.date             = Time.now.strftime('%Y-%m-%d')
+      s.files            = gem_files
+      s.test_files       = gem_files.grep(%r{^test/(.+?/)*test_.+?\.rb$})
+      s.require_paths    = %w[lib]
+    })
+    spec
+  end
+
   def gem_tag
     "#{spec.name}-#{spec.version}"
   end
