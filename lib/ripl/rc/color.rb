@@ -23,6 +23,7 @@ module Ripl::Rc::Color
                     U.send(U.colors[Hash        ]){ ', '    }) +
                     U.send(U.colors[Hash        ]){ '}'     }
 
+      # TODO: this find should preserve order!
       else        ; if pair = U.colors.find{|klass, _|result.kind_of?(klass)}
                     U.send(pair.last){ display }
                     else
