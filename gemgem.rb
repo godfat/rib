@@ -48,12 +48,12 @@ namespace :gem do
 
 desc 'Install gem'
 task :install => [:build] do
-  sh("gem install pkg/#{Gemgem.gem_tag}")
+  sh("#{Gem.ruby} -S gem install pkg/#{Gemgem.gem_tag}")
 end
 
 desc 'Build gem'
 task :build => [:spec] do
-  sh("gem build #{Gemgem.spec.name}.gemspec")
+  sh("#{Gem.ruby} -S gem build #{Gemgem.spec.name}.gemspec")
   sh("mkdir -p pkg")
   sh("mv #{Gemgem.gem_tag}.gem pkg/")
 end
@@ -63,7 +63,7 @@ task :release => [:spec, :check, :build] do
   sh("git tag #{Gemgem.gem_tag}")
   sh("git push")
   sh("git push --tags")
-  sh("gem push pkg/#{Gemgem.gem_tag}")
+  sh("#{Gem.ruby} -S gem push pkg/#{Gemgem.gem_tag}")
 end
 
 task :check do
