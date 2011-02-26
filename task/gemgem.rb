@@ -33,42 +33,60 @@ module Gemgem
   end
 
   def write
-    File.open("#{spec.name}.gemspec", 'w'){ |f| f << spec.to_ruby }
+    File.open("#{dir}/#{spec.name}.gemspec", 'w'){ |f| f << spec.to_ruby }
+  end
+
+  def all_files
+    @all_files ||= find_files(Pathname.new(dir)).map{ |file|
+      if file.to_s =~ %r{\.git/}
+        nil
+      else
+        file.to_s
+      end
+    }.compact.sort
   end
 
   def gem_files
-    @gem_files ||= gem_files_find(Pathname.new(dir)).sort
+    @gem_files ||= all_files - ignored_files
+  end
+
+  def ignored_files
+    @ignored_file ||= all_files.select{ |path| ignore_patterns.find{ |ignore|
+      path =~ ignore && !git_files.include?(path)}}
+  end
+
+  def git_files
+    @git_files ||= if File.exist?("#{dir}/.git")
+                     `git ls-files`.split("\n")
+                   else
+                     []
+                   end
   end
 
   # protected
-  def gem_files_find path
-    path.children.select(&:file?).map{ |file| file.to_s[(dir.size+1)..-1] }.
-      reject{ |file| ignore_files.find{ |ignore| file.to_s =~ ignore }}    +
-
-    path.children.select(&:directory?).map{ |dir| gem_files_find(dir)}.flatten
+  def find_files path
+    path.children.select(&:file?).map{|file| file.to_s[(dir.size+1)..-1]} +
+    path.children.select(&:directory?).map{|dir| find_files(dir)}.flatten
   end
 
-  def ignore_files
-    @ignore_files ||= find_files(
+  def ignore_patterns
+    @ignore_files ||= expand_patterns(
       File.read("#{dir}/.gitignore").split("\n").reject{ |pattern|
         pattern.strip == ''
-      } + ['.git']).map{ |pattern|
-        %r{^([^/]+/)*?#{Regexp.escape(pattern)}(/[^/]+)*?$}
-      }
+      }).map{ |pattern| %r{^([^/]+/)*?#{Regexp.escape(pattern)}(/[^/]+)*?$} }
   end
 
-  def find_files pathes
-    pathes.map{ |ignore|
-      if ignore !~ /\*/
-        ignore if File.exist?(ignore)
+  def expand_patterns pathes
+    pathes.map{ |path|
+      if path !~ /\*/
+        path
       else
-        find_files(Dir[ignore] +
-                    Pathname.new(File.dirname(ignore)).children.
-                      select(&:directory?).map{ |p|
-                        "#{p}/#{File.basename(ignore)}"
-                      })
+        expand_patterns(
+          Dir[path] +
+          Pathname.new(File.dirname(path)).children.select(&:directory?).
+            map{ |prefix| "#{prefix}/#{File.basename(path)}" })
       end
-    }.flatten.compact
+    }.flatten
   end
 end
 
