@@ -91,7 +91,7 @@ end
 
 desc 'Generate rdoc'
 task :doc => ['gem:spec'] do
-  sh("yardoc --files #{Gemgem.spec.extra_rdoc_files.join(',')}")
+  sh("yardoc -o rdoc --files #{Gemgem.spec.extra_rdoc_files.join(',')}")
 end
 
 task :default do
