@@ -36,7 +36,11 @@ module Gemgem
       if ignore.strip == ''
         nil
       elsif ignore =~ /\*/
-        to_regexpes(Dir["**/#{ignore}"])
+        to_regexpes(Dir[ignore] +
+                    Pathname.new(File.dirname(ignore)).children.
+                      select(&:directory?).map{ |p|
+                        "#{p}/#{File.basename(ignore)}"
+                      })
       else
         Regexp.new("^#{Regexp.escape(ignore)}")
       end
