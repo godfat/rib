@@ -1,4 +1,6 @@
 
+require 'pathname'
+
 module Gemgem
   class << self
     attr_accessor :dir, :spec
@@ -14,7 +16,6 @@ module Gemgem
   end
 
   def gem_files
-    require 'pathname'
     @gem_files ||= gem_files_find(Pathname.new(dir)).sort
   end
 
@@ -27,22 +28,24 @@ module Gemgem
   end
 
   def ignore_files
-    @ignore_files ||= to_regexpes(
-      File.read("#{dir}/.gitignore").split("\n") + ['.git/']).compact
+    @ignore_files ||= find_files(
+      File.read("#{dir}/.gitignore").split("\n").reject{ |pattern|
+        pattern.strip == ''
+      } + ['.git']).map{ |pattern|
+        %r{^([^/]+/)*?#{Regexp.escape(pattern)}(/[^/]+)*?$}
+      }
   end
 
-  def to_regexpes pathes
+  def find_files pathes
     pathes.map{ |ignore|
-      if ignore.strip == ''
-        nil
-      elsif ignore =~ /\*/
-        to_regexpes(Dir[ignore] +
+      if ignore !~ /\*/
+        ignore
+      else
+        find_files(Dir[ignore] +
                     Pathname.new(File.dirname(ignore)).children.
                       select(&:directory?).map{ |p|
                         "#{p}/#{File.basename(ignore)}"
                       })
-      else
-        Regexp.new("^#{Regexp.escape(ignore)}")
       end
     }.flatten
   end
@@ -104,5 +107,5 @@ task :default do
 end
 
 require 'rake/clean'
-  CLEAN.include Dir['**/*.rbc']
+  CLEAN.include Gemgem.find_files(['*.rbc'])
 CLOBBER.include Dir['{doc,pkg}']
