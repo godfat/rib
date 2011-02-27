@@ -24,8 +24,8 @@ module Ripl::Rc::Color
                     U.send(U.colors[Hash        ]){ '}'     }
 
       # TODO: this find should preserve order!
-      else        ; if pair = U.colors.find{|klass, _|result.kind_of?(klass)}
-                    U.send(pair.last){ display }
+      else        ; if color = U.find_color(result)
+                    U.send(color){ display }
                     else
                     U.send(U.colors[Object      ]){ display }
                     end
@@ -44,6 +44,15 @@ module Ripl::Rc::Color
   end
 
   module Imp
+    def find_color value
+      (colors.sort{ |(k1, v1), (k2, v2)|
+        # Class <=> Class
+        if    k1 < k2 then -1
+        elsif k1 > k2 then  1
+        else          then  0
+        end}.find{ |(klass, _)| value.kind_of?(klass) } || []).last
+    end
+
     def colors
       Ripl.config[:rc_color]
     end
