@@ -5,6 +5,7 @@
 * [    bin] added `ripl rc` and `ripl rc rails` commands
 * [noirbrc] added that don't read ~/.irbrc by default
 * [ anchor] use short_inspect
+* [ anchor] fixed a bug that cannot display nil
 * [  color] colorize error output as well
 * [squeeze_history] max 500 items
 * [strip_backtrace] fixed cwd, don't trace if it's a syntax error
