@@ -109,7 +109,7 @@ task :release => [:spec, :check, :build] do
   sh("git tag #{Gemgem.gem_tag}")
   sh("git push")
   sh("git push --tags")
-  sh("#{Gem.ruby} -S gem push pkg/#{Gemgem.gem_tag}")
+  sh("#{Gem.ruby} -S gem push pkg/#{Gemgem.gem_tag}.gem")
 end
 
 task :check do
