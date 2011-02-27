@@ -39,7 +39,7 @@ Another thing which might worth to be mentioned is
 `ripl/rc/anchor`, which is a _pry_ like feature built into
 ripl. You can embed two things into ripl, one is any object:
 
-    Ripl.anchor your_object_want_to_be_observed
+    Ripl.anchor your_object_want_to_be_viewed_as_self
 
 Another one is local binding inside a method:
 

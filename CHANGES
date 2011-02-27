@@ -1,6 +1,6 @@
 = ripl-rc changes history
 
-== ripl-rc 0.1.3 -- ?
+== ripl-rc 0.1.3 -- 2011-02-28
 
 * [    bin] added `ripl rc` and `ripl rc rails` commands
 * [noirbrc] added that don't read ~/.irbrc by default
