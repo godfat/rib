@@ -54,33 +54,97 @@ shown in prompt is the level of anchors, started from 1.
 
 ## FEATURES:
 
-when session ends
+upon session ends:
 
-* require 'ripl/rc/squeeze_history'
-* require 'ripl/rc/mkdir_history'
-* require 'ripl/rc/ctrld_newline'
+* `require 'ripl/rc/squeeze_history'`
 
-result format
+  which squeezes the same input in history, both in memory
+  and history file.
 
-* require 'ripl/rc/strip_backtrace'
-* require 'ripl/rc/color'
+* `require 'ripl/rc/mkdir_history'`
 
-input modification
+  which calls `mkdir -p` on directory which contains history
+  file. For example, I put my irb_history in an directory
+  might not exist before use: `~/.config/irb/irb_history`
 
-* require 'ripl/rc/multiline' # work better with anchor...
-* require 'ripl/rc/eat_whites'
+* `require 'ripl/rc/ctrld_newline'`
 
-speical tool
+  ruby 1.9.2 has no this problem in irb, but 1.8 and ripl do.
+  When hitting ctrl+d to exit ripl, it would print a newline
+  instead of messing up with shell prompt.
 
-* require 'ripl/rc/anchor' # pry like, use: Ripl.anchor(binding) # or obj
+upon formatting output:
 
-config
+* `require 'ripl/rc/strip_backtrace'`
 
-* require 'ripl/rc/noirbrc'
+  ripl prints the full backtrace upon exceptions, even the
+  exceptions come from interactive environment, making it
+  very verbose. This ripl plugin strips those backtrace.
 
-for lazies
+* `require 'ripl/rc/color'`
 
-* require 'ripl/rc' # for all of above
+  There's ripl-color_result that make use of <a href="https://github.com/michaeldv/awesome_print">awesome_print</a>,
+  <a href="http://coderay.rubychan.de/">coderay</a>, or <a href="https://github.com/janlelis/wirb">wirb</a>. The problem of awesome_print is it's too
+  awesome and too verbose, and the problem of coderay and
+  wirb is that they are both parser based. In ripl, this should
+  be as simple as just print different colors upon different
+  objects, instead of inspecting it and parsing it.
+
+  ripl/rc/color just uses a hash with Class to color mapping
+  to pick up which color should be used upon a ruby object.
+
+  To customize the color schema, inspect `Ripl.config[:rc_color]`
+
+upon input:
+
+* `require 'ripl/rc/multiline'`
+
+  I need some modification on ripl-multi_line to make prompt
+  work better, but not sure if I can come up a good fix and
+  try to convince the author to accept those patches. So I
+  just bundle and maintain it on my own. If you're using
+  ripl-rc, you could use this plugin, otherwise, keep using
+  ripl-multi_line.
+
+* `require 'ripl/rc/eat_whites'`
+
+  irb will just give you another prompt upon an empty input,
+  while ripl would show you that your input is nil. I don't like
+  this, because sometimes I'll keep hitting enter to separate
+  between inspects. This plugin would skip inspect if the input
+  is empty just like irb.
+
+special tool:
+
+* `require 'ripl/rc/anchor'`
+
+  So this is my attempt to emulate pry in ripl. Instead
+  trying to make pry support irb_history, colorizing, etc.,
+  I think implement pry like feature in ripl is a lot easier.
+  No need to be fancy, I just need the basic functionality.
+
+  To use it, use:
+  <pre><code>Ripl.anchor your_object_want_to_be_viewed_as_self</code></pre>
+  or
+  <pre><code>Ripl.anchor binding</code></pre>
+  in your code. Other than pry ripl support, you might be
+  interested in <a href="https://github.com/cldwalker/ripl-rails">ripl-rails</a> and <a href="https://github.com/cldwalker/ripl-hijack">ripl-hijack</a>, too.
+
+about config:
+
+* `require 'ripl/rc/noirbrc'`
+
+  By default ripl is reading `~/.irbrc`. I don't think this
+  is what people still using irb would want, because the
+  configuration is totally different. This suppress that,
+  make it only read `~/.riplrc`
+
+for lazies:
+
+* `require 'ripl/rc'`
+
+  This requires anything above for you, and is what `ripl rc`
+  and `ripl rc rails` shell commands did.
 
 ## REQUIREMENTS:
 
