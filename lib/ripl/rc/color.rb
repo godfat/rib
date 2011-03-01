@@ -48,7 +48,7 @@ module Ripl::Rc::Color
         # Class <=> Class
         if    k1 < k2 then -1
         elsif k1 > k2 then  1
-        else          then  0
+        else                0
         end}.find{ |(klass, _)| value.kind_of?(klass) } || []).last
     end
 
