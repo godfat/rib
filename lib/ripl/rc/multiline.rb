@@ -37,7 +37,7 @@ module Ripl::Rc::Multiline
 
   def print_eval_error(e)
     if e.is_a?(SyntaxError) && e.message =~ ERROR_REGEXP
-      @rc_multiline_buffer << @input
+      @rc_multiline_buffer << @input if @rc_multiline_buffer.empty?
       history.pop
       throw :rc_multiline_cont
     else
@@ -51,7 +51,7 @@ module Ripl::Rc::Multiline
     else
       @rc_multiline_buffer << input
       history.pop
-      history << "\n" + str = @rc_multiline_buffer.join("\n")
+      history << "\n" + (str = @rc_multiline_buffer.join("\n"))
       super str
     end
   end
