@@ -4,16 +4,16 @@ require 'ripl'
 # from https://github.com/janlelis/ripl-multi_line
 module Ripl::Rc; end
 module Ripl::Rc::Multiline
-  ERROR_REGEXP = /#{
-    [ %q%unexpected \$end%,
-      %q%unterminated [a-z]+ meets end of file%,
+  ERROR_REGEXP = Regexp.new(
+    [ "unexpected \\$end",
+      "unterminated [a-z]+ meets end of file",
       # rubinius
-      %q%expecting '\\n' or ';'%,
-      %q%missing 'end'%,
-      %q%expecting '}'%,
+      "expecting '\\\\n' or ';'",
+      "missing 'end'",
+      "expecting '}'",
       # jruby
-      %q%syntax error, unexpected end-of-file%,
-    ]*'|' }/
+      "syntax error, unexpected end-of-file",
+    ].join('|'))
 
   def before_loop
     @rc_multiline_buffer = []
