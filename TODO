@@ -1,11 +1,4 @@
 = ripl-rc todo list
 
-* something is wrong, try this:
-
-    class C; def f; super; end; end
-    C.new.f
-
-  no error on first call!
-
 * tests for each plugin
 * doc
