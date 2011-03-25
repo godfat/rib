@@ -1,5 +1,12 @@
 = ripl-rc changes history
 
+== ripl-rc 0.1.5 -- 2011-03-26
+
+* [      bin] shows a better error message when ripl-rails can't be found
+* [  ripl-rc] made require 'ripl-rc' works like require 'ripl/rc'
+* [multiline] fixed regexp warning on ruby 1.8.7
+* [multiline] fixed history when using multiline
+
 == ripl-rc 0.1.4 -- 2011-03-01
 
 * [  color] fix syntax error; sorry, i definitely need tests.. :s
