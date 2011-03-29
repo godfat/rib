@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = %q{2011-03-26}
+  s.date = %q{2011-03-29}
   s.default_executable = %q{ripl-rc}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = ["godfat (XD) godfat.org"]
