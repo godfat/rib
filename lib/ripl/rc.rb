@@ -4,6 +4,9 @@ require 'ripl/rc/squeeze_history'
 require 'ripl/rc/mkdir_history'
 require 'ripl/rc/ctrld_newline'
 
+# handling error
+require 'ripl/rc/last_exception'
+
 # result format
 require 'ripl/rc/strip_backtrace'
 require 'ripl/rc/color'
