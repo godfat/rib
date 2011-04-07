@@ -12,6 +12,7 @@ describe Ripl::Rc::SqueezeHistory do
     @shell   = Ripl::Shell.create(Ripl.config.merge!(:history => @history))
     @input   = %w[foo bar bar foo bar]
     @shell.history.clear
+    @shell.before_loop
   end
 
   after do; FileUtils.rm_f(@history); end
