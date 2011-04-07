@@ -10,6 +10,15 @@ by Lin Jen-Shin ([godfat](http://godfat.org))
 
 ripl plugins collection, take you want, leave you don't.
 
+## REQUIREMENTS:
+
+* Tested with MRI 1.8.7, 1.9.2 and Rubinius 1.2.3, JRuby 1.6.0
+* ripl
+
+## INSTALLATION:
+
+   gem install ripl-rc
+
 ## SYNOPSIS:
 
 If you don't know what is __ripl__, or just want to have an
@@ -145,15 +154,6 @@ for lazies:
 
   This requires anything above for you, and is what `ripl rc`
   and `ripl rc rails` shell commands did.
-
-## REQUIREMENTS:
-
-* Tested with MRI 1.8.7, 1.9.2 and Rubinius 1.2.3, JRuby 1.6.0
-* ripl
-
-## INSTALL:
-
-   gem install ripl-rc
 
 ## LICENSE:
 
