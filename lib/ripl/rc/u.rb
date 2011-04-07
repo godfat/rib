@@ -27,13 +27,19 @@ module Ripl::Rc::U
 
     snake_name = mod.name[/::\w+$/].tr(':', ''). # remove namespaces
                      gsub(/([A-Z][a-z]*)/, '\\1_').downcase[0..-2]
-    code = %w[enable disable enabled? disabled?].map{ |meth|
+    code = (%w[enable disable].map{ |meth|
       <<-RUBY
         def #{meth}_#{snake_name}
           #{mod.name}.#{meth}
         end
       RUBY
-    }.join("\n")
+    } + %w[enabled? disabled?].map{ |meth|
+      <<-RUBY
+        def #{snake_name}_#{meth}
+          #{mod.name}.#{meth}
+        end
+      RUBY
+    }).join("\n")
     module_eval(code)
   end
 end
