@@ -4,6 +4,11 @@ require 'ripl/rc/u'
 module Ripl::Rc::SqueezeHistory
   include Ripl::Rc::U
 
+  # avoid some complicated conditions...
+  def history
+    super || (@history ||= [])
+  end
+
   # write squeezed history
   def write_history
     return super if SqueezeHistory.disabled?
