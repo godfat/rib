@@ -6,6 +6,7 @@ module Ripl::Rc::SqueezeHistory
 
   # write squeezed history
   def write_history
+    return super if SqueezeHistory.disabled?
     File.open(history_file, 'w'){ |f|
       f.puts U.squeeze_history(history).join("\n")
     }
@@ -13,12 +14,14 @@ module Ripl::Rc::SqueezeHistory
 
   # squeeze history on memory too
   def eval_input input
+    return super if SqueezeHistory.disabled?
     history.pop if input.strip == '' ||
                   (history.size > 1 && input == history[-2])
     super
   end
 
   def before_loop
+    return super if SqueezeHistory.disabled?
     super if history.empty?
   end
 
