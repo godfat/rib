@@ -24,5 +24,18 @@ module Ripl::Rc::U
         !!disabled
       end
     end
+
+    snake_name = mod.name[/::\w+$/].tr(':', ''). # remove namespaces
+                     gsub(/([A-Z][a-z]*)/, '\\1_').downcase[0..-2]
+    code = %w[enable disable enabled? disabled?].map{ |meth|
+      <<-RUBY
+        def #{meth}_#{snake_name}
+          #{mod.name}.#{meth}
+        end
+      RUBY
+    }.join("\n")
+    module_eval(code)
   end
 end
+
+Ripl.extend(Ripl::Rc::U)
