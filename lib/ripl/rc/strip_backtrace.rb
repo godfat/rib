@@ -1,17 +1,18 @@
 
-require 'ripl'
+require 'ripl/rc/u'
 
-module Ripl::Rc; end
 module Ripl::Rc::StripBacktrace
-  include Ripl::Rc # makes U avaliable
+  include Ripl::Rc::U
 
   # strip backtrace until ripl
   def format_error e
+    return super if StripBacktrace.disabled?
     message, backtrace = get_error(e, U.strip_backtrace(e, @name))
     "#{message}\n  #{backtrace.join("\n  ")}"
   end
 
   def get_error e, backtrace=e.backtrace
+    return super if StripBacktrace.disabled?
     ["#{e.class}: #{e.message}", backtrace]
   end
 

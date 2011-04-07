@@ -1,9 +1,8 @@
 
-require 'ripl'
+require 'ripl/rc/u'
 
-module Ripl::Rc; end
 module Ripl::Rc::SqueezeHistory
-  include Ripl::Rc # makes U avaliable
+  include Ripl::Rc::U
 
   # write squeezed history
   def write_history

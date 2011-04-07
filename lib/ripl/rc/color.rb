@@ -1,11 +1,11 @@
 
-require 'ripl'
+require 'ripl/rc/u'
 
-module Ripl::Rc; end
 module Ripl::Rc::Color
-  include Ripl::Rc # makes U avaliable
+  include Ripl::Rc::U
 
   def format_result result, display=result.inspect
+    return super(result) if Color.disabled?
     case result
       when String ; U.send(U.colors[String      ]){ display }
       when Numeric; U.send(U.colors[Numeric     ]){ display }
@@ -32,6 +32,7 @@ module Ripl::Rc::Color
   end
 
   def get_error e, backtrace=e.backtrace
+    return super if Color.disabled?
     [format_result(e, "#{e.class.to_s}: #{e.message}"),
      backtrace.map{ |b|
        path, rest = File.split(b)

@@ -1,8 +1,9 @@
 
-require 'ripl'
+require 'ripl/rc/u'
 
-module Ripl::Rc; end
 module Ripl::Rc::Anchor
+  include Ripl::Rc::U
+
   def loop_eval(str)
     case obj_or_binding = (config[:rc_anchor] ||= []).last
       when NilClass
@@ -42,6 +43,7 @@ module Ripl::Rc::Anchor
 
   module AnchorImp
     def anchor obj_or_binding
+      return if Ripl::Rc::Anchor.disabled?
       if Ripl.config[:rc_init].nil?
         Ripl::Runner.load_rc(Ripl.config[:riplrc])
         Ripl.config[:rc_init] = true

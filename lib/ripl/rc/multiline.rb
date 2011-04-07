@@ -1,9 +1,10 @@
 
-require 'ripl'
+require 'ripl/rc/u'
 
 # from https://github.com/janlelis/ripl-multi_line
-module Ripl::Rc; end
 module Ripl::Rc::Multiline
+  include Ripl::Rc::U
+
   # test those:
   # ruby -e '"'
   # ruby -e '{'
@@ -24,11 +25,13 @@ module Ripl::Rc::Multiline
     ].join('|'))
 
   def before_loop
+    return super if Multiline.disabled?
     @rc_multiline_buffer = []
     super
   end
 
   def prompt
+    return super if Multiline.disabled?
     if @rc_multiline_buffer.empty?
       super
     else
@@ -37,6 +40,7 @@ module Ripl::Rc::Multiline
   end
 
   def loop_once
+    return super if Multiline.disabled?
     catch(:rc_multiline_cont) do
       super
       @rc_multiline_buffer.clear
@@ -44,6 +48,7 @@ module Ripl::Rc::Multiline
   end
 
   def print_eval_error(e)
+    return super if Multiline.disabled?
     if e.is_a?(SyntaxError) && e.message =~ ERROR_REGEXP
       @rc_multiline_buffer << @input if @rc_multiline_buffer.empty?
       history.pop
@@ -54,6 +59,7 @@ module Ripl::Rc::Multiline
   end
 
   def loop_eval(input)
+    return super if Multiline.disabled?
     if @rc_multiline_buffer.empty?
       super
     else
@@ -65,6 +71,7 @@ module Ripl::Rc::Multiline
   end
 
   def handle_interrupt
+    return super if Multiline.disabled?
     if @rc_multiline_buffer.empty?
       super
     else
