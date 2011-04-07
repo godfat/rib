@@ -17,7 +17,7 @@ ripl plugins collection, take you want, leave you don't.
 
 ## INSTALLATION:
 
-   gem install ripl-rc
+    gem install ripl-rc
 
 ## SYNOPSIS:
 
