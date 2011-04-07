@@ -4,13 +4,21 @@ require 'ripl'
 # from https://github.com/janlelis/ripl-multi_line
 module Ripl::Rc; end
 module Ripl::Rc::Multiline
+  # test those:
+  # ruby -e '"'
+  # ruby -e '{'
+  # ruby -e '['
+  # ruby -e '('
+  # ruby -e 'class C'
+  # ruby -e 'def f'
+  # ruby -e 'begin'
   ERROR_REGEXP = Regexp.new(
-    [ "unexpected \\$end",
-      "unterminated [a-z]+ meets end of file",
+    [ # string
+      "unterminated string meets end of file",
+      # mri and rubinius
+      "syntax error, unexpected \\$end",
       # rubinius
-      "expecting '\\\\n' or ';'",
-      "missing 'end'",
-      "expecting '}'",
+      "expecting '.+'( or '.+')*",
       # jruby
       "syntax error, unexpected end-of-file",
     ].join('|'))
