@@ -148,6 +148,7 @@ for lazies:
 
 ## REQUIREMENTS:
 
+* Tested with MRI 1.8.7, 1.9.2 and Rubinius 1.2.3, JRuby 1.6.0
 * ripl
 
 ## INSTALL:
