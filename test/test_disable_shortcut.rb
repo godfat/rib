@@ -1,16 +1,13 @@
 
-require 'bacon'
-require 'rr'
+require 'ripl/rc/test'
 require 'ripl/rc'
-Bacon.summary_on_exit
-include RR::Adapters::RRMethods
 
 describe Ripl::Rc::U do
   before do
     @names = Dir[File.expand_path(
                "#{File.dirname(__FILE__)}/../lib/ripl/rc/*.rb")].
                map   { |path| File.basename(path)[0..-4] }.
-               reject{ |name| %w[version u noirbrc].include?(name) }
+               reject{ |name| %w[version u noirbrc test].include?(name) }
     @mods  = Ripl::Shell.ancestors[1..-1].select{ |mod| mod < Ripl::Rc }
   end
 

@@ -1,10 +1,6 @@
 
-require 'bacon'
-require 'rr'
-require 'fileutils'
+require 'ripl/rc/test'
 require 'ripl/rc/squeeze_history'
-Bacon.summary_on_exit
-include RR::Adapters::RRMethods
 
 describe Ripl::Rc::SqueezeHistory do
   before do
