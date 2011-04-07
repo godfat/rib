@@ -9,7 +9,8 @@ include RR::Adapters::RRMethods
 describe Ripl::Rc::SqueezeHistory do
   before do
     @history = '/tmp/test_ripl_history'
-    @shell   = Ripl::Shell.create(Ripl.config.merge!(:history => @history))
+    @shell   = Ripl::Shell.create(Ripl.config.merge!(:history => @history,
+                                                     :irbrc   => nil))
     @input   = %w[foo bar bar foo bar]
     @shell.history.clear
     @shell.before_loop
