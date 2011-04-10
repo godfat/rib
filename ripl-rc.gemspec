@@ -6,8 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = %q{2011-04-08}
-  s.default_executable = %q{ripl-rc}
+  s.date = %q{2011-04-10}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["ripl-rc"]
@@ -16,7 +15,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/godfat/}
   s.rdoc_options = ["--main", "README"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.rubygems_version = %q{1.7.2}
   s.summary = %q{ripl plugins collection, take you want, leave you don't.}
   s.test_files = ["test/test_disable_shortcut.rb", "test/test_squeeze_history.rb"]
 
