@@ -67,20 +67,30 @@ upon session ends:
 
 * `require 'ripl/rc/squeeze_history'`
 
-  which squeezes the same input in history, both in memory
+  Which squeezes the same input in history, both in memory
   and history file.
 
 * `require 'ripl/rc/mkdir_history'`
 
-  which calls `mkdir -p` on directory which contains history
+  Which calls `mkdir -p` on directory which contains history
   file. For example, I put my irb_history in an directory
   might not exist before use: `~/.config/irb/irb_history`
 
 * `require 'ripl/rc/ctrld_newline'`
 
-  ruby 1.9.2 has no this problem in irb, but 1.8 and ripl do.
+  Ruby 1.9.2 has no this problem in irb, but 1.8 and ripl do.
   When hitting ctrl+d to exit ripl, it would print a newline
   instead of messing up with shell prompt.
+
+upon exception occurs:
+
+* `require 'ripl/rc/last_exception'`
+
+  We can't access $! for last exception because input evaluation
+  is not in the block which rescues the exception, neither can we
+  update $! because it's a read only pseudo global variable.
+
+  This plugin makes last rescued exception stored in `Ripl.last_exception`
 
 upon formatting output:
 
