@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ripl-rc}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = %q{2011-04-10}
+  s.date = %q{2011-04-11}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = ["godfat (XD) godfat.org"]
   s.executables = ["ripl-rc"]
