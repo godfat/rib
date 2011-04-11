@@ -21,7 +21,8 @@ module Ripl::Rc::SqueezeHistory
   def eval_input input
     return super if SqueezeHistory.disabled?
     history.pop if input.strip == '' ||
-                  (history.size > 1 && input == history[-2])
+                  (history.size > 1 && input == history.to_a[-2])
+                  # EditLine is really broken, to_a is needed for it
     super
   end
 
