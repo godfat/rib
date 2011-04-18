@@ -5,24 +5,25 @@ require 'ripl/rc/multiline' # dependency
 module Ripl::Rc::MultilineHistory
   include Ripl::Rc::U
 
-  def print_eval_error(e)
-    return super if MultilineHistory.disabled?
-    catch(:rc_multiline_cont) do
-      return super
-    end
-    history.pop
-    throw :rc_multiline_cont
-  end
-
   def loop_eval(input)
     return super if MultilineHistory.disabled?
-    if @rc_multiline_buffer.empty?
-      super
-    else
-      history.pop
-      history << "\n" + @rc_multiline_buffer.join("\n") + "\n#{input}"
-      super
+    result = super # might throw
+    unless @rc_multiline_buffer.empty?
+      (@rc_multiline_buffer.size + (@rc_multiline_trash || 0)).
+        times{ history.pop }
+       @rc_multiline_trash = 0
+      history << "\n" + @rc_multiline_buffer.join("\n")
     end
+    result
+  end
+
+  def handle_interrupt
+    return super if MultilineHistory.disabled?
+    unless @rc_multiline_buffer.empty?
+      @rc_multiline_trash ||= 0
+      @rc_multiline_trash  += 1
+    end
+    super
   end
 end
 
