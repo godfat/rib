@@ -1,6 +1,6 @@
 
 # upon session ends
-require 'ripl/rc/history'
+require 'ripl/rc/history_ivar'
 require 'ripl/rc/squeeze_history'
 require 'ripl/rc/mkdir_history'
 require 'ripl/rc/ctrld_newline'
