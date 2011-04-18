@@ -1,5 +1,6 @@
 
 require 'ripl/rc/u'
+require 'ripl/rc/multiline' # dependency
 
 module Ripl::Rc::MultilineHistory
   include Ripl::Rc::U
