@@ -4,11 +4,6 @@ require 'ripl/rc/u'
 module Ripl::Rc::SqueezeHistory
   include Ripl::Rc::U
 
-  # avoid some complicated conditions...
-  def history
-    super || (@history ||= [])
-  end
-
   # write squeezed history
   def write_history
     return super if SqueezeHistory.disabled?
@@ -24,12 +19,6 @@ module Ripl::Rc::SqueezeHistory
                   (history.size > 1 && input == history.to_a[-2])
                   # EditLine is really broken, to_a is needed for it
     super
-  end
-
-  # avoid double initialization for history
-  def before_loop
-    return super if SqueezeHistory.disabled?
-    super if history.empty?
   end
 
   module Imp
