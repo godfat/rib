@@ -6,7 +6,7 @@ module Ripl::Rc::HistoryIvar
 
   def history
     return super if HistoryIvar.disabled?
-    @history ||= super
+    @history ||= super || [] # if readline is not available
   end
 end
 
