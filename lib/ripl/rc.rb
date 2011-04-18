@@ -13,6 +13,7 @@ require 'ripl/rc/color'
 
 # upon input
 require 'ripl/rc/multiline'
+require 'ripl/rc/multiline_history'
 require 'ripl/rc/eat_whites'
 
 # speical tool
