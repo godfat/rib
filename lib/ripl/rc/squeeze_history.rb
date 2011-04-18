@@ -26,6 +26,7 @@ module Ripl::Rc::SqueezeHistory
     super
   end
 
+  # avoid double initialization for history
   def before_loop
     return super if SqueezeHistory.disabled?
     super if history.empty?
