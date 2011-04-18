@@ -1,7 +1,20 @@
 
+# this really messes thing up! should be loaded first if we're using
+# ripl/rc/multiline_history_file, otherwise, history couldn't really
+# be overridden...
+require 'ripl'
+if Ripl.config[:readline] == true
+  require 'readline'
+  require 'ripl/readline'
+elsif Ripl.config[:readline]
+  require Ripl.config[:readline].to_s
+  require 'ripl/readline'
+end
+
 # upon session ends
-require 'ripl/rc/history_ivar'
 require 'ripl/rc/squeeze_history'
+require 'ripl/rc/history_ivar'
+require 'ripl/rc/multiline_history_file'
 require 'ripl/rc/mkdir_history'
 require 'ripl/rc/ctrld_newline'
 
