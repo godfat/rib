@@ -73,12 +73,9 @@ module Ripl::Rc::Multiline
       super
     else
       line = @rc_multiline_buffer.pop
-      if @rc_multiline_buffer.empty?
-        super
-      else
-        puts "[removed this line: #{line}]"
-        throw :rc_multiline_cont
-      end
+      print "[removed this line: #{line}]"
+      super
+      throw :rc_multiline_cont unless @rc_multiline_buffer.empty?
     end
   end
 end
