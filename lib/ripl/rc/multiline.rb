@@ -75,7 +75,7 @@ module Ripl::Rc::Multiline
       line = @rc_multiline_buffer.pop
       print "[removed this line: #{line}]"
       super
-      throw :rc_multiline_cont unless @rc_multiline_buffer.empty?
+      throw :rc_multiline_cont
     end
   end
 end
