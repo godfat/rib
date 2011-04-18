@@ -6,12 +6,13 @@ module Ripl::Rc::History
 
   # avoid some complicated conditions...
   def history
+    return super if History.disabled?
     super || (@history ||= [])
   end
 
   # avoid double initialization for history
   def before_loop
-    return super if SqueezeHistory.disabled?
+    return super if History.disabled?
     super if history.empty?
   end
 end
