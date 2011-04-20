@@ -7,7 +7,7 @@ module Ripl::Rc::MultilineHistoryFile
 
   def write_history
     return super if MultilineHistoryFile.disabled?
-    @history = history.to_a.map{ |line|
+    @history_ivar = history.to_a.map{ |line|
       line.gsub("\n", "#{Ripl.config[:rc_multiline_history_file_token]}\n")
     }
     super
@@ -15,6 +15,7 @@ module Ripl::Rc::MultilineHistoryFile
 
   def before_loop
     return super if MultilineHistoryFile.disabled?
+    super # this would initilaize @history to [], nothing we can do here
     buffer = []
     File.exist?(history_file) &&
       IO.readlines(history_file).each{ |line|

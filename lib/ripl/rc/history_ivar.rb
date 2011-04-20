@@ -6,7 +6,12 @@ module Ripl::Rc::HistoryIvar
 
   def history
     return super if HistoryIvar.disabled?
-    @history ||= super || [] # if readline is not available
+    # avoid conflict on build-in @history object!
+    # since it would get initialized to [] upon before_loop
+    # and here nothing we can prevent it... i hope that
+    # could be updated to something like @history ||= []
+    # then i can set @history to other value before it gets set to []
+    @history_ivar ||= super || [] # if readline is not available
   end
 end
 
