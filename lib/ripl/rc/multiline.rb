@@ -10,12 +10,13 @@ module Ripl::Rc::Multiline
   # ruby -e '{'
   # ruby -e '['
   # ruby -e '('
+  # ruby -e '/'
   # ruby -e 'class C'
   # ruby -e 'def f'
   # ruby -e 'begin'
   ERROR_REGEXP = Regexp.new(
-    [ # string
-      "unterminated string meets end of file",
+    [ # string or regexp
+      "unterminated \\w+ meets end of file",
       # mri and rubinius
       "syntax error, unexpected \\$end",
       # rubinius
