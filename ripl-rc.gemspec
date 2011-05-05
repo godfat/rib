@@ -5,19 +5,19 @@ Gem::Specification.new do |s|
   s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = %q{2011-04-20}
+  s.authors = [%q{Lin Jen-Shin (godfat)}]
+  s.date = %q{2011-05-05}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
-  s.email = ["godfat (XD) godfat.org"]
-  s.executables = ["ripl-rc"]
-  s.extra_rdoc_files = ["CHANGES", "CONTRIBUTORS", "LICENSE", "TODO"]
-  s.files = [".gitignore", "2011-02-28.md", "CHANGES", "CONTRIBUTORS", "Gemfile", "LICENSE", "README", "README.md", "Rakefile", "TODO", "bin/ripl-rc", "lib/ripl-rc.rb", "lib/ripl/rc.rb", "lib/ripl/rc/anchor.rb", "lib/ripl/rc/color.rb", "lib/ripl/rc/ctrld_newline.rb", "lib/ripl/rc/eat_whites.rb", "lib/ripl/rc/history_ivar.rb", "lib/ripl/rc/last_exception.rb", "lib/ripl/rc/mkdir_history.rb", "lib/ripl/rc/multiline.rb", "lib/ripl/rc/multiline_history.rb", "lib/ripl/rc/multiline_history_file.rb", "lib/ripl/rc/noirbrc.rb", "lib/ripl/rc/squeeze_history.rb", "lib/ripl/rc/strip_backtrace.rb", "lib/ripl/rc/test.rb", "lib/ripl/rc/u.rb", "lib/ripl/rc/version.rb", "ripl-rc.gemspec", "screenshot.png", "task/gemgem.rb", "test/test_disable_shortcut.rb", "test/test_squeeze_history.rb"]
+  s.email = [%q{godfat (XD) godfat.org}]
+  s.executables = [%q{ripl-rc}]
+  s.extra_rdoc_files = [%q{CHANGES}, %q{CONTRIBUTORS}, %q{LICENSE}, %q{TODO}]
+  s.files = [%q{.gitignore}, %q{.gitmodules}, %q{2011-02-28.md}, %q{CHANGES}, %q{CONTRIBUTORS}, %q{Gemfile}, %q{LICENSE}, %q{README}, %q{README.md}, %q{Rakefile}, %q{TODO}, %q{bin/ripl-rc}, %q{lib/ripl-rc.rb}, %q{lib/ripl/rc.rb}, %q{lib/ripl/rc/anchor.rb}, %q{lib/ripl/rc/color.rb}, %q{lib/ripl/rc/ctrld_newline.rb}, %q{lib/ripl/rc/eat_whites.rb}, %q{lib/ripl/rc/history_ivar.rb}, %q{lib/ripl/rc/last_exception.rb}, %q{lib/ripl/rc/mkdir_history.rb}, %q{lib/ripl/rc/multiline.rb}, %q{lib/ripl/rc/multiline_history.rb}, %q{lib/ripl/rc/multiline_history_file.rb}, %q{lib/ripl/rc/noirbrc.rb}, %q{lib/ripl/rc/squeeze_history.rb}, %q{lib/ripl/rc/strip_backtrace.rb}, %q{lib/ripl/rc/test.rb}, %q{lib/ripl/rc/u.rb}, %q{lib/ripl/rc/version.rb}, %q{ripl-rc.gemspec}, %q{screenshot.png}, %q{task/gemgem.rb}, %q{test/test_disable_shortcut.rb}, %q{test/test_squeeze_history.rb}]
   s.homepage = %q{http://github.com/godfat/}
-  s.rdoc_options = ["--main", "README"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.7.2}
+  s.rdoc_options = [%q{--main}, %q{README}]
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.0}
   s.summary = %q{ripl plugins collection, take you want, leave you don't.}
-  s.test_files = ["test/test_disable_shortcut.rb", "test/test_squeeze_history.rb"]
+  s.test_files = [%q{test/test_disable_shortcut.rb}, %q{test/test_squeeze_history.rb}]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
