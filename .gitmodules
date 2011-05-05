@@ -1,0 +1,3 @@
+[submodule "task"]
+	path = task
+	url = git://github.com/godfat/godfat-gemgem.git
