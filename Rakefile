@@ -12,7 +12,7 @@ task 'gem:spec' do
     s.version     = Ripl::Rc::VERSION
     s.executables = [s.name]
 
-    %w[ripl]    .each{ |g| s.add_runtime_dependency(g) }
+    %w[ripl]    .each{ |g| s.add_runtime_dependency(g, '>=0.4.1') }
     %w[bacon rr].each{ |g| s.add_development_dependency(g) }
   end
 

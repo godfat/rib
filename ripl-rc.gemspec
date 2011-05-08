@@ -34,7 +34,6 @@ Gem::Specification.new do |s|
   %q{lib/ripl/rc/color.rb},
   %q{lib/ripl/rc/ctrld_newline.rb},
   %q{lib/ripl/rc/eat_whites.rb},
-  %q{lib/ripl/rc/history_ivar.rb},
   %q{lib/ripl/rc/last_exception.rb},
   %q{lib/ripl/rc/mkdir_history.rb},
   %q{lib/ripl/rc/multiline.rb},
@@ -66,16 +65,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ripl>, [">= 0"])
+      s.add_runtime_dependency(%q<ripl>, [">= 0.4.1"])
       s.add_development_dependency(%q<bacon>, [">= 0"])
       s.add_development_dependency(%q<rr>, [">= 0"])
     else
-      s.add_dependency(%q<ripl>, [">= 0"])
+      s.add_dependency(%q<ripl>, [">= 0.4.1"])
       s.add_dependency(%q<bacon>, [">= 0"])
       s.add_dependency(%q<rr>, [">= 0"])
     end
   else
-    s.add_dependency(%q<ripl>, [">= 0"])
+    s.add_dependency(%q<ripl>, [">= 0.4.1"])
     s.add_dependency(%q<bacon>, [">= 0"])
     s.add_dependency(%q<rr>, [">= 0"])
   end
