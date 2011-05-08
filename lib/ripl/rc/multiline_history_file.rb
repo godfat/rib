@@ -1,13 +1,13 @@
 
 require 'ripl/rc/u'
-require 'ripl/rc/history_ivar' # dependency
+# require 'ripl/rc/history_ivar' # dependency
 
 module Ripl::Rc::MultilineHistoryFile
   include Ripl::Rc::U
 
   def write_history
     return super if MultilineHistoryFile.disabled?
-    @history_ivar = history.to_a.map{ |line|
+    @history = history.to_a.map{ |line|
       line.gsub("\n", "#{Ripl.config[:rc_multiline_history_file_token]}\n")
     }
     super
