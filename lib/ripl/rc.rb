@@ -13,7 +13,6 @@ end
 
 # upon session ends
 require 'ripl/rc/squeeze_history'
-# require 'ripl/rc/history_ivar'
 require 'ripl/rc/multiline_history_file'
 require 'ripl/rc/mkdir_history'
 require 'ripl/rc/ctrld_newline'
