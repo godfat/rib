@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-05-08}
+  s.date = %q{2011-06-01}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [%q{ripl-rc}]
@@ -55,7 +55,7 @@ Gem::Specification.new do |s|
   %q{--main},
   %q{README}]
   s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.1}
+  s.rubygems_version = %q{1.8.5}
   s.summary = %q{ripl plugins collection, take you want, leave you don't.}
   s.test_files = [
   %q{test/test_disable_shortcut.rb},

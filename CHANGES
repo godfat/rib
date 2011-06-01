@@ -1,5 +1,10 @@
 = ripl-rc changes history
 
+== ripl-rc 0.2.2 -- 2011-06-01
+
+* [multiline_history     ] fixed multiline_history
+* [multiline_history_file] now we have persistent multiline_history
+
 == ripl-rc 0.2.1 -- 2011-04-11
 
 * [multiline] fixed history with editline (e.g. mac's build-in ruby)
