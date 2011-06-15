@@ -6,8 +6,8 @@ describe Ripl::Rc::U do
   before do
     @names = Dir[File.expand_path(
                "#{File.dirname(__FILE__)}/../lib/ripl/rc/*.rb")].
-               map   { |path| File.basename(path)[0..-4] }.
-               reject{ |name| %w[version u noirbrc test].include?(name) }
+               map   {|path| File.basename(path)[0..-4]                     }.
+               reject{|name| %w[version u noirbrc test debug].include?(name)}
     @mods  = Ripl::Shell.ancestors[1..-1].select{ |mod| mod < Ripl::Rc }
   end
 
