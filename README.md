@@ -61,6 +61,11 @@ shown in prompt is the level of anchors, started from 1.
 
 ![Screenshot](https://github.com/godfat/ripl-rc/raw/master/screenshot.png)
 
+Please read this blog post for other detail since I haven't
+had time to update this README... Sorry about that.
+
+* [a new feature mainly for anchor in ripl-rc ](http://blogger.godfat.org/2011/06/new-feature-mainly-for-anchor-in-ripl.html)
+
 ## FEATURES:
 
 upon session ends:

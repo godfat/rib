@@ -1,5 +1,15 @@
 = ripl-rc changes history
 
+== ripl-rc 0.2.3 -- 2011-06-16
+
+Please read this for detail:
+http://blogger.godfat.org/2011/06/new-feature-mainly-for-anchor-in-ripl.html
+
+* [ripl-rc] Ripl.enable/disable_??? now accepts a block to ease switching.
+* [  debug] This plugin is simply calling Ripl.disable_anchor at the
+            beginning, make it easier to use [anchor] to inspect a certain
+            place under a certain condition. See the blog post for detail.
+
 == ripl-rc 0.2.2 -- 2011-06-01
 
 * [multiline_history     ] fixed multiline_history
