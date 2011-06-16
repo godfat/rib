@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   %q{screenshot.png},
   %q{task/gemgem.rb},
   %q{test/test_disable_shortcut.rb},
+  %q{test/test_ensure_after_loop.rb},
   %q{test/test_squeeze_history.rb}]
   s.homepage = %q{https://github.com/godfat/ripl-rc}
   s.rdoc_options = [
@@ -61,6 +62,7 @@ Gem::Specification.new do |s|
   s.summary = %q{ripl plugins collection, take you want, leave you don't.}
   s.test_files = [
   %q{test/test_disable_shortcut.rb},
+  %q{test/test_ensure_after_loop.rb},
   %q{test/test_squeeze_history.rb}]
 
   if s.respond_to? :specification_version then
