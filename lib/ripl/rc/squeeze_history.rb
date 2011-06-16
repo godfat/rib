@@ -7,9 +7,8 @@ module Ripl::Rc::SqueezeHistory
   # write squeezed history
   def write_history
     return super if SqueezeHistory.disabled?
-    File.open(history_file, 'w'){ |f|
-      f.puts U.squeeze_history(history).join("\n")
-    }
+    @history = U.squeeze_history(history).join("\n")
+    super
   end
 
   # squeeze history on memory too
