@@ -4,6 +4,7 @@ require 'ripl/rc/u'
 module Ripl::Rc::Color
   include Ripl::Rc::U
 
+  module_function
   def format_result result, display=result.inspect
     return super(result) if Color.disabled?
     case result
