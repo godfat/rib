@@ -1,6 +1,5 @@
 
 require 'ripl/rc/u'
-# require 'ripl/rc/history_ivar' # dependency
 
 module Ripl::Rc::MultilineHistoryFile
   include Ripl::Rc::U
