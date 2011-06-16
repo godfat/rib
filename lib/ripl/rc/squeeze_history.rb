@@ -7,7 +7,7 @@ module Ripl::Rc::SqueezeHistory
   # write squeezed history
   def write_history
     return super if SqueezeHistory.disabled?
-    @history = U.squeeze_history(history).join("\n")
+    @history = "#{U.squeeze_history(history).join("\n")}\n"
     super
   end
 
