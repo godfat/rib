@@ -31,7 +31,7 @@ module Ripl::Rc::Anchor
   # if the object is the same, then we're exiting from an anchor,
   # so don't print anything.
   def print_result result
-    super unless result != nil &&
+    super unless !result.nil? &&
                  result.object_id == Ripl.config[:rc_anchor_last].object_id
   end
 
