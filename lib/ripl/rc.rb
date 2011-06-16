@@ -16,6 +16,7 @@ require 'ripl/rc/squeeze_history'
 require 'ripl/rc/multiline_history_file'
 require 'ripl/rc/mkdir_history'
 require 'ripl/rc/ctrld_newline'
+require 'ripl/rc/ensure_after_loop'
 
 # upon exception occurs
 require 'ripl/rc/last_exception'

@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
   %q{lib/ripl/rc/ctrld_newline.rb},
   %q{lib/ripl/rc/debug.rb},
   %q{lib/ripl/rc/eat_whites.rb},
+  %q{lib/ripl/rc/ensure_after_loop.rb},
   %q{lib/ripl/rc/last_exception.rb},
   %q{lib/ripl/rc/mkdir_history.rb},
   %q{lib/ripl/rc/multiline.rb},
