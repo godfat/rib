@@ -3,7 +3,7 @@ by Lin Jen-Shin ([godfat](http://godfat.org))
 
 ## LINKS:
 
-* [github](http://github.com/godfat/ripl-rc)
+* [github](https://github.com/godfat/ripl-rc)
 * [rubygems](http://rubygems.org/gems/ripl-rc)
 
 ## DESCRIPTION:
