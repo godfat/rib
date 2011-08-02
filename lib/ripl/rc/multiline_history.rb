@@ -7,14 +7,14 @@ module Ripl::Rc::MultilineHistory
 
   def loop_eval(input)
     return super if MultilineHistory.disabled?
-    result = super # might throw
+    super # might throw
+  ensure
     unless @rc_multiline_buffer.empty?
       (@rc_multiline_buffer.size + (@rc_multiline_trash || 0)).
         times{ history.pop }
        @rc_multiline_trash = 0
       history << "\n" + @rc_multiline_buffer.join("\n")
     end
-    result
   end
 
   def handle_interrupt
