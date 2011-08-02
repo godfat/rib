@@ -1,4 +1,5 @@
 # ripl-rc
+
 by Lin Jen-Shin ([godfat](http://godfat.org))
 
 ## LINKS:
@@ -174,7 +175,7 @@ for lazies:
 
 Apache License 2.0
 
-Copyright (c) 2010, Lin Jen-Shin (godfat)
+Copyright (c) 2010-2011, Lin Jen-Shin (godfat)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
