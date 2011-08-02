@@ -1,5 +1,20 @@
 = ripl-rc changes history
 
+== ripl-rc 0.2.4 -- 2011-08-03
+
+* [ensure_after_loop] A plugin which would make sure after_loop is called.
+                      (Some plugins need to do cleaning up in after_loop)
+
+* [anchor           ] Fixed a bug for buggy EditLine, which would raise
+                      weird exception upon calling `HISTORY == nil`.
+                      Now we use `.nil?` to lookup if it's nil or not.
+
+* [multiline_history] Fixed a bug when multiline evaluation raised an
+                      exception, it wouldn't handle the history correctly.
+                      Moving the handling to an ensure block fixed this.
+
+* [squeeze_history  ] (Internal) Take the advantage of the new history API
+
 == ripl-rc 0.2.3 -- 2011-06-16
 
 Please read this for detail:
