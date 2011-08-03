@@ -5,7 +5,11 @@ module Ripl::Rc::Color
   include Ripl::Rc::U
 
   module_function
-  def format_result result, display=result.inspect
+  def format_result result
+    format_result_with_display result
+  end
+
+  def format_result_with_display result, display=result.inspect
     return super(result) if Color.disabled?
     case result
       when String ; U.send(U.colors[String      ]){ display }
@@ -34,7 +38,7 @@ module Ripl::Rc::Color
 
   def get_error e, backtrace=e.backtrace
     return super if Color.disabled?
-    [format_result(e, "#{e.class.to_s}: #{e.message}"),
+    [format_result_with_display(e, "#{e.class.to_s}: #{e.message}"),
      backtrace.map{ |b|
        path, rest = File.split(b)
        name, msgs = rest.split(':', 2)

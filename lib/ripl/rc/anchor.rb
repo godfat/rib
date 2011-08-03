@@ -22,7 +22,7 @@ module Ripl::Rc::Anchor
     if Ripl::Rc.const_defined?(:Color) && kind_of?(Ripl::Rc::Color) &&
        obj_or_binding = (config[:rc_anchor] ||= []).last
 
-      super.sub(@name, format_result(obj_or_binding, @name))
+      super.sub(@name, format_result_with_display(obj_or_binding, @name))
     else
       super
     end
