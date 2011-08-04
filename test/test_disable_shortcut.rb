@@ -1,15 +1,13 @@
 
-require 'ripl/rc/test'
-require 'ripl/rc'
+require 'rib/test'
+require 'rib/all'
 
-describe Ripl::Rc::U do
+describe Rib::Plugin do
   before do
     @names = Dir[File.expand_path(
-               "#{File.dirname(__FILE__)}/../lib/ripl/rc/*.rb")].
-               map   {|path| File.basename(path)[0..-4]                     }.
-               reject{|name| %w[version u noirbrc test debug].include?(name)}.
-               each  {|name| require "ripl/rc/#{name}"}
-    @mods  = Ripl::Shell.ancestors[1..-1].select{ |mod| mod < Ripl::Rc }
+               "#{File.dirname(__FILE__)}/../lib/rib/{core,more,zore}/*.rb")].
+               map   {|path| File.basename(path)[0..-4]                     }
+    @mods  = Rib::Shell.ancestors[1..-1].select{ |mod| mod < Rib::Plugin }
   end
 
   after do
@@ -19,10 +17,10 @@ describe Ripl::Rc::U do
   should 'have shortcut methods' do
     @names.each{ |name|
       %w[enable disable].each{ |meth|
-        Ripl.should.respond_to?("#{meth}_#{name}") == true
+        Rib.should.respond_to?("#{meth}_#{name}") == true
       }
       %w[enabled? disabled?].each{ |meth|
-        Ripl.should.respond_to?("#{name}_#{meth}") == true
+        Rib.should.respond_to?("#{name}_#{meth}") == true
       }
     }
   end
@@ -31,7 +29,7 @@ describe Ripl::Rc::U do
     @mods.shuffle.take(@mods.size/2).each(&:disable)
     @names.each{ |name|
       %w[enabled? disabled?].each{ |meth|
-        Ripl.send("#{name}_#{meth}").should ==
+        Rib.send("#{name}_#{meth}").should ==
           @mods.find{ |mod|
             mod.name[/::\w+$/].tr(':', '') ==
             name.gsub(/([^_]+)/){$1.capitalize}.tr('_', '') }.
