@@ -1,18 +1,16 @@
 
-require 'ripl/rc/test'
-require 'ripl/rc/squeeze_history'
+require 'rib/test'
+require 'rib/more/squeeze_history'
 
-describe Ripl::Rc::SqueezeHistory do
+describe Rib::SqueezeHistory do
   before do
-    @history = '/tmp/test_ripl_history'
-    Ripl.config.merge!(:history => @history, :irbrc => nil)
-    @shell   = Ripl::Shell.create(Ripl.config)
+    @history = '/tmp/test_rib_history'
+    @shell   = Rib::Shell.new(:history => @history).before_loop
     @input   = %w[foo bar bar foo bar]
-    @shell.before_loop
     @shell.history.clear
   end
 
-  after do; FileUtils.rm_f(@history); Ripl.enable_squeeze_history; end
+  after do; FileUtils.rm_f(@history); Rib.enable_squeeze_history; end
 
   should 'after_loop saves squeezed history' do
     @shell.history.push(*@input)
@@ -30,7 +28,7 @@ describe Ripl::Rc::SqueezeHistory do
   end
 
   should 'be disabled if disabled' do
-    Ripl.disable_squeeze_history
+    Rib.disable_squeeze_history
     times = @input.size
     input = @input.dup
     stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'")[-1] }
