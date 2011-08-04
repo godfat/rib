@@ -37,4 +37,4 @@ require 'ripl/rc/anchor'
 require 'ripl/rc/noirbrc'
 
 # to force ripl to load everything before bundler kicks in!
-Ripl.shell
+(Ripl.config[:rc_shells] ||= []) << Ripl.shell

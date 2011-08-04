@@ -47,13 +47,15 @@ module Ripl::Rc::Anchor
 
       (Ripl.config[:rc_anchor] ||= []) << obj_or_binding
       name = Ripl::Rc::U.short_inspect(obj_or_binding)
-      Ripl::Shell.create(Ripl.config.merge(
-        :name   => name,
-        :prompt => "#{name}(#{Ripl.config[:rc_anchor].size})" +
-                   Ripl.config[:prompt])).loop
+      (Ripl.config[:rc_shells] ||= []) <<
+        Ripl::Shell.create(Ripl.config.merge(
+          :name   => name,
+          :prompt => "#{name}(#{Ripl.config[:rc_anchor].size})" +
+                     Ripl.config[:prompt])).loop
 
       # stores to check if we're exiting from an anchor
       Ripl.config[:rc_anchor_last] = Ripl.config[:rc_anchor].pop
+      Ripl.config[:rc_shells].pop
     end
   end
 end
