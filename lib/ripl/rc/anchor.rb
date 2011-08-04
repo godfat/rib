@@ -53,6 +53,7 @@ module Ripl::Rc::Anchor
           :prompt => "#{name}(#{Ripl.config[:rc_anchor].size})" +
                      Ripl.config[:prompt])).loop
 
+    ensure
       # stores to check if we're exiting from an anchor
       Ripl.config[:rc_anchor_last] = Ripl.config[:rc_anchor].pop
       Ripl.config[:rc_shells].pop
