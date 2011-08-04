@@ -14,7 +14,7 @@ module Ripl::Rc::Edit
 
       system("$EDITOR #{file.path}")
 
-      Ripl.config[:rc_shells].last.loop_eval(
+      ((Ripl.config[:rc_shells] ||= []).last || Ripl.shell).loop_eval(
         Ripl.config[:rc_edit] = File.read(file.path))
     ensure
       file.close
