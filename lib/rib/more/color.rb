@@ -3,6 +3,7 @@ require 'rib/plugin'
 
 module Rib::Color
   include Rib::Plugin
+  Shell.use(self)
 
   def before_loop
     config[:color] ||= {
@@ -94,5 +95,4 @@ module Rib::Color
   end
 
   Plugin.extend(Imp)
-  Shell.use(self)
 end
