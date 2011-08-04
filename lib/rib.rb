@@ -7,7 +7,15 @@ module Rib
   end
 
   def self.shell
-    @shell ||= Shell.new(config)
+    @shell  ||= (shells << Shell.new(config)).last
+  end
+
+  def self.shells
+    @shells ||= []
+  end
+
+  def self.vars
+    @vars   ||= {}
   end
 
   def self.start(*argv)
