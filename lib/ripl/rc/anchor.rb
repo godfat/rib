@@ -51,7 +51,9 @@ module Ripl::Rc::Anchor
         Ripl::Shell.create(Ripl.config.merge(
           :name   => name,
           :prompt => "#{name}(#{Ripl.config[:rc_anchor].size})" +
-                     Ripl.config[:prompt])).loop
+                     Ripl.config[:prompt]))
+
+      Ripl.config[:rc_shells].last.loop
 
     ensure
       # stores to check if we're exiting from an anchor
