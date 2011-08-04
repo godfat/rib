@@ -32,7 +32,7 @@ module Rib::History
 
   def write_history
     File.open(history_file, 'w'){ |f|
-      f.write(history.to_a.last(config[:history_size]).join("\n")) }
+      f.puts(history.to_a.last(config[:history_size]).join("\n")) }
   end
 
   def history
