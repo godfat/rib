@@ -23,6 +23,7 @@ class Rib::Shell
   def loop
     before_loop
     in_loop
+  ensure
     after_loop
   end
 
