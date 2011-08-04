@@ -1,5 +1,5 @@
 
-require 'rib/plugin'
+require 'rib'
 
 module Rib::Color
   include Rib::Plugin
@@ -63,9 +63,9 @@ module Rib::Color
      backtrace.map{ |b|
        path, rest = ::File.split(b)
        name, msgs = rest.split(':', 2)
-       msg = msgs.sub(/(\d+):/){red{$1}+':'}.sub(/`.+?'/){green{$&}}
+       msg = msgs.sub(/(\d+):/){P.red{$1}+':'}.sub(/`.+?'/){P.green{$&}}
 
-       "#{path+'/'}#{yellow{name}}:#{msg}"
+       "#{path+'/'}#{P.yellow{name}}:#{msg}"
      }]
   end
 
