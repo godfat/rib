@@ -23,7 +23,7 @@ module Rib::Color
 
   def format_result result
     return super if Color.disabled?
-    format_color(result)
+    config[:result_prompt] + format_color(result)
   end
 
   private
