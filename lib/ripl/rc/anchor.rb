@@ -44,10 +44,6 @@ module Ripl::Rc::Anchor
   module AnchorImp
     def anchor obj_or_binding
       return if Ripl::Rc::Anchor.disabled?
-      if Ripl.config[:rc_init].nil?
-        Ripl::Runner.load_rc(Ripl.config[:riplrc])
-        Ripl.config[:rc_init] = true
-      end
 
       (Ripl.config[:rc_anchor] ||= []) << obj_or_binding
       name = Ripl::Rc::U.short_inspect(obj_or_binding)
