@@ -12,11 +12,10 @@ module Ripl::Rc::MultilineHistoryFile
     super
   end
 
-  def before_loop
+  def read_history
     return super if MultilineHistoryFile.disabled?
-    super # this would initilaize @history to [], nothing we can do here
     buffer = []
-    File.exist?(history_file) &&
+    File.exist?(history_file) && history.empty? &&
       IO.readlines(history_file).each{ |line|
         if line.end_with?(
              "#{Ripl.config[:rc_multiline_history_file_token]}\n")
