@@ -23,8 +23,7 @@ module Rib::Anchor
     if Rib.const_defined?(:Color) && kind_of?(Rib::Color) &&
        obj_or_binding = (Rib.vars[:anchor] ||= []).last
 
-      super.sub(config[:name],
-                format_result_with_display(obj_or_binding, config[:name]))
+      super.sub(config[:name], format_color(obj_or_binding, config[:name]))
     else
       super
     end

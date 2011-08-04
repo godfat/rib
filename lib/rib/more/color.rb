@@ -23,7 +23,7 @@ module Rib::Color
 
   def format_result result
     return super if Color.disabled?
-    format_result_with_display(result)
+    format_color(result)
   end
 
   private
@@ -31,23 +31,23 @@ module Rib::Color
     config[:color]
   end
 
-  def format_result_with_display result, display=result.inspect
+  def format_color result, display=result.inspect
     case result
-      when String ; P.send(colors[String      ]){ display }
-      when Numeric; P.send(colors[Numeric     ]){ display }
-      when Symbol ; P.send(colors[Symbol      ]){ display }
+      when String ; P.send(colors[String ]){ display }
+      when Numeric; P.send(colors[Numeric]){ display }
+      when Symbol ; P.send(colors[Symbol ]){ display }
 
-      when Array  ; P.send(colors[Array       ]){ '['     }  +
-                      result.map{ |e| format_result(e) }.join(
-                    P.send(colors[Array       ]){ ', '    }) +
-                    P.send(colors[Array       ]){ ']'     }
+      when Array  ; P.send(colors[Array  ]){ '['     }   +
+                      result.map{ |e   | format_color(e) }.
+               join(P.send(colors[Array  ]){ ', '    })  +
+                    P.send(colors[Array  ]){ ']'     }
 
-      when Hash   ; P.send(colors[Hash        ]){ '{'     }  +
-                      result.map{ |k, v| format_result(k)      +
-                    P.send(colors[Hash        ]){ '=>'    }  +
-                                       format_result(v) }.join(
-                    P.send(colors[Hash        ]){ ', '    }) +
-                    P.send(colors[Hash        ]){ '}'     }
+      when Hash   ; P.send(colors[Hash   ]){ '{'     }   +
+                      result.map{ |k, v| format_color(k) +
+                    P.send(colors[Hash   ]){ '=>'    }   +
+                                         format_color(v) }.
+               join(P.send(colors[Hash   ]){ ', '    }) +
+                    P.send(colors[Hash   ]){ '}'     }
 
       else        ; if color = P.find_color(colors, result)
                     P.send(color){ display }
@@ -59,7 +59,7 @@ module Rib::Color
 
   def get_error e, backtrace=e.backtrace
     return super if Color.disabled?
-    [format_result_with_display(e, "#{e.class.to_s}: #{e.message}"),
+    [format_color(e, "#{e.class.to_s}: #{e.message}"),
      backtrace.map{ |b|
        path, rest = ::File.split(b)
        name, msgs = rest.split(':', 2)
