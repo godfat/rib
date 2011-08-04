@@ -15,7 +15,7 @@ class Rib::Shell
       :binding       => TOPLEVEL_BINDING         ,
       :rc            => '~/.config/rib/config.rb',
       :exit          => [nil, 'exit', 'quit']    ,
-      :line          => 0
+      :line          => 1
     }.merge(config)
   end
 
