@@ -24,7 +24,7 @@ module Rib::SqueezeHistory
   module Imp
     def squeeze_history history
       history.to_a.inject([]){ |result, item|
-        if result.last == item
+        if result.last == item || item.strip == ''
           result
         else
           result << item
