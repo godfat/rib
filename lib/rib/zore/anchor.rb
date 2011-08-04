@@ -55,7 +55,7 @@ module Rib::Anchor
           :prompt => "#{name}(#{Rib.vars[:anchor].size})" +
                      (Rib.config[:prompt] || '>> ')))
 
-      Rib.shells.last.loop
+      Rib.shell.loop
 
     ensure
       # stores to check if we're exiting from an anchor
