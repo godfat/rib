@@ -20,6 +20,6 @@ module Rib
 
   def self.start(*argv)
     require 'rib/runner'
-    Runner.run(*argv)
+    Runner.run(argv)
   end
 end
