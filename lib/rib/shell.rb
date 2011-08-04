@@ -85,6 +85,15 @@ class Rib::Shell
       config[:prompt]
     end
 
+    def read_history
+    end
+
+    def write_history
+    end
+
+    def history
+    end
+
     # Evals user input using @binding, @name and @line
     def loop_eval(input)
       eval(input, config[:binding], "(#{config[:name]})", config[:line])
