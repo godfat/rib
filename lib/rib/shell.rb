@@ -38,6 +38,7 @@ class Rib::Shell
       if File.exist?(rc = File.expand_path(config[:rc]))
         require rc
       end
+      self
     end
 
     def in_loop
@@ -132,6 +133,7 @@ class Rib::Shell
 
     # Called after shell finishes looping.
     def after_loop
+      self
     end
   end
 
