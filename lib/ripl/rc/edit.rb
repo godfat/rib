@@ -14,8 +14,9 @@ module Ripl::Rc::Edit
 
       system("$EDITOR #{file.path}")
 
-      ((Ripl.config[:rc_shells] ||= []).last || Ripl.shell).loop_eval(
-        Ripl.config[:rc_edit] = File.read(file.path))
+      shell = (Ripl.config[:rc_shells] ||= []).last || Ripl.shell
+      shell.before_loop unless shell.in_loop?
+      shell.loop_eval(Ripl.config[:rc_edit] = File.read(file.path))
     ensure
       file.close
       file.unlink
