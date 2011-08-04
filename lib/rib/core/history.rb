@@ -21,6 +21,10 @@ module Rib::History
     super
   end
 
+  def get_input
+    (history << super).last
+  end
+
   def read_history
     File.exists?(history_file) && history.empty? &&
       File.readlines(history_file).each{ |e| history << e.chomp }
