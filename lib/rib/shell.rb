@@ -50,7 +50,7 @@ class Rib::Shell
       self.error_raised = nil
       input = get_input
       throw(:rib_exit, input) if config[:exit].include?(input)
-      print_result(eval_input(input))
+      print_result(eval_input(input)) if input.strip != ''
     rescue Interrupt
       handle_interrupt
     end
