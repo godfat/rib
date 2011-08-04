@@ -4,6 +4,7 @@ require 'readline'
 
 module Rib::Readline
   include Rib::Plugin
+  Shell.use(self)
 
   def before_loop
     @history = ::Readline::HISTORY
@@ -13,6 +14,4 @@ module Rib::Readline
   def get_input
     ::Readline.readline(prompt, true)
   end
-
-  Shell.use(self)
 end

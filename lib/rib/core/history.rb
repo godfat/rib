@@ -4,8 +4,10 @@ require 'fileutils'
 
 module Rib::History
   include Rib::Plugin
+  Shell.use(self)
 
   def before_loop
+    return super if History.disabled?
     config[:history] ||= '~/.config/rib/history'
     FileUtils.mkdir_p(File.dirname(history_file))
     read_history
@@ -13,10 +15,12 @@ module Rib::History
   end
 
   def after_loop
+    return super if History.disabled?
     write_history
     super
   end
 
+  private
   def read_history
     File.exists?(history_file) && history.empty? &&
       File.readlines(history_file).each{ |e| history << e.chomp }
@@ -33,10 +37,4 @@ module Rib::History
   def history
     @history ||= []
   end
-
-  def get_input
-    (@history << super)[-1]
-  end
-
-  Shell.use(self)
 end
