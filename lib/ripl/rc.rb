@@ -32,6 +32,7 @@ require 'ripl/rc/eat_whites'
 
 # speical tool
 require 'ripl/rc/anchor'
+require 'ripl/rc/edit'
 
 # about config
 require 'ripl/rc/noirbrc'
