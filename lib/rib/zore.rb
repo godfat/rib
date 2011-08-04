@@ -1,0 +1,2 @@
+
+require 'rib/zore/anchor'
