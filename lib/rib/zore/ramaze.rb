@@ -11,7 +11,7 @@ module Rib::Ramaze
   end
 
   def after_loop
-    puts('Ramazement has ended, go in peace.')
+    puts('Ramazement has ended, go in peace.') if @ramaze_loaded
     super
   end
 
@@ -20,5 +20,8 @@ module Rib::Ramaze
     require 'ramaze'
     ::Ramaze.options.started = true
     require './start'
+    @ramaze_loaded = true
+  rescue LoadError => e
+    abort("#{name}: Is this a Ramaze app?\n  #{e}")
   end
 end
