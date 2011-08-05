@@ -1,27 +1,17 @@
 
-require 'rib'
-
+module Rib; end
 module Rib::Ramaze
-  include Rib::Plugin
-  Shell.use(self)
-
-  def before_loop
-    load_ramaze
-    super
-  end
-
-  def after_loop
-    puts('Ramazement has ended, go in peace.') if @ramaze_loaded
-    super
-  end
-
   module_function
-  def load_ramaze
+  def load
     require 'ramaze'
     ::Ramaze.options.started = true
     require './start'
-    @ramaze_loaded = true
+    at_exit{ puts('Ramazement has ended, go in peace.') }
+
   rescue LoadError => e
-    abort("#{name}: Is this a Ramaze app?\n  #{e}")
+    abort("#{Rib.config[:name]}: Is this a Ramaze app?\n  #{e}")
   end
 end
+
+Rib.require_rc
+Rib::Ramaze.load
