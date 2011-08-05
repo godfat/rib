@@ -34,11 +34,6 @@ class Rib::Shell
     !!@running
   end
 
-  def run_eval str
-    before_loop unless running?
-    loop_eval(str)
-  end
-
   protected
   attr_writer :config
   attr_accessor :error_raised

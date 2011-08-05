@@ -15,7 +15,14 @@ module Rib::Edit
 
       system("$EDITOR #{file.path}")
 
-      Rib.shell.run_eval(Rib.vars[:edit] = File.read(file.path))
+      if (shell = Rib.shell).running?
+        shell.send(:multiline_buffer).pop
+      else
+        shell.before_loop
+      end
+
+      shell.loop_eval(Rib.vars[:edit] = File.read(file.path))
+
     ensure
       file.close
       file.unlink
