@@ -12,9 +12,9 @@ module Rib::Rails
 
   module_function
   def load_rails
-    require "#{Dir.pwd}/config/boot"
+    require './config/boot'
 
-    if File.exist?("#{Dir.pwd}/config/application.rb")
+    if File.exist?('./config/application.rb')
       Rib::Rails.load_rails3
     else
       Rib::Rails.load_rails2
@@ -27,14 +27,14 @@ module Rib::Rails
   end
 
   def load_rails2
-    ["#{Dir.pwd}/config/environment",
-     'console_app',
+    ['./config/environment',
+     'console_app'         ,
      'console_with_helpers'].each{ |f| require f }
   end
 
   def load_rails3
-    ["#{Dir.pwd}/config/application",
-     'rails/console/app',
+    ['./config/application',
+     'rails/console/app'   ,
      'rails/console/helpers'].each{ |f| require f }
 
     ::Rails.application.require_environment!
