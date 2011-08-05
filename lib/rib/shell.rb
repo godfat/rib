@@ -104,7 +104,7 @@ class Rib::Shell
 
     # Evals user input using @binding, @name and @line
     def loop_eval(input)
-      eval(input, config[:binding], "(#{config[:name]})", config[:line])
+      config[:binding].eval(input, "(#{config[:name]})", config[:line])
     end
 
     # Prints error formatted by #format_error to STDERR. Could be extended to
