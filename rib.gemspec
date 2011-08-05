@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-05}
+  s.date = %q{2011-08-06}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [%q{rib}]
@@ -31,9 +31,10 @@ Gem::Specification.new do |s|
   %q{bin/rib},
   %q{lib/rib.rb},
   %q{lib/rib/all.rb},
+  %q{lib/rib/api.rb},
   %q{lib/rib/core.rb},
   %q{lib/rib/core/completion.rb},
-  %q{lib/rib/core/history.rb},
+  %q{lib/rib/core/history_file.rb},
   %q{lib/rib/core/readline.rb},
   %q{lib/rib/core/underscore.rb},
   %q{lib/rib/debug.rb},
@@ -53,26 +54,35 @@ Gem::Specification.new do |s|
   %q{lib/rib/zore/anchor.rb},
   %q{lib/rib/zore/edit.rb},
   %q{rib.gemspec},
-  %q{ripl-rc.gemspec},
   %q{screenshot.png},
   %q{task/.gitignore},
   %q{task/gemgem.rb},
-  %q{test/test_color.rb},
-  %q{test/test_disable_shortcut.rb},
-  %q{test/test_ensure_after_loop.rb},
-  %q{test/test_squeeze_history.rb}]
+  %q{test/core/test_completion.rb},
+  %q{test/core/test_history_file.rb},
+  %q{test/core/test_readline.rb},
+  %q{test/core/test_underscore.rb},
+  %q{test/more/test_color.rb},
+  %q{test/more/test_squeeze_history.rb},
+  %q{test/test_api.rb},
+  %q{test/test_plugin.rb},
+  %q{test/test_shell.rb}]
   s.homepage = %q{https://github.com/godfat/rib}
   s.rdoc_options = [
   %q{--main},
   %q{README}]
   s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.6}
+  s.rubygems_version = %q{1.8.7}
   s.summary = %q{ripl plugins collection, take you want, leave you don't.}
   s.test_files = [
-  %q{test/test_color.rb},
-  %q{test/test_disable_shortcut.rb},
-  %q{test/test_ensure_after_loop.rb},
-  %q{test/test_squeeze_history.rb}]
+  %q{test/core/test_completion.rb},
+  %q{test/core/test_history_file.rb},
+  %q{test/core/test_readline.rb},
+  %q{test/core/test_underscore.rb},
+  %q{test/more/test_color.rb},
+  %q{test/more/test_squeeze_history.rb},
+  %q{test/test_api.rb},
+  %q{test/test_plugin.rb},
+  %q{test/test_shell.rb}]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
