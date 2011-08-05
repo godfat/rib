@@ -14,9 +14,9 @@ describe Rib::Shell do
       mock(@shell).get_input{str}
       @shell.loop.should.eq @shell
     end
-    should 'exit'   do input('exit') end
-    should 'quit'   do input('quit') end
-    should 'ctrl+d' do input(nil)    end
+    should 'exit'   do                    input('exit') end
+    should 'quit'   do                    input('quit') end
+    should 'ctrl+d' do mock(@shell).puts; input(nil)    end
   end
 
   describe '#loop_once' do
