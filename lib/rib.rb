@@ -42,5 +42,7 @@ module Rib
     config[:config] &&
       File.exist?(rc = File.expand_path(config[:config])) &&
       require(rc)
+  rescue Exception => e
+    warn("#{name}: Error loading #{config[:config]}\n  #{e}")
   end
 end
