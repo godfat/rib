@@ -42,16 +42,20 @@ module Rib
     Rib.warn("Error loading #{config[:config]}\n  #{e}")
   end
 
+  def say *words
+    $stdout.puts(prepare(words))
+  end
+
   def warn *words
-    $stderr.puts(say(words))
+    $stderr.puts(prepare(words))
   end
 
   def abort *words
-    warn(say(words))
+    warn(prepare(words))
     exit(1)
   end
 
-  def say words
+  def prepare words
     name = config[:name]
     "#{name}: #{words.join("\n#{' '*(name.size+2)}")}"
   end
