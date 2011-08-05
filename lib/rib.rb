@@ -22,6 +22,18 @@ module Rib
     end
   end
 
+  def plugins
+    Shell.ancestors[1..-1].select{ |a| a < Plugin }
+  end
+
+  def disable_plugins plugs=plugins
+    plugs.each(&:disable)
+  end
+
+  def enable_plugins plugs=plugins
+    plugs.each(&:enable)
+  end
+
   def require_rc
     config[:config] &&
       File.exist?(rc = File.expand_path(config[:config])) &&
