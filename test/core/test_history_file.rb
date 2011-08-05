@@ -1,14 +1,14 @@
 
 require 'rib/test'
-require 'rib/core/history'
+require 'rib/core/history_file'
 
-describe Rib::History do
+describe Rib::HistoryFile do
   behaves_like :rib
 
   before do
-    Rib::History.enable
+    Rib::HistoryFile.enable
     @history = "/tmp/test_rib_#{rand}"
-    @shell   = Rib::Shell.new(:history => @history).before_loop
+    @shell   = Rib::Shell.new(:history_file => @history).before_loop
   end
 
   after do

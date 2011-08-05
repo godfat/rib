@@ -61,6 +61,7 @@ module Rib::API
   end
 
   def history
+    @history ||= []
   end
 
   # Evals user input using @binding, @name and @line
