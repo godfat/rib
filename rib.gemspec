@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{ripl-rc}
-  s.version = "0.2.4"
+  s.name = %q{rib}
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-04}
+  s.date = %q{2011-08-05}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = [%q{godfat (XD) godfat.org}]
-  s.executables = [%q{ripl-rc}]
+  s.executables = [%q{rib}]
   s.extra_rdoc_files = [
   %q{CHANGES},
   %q{CONTRIBUTORS},
@@ -28,36 +28,40 @@ Gem::Specification.new do |s|
   %q{README.md},
   %q{Rakefile},
   %q{TODO},
-  %q{bin/ripl-rc},
-  %q{lib/ripl-rc.rb},
-  %q{lib/ripl/rc.rb},
-  %q{lib/ripl/rc/anchor.rb},
-  %q{lib/ripl/rc/color.rb},
-  %q{lib/ripl/rc/ctrld_newline.rb},
-  %q{lib/ripl/rc/debug.rb},
-  %q{lib/ripl/rc/eat_whites.rb},
-  %q{lib/ripl/rc/edit.rb},
-  %q{lib/ripl/rc/ensure_after_loop.rb},
-  %q{lib/ripl/rc/last_exception.rb},
-  %q{lib/ripl/rc/mkdir_history.rb},
-  %q{lib/ripl/rc/multiline.rb},
-  %q{lib/ripl/rc/multiline_history.rb},
-  %q{lib/ripl/rc/multiline_history_file.rb},
-  %q{lib/ripl/rc/noirbrc.rb},
-  %q{lib/ripl/rc/squeeze_history.rb},
-  %q{lib/ripl/rc/strip_backtrace.rb},
-  %q{lib/ripl/rc/test.rb},
-  %q{lib/ripl/rc/u.rb},
-  %q{lib/ripl/rc/version.rb},
+  %q{bin/rib},
+  %q{lib/rib.rb},
+  %q{lib/rib/all.rb},
+  %q{lib/rib/core.rb},
+  %q{lib/rib/core/completion.rb},
+  %q{lib/rib/core/history.rb},
+  %q{lib/rib/core/readline.rb},
+  %q{lib/rib/core/underscore.rb},
+  %q{lib/rib/debug.rb},
+  %q{lib/rib/more.rb},
+  %q{lib/rib/more/color.rb},
+  %q{lib/rib/more/multiline.rb},
+  %q{lib/rib/more/multiline_history.rb},
+  %q{lib/rib/more/multiline_history_file.rb},
+  %q{lib/rib/more/squeeze_history.rb},
+  %q{lib/rib/more/strip_backtrace.rb},
+  %q{lib/rib/plugin.rb},
+  %q{lib/rib/runner.rb},
+  %q{lib/rib/shell.rb},
+  %q{lib/rib/test.rb},
+  %q{lib/rib/version.rb},
+  %q{lib/rib/zore.rb},
+  %q{lib/rib/zore/anchor.rb},
+  %q{lib/rib/zore/edit.rb},
+  %q{rib.gemspec},
   %q{ripl-rc.gemspec},
   %q{screenshot.png},
   %q{task/.gitignore},
   %q{task/gemgem.rb},
-  %q{test/test_color.rb.rb},
+  %q{test/test_color.rb},
   %q{test/test_disable_shortcut.rb},
   %q{test/test_ensure_after_loop.rb},
   %q{test/test_squeeze_history.rb}]
-  s.homepage = %q{https://github.com/godfat/ripl-rc}
+  s.homepage = %q{https://github.com/godfat/rib}
   s.rdoc_options = [
   %q{--main},
   %q{README}]
@@ -65,7 +69,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.8.6}
   s.summary = %q{ripl plugins collection, take you want, leave you don't.}
   s.test_files = [
-  %q{test/test_color.rb.rb},
+  %q{test/test_color.rb},
   %q{test/test_disable_shortcut.rb},
   %q{test/test_ensure_after_loop.rb},
   %q{test/test_squeeze_history.rb}]
@@ -74,16 +78,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ripl>, [">= 0.4.1"])
+      s.add_runtime_dependency(%q<bond>, [">= 0"])
       s.add_development_dependency(%q<bacon>, [">= 0"])
       s.add_development_dependency(%q<rr>, [">= 0"])
     else
-      s.add_dependency(%q<ripl>, [">= 0.4.1"])
+      s.add_dependency(%q<bond>, [">= 0"])
       s.add_dependency(%q<bacon>, [">= 0"])
       s.add_dependency(%q<rr>, [">= 0"])
     end
   else
-    s.add_dependency(%q<ripl>, [">= 0.4.1"])
+    s.add_dependency(%q<bond>, [">= 0"])
     s.add_dependency(%q<bacon>, [">= 0"])
     s.add_dependency(%q<rr>, [">= 0"])
   end
