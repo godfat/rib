@@ -7,12 +7,17 @@ module Rib::MultilineHistory
 
   def loop_eval input
     return super if MultilineHistory.disabled?
-    super # might raise
-  ensure
+    value = super
+  rescue Exception
+    # might be multiline editing, ignore
+    raise
+  else
     if multiline_buffer.size > 1
+      # so multiline editing is considering done here
       (multiline_buffer.size + (@multiline_trash || 0)).times{ history.pop }
       history << "\n" + multiline_buffer.join("\n")
     end
+    value
   end
 
   def handle_interrupt
