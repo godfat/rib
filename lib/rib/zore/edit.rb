@@ -13,7 +13,7 @@ module Rib::Edit
       file.puts(Rib.vars[:edit])
       file.close
 
-      system("$EDITOR #{file.path}")
+      system("#{ENV['EDITOR']} #{file.path}")
 
       if (shell = Rib.shell).running?
         shell.send(:multiline_buffer).pop
