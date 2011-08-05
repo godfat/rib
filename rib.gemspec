@@ -9,7 +9,9 @@ Gem::Specification.new do |s|
   s.date = %q{2011-08-06}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = [%q{godfat (XD) godfat.org}]
-  s.executables = [%q{rib}]
+  s.executables = [
+  %q{rib},
+  %q{rib-rails}]
   s.extra_rdoc_files = [
   %q{CHANGES},
   %q{CONTRIBUTORS},
@@ -29,6 +31,7 @@ Gem::Specification.new do |s|
   %q{Rakefile},
   %q{TODO},
   %q{bin/rib},
+  %q{bin/rib-rails},
   %q{lib/rib.rb},
   %q{lib/rib/all.rb},
   %q{lib/rib/api.rb},
@@ -53,6 +56,7 @@ Gem::Specification.new do |s|
   %q{lib/rib/zore.rb},
   %q{lib/rib/zore/anchor.rb},
   %q{lib/rib/zore/edit.rb},
+  %q{lib/rib/zore/rails.rb},
   %q{rib.gemspec},
   %q{screenshot.png},
   %q{task/.gitignore},

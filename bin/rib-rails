@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'rib/runner'
+require 'rib/zore/rails'
+Rib.config[:name] = File.basename(__FILE__)
+Rib::Runner.run(ARGV)
