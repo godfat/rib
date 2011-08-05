@@ -2,5 +2,5 @@
 
 require 'rib/runner'
 Rib.config[:name] = File.basename(__FILE__)
-require 'rib/zore/rails'
+require 'rib/app/rails'
 Rib::Runner.run(ARGV)
