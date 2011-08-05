@@ -25,6 +25,7 @@ class Rib::Shell
     before_loop
     @running = true
     in_loop
+    self
   ensure
     @running = false
     after_loop
