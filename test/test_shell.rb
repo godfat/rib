@@ -40,12 +40,12 @@ describe Rib::Shell do
     end
 
     should 'error in print_result' do
-      mock(@shell).warn(/rib: Error while printing result.*BOOM/m)
+      mock(Rib).warn(/Error while printing result.*BOOM/m)
       input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
     end
 
     should 'print error from eval' do
-      mock(@shell).warn(/RuntimeError/)
+      mock(@shell).puts(/RuntimeError/)
       input('raise "blah"')
     end
   end
@@ -68,7 +68,7 @@ describe Rib::Shell do
     end
 
     should 'print error and increments line' do
-      mock(@shell).warn(/^SyntaxError:/)
+      mock(@shell).puts(/^SyntaxError:/)
       @shell.eval_input('{').should.eq nil
       @shell.config[:line]  .should.eq @line + 1
     end

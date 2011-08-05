@@ -34,7 +34,7 @@ describe Rib::Underscore do
 
   should 'set __' do
     setup
-    stub(@shell).warn
+    stub(@shell).puts
     @shell.eval_input('XD')
     @shell.eval_input('__').should.kind_of?(NameError)
   end

@@ -7,10 +7,6 @@ module Rib
     @config ||= {:config => '~/.config/rib/config.rb', :name => 'rib'}
   end
 
-  def name
-    config[:name]
-  end
-
   def shells
     @shells ||= []
   end
@@ -43,6 +39,20 @@ module Rib
       File.exist?(rc = File.expand_path(config[:config])) &&
       require(rc)
   rescue Exception => e
-    warn("#{name}: Error loading #{config[:config]}\n  #{e}")
+    Rib.warn("Error loading #{config[:config]}\n  #{e}")
+  end
+
+  def warn *words
+    $stderr.puts(say(words))
+  end
+
+  def abort *words
+    warn(say(words))
+    exit(1)
+  end
+
+  def say words
+    name = config[:name]
+    "#{name}: #{words.join("\n#{' '*(name.size+2)}")}"
   end
 end

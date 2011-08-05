@@ -9,7 +9,7 @@ module Rib::Ramaze
     at_exit{ puts('Ramazement has ended, go in peace.') }
 
   rescue LoadError => e
-    abort("#{Rib.config[:name]}: Is this a Ramaze app?\n  #{e}")
+    Rib.abort("Is this a Ramaze app?\n  #{e}")
   end
 end
 

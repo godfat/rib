@@ -3,10 +3,6 @@ require 'rib'
 
 module Rib::Runner
   module_function
-  def name
-    File.basename($PROGRAM_NAME)
-  end
-
   def options
     { # Ruby OPTIONS
      '-e, --eval LINE'       =>
@@ -37,10 +33,10 @@ module Rib::Runner
       plugin = "rib-#{command}"
       path   = `which #{plugin}`.strip
       if path == ''
-        puts("#{name}: Can't find #{plugin} in $PATH.\n"               \
-             "Please make sure #{plugin} is installed,\n"              \
-             "or is there any typo? You can try this to install it:\n" \
-             "  gem install #{plugin}")
+        Rib.warn(
+          "Can't find #{plugin} in $PATH. Please make sure it is installed,",
+          "or is there any typo? You can try this to install it:\n"         ,
+          "    gem install #{plugin}")
       else
         load(path)
       end
@@ -51,7 +47,7 @@ module Rib::Runner
 
   def start *argv
     unused = parse(argv.dup)
-    warn("#{name}: Unused arguments: #{unused.inspect}") unless unused.empty?
+    Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
     Rib.shell.loop
   end
 

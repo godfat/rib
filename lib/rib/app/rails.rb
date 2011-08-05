@@ -14,7 +14,7 @@ module Rib::Rails
     puts("Loading #{::Rails.env} environment (Rails #{::Rails.version})")
 
   rescue LoadError => e
-    abort("#{Rib.config[:name]}: Is this a Rails app?\n  #{e}")
+    Rib.abort("Is this a Rails app?\n  #{e}")
   end
 
   def load_rails2

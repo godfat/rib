@@ -78,15 +78,16 @@ module Rib::API
   # handle certain exceptions.
   # @param [Exception]
   def print_eval_error(err)
-    warn format_error(err)
+    puts(format_error(err))
+  rescue StandardError, SyntaxError => e
+    Rib.warn("Error while printing error:\n  #{e}")
   end
 
   # Prints result using #format_result
   def print_result(result)
     puts(format_result(result)) unless error_raised
   rescue StandardError, SyntaxError => e
-    warn "#{name}: Error while printing result:\n" \
-         "#{format_error(e)}"
+    Rib.warn("Error while printing result:\n  #{format_error(e)}")
   end
 
   # Formats errors raised by eval of user input
