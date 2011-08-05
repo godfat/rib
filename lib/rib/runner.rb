@@ -37,9 +37,10 @@ module Rib::Runner
       plugin = "rib-#{command}"
       path   = `which #{plugin}`.strip
       if path == ''
-        puts("#{name}: Can't find `#{plugin}' in $PATH.\n"  \
-             "Please make sure `#{plugin}' is installed.\n" \
-             "e.g. run `gem install #{plugin}`")
+        puts("#{name}: Can't find #{plugin} in $PATH.\n"               \
+             "Please make sure #{plugin} is installed,\n"              \
+             "or is there any typo? You can try this to install it:\n" \
+             "  gem install #{plugin}")
       else
         load(path)
       end
