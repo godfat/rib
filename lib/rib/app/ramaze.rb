@@ -16,6 +16,3 @@ module Rib::Ramaze
     Rib.abort("Is this a Ramaze app?\n  #{e}")
   end
 end
-
-Rib.require_rc
-Rib::Ramaze.load

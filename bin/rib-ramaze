@@ -3,4 +3,6 @@
 require 'rib/runner'
 Rib.config[:name] = File.basename(__FILE__)
 require 'rib/app/ramaze'
+Rib.require_rc
+Rib::Ramaze.load
 Rib::Runner.run(ARGV)

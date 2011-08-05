@@ -31,6 +31,3 @@ module Rib::Rails
     ::Rails.application.require_environment!
   end
 end
-
-Rib.require_rc
-Rib::Rails.load

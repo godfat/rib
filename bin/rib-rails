@@ -3,4 +3,6 @@
 require 'rib/runner'
 Rib.config[:name] = File.basename(__FILE__)
 require 'rib/app/rails'
+Rib.require_rc
+Rib::Rails.load
 Rib::Runner.run(ARGV)
