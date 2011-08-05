@@ -22,6 +22,7 @@ module Rib::History
   end
 
   def get_input
+    return super if History.disabled?
     (history << super).last
   end
 
