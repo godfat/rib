@@ -11,7 +11,8 @@ Gem::Specification.new do |s|
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [
   %q{rib},
-  %q{rib-rails}]
+  %q{rib-rails},
+  %q{rib-ramaze}]
   s.extra_rdoc_files = [
   %q{CHANGES},
   %q{CONTRIBUTORS},
@@ -32,6 +33,7 @@ Gem::Specification.new do |s|
   %q{TODO},
   %q{bin/rib},
   %q{bin/rib-rails},
+  %q{bin/rib-ramaze},
   %q{lib/rib.rb},
   %q{lib/rib/all.rb},
   %q{lib/rib/api.rb},
@@ -57,6 +59,7 @@ Gem::Specification.new do |s|
   %q{lib/rib/zore/anchor.rb},
   %q{lib/rib/zore/edit.rb},
   %q{lib/rib/zore/rails.rb},
+  %q{lib/rib/zore/ramaze.rb},
   %q{rib.gemspec},
   %q{screenshot.png},
   %q{task/.gitignore},
