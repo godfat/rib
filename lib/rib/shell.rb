@@ -2,6 +2,8 @@
 require 'rib/plugin'
 
 class Rib::Shell
+  trap('INT'){ raise Interrupt }
+
   def self.use mod
     include mod
   end
