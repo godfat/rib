@@ -46,7 +46,7 @@ class Rib::Shell
       input = get_input
       throw(:rib_exit, input) if config[:exit].include?(input)
       if input.strip == ''
-        history.pop
+        eval_input(input)
       else
         print_result(eval_input(input))
       end
