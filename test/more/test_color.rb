@@ -3,6 +3,8 @@ require 'rib/test'
 require 'rib/more/color'
 
 describe Rib::Color do
+  behaves_like :rib
+
   before do
     @color = Class.new do
       include Rib::Color

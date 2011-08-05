@@ -3,6 +3,8 @@ require 'rib/test'
 require 'rib/core/completion'
 
 describe Rib::Completion do
+  behaves_like :rib
+
   before do
     @completion = Class.new do
       include Rib::Completion

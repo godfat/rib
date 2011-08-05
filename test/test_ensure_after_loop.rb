@@ -2,7 +2,7 @@
 require 'rib/test'
 
 describe Rib::Shell do
-  after do; RR.verify; end
+  behaves_like :rib
 
   should 'call after_loop even if in_loop raises' do
     @shell = Rib::Shell.new

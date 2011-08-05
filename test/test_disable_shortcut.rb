@@ -3,15 +3,13 @@ require 'rib/test'
 require 'rib/all'
 
 describe Rib::Plugin do
+  behaves_like :rib
+
   before do
     @names = Dir[File.expand_path(
                "#{File.dirname(__FILE__)}/../lib/rib/{core,more,zore}/*.rb")].
                map   {|path| File.basename(path)[0..-4]                     }
     @mods  = Rib.plugins
-  end
-
-  after do
-    @mods.each(&:enable)
   end
 
   should 'have shortcut methods' do
