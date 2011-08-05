@@ -11,7 +11,7 @@ describe Rib::Completion do
     end.new
   end
 
-  should "#before_loop adds gem plugin to config" do
+  should 'find correct ripl plugins' do
     $LOADED_FEATURES << '/dir/ripl/some_plugin.rb'
     @completion.send(:ripl_plugins).should == ['ripl/some_plugin.rb']
   end
