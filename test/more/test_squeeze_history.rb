@@ -8,7 +8,7 @@ describe Rib::SqueezeHistory do
   before do
     Rib::History.enable
     Rib::SqueezeHistory.enable
-    @history = '/tmp/test_rib_history'
+    @history = "/tmp/test_rib_#{rand}"
     @shell   = Rib::Shell.new(:history => @history).before_loop
     @input   = %w[foo bar bar foo bar]
   end
