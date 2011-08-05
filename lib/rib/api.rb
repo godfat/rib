@@ -55,6 +55,10 @@ module Rib::API
     config[:prompt]
   end
 
+  def name
+    config[:name]
+  end
+
   def read_history
   end
 
@@ -67,7 +71,7 @@ module Rib::API
 
   # Evals user input using @binding, @name and @line
   def loop_eval(input)
-    config[:binding].eval(input, "(#{config[:name]})", config[:line])
+    config[:binding].eval(input, "(#{name})", config[:line])
   end
 
   # Prints error formatted by #format_error to STDERR. Could be extended to
@@ -81,7 +85,7 @@ module Rib::API
   def print_result(result)
     puts(format_result(result)) unless error_raised
   rescue StandardError, SyntaxError => e
-    warn "#{config[:name]}: Error while printing result:\n" \
+    warn "#{name}: Error while printing result:\n" \
          "#{format_error(e)}"
   end
 

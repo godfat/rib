@@ -37,7 +37,7 @@ module Rib::Runner
       plugin = "rib-#{command}"
       path   = `which #{plugin}`.strip
       if path == ''
-        puts("Can't find `#{plugin}' in $PATH.\n"           \
+        puts("#{name}: Can't find `#{plugin}' in $PATH.\n"  \
              "Please make sure `#{plugin}' is installed.\n" \
              "e.g. run `gem install #{plugin}`")
       else
@@ -50,7 +50,7 @@ module Rib::Runner
 
   def start *argv
     unused = parse(argv.dup)
-    warn "#{name}: Unused arguments: #{unused.inspect}" unless unused.empty?
+    warn("#{name}: Unused arguments: #{unused.inspect}") unless unused.empty?
     Rib.shell.loop
   end
 
