@@ -16,13 +16,13 @@ module Rib
   end
 
   def shell
-    @shell  ||= begin
-      load_rc
+    shells.last || begin
+      require_rc
       (shells << Shell.new(config)).last
     end
   end
 
-  def load_rc
+  def require_rc
     config[:config] &&
       File.exist?(rc = File.expand_path(config[:config])) &&
       require(rc)
