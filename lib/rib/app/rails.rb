@@ -33,4 +33,9 @@ module Rib::Rails
 
     ::Rails.application.require_environment!
   end
+
+  def rails?
+    File.exist?('./config/boot.rb')    &&
+    File.exist?('./config/environment.rb')
+  end
 end

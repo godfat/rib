@@ -10,12 +10,16 @@ module Rib::Ramaze
 
   def load_ramaze
     # try to produce consistent error message, and yet lazy loading ramaze
-    require './start' unless File.exist?('./start.rb')
+    require './start' unless ramaze?
 
     require 'ramaze'
     ::Ramaze.options.started = true
 
     require './start'
     at_exit{ puts('Ramazement has ended, go in peace.') }
+  end
+
+  def ramaze?
+    File.exist?('./start.rb')
   end
 end
