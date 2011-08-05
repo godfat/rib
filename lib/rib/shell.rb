@@ -13,7 +13,6 @@ class Rib::Shell
   attr_reader :config
   def initialize(config={})
     self.config = {
-      :name          => 'rib'                    ,
       :result_prompt => '=> '                    ,
       :prompt        => '>> '                    ,
       :binding       => TOPLEVEL_BINDING         ,

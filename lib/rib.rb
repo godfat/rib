@@ -4,7 +4,11 @@ require 'rib/shell'
 module Rib
   module_function
   def config
-    @config ||= {:config => '~/.config/rib/config.rb'}
+    @config ||= {:config => '~/.config/rib/config.rb', :name => 'rib'}
+  end
+
+  def name
+    config[:name]
   end
 
   def shells
