@@ -2,24 +2,29 @@
 require 'rib/shell'
 
 module Rib
-  def self.config
-    @config ||= {}
+  module_function
+  def config
+    @config ||= {:config => '~/.config/rib/config.rb'}
   end
 
-  def self.shell
-    @shell  ||= (shells << Shell.new(config)).last
-  end
-
-  def self.shells
+  def shells
     @shells ||= []
   end
 
-  def self.vars
+  def vars
     @vars   ||= {}
   end
 
-  def self.start(*argv)
-    require 'rib/runner'
-    Runner.run(argv)
+  def shell
+    @shell  ||= begin
+      load_rc
+      (shells << Shell.new(config)).last
+    end
+  end
+
+  def load_rc
+    config[:config] &&
+      File.exist?(rc = File.expand_path(config[:config])) &&
+      require(rc)
   end
 end

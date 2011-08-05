@@ -13,7 +13,6 @@ class Rib::Shell
       :result_prompt => '=> '                    ,
       :prompt        => '>> '                    ,
       :binding       => TOPLEVEL_BINDING         ,
-      :rc            => '~/.config/rib/config.rb',
       :exit          => [nil, 'exit', 'quit']    ,
       :line          => 1
     }.merge(config)
@@ -32,12 +31,7 @@ class Rib::Shell
   attr_accessor :error_raised
 
   module API
-    # Sets up shell before looping by loading ~/.irbrc. Can be extended to
-    # initialize plugins and their instance variables.
     def before_loop
-      if File.exist?(rc = File.expand_path(config[:rc]))
-        require rc
-      end
       self
     end
 
