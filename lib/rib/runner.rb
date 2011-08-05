@@ -4,7 +4,7 @@ require 'rib'
 module Rib::Runner
   module_function
   def name
-    $PROGRAM_NAME
+    File.basename($PROGRAM_NAME)
   end
 
   def options
