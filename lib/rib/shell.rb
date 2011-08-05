@@ -38,7 +38,7 @@ class Rib::Shell
     end
 
     def in_loop
-      input = catch(:rib_exit){ loop_once while true}
+      input = catch(:rib_exit){ loop_once while true }
       puts if input == nil
     end
 
