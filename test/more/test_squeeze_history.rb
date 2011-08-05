@@ -11,10 +11,11 @@ describe Rib::SqueezeHistory do
     @history = '/tmp/test_rib_history'
     @shell   = Rib::Shell.new(:history => @history).before_loop
     @input   = %w[foo bar bar foo bar]
-    @shell.history.clear
   end
 
-  after do; FileUtils.rm_f(@history); end
+  after do
+    FileUtils.rm_f(@history)
+  end
 
   should 'after_loop saves squeezed history' do
     @shell.history.push(*@input)
