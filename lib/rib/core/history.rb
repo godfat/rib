@@ -26,7 +26,7 @@ module Rib::History
   end
 
   def read_history
-    File.exists?(history_file) && history.empty? &&
+    File.exist?(history_file) && history.empty? &&
       File.readlines(history_file).each{ |e| history << e.chomp }
   end
 
