@@ -37,7 +37,7 @@ module Rib::Multiline
     if @multiline_buffer.empty?
       super
     else
-      "#{' '*(@prompt.size-2)}| "
+      "#{' '*(config[:prompt].size-2)}| "
     end
   end
 
