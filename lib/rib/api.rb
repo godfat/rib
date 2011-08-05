@@ -2,6 +2,7 @@
 module Rib; end
 module Rib::API
   def before_loop
+    read_history
     self
   end
 
@@ -98,6 +99,7 @@ module Rib::API
 
   # Called after shell finishes looping.
   def after_loop
+    write_history
     self
   end
 end

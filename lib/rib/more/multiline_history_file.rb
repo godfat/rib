@@ -12,6 +12,7 @@ module Rib::MultilineHistoryFile
   end
 
   def read_history
+    return super if MultilineHistoryFile.disabled?
     buffer = []
     File.exist?(history_file) && history.empty? &&
       IO.readlines(history_file).each{ |line|

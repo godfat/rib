@@ -11,13 +11,6 @@ module Rib::HistoryFile
     config[:history_file] ||= '~/.config/rib/history.rb'
     config[:history_size] ||= 500
     FileUtils.mkdir_p(File.dirname(history_file))
-    read_history
-    super
-  end
-
-  def after_loop
-    return super if HistoryFile.disabled?
-    write_history
     super
   end
 
