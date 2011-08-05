@@ -15,7 +15,7 @@ module Rib::Edit
 
       system("$EDITOR #{file.path}")
 
-      Rib.shell.loop_eval(Rib.vars[:edit] = File.read(file.path))
+      Rib.shell.run_eval(Rib.vars[:edit] = File.read(file.path))
     ensure
       file.close
       file.unlink

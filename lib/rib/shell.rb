@@ -23,9 +23,20 @@ class Rib::Shell
   # Loops shell until user exits
   def loop
     before_loop
+    @running = true
     in_loop
   ensure
+    @running = false
     after_loop
+  end
+
+  def running?
+    !!@running
+  end
+
+  def run_eval str
+    before_loop unless running?
+    loop_eval(str)
   end
 
   protected
