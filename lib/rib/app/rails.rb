@@ -3,6 +3,12 @@ module Rib; end
 module Rib::Rails
   module_function
   def load
+    load_rails
+  rescue LoadError => e
+    Rib.abort("Is this a Rails app?\n  #{e}")
+  end
+
+  def load_rails
     require './config/boot'
 
     if File.exist?('./config/application.rb')
@@ -12,9 +18,6 @@ module Rib::Rails
     end
 
     puts("Loading #{::Rails.env} environment (Rails #{::Rails.version})")
-
-  rescue LoadError => e
-    Rib.abort("Is this a Rails app?\n  #{e}")
   end
 
   def load_rails2
