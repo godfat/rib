@@ -26,15 +26,9 @@ module Rib::Multiline
       "syntax error, unexpected end-of-file",
     ].join('|'))
 
-  def before_loop
-    return super if Multiline.disabled?
-    @multiline_buffer = []
-    super
-  end
-
   def prompt
     return super if Multiline.disabled?
-    if @multiline_buffer.empty?
+    if multiline_buffer.empty?
       super
     else
       "#{' '*(config[:prompt].size-2)}| "
@@ -45,14 +39,14 @@ module Rib::Multiline
     return super if Multiline.disabled?
     catch(:multiline_cont) do
       super
-      @multiline_buffer.clear
+      multiline_buffer.clear
     end
   end
 
   def loop_eval(input)
     return super if Multiline.disabled?
-    @multiline_buffer << input
-    super(@multiline_buffer.join("\n"))
+    multiline_buffer << input
+    super(multiline_buffer.join("\n"))
   end
 
   def print_eval_error(e)
@@ -66,13 +60,18 @@ module Rib::Multiline
 
   def handle_interrupt
     return super if Multiline.disabled?
-    if @multiline_buffer.empty?
+    if multiline_buffer.empty?
       super
     else
-      line = @multiline_buffer.pop
+      line = multiline_buffer.pop
       print "[removed this line: #{line}]"
       super
       throw :multiline_cont
     end
+  end
+
+  private
+  def multiline_buffer
+    @multiline_buffer ||= []
   end
 end
