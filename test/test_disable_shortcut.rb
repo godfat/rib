@@ -7,7 +7,7 @@ describe Rib::Plugin do
     @names = Dir[File.expand_path(
                "#{File.dirname(__FILE__)}/../lib/rib/{core,more,zore}/*.rb")].
                map   {|path| File.basename(path)[0..-4]                     }
-    @mods  = Rib::Shell.ancestors[1..-1].select{ |mod| mod < Rib::Plugin }
+    @mods  = Rib.plugins
   end
 
   after do
