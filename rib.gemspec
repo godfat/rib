@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   %q{lib/rib.rb},
   %q{lib/rib/all.rb},
   %q{lib/rib/api.rb},
+  %q{lib/rib/app/hirb.rb},
   %q{lib/rib/app/rails.rb},
   %q{lib/rib/app/ramaze.rb},
   %q{lib/rib/core.rb},
