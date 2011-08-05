@@ -15,10 +15,10 @@ describe Rib::Plugin do
   should 'have shortcut methods' do
     @names.each{ |name|
       %w[enable disable].each{ |meth|
-        Rib.should.respond_to?("#{meth}_#{name}") == true
+        Rib.respond_to?("#{meth}_#{name}").should == true
       }
       %w[enabled? disabled?].each{ |meth|
-        Rib.should.respond_to?("#{name}_#{meth}") == true
+        Rib.respond_to?("#{name}_#{meth}").should == true
       }
     }
   end
