@@ -5,21 +5,22 @@ module Rib::MultilineHistory
   include Rib::Plugin
   Shell.use(self)
 
-  def loop_eval(input)
+  def loop_eval input
     return super if MultilineHistory.disabled?
-    super # might throw
-  ensure
-    unless @multiline_buffer.empty?
-      (@multiline_buffer.size + (@multiline_trash || 0)).
-        times{ history.pop }
-       @multiline_trash = 0
+    value = super
+  rescue Exception
+    raise
+  else
+    if @multiline_buffer.size > 1
+      (@multiline_buffer.size + (@multiline_trash || 0)).times{ history.pop }
       history << "\n" + @multiline_buffer.join("\n")
     end
+    value
   end
 
   def handle_interrupt
     return super if MultilineHistory.disabled?
-    unless @multiline_buffer.empty?
+    if @multiline_buffer.size > 1
       @multiline_trash ||= 0
       @multiline_trash  += 1
     end

@@ -49,23 +49,18 @@ module Rib::Multiline
     end
   end
 
+  def loop_eval(input)
+    return super if Multiline.disabled?
+    @multiline_buffer << input
+    super(@multiline_buffer.join("\n"))
+  end
+
   def print_eval_error(e)
     return super if Multiline.disabled?
     if e.is_a?(SyntaxError) && e.message =~ ERROR_REGEXP
-      @multiline_buffer << @input if @multiline_buffer.empty?
       throw :multiline_cont
     else
       super
-    end
-  end
-
-  def loop_eval(input)
-    return super if Multiline.disabled?
-    if @multiline_buffer.empty?
-      super
-    else
-      @multiline_buffer << input
-      super @multiline_buffer.join("\n")
     end
   end
 
