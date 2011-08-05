@@ -17,7 +17,7 @@ describe Rib::Color do
   should 'give correct color' do
     @color.send(:format_color,
       [{0 => :a}, 'b', [nil, {false => Object}], {true => Exception.new}]).
-        should ==
+        should.eq \
           "\e[34m[\e[m\e[34m{\e[m\e[31m0\e[m\e[34m=>\e[m\e[36m:a\e[m\e[" \
           "34m}\e[m\e[34m, \e[m\e[32m\"b\"\e[m\e[34m, \e[m\e[34m[\e[m\e" \
           "[35mnil\e[m\e[34m, \e[m\e[34m{\e[m\e[35mfalse\e[m\e[34m=>\e[" \

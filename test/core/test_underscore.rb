@@ -16,9 +16,9 @@ describe Rib::Underscore do
 
   should 'set _' do
     setup
-    @shell.eval_input('_').should.equal nil
+    @shell.eval_input('_').should.eq nil
     @shell.eval_input('10 ** 2')
-    @shell.eval_input('_').should.equal 100
+    @shell.eval_input('_').should.eq 100
   end
 
   should 'not set _ if already there' do
@@ -27,9 +27,9 @@ describe Rib::Underscore do
       'hey'
     end
     setup(bound)
-    @shell.eval_input('_').should.equal 'hey'
+    @shell.eval_input('_').should.eq 'hey'
     @shell.eval_input('10 ** 2')
-    @shell.eval_input('_').should.equal 'hey'
+    @shell.eval_input('_').should.eq 'hey'
   end
 
   should 'set __' do

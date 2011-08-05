@@ -17,3 +17,9 @@ shared :rib do
     Rib.enable_plugins
   end
 end
+
+module Kernel
+  def eq? rhs
+    self == rhs
+  end
+end
