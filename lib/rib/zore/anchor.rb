@@ -56,6 +56,7 @@ module Rib::Anchor
                      (Rib.config[:prompt] || '>> ')))
 
       Rib.shell.loop
+      Rib.vars[:anchor].last # the way to hide return value from Rib.anchor
 
     ensure
       # stores to check if we're exiting from an anchor
