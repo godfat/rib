@@ -44,19 +44,20 @@ module Rib::Runner
         load(path)
       end
     else
-      start(*argv.dup)
+      start(*argv)
     end
   end
 
   def start *argv
-    parse(argv)
-    warn "#{name}: Unused arguments: #{argv.inspect}" unless argv.empty?
+    unused = parse(argv.dup)
+    warn "#{name}: Unused arguments: #{unused.inspect}" unless unused.empty?
     Rib.shell.loop
   end
 
   def parse argv
+    unused = []
     until argv.empty?
-      case argv.shift
+      case arg = argv.shift
       when /-e=?(.*)/, /--eval=?(.*)/
         eval($1 || argv.shift, __FILE__, __LINE__)
 
@@ -87,8 +88,12 @@ module Rib::Runner
         require 'rib/version'
         puts(Rib::VERSION)
         exit
+
+      else
+        unused << arg
       end
     end
+    unused
   end
 
   def help
