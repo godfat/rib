@@ -84,6 +84,7 @@ module Rib::Runner
   end
 
   def help
+    name = Rib.config[:name]
     maxn = options.transpose.first.map(&:size).max
     maxd = options.transpose.last .map(&:size).max
     "Usage: #{name} [Ruby OPTIONS] [Rib COMMAND] [Rib OPTIONS]\n" +
