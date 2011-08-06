@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [
   %q{rib},
+  %q{rib-all},
   %q{rib-auto},
   %q{rib-rails},
   %q{rib-ramaze}]
@@ -33,6 +34,7 @@ Gem::Specification.new do |s|
   %q{Rakefile},
   %q{TODO},
   %q{bin/rib},
+  %q{bin/rib-all},
   %q{bin/rib-auto},
   %q{bin/rib-rails},
   %q{bin/rib-ramaze},
