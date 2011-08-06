@@ -74,7 +74,7 @@ module Rib::Runner
         puts(Rib::VERSION)
         exit
 
-      when /[^-]+/
+      when /^[^-]/
         load_command(arg)
 
       else
