@@ -72,7 +72,7 @@ module Rib
   # Warn (print to $stderr, with colors in the future, maybe)
   # something by the name of Rib and then exit(1)
   def abort *words
-    warn(Rib.prepare(words))
+    warn(words)
     exit(1)
   end
 
