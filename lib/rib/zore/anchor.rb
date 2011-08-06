@@ -5,7 +5,8 @@ module Rib::Anchor
   include Rib::Plugin
   Shell.use(self)
 
-  def loop_eval(str)
+  def loop_eval str
+    return super if Rib::Anchor.disabled?
     case obj_or_binding = (Rib.vars[:anchor] ||= []).last
       when NilClass
         super
@@ -20,6 +21,7 @@ module Rib::Anchor
   end
 
   def prompt
+    return super if Rib::Anchor.disabled?
     if Rib.const_defined?(:Color) && kind_of?(Rib::Color) &&
        obj_or_binding = (Rib.vars[:anchor] ||= []).last
 
@@ -32,6 +34,7 @@ module Rib::Anchor
   # if the object is the same, then we're exiting from an anchor,
   # so don't print anything.
   def print_result result
+    return super if Rib::Anchor.disabled?
     super unless !result.nil? &&
                  result.object_id == Rib.vars[:anchor_last].object_id
   end
@@ -59,6 +62,7 @@ module Rib::Anchor
       Rib.vars[:anchor].last # the way to hide return value from Rib.anchor
 
     ensure
+      return if Rib::Anchor.disabled?
       # stores to check if we're exiting from an anchor
       Rib.vars[:anchor_last] = Rib.vars[:anchor].pop
       Rib.shells.pop
