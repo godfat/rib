@@ -4,7 +4,8 @@ require 'rib'
 module Rib::Runner
   module_function
   def options
-    [['-e, --eval LINE'                                               ,
+    [['ruby options:', '']                                            ,
+     ['-e, --eval LINE'                                               ,
       'Evaluate a LINE of code'                                      ],
 
      ['-d, --debug'                                                   ,
@@ -19,7 +20,7 @@ module Rib::Runner
      ['-r, --require LIBRARY'                                         ,
        'Require the library, before executing your script'           ],
 
-      # Rib OPTIONS
+     ['rib options:', '']                                             ,
      ['-c, --config FILE', 'Load config from FILE'                   ],
      ['-n, --no-config'  , 'Suppress loading ~/.config/rib/config.rb'],
      ['-h, --help'       , 'Print this message'                      ],
@@ -89,7 +90,12 @@ module Rib::Runner
     maxd = options.transpose.last .map(&:size).max
     "Usage: #{name} [ruby OPTIONS] [rib COMMAND] [rib OPTIONS]\n" +
     options.map{ |(name, desc)|
-      sprintf("  %-*s  %-*s", maxn, name, maxd, desc) }.join("\n")
+      if desc.empty?
+        name
+      else
+        sprintf("  %-*s  %-*s", maxn, name, maxd, desc)
+      end
+    }.join("\n")
   end
 
   def load_command command
