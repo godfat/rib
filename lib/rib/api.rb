@@ -1,17 +1,48 @@
 
 module Rib; end
 module Rib::API
+  # Called before shell starts looping
   def before_loop
     read_history
     self
   end
 
+  # Called after shell finishes looping
+  def after_loop
+    write_history
+    self
+  end
+
+  # Read config[:history_file] into #history, handled in history_file plugin
+  def read_history
+  end
+
+  # Write #history into config[:history_file], handled in history_file plugin
+  def write_history
+  end
+
+  # Handle interrupt (control-c)
+  def handle_interrupt; puts               ; end
+  # The prompt string of this shell
+  def prompt       ; config[:prompt]       ; end
+  # The result prompt string of this shell
+  def result_prompt; config[:result_prompt]; end
+  # The name of this shell
+  def name         ; config[:name]         ; end
+  # The binding for evaluation
+  def eval_binding ; config[:binding]      ; end
+  # The line number for next evaluation
+  def line         ; config[:line]         ; end
+  # The history data
+  def history      ; @history ||= []       ; end
+
+  # Main loop
   def in_loop
     input = catch(:rib_exit){ loop_once while true }
     puts if input == nil
   end
 
-  # Runs through one loop iteration: gets input, evals and prints result
+  # Loop iteration: REPL
   def loop_once
     self.error_raised = nil
     input = get_input
@@ -25,22 +56,7 @@ module Rib::API
     handle_interrupt
   end
 
-  # Handles interrupt (Control-C) by printing a newline
-  def handle_interrupt() puts end
-
-  # Sets @result to result of evaling input and print unexpected errors
-  def eval_input(input)
-    loop_eval(input)
-  rescue Exception => e
-    self.error_raised = true
-    print_eval_error(e)
-  ensure
-    config[:line] += 1
-  end
-
-  # When extending this method, ensure your plugin disables readline:
-  # Readline.config[:readline] = false.
-  # @return [String, nil] Prints #prompt and returns input given by user
+  # Get user input. This is most likely overrided in Readline plugin
   def get_input
     print(prompt)
     if input = $stdin.gets
@@ -50,61 +66,42 @@ module Rib::API
     end
   end
 
-  # @return [String]
-  def prompt
-    config[:prompt]
+  # Evaluate the input using #loop_eval and handle it
+  def eval_input input
+    loop_eval(input)
+  rescue Exception => e
+    self.error_raised = true
+    print_eval_error(e)
+  ensure
+    config[:line] += 1
   end
 
-  def name
-    config[:name]
+  # Evaluate user input with #eval_binding, name and line
+  def loop_eval input
+    eval_binding.eval(input, "(#{name})", line)
   end
 
-  def read_history
-  end
-
-  def write_history
-  end
-
-  def history
-    @history ||= []
-  end
-
-  # Evals user input using @binding, @name and @line
-  def loop_eval(input)
-    config[:binding].eval(input, "(#{name})", config[:line])
-  end
-
-  # Prints error formatted by #format_error to STDERR. Could be extended to
-  # handle certain exceptions.
-  # @param [Exception]
-  def print_eval_error(err)
-    puts(format_error(err))
-  rescue StandardError, SyntaxError => e
-    Rib.warn("Error while printing error:\n  #{e}")
-  end
-
-  # Prints result using #format_result
-  def print_result(result)
+  # Print result using #format_result
+  def print_result result
     puts(format_result(result)) unless error_raised
   rescue StandardError, SyntaxError => e
     Rib.warn("Error while printing result:\n  #{format_error(e)}")
   end
 
-  # Formats errors raised by eval of user input
-  # @param [Exception]
-  # @return [String]
-  def format_error(e)
-    "#{e.class}: #{e.message}\n    #{e.backtrace.join("\n    ")}"
+  # Print evaluated error using #format_error
+  def print_eval_error err
+    puts(format_error(err))
+  rescue StandardError, SyntaxError => e
+    Rib.warn("Error while printing error:\n  #{e}")
   end
 
-  # @return [String] Formats result using result_prompt
-  def format_result(result)
-    config[:result_prompt] + result.inspect
+  # Format result using #result_prompt
+  def format_result result
+    result_prompt + result.inspect
   end
 
-  # Called after shell finishes looping.
-  def after_loop
-    write_history
-    self
+  # Format error raised in #loop_eval
+  def format_error err
+    "#{err.class}: #{err.message}\n    #{err.backtrace.join("\n    ")}"
   end
 end
