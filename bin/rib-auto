@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'rib/runner'
+Rib.config[:name] = File.basename(__FILE__)
+require 'rib/app/auto'
+Rib.require_rc
+Rib::Auto.load
+Rib::Runner.run(ARGV)

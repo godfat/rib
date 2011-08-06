@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [
   %q{rib},
+  %q{rib-auto},
   %q{rib-rails},
   %q{rib-ramaze}]
   s.extra_rdoc_files = [
@@ -32,11 +33,13 @@ Gem::Specification.new do |s|
   %q{Rakefile},
   %q{TODO},
   %q{bin/rib},
+  %q{bin/rib-auto},
   %q{bin/rib-rails},
   %q{bin/rib-ramaze},
   %q{lib/rib.rb},
   %q{lib/rib/all.rb},
   %q{lib/rib/api.rb},
+  %q{lib/rib/app/auto.rb},
   %q{lib/rib/app/hirb.rb},
   %q{lib/rib/app/rails.rb},
   %q{lib/rib/app/ramaze.rb},
