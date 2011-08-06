@@ -30,11 +30,11 @@ module Rib::Runner
   def run argv=ARGV
     (@commands ||= []) << Rib.config[:name]
     unused = parse(argv)
-    # if it's running a rib command, the loop would be inside rib itself
+    # if it's running a Rib command, the loop would be inside Rib itself
     # so here we only parse args for the command
     return if @commands.pop != 'rib'
-    # by comming to this line, it means now we're running rib main loop,
-    # not any other rib command
+    # by comming to this line, it means now we're running Rib main loop,
+    # not any other Rib command
     Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
     Rib.shell.loop
   end
