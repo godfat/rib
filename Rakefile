@@ -11,8 +11,9 @@ task 'gem:spec' do
     s.name        = 'rib'
     s.version     = Rib::VERSION
 
-    %w[bond].each{ |g| s.add_runtime_dependency(g) }
-    %w[hirb
+    %w[].each{ |g| s.add_runtime_dependency(g) }
+    %w[bond
+       hirb
        bacon
        rr]  .each{ |g| s.add_development_dependency(g) }
   end

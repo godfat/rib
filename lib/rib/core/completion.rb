@@ -1,6 +1,5 @@
 
 require 'rib'
-require 'bond'
 
 module Rib::Completion
   include Rib::Plugin
@@ -19,4 +18,13 @@ module Rib::Completion
   def ripl_plugins
     $LOADED_FEATURES.map{ |e| e[/ripl\/[^\/]+$/] }.compact
   end
+end
+
+begin
+  require 'bond'
+rescue LoadError
+  Rib.warn("Please install bond to use completion plugin:\n",
+           "    gem install bond\n",
+           "Or add bond to Gemfile if that's the case")
+  Rib::Completion.disable
 end
