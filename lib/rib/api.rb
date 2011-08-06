@@ -60,7 +60,7 @@ module Rib::API
   def get_input
     print(prompt)
     if input = $stdin.gets
-      input.chomp
+      (history << input.chomp).last
     else
       nil
     end

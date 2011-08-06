@@ -14,11 +14,6 @@ module Rib::HistoryFile
     super
   end
 
-  def get_input
-    return super if HistoryFile.disabled?
-    (history << super).last
-  end
-
   def read_history
     return super if HistoryFile.disabled?
     File.exist?(history_file) && history.empty? &&
