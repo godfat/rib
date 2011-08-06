@@ -43,8 +43,8 @@ module Rib::Runner
     unused = []
     until argv.empty?
       case arg = argv.shift
-      when /-e=?(.*)/, /--eval=?(.*)/
-        eval($1 || argv.shift, __FILE__, __LINE__)
+      when /-e=?(.+)?/, /--eval=?(.+)?/
+        eval($1 || argv.shift, binding, __FILE__, __LINE__)
 
       when '-d', '--debug'
         $DEBUG = true
@@ -52,14 +52,14 @@ module Rib::Runner
       when '-w', '--warn'
         $-w = true
 
-      when /-I=?(.*)/, /--include=?(.*)/
+      when /-I=?(.+)?/, /--include=?(.+)?/
         paths = ($1 || argv.shift).split(':')
         $LOAD_PATH.unshift(*paths)
 
-      when /-r=?(.*)/, /--require=?(.*)/
+      when /-r=?(.+)?/, /--require=?(.+)?/
         require($1 || argv.shift)
 
-      when /-c=?(.*)/, /--config=?(.*)/
+      when /-c=?(.+)?/, /--config=?(.+)?/
         Rib.config[:config] = $1 || argv.shift
 
       when '-n', '--no-config'
