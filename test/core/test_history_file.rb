@@ -7,23 +7,23 @@ describe Rib::HistoryFile do
 
   before do
     Rib::HistoryFile.enable
-    @history = "/tmp/test_rib_#{rand}"
-    @shell   = Rib::Shell.new(:history_file => @history).before_loop
+    @history_path = "/tmp/test_rib_#{rand}"
+    @shell        = Rib::Shell.new(:history_file => @history_path).before_loop
   end
 
   after do
-    FileUtils.rm_f(@history)
+    FileUtils.rm_f(@history_path)
   end
 
   should '#after_loop save history' do
     inputs = %w[blih blah]
     @shell.history.replace(inputs)
     @shell.after_loop
-    File.read(@history).should.eq "#{inputs.join("\n")}\n"
+    File.read(@history_path).should.eq "#{inputs.join("\n")}\n"
   end
 
   should '#before_loop load previous history' do
-    File.open(@history, 'w'){ |f| f.write "check\nthe\nmike" }
+    File.open(@history_path, 'w'){ |f| f.write "check\nthe\nmike" }
     @shell.before_loop
     @shell.history.to_a.should.eq %w[check the mike]
   end
