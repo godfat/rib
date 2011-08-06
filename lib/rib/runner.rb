@@ -4,27 +4,26 @@ require 'rib'
 module Rib::Runner
   module_function
   def options
-    { # Ruby OPTIONS
-     '-e, --eval LINE'       =>
-       'Evaluate a LINE of code'                                      ,
+    [['-e, --eval LINE'                                               ,
+      'Evaluate a LINE of code'                                      ],
 
-     '-d, --debug'           =>
-       'Set debugging flags (set $DEBUG to true)'                     ,
+     ['-d, --debug'                                                   ,
+      'Set debugging flags (set $DEBUG to true)'                     ],
 
-     '-w, --warn'            =>
-       'Turn warnings on for your script (set $-w to true)'           ,
+     ['-w, --warn'                                                    ,
+       'Turn warnings on for your script (set $-w to true)'          ],
 
-     '-I, --include PATH'    =>
-       'Specify $LOAD_PATH (may be used more than once)'              ,
+     ['-I, --include PATH'                                            ,
+       'Specify $LOAD_PATH (may be used more than once)'             ],
 
-     '-r, --require LIBRARY' =>
-       'Require the library, before executing your script'            ,
+     ['-r, --require LIBRARY'                                         ,
+       'Require the library, before executing your script'           ],
 
       # Rib OPTIONS
-     '-c, --config FILE' => 'Load config from FILE'                   ,
-     '-n, --no-config'   => 'Suppress loading ~/.config/rib/config.rb',
-     '-h, --help'        => 'Print this message'                      ,
-     '-v, --version'     => 'Print the version'                       }
+     ['-c, --config FILE', 'Load config from FILE'                   ],
+     ['-n, --no-config'  , 'Suppress loading ~/.config/rib/config.rb'],
+     ['-h, --help'       , 'Print this message'                      ],
+     ['-v, --version'    , 'Print the version'                       ]]
   end
 
   def run argv=ARGV
@@ -85,10 +84,10 @@ module Rib::Runner
   end
 
   def help
-    maxn = options.keys  .map(&:size).max
-    maxd = options.values.map(&:size).max
+    maxn = options.transpose.first.map(&:size).max
+    maxd = options.transpose.last .map(&:size).max
     "Usage: #{name} [Ruby OPTIONS] [Rib COMMAND] [Rib OPTIONS]\n" +
-    options.map{ |name, desc|
+    options.map{ |(name, desc)|
       sprintf("  %-*s  %-*s", maxn, name, maxd, desc) }.join("\n")
   end
 
