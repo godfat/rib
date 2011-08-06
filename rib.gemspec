@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-06}
+  s.date = %q{2011-08-07}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [
@@ -59,6 +59,7 @@ Gem::Specification.new do |s|
   %q{lib/rib/more/squeeze_history.rb},
   %q{lib/rib/more/strip_backtrace.rb},
   %q{lib/rib/plugin.rb},
+  %q{lib/rib/rc.rb},
   %q{lib/rib/runner.rb},
   %q{lib/rib/shell.rb},
   %q{lib/rib/test.rb},
