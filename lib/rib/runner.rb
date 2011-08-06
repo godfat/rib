@@ -25,7 +25,32 @@ module Rib::Runner
      ['-c, --config FILE', 'Load config from FILE'                   ],
      ['-n, --no-config'  , 'Suppress loading ~/.config/rib/config.rb'],
      ['-h, --help'       , 'Print this message'                      ],
-     ['-v, --version'    , 'Print the version'                       ]]
+     ['-v, --version'    , 'Print the version'                       ]] +
+
+    [['rib commands:'    , '']] + commands
+  end
+
+  def commands
+     @commands ||=
+      command_names.map{ |n| [n, command_descriptions[n] || ' '] }
+  end
+
+  def command_names
+    @command_names ||=
+    Gem.path.map{ |path|
+      Dir["#{path}/bin/*"].map{ |f|
+        (File.executable?(f) && File.basename(f) =~ /^rib\-(\w+)$/ && $1) ||
+         nil    # a trick to make false to be nil and then
+      }.compact # this compact could eliminate them
+    }.flatten
+  end
+
+  def command_descriptions
+    @command_descriptions ||=
+    {'all'    => 'Load all recommended plugins'                ,
+     'auto'   => 'Run as Rails or Ramaze console (auto-detect)',
+     'rails'  => 'Run as Rails console'                        ,
+     'ramaze' => 'Run as Ramaze console'                       }
   end
 
   def run argv=ARGV
