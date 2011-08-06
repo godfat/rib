@@ -4,7 +4,8 @@ require 'rib'
 module Rib::Runner
   module_function
   def options
-    [['ruby options:', '']                                            ,
+    @options ||=
+    [['ruby options:'    , ''                                        ],
      ['-e, --eval LINE'                                               ,
       'Evaluate a LINE of code'                                      ],
 
@@ -20,7 +21,7 @@ module Rib::Runner
      ['-r, --require LIBRARY'                                         ,
        'Require the library, before executing your script'           ],
 
-     ['rib options:', '']                                             ,
+     ['rib options:'     , ''                                        ],
      ['-c, --config FILE', 'Load config from FILE'                   ],
      ['-n, --no-config'  , 'Suppress loading ~/.config/rib/config.rb'],
      ['-h, --help'       , 'Print this message'                      ],
