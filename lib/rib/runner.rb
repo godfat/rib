@@ -28,25 +28,13 @@ module Rib::Runner
   end
 
   def run argv=ARGV
-    if command = argv.find{ |a| a =~ /^[^-]/ }
-      argv.delete(command)
-      plugin = "rib-#{command}"
-      path   = `which #{plugin}`.strip
-      if path == ''
-        Rib.warn(
-          "Can't find #{plugin} in $PATH. Please make sure it is installed,",
-          "or is there any typo? You can try this to install it:\n"         ,
-          "    gem install #{plugin}")
-      else
-        load(path)
-      end
-    else
-      start(*argv)
-    end
-  end
-
-  def start *argv
-    unused = parse(argv.dup)
+    (@commands ||= []) << Rib.config[:name]
+    unused = parse(argv)
+    # if it's running a rib command, the loop would be inside rib itself
+    # so here we only parse args for the command
+    return if @commands.pop != 'rib'
+    # by comming to this line, it means now we're running rib main loop,
+    # not any other rib command
     Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
     Rib.shell.loop
   end
@@ -86,6 +74,9 @@ module Rib::Runner
         puts(Rib::VERSION)
         exit
 
+      when /[^-]+/
+        load_command(arg)
+
       else
         unused << arg
       end
@@ -99,5 +90,19 @@ module Rib::Runner
     "Usage: #{name} [Ruby OPTIONS] [Rib COMMAND] [Rib OPTIONS]\n" +
     options.map{ |name, desc|
       sprintf("  %-*s  %-*s", maxn, name, maxd, desc) }.join("\n")
+  end
+
+  def load_command command
+    bin  = "rib-#{command}"
+    path = `which #{bin}`.strip
+    if path == ''
+      Rib.warn(
+        "Can't find #{bin} in $PATH. Please make sure it is installed,",
+        "or is there any typo? You can try this to install it:\n"         ,
+        "    gem install #{bin}")
+    else
+      Rib.config[:name] = bin
+      load(path)
+    end
   end
 end

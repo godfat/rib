@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'rib/runner'
-Rib.config[:name] = File.basename(__FILE__)
-require 'rib/app/auto'
+# load rc before app to prvent your bundler (if any) kicks in
 Rib.require_rc
+require 'rib/app/auto'
+# load the app
 Rib::Auto.load
 Rib::Runner.run(ARGV)
