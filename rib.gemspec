@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   %q{2011-02-28.md},
   %q{CHANGES},
   %q{CONTRIBUTORS},
+  %q{EXAMPLE.md},
   %q{Gemfile},
   %q{LICENSE},
   %q{README},
