@@ -87,7 +87,7 @@ module Rib::Runner
     name = Rib.config[:name]
     maxn = options.transpose.first.map(&:size).max
     maxd = options.transpose.last .map(&:size).max
-    "Usage: #{name} [Ruby OPTIONS] [Rib COMMAND] [Rib OPTIONS]\n" +
+    "Usage: #{name} [ruby OPTIONS] [rib COMMAND] [rib OPTIONS]\n" +
     options.map{ |(name, desc)|
       sprintf("  %-*s  %-*s", maxn, name, maxd, desc) }.join("\n")
   end
