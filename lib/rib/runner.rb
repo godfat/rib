@@ -89,7 +89,7 @@ module Rib::Runner
     name = Rib.config[:name]
     maxn = options.transpose.first.map(&:size).max
     maxd = options.transpose.last .map(&:size).max
-    "Usage: #{name} [ruby OPTIONS] [rib COMMAND] [rib OPTIONS]\n" +
+    "Usage: #{name} [ruby OPTIONS] [rib OPTIONS] [rib COMMANDS]\n" +
     options.map{ |(name, desc)|
       if desc.empty?
         name
