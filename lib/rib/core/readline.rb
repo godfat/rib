@@ -8,7 +8,7 @@ module Rib::Readline
 
   def before_loop
     return super if Readline.disabled?
-    @history = ::Readline::HISTORY
+    config[:history] = ::Readline::HISTORY
     super
   end
 

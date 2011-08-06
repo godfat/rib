@@ -36,7 +36,7 @@ describe Rib::HistoryFile do
   should '#read_history be accessible to plugins in #before_loop' do
     mod = Module.new do
       def read_history
-        @history = ['pong_read_history']
+        config[:history] = ['pong_read_history']
       end
     end
     shell = Rib::Shell.dup
@@ -47,7 +47,7 @@ describe Rib::HistoryFile do
   should '#write_history be accessible to plugins in #after_loop' do
     mod = Module.new do
       def write_history
-        @history = ['pong_write_history']
+        config[:history] = ['pong_write_history']
       end
     end
     shell = Rib::Shell.dup

@@ -22,19 +22,19 @@ module Rib::API
   end
 
   # Handle interrupt (control-c)
-  def handle_interrupt; puts               ; end
+  def handle_interrupt; puts                ; end
   # The prompt string of this shell
-  def prompt       ; config[:prompt]       ; end
+  def prompt       ; config[:prompt]        ; end
   # The result prompt string of this shell
-  def result_prompt; config[:result_prompt]; end
+  def result_prompt; config[:result_prompt] ; end
   # The name of this shell
-  def name         ; config[:name]         ; end
+  def name         ; config[:name]          ; end
   # The binding for evaluation
-  def eval_binding ; config[:binding]      ; end
+  def eval_binding ; config[:binding]       ; end
   # The line number for next evaluation
-  def line         ; config[:line]         ; end
+  def line         ; config[:line]          ; end
   # The history data
-  def history      ; @history ||= []       ; end
+  def history      ; config[:history] ||= []; end
 
   # Main loop
   def in_loop

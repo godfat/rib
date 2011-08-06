@@ -29,7 +29,7 @@ module Rib::MultilineHistoryFile
 
   def write_history
     return super if MultilineHistoryFile.disabled?
-    @history = history.to_a.map{ |line|
+    config[:history] = history.to_a.map{ |line|
       line.gsub("\n", "#{config[:multiline_history_file_token]}\n")
     }
     super
