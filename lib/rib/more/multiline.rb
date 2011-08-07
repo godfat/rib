@@ -37,7 +37,7 @@ module Rib::Multiline
 
   def loop_once
     return super if Multiline.disabled?
-    catch(:multiline_cont) do
+    catch(:rib_multiline) do
       super
       multiline_buffer.clear
     end
@@ -52,7 +52,7 @@ module Rib::Multiline
   def print_eval_error(e)
     return super if Multiline.disabled?
     if e.is_a?(SyntaxError) && e.message =~ ERROR_REGEXP
-      throw :multiline_cont
+      throw :rib_multiline
     else
       super
     end
@@ -66,7 +66,7 @@ module Rib::Multiline
       line = multiline_buffer.pop
       print "[removed this line: #{line}]"
       super
-      throw :multiline_cont
+      throw :rib_multiline
     end
   end
 
