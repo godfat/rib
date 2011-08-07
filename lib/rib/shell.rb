@@ -28,6 +28,9 @@ class Rib::Shell
     @running = true
     in_loop
     self
+  rescue Exception => e
+    Rib.warn("Error while running loop:\n  #{format_error(e)}")
+    raise
   ensure
     @running = false
     after_loop

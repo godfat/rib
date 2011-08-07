@@ -76,7 +76,8 @@ describe Rib::Shell do
 
   should 'call after_loop even if in_loop raises' do
     mock(@shell).loop_once{ raise 'boom' }
+    mock(Rib).warn(is_a(String))
     mock(@shell).after_loop
-    lambda{ @shell.loop }.should.raise(RuntimeError)
+    lambda{@shell.loop}.should.raise(RuntimeError)
   end
 end
