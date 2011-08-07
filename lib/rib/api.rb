@@ -94,7 +94,7 @@ module Rib::API
   def print_eval_error err
     puts(format_error(err))
   rescue StandardError, SyntaxError => e
-    Rib.warn("Error while printing error:\n  #{e}")
+    Rib.warn("Error while printing error:\n  #{format_error(e)}")
   end
 
   # Format result using #result_prompt
