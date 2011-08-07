@@ -50,6 +50,6 @@ module Rib::Underscore
   end
 
   def bound_object
-    eval_binding.eval('self')
+    @bound_object ||= eval_binding.eval('self', __FILE__, __LINE__)
   end
 end
