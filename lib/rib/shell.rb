@@ -19,6 +19,7 @@ class Rib::Shell
       :exit          => [nil, 'exit', 'quit']    ,
       :line          => 1
     }.merge(config)
+    @running = false
   end
 
   # Loops shell until user exits

@@ -111,10 +111,10 @@ module Rib::Runner
   end
 
   def help
-    name = Rib.config[:name]
     maxn = options.transpose.first.map(&:size).max
     maxd = options.transpose.last .map(&:size).max
-    "Usage: #{name} [ruby OPTIONS] [rib OPTIONS] [rib COMMANDS]\n" +
+    "Usage: #{Rib.config[:name]}"                    \
+    " [ruby OPTIONS] [rib OPTIONS] [rib COMMANDS]\n" +
     options.map{ |(name, desc)|
       if desc.empty?
         name
