@@ -26,7 +26,7 @@ module Rib::Anchor
   private
   def bound_object
     return super if Rib::Anchor.disabled?
-    super if eval_binding.kind_of?(Binding)
+    return super if eval_binding.kind_of?(Binding)
     eval_binding
   end
 
