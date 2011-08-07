@@ -10,7 +10,7 @@ module Rib::Completion
      config[:completion]                ||= {}
      config[:completion][:eval_binding] ||= lambda{ config[:binding] }
     (config[:completion][:gems]         ||= []).concat(ripl_plugins)
-    Bond.start(config[:completion])
+    Rib.silence{Bond.start(config[:completion])}
     super
   end
 
@@ -21,7 +21,7 @@ module Rib::Completion
 end
 
 begin
-  require 'bond'
+  Rib.silence{require 'bond'}
 rescue LoadError
   Rib.warn("Please install bond to use completion plugin:\n",
            "    gem install bond\n",

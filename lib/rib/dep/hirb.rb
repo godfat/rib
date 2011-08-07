@@ -12,8 +12,10 @@ module Rib::Hirb
 end
 
 begin
-  require 'hirb'
-  ::Hirb.enable
+  Rib.silence{
+    require 'hirb'
+    ::Hirb.enable
+  }
 rescue LoadError
   Rib.warn("Please install hirb to use hirb plugin:\n",
            "    gem install hirb\n",

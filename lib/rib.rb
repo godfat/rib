@@ -76,6 +76,14 @@ module Rib
     exit(1)
   end
 
+  def silence
+    w, v = $-w, $VERBOSE
+    $-w, $VERBOSE = false, false
+    yield
+  ensure
+    $-w, $VERBOSE = w, v
+  end
+
   private
   def self.prepare words
     name = config[:name]
