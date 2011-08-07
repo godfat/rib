@@ -48,6 +48,6 @@ module Rib::Underscore
   end
 
   def bound_object
-    config[:binding].eval('self')
+    binding.eval('self')
   end
 end
