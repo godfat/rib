@@ -37,6 +37,8 @@ module Rib::Underscore
         instance_variable_get(v)
       } unless bound_object.respond_to?(k) # only inject for innocences
     }
+  rescue TypeError
+    # can't define singleton method for immediate value
   end
 
   def bound_singleton
