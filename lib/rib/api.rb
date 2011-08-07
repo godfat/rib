@@ -1,6 +1,8 @@
 
 module Rib; end
 module Rib::API
+  extend self
+
   # Called before shell starts looping
   def before_loop
     self
