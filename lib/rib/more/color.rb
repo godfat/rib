@@ -5,6 +5,8 @@ module Rib::Color
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   def before_loop
     config[:color] ||= {
       Numeric    => :red    ,
@@ -26,10 +28,9 @@ module Rib::Color
     config[:result_prompt] + format_color(result)
   end
 
-  private
-  def colors
-    config[:color]
-  end
+  # --------------- Plugin API ---------------
+
+  def colors; config[:color]; end
 
   def format_color result, display=result.inspect
     case result
@@ -68,6 +69,8 @@ module Rib::Color
        "#{path+'/'}#{P.yellow{name}}:#{msg}"
      }]
   end
+
+
 
   module Imp
     def find_color colors, value

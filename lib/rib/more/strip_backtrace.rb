@@ -5,12 +5,16 @@ module Rib::StripBacktrace
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   # strip backtrace until ripl
   def format_error e
     return super if StripBacktrace.disabled?
     message, backtrace = get_error(e, P.strip_backtrace(e, config[:name]))
     "#{message}\n  #{backtrace.join("\n  ")}"
   end
+
+  # --------------- Plugin API ---------------
 
   def get_error e, backtrace=e.backtrace
     return super if StripBacktrace.disabled?

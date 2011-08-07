@@ -5,6 +5,8 @@ module Rib::MultilineHistory
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   def loop_eval input
     return super if MultilineHistory.disabled?
     value = super

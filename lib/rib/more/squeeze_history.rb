@@ -5,6 +5,8 @@ module Rib::SqueezeHistory
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   # squeeze history on memory too
   def eval_input input
     return super if SqueezeHistory.disabled?
@@ -14,12 +16,16 @@ module Rib::SqueezeHistory
     super
   end
 
+  # --------------- Plugin API ---------------
+
   # write squeezed history
   def write_history
     return super if SqueezeHistory.disabled?
     config[:history] = P.squeeze_history(history)
     super
   end
+
+
 
   module Imp
     def squeeze_history history

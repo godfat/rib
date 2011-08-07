@@ -5,6 +5,8 @@ module Rib::Anchor
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   def loop_eval str
     return super if Rib::Anchor.disabled?
     if eval_binding.kind_of?(Binding)
@@ -29,6 +31,17 @@ module Rib::Anchor
     end
   end
 
+  # --------------- Plugin API ---------------
+
+  # override Underscore#bound_object
+  def bound_object
+    return super if Rib::Anchor.disabled?
+    return super if eval_binding.kind_of?(Binding)
+    eval_binding
+  end
+
+
+
   private
   def prompt_anchor
     @prompt_anchor ||=
@@ -37,12 +50,6 @@ module Rib::Anchor
     else
       eval_binding
     end.inspect[0..9]
-  end
-
-  def bound_object
-    return super if Rib::Anchor.disabled?
-    return super if eval_binding.kind_of?(Binding)
-    eval_binding
   end
 
   module AnchorImp

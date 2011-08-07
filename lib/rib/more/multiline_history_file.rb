@@ -5,11 +5,15 @@ module Rib::MultilineHistoryFile
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   def before_loop
     return super if MultilineHistoryFile.disabled?
     config[:multiline_history_file_token] ||= ' '
     super
   end
+
+  # --------------- Plugin API ---------------
 
   def read_history
     return super if MultilineHistoryFile.disabled?
