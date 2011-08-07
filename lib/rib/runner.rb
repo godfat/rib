@@ -76,7 +76,7 @@ module Rib::Runner
         $DEBUG = true
 
       when '-w', '--warn'
-        $-w = true
+        $-w, $VERBOSE = true, true
 
       when /-I=?(.+)?/, /--include=?(.+)?/
         paths = ($1 || argv.shift).split(':')
