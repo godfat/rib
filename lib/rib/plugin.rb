@@ -26,8 +26,8 @@ module Rib::Plugin
       end
     end
 
-    snake_name = mod.name[/::\w+$/].tr(':', ''). # remove namespaces
-                     gsub(/([A-Z][a-z]*)/, '\\1_').downcase[0..-2]
+    snake_name = mod.name.sub(/(\w+::)+?(\w+)$/, '\2').
+      gsub(/([A-Z][a-z]*)/, '\\1_').downcase[0..-2]
 
     code = (%w[enable disable].map{ |meth|
       <<-RUBY
