@@ -7,36 +7,27 @@ module Rib::Anchor
 
   def loop_eval str
     return super if Rib::Anchor.disabled?
-    case obj_or_binding = (Rib.vars[:anchor] ||= []).last
-      when NilClass
-        super
-
-      when Binding
-        @binding = obj_or_binding
-        super
-
-      else
-        obj_or_binding.instance_eval(str, "(#{config[:name]})", config[:line])
+    if eval_binding.kind_of?(Binding)
+      super
+    else
+      eval_binding.instance_eval(str, "(#{name})", line)
     end
   end
 
   def prompt
     return super if Rib::Anchor.disabled?
-    if Rib.const_defined?(:Color) && kind_of?(Rib::Color) &&
-       obj_or_binding = (Rib.vars[:anchor] ||= []).last
-
-      super.sub(config[:name], format_color(obj_or_binding, config[:name]))
+    if Rib.const_defined?(:Color) && kind_of?(Rib::Color)
+      super.sub(name, format_color(eval_binding, name))
     else
       super
     end
   end
 
-  # if the object is the same, then we're exiting from an anchor,
-  # so don't print anything.
-  def print_result result
+  private
+  def bound_object
     return super if Rib::Anchor.disabled?
-    super unless !result.nil? &&
-                 result.object_id == Rib.vars[:anchor_last].object_id
+    super if eval_binding.kind_of?(Binding)
+    eval_binding
   end
 
   module Imp
@@ -49,23 +40,34 @@ module Rib::Anchor
     def anchor obj_or_binding
       return if Rib::Anchor.disabled?
 
-      (Rib.vars[:anchor] ||= []) << obj_or_binding
+      # TODO: this is not really a good idea, how do we know we really
+      #       need to do cleanup? what if the newly created shell didn't
+      #       really be created?
+      @level ||= 0
+      @level  += 1
+
       name = Rib::P.short_inspect(obj_or_binding)
 
       Rib.shells <<
         Rib::Shell.new(Rib.config.merge(
-          :name   => name,
-          :prompt => "#{name}(#{Rib.vars[:anchor].size})" +
-                     (Rib.config[:prompt] || '>> ')))
+          :name   => name, :binding => obj_or_binding,
+          :prompt => "#{name}(#{@level})#{Rib.config[:prompt] || '>> '}"))
 
       Rib.shell.loop
-      Rib.vars[:anchor].last # the way to hide return value from Rib.anchor
 
-    ensure
-      return if Rib::Anchor.disabled?
-      # stores to check if we're exiting from an anchor
-      Rib.vars[:anchor_last] = Rib.vars[:anchor].pop
+    # we can't use ensure block here because we need to do something
+    # (i.e. throw :rib_skip) if there's no exception. this can't be
+    # done via ensure because then we don't know if there's an
+    # exception or not, and ensure block is always executed last
+    rescue
+      @level -= 1
       Rib.shells.pop
+      raise
+    else
+      # only skip printing anchor result while there's another shell running
+      @level -= 1
+      Rib.shells.pop
+      throw :rib_skip if Rib.shell.running?
     end
   end
 
