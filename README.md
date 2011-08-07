@@ -1,55 +1,137 @@
-# ripl-rc
+# Rib
 
 by Lin Jen-Shin ([godfat](http://godfat.org))
 
 ## LINKS:
 
-* [github](https://github.com/godfat/ripl-rc)
-* [rubygems](http://rubygems.org/gems/ripl-rc)
+* [github](https://github.com/godfat/rib)
+* [rubygems](http://rubygems.org/gems/rib)
 
 ## DESCRIPTION:
 
-ripl plugins collection, take you want, leave you don't.
+Ruby-Interactive-ruBy -- Yet another interactive Ruby shell
+
+Rib is based on the design of [ripl][] and the work of [ripl-rc][], some of
+the features are also inspired by [pry][]. The aim of Rib is to be fully
+featured and yet very easy to opt-out or opt-in other features. It shall
+be simple, lightweight and modular so that everyone could customize Rib.
+
+[ripl]: https://github.com/cldwalker/ripl
+[ripl-rc]: https://github.com/godfat/ripl-rc
+[pry]: https://github.com/pry/pry
 
 ## REQUIREMENTS:
 
-* Tested with MRI 1.8.7, 1.9.2 and Rubinius 1.2.3, JRuby 1.6.0
-* ripl
+* Tested with MRI 1.8.7, 1.9.2 and Rubinius 1.2, JRuby 1.6
+* All gem dependencies are optional, but it's highly recommended to use
+  Rib with [bond][] for tab completion.
+
+[bond]: https://github.com/cldwalker/bond
 
 ## INSTALLATION:
 
-    gem install ripl-rc
+    gem install rib
 
 ## SYNOPSIS:
 
-If you don't know what is __ripl__, or just want to have an
-overview of what does __ripl-rc__ do, then you can use it as
-a command line tool:
+![Screenshot](https://github.com/godfat/ripl-rc/raw/master/screenshot.png)
 
-    ripl rc
+### As an interactive shell
 
-This can be used to run rails console, too. First install
-_ripl-rails_ by `gem install ripl-rails` then run this:
+As IRB (reads `~/.config/rib/config.rb` writes `~/.config/rib/history.rb`)
 
-    ripl rc rails
+    rib
 
-Then you'll have a _ripl-rc_ flavored rails console without
-setting anything (i.e. `~/.riplrc`)
+As Rails console
 
-If you already know what is _ripl_, you might want to setup
-yourself, to be better control what you might want and what
-you might not want. Then checkout FEATURES for all plugins
-you can put in `~/.riplrc`.
+    rib rails
 
-If you want to enable all plugins, the use this:
+As Ramaze console
 
-    require 'ripl/rc'
+    rib ramaze
 
-Another thing which might worth to be mentioned is
-`ripl/rc/anchor`, which is a _pry_ like feature built into
-ripl. You can embed two things into ripl, one is any object:
+As a console for whichever the app in the current path
+it should be (for now, it's either Rails or Ramaze)
 
-    Ripl.anchor your_object_want_to_be_viewed_as_self
+    rib auto
+
+As a fully featured interactive Ruby shell (as ripl-rc)
+
+    rib all
+
+As a fully featured app console (yes, some commands could be used together)
+
+    rib all auto # or `rib auto all`, the order doesn't really matter
+
+You can customize Rib's behaviour by setting `~/.config/rib/config.rb` (by
+default). Since it's merely a Ruby script which would be loaded into memory
+before launching Rib shell session, You can put any customization or monkey
+patch there. Personally, I use all plugins provided by Rib.
+
+<https://github.com/godfat/dev-tool/blob/master/.config/rib/config.rb>
+
+As you can see, putting `require 'rib/all'` into config file is exactly the
+same as running `rib all` without a config file. What `rib all` would do is
+merely require the file, and that file is also merely requiring all plugins.
+Suppose you only want to use the core plugins and color plugin, you'll put
+this into your config file:
+
+    require 'rib/core'
+    require 'rib/more/color'
+
+You can also write your plugins there. Here's another example:
+
+    require 'rib/core'
+    Rib.config[:prompt] = '$ '
+
+    module RibPP
+      include Rib::Plugin
+      Rib::Shell.use(self)
+
+      def format_result result
+        require 'pp'
+        result_prompt + result.pretty_inspect
+      end
+    end
+
+So that we override the original behaviour to pretty_inspect the result. You
+can also build your own gem and then simply require it in your config file.
+
+### As a debugging/interacting tool
+
+Rib could be used as a kind of debugging tool which you can set break point
+in the source program.
+
+    require 'rib/rc'     # This would load your ~/.config/rib/config.rb
+    require 'rib/anchor' # If you enabled this in config, then not needed.
+    Rib.anchor binding   # This would give you an interactive shell
+                         # when your program has been executed here.
+
+    # But this might be called in a loop, you might only want to
+    # enter the shell under certain circumstance, then you'll need:
+
+    require 'rib/debug'
+    Rib.enable_anchor do
+      # Only `Rib.anchor` called in the block would launch a shell
+    end
+
+    Rib.anchor binding # No effect (no-op) outside the block
+
+Edit in place
+
+### As a shell framework
+
+The essence is:
+
+    require 'rib'
+
+All others are optional. The core plugins are lying in `rib/core/*.rb`,
+and more plugins are lying in `rib/more/*.rb`. There are also so-called
+zore plugins which are lying in `rib/zore/*.rb`, which are used as special
+Rib command, such as `Rib.anchor` and `Rib.edit`. You can simply get
+
+* All
+* App
 
 Another one is local binding inside a method:
 
@@ -57,119 +139,8 @@ Another one is local binding inside a method:
 
 Then you can look through local variables inside a method
 with an interactive environment. Anchor could be nested, too.
-You can anchor another object inside a _ripl_ session. The number
-shown in prompt is the level of anchors, started from 1.
-
-![Screenshot](https://github.com/godfat/ripl-rc/raw/master/screenshot.png)
-
-Please read this blog post for other detail since I haven't
-had time to update this README... Sorry about that.
-
-* [a new feature mainly for anchor in ripl-rc ](http://blogger.godfat.org/2011/06/new-feature-mainly-for-anchor-in-ripl.html)
-
-## FEATURES:
-
-upon session ends:
-
-* `require 'ripl/rc/squeeze_history'`
-
-  Which squeezes the same input in history, both in memory
-  and history file.
-
-* `require 'ripl/rc/mkdir_history'`
-
-  Which calls `mkdir -p` on directory which contains history
-  file. For example, I put my irb_history in an directory
-  might not exist before use: `~/.config/irb/irb_history`
-
-* `require 'ripl/rc/ctrld_newline'`
-
-  Ruby 1.9.2 has no this problem in irb, but 1.8 and ripl do.
-  When hitting ctrl+d to exit ripl, it would print a newline
-  instead of messing up with shell prompt.
-
-upon exception occurs:
-
-* `require 'ripl/rc/last_exception'`
-
-  We can't access $! for last exception because input evaluation
-  is not in the block which rescues the exception, neither can we
-  update $! because it's a read only pseudo global variable.
-
-  This plugin makes last rescued exception stored in `Ripl.last_exception`
-
-upon formatting output:
-
-* `require 'ripl/rc/strip_backtrace'`
-
-  ripl prints the full backtrace upon exceptions, even the
-  exceptions come from interactive environment, making it
-  very verbose. This ripl plugin strips those backtrace.
-
-* `require 'ripl/rc/color'`
-
-  There's ripl-color_result that make use of <a href="https://github.com/michaeldv/awesome_print">awesome_print</a>,
-  <a href="http://coderay.rubychan.de/">coderay</a>, or <a href="https://github.com/janlelis/wirb">wirb</a>. The problem of awesome_print is it's too
-  awesome and too verbose, and the problem of coderay and
-  wirb is that they are both parser based. In ripl, this should
-  be as simple as just print different colors upon different
-  objects, instead of inspecting it and parsing it.
-
-  ripl/rc/color just uses a hash with Class to color mapping
-  to pick up which color should be used upon a ruby object.
-
-  To customize the color schema, inspect `Ripl.config[:rc_color]`
-
-upon input:
-
-* `require 'ripl/rc/multiline'`
-
-  I need some modification on ripl-multi_line to make prompt
-  work better, but not sure if I can come up a good fix and
-  try to convince the author to accept those patches. So I
-  just bundle and maintain it on my own. If you're using
-  ripl-rc, you could use this plugin, otherwise, keep using
-  ripl-multi_line.
-
-* `require 'ripl/rc/eat_whites'`
-
-  irb will just give you another prompt upon an empty input,
-  while ripl would show you that your input is nil. I don't like
-  this, because sometimes I'll keep hitting enter to separate
-  between inspects. This plugin would skip inspect if the input
-  is empty just like irb.
-
-special tool:
-
-* `require 'ripl/rc/anchor'`
-
-  So this is my attempt to emulate pry in ripl. Instead
-  trying to make pry support irb_history, colorizing, etc.,
-  I think implement pry like feature in ripl is a lot easier.
-  No need to be fancy, I just need the basic functionality.
-
-  To use it, use:
-  <pre><code>Ripl.anchor your_object_want_to_be_viewed_as_self</code></pre>
-  or
-  <pre><code>Ripl.anchor binding</code></pre>
-  in your code. Other than pry ripl support, you might be
-  interested in <a href="https://github.com/cldwalker/ripl-rails">ripl-rails</a> and <a href="https://github.com/cldwalker/ripl-hijack">ripl-hijack</a>, too.
-
-about config:
-
-* `require 'ripl/rc/noirbrc'`
-
-  By default ripl is reading `~/.irbrc`. I don't think this
-  is what people still using irb would want, because the
-  configuration is totally different. This suppress that,
-  make it only read `~/.riplrc`
-
-for lazies:
-
-* `require 'ripl/rc'`
-
-  This requires anything above for you, and is what `ripl rc`
-  and `ripl rc rails` shell commands did.
+You can anchor another object inside a Rib session. The number
+shown in prompt is the level of anchors, starting from 1.
 
 ## LICENSE:
 

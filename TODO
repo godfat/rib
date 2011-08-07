@@ -1,6 +1,0 @@
-= ripl-rc todo list
-
-* tests for each plugin
-* doc
-
-* read multiline histroy in irb_history

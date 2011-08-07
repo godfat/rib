@@ -7,7 +7,16 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
   s.date = %q{2011-08-08}
-  s.description = %q{ripl plugins collection, take you want, leave you don't.}
+  s.description = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell
+
+Rib is based on the design of [ripl][] and the work of [ripl-rc][], some of
+the features are also inspired by [pry][]. The aim of Rib is to be fully
+featured and yet very easy to opt-out or opt-in other features. It shall
+be simple, lightweight and modular so that everyone could customize Rib.
+
+[ripl]: https://github.com/cldwalker/ripl
+[ripl-rc]: https://github.com/godfat/ripl-rc
+[pry]: https://github.com/pry/pry}
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [
   %q{rib},
@@ -16,24 +25,23 @@ Gem::Specification.new do |s|
   %q{rib-rails},
   %q{rib-ramaze}]
   s.extra_rdoc_files = [
-  %q{CHANGES},
   %q{CONTRIBUTORS},
   %q{LICENSE},
-  %q{TODO}]
+  %q{CHANGES.md},
+  %q{TODO.md},
+  %q{CONTRIBUTORS}]
   s.files = [
   %q{.gitignore},
   %q{.gitmodules},
   %q{.travis.yml},
-  %q{2011-02-28.md},
-  %q{CHANGES},
+  %q{CHANGES.md},
   %q{CONTRIBUTORS},
-  %q{EXAMPLE.md},
   %q{Gemfile},
   %q{LICENSE},
   %q{README},
   %q{README.md},
   %q{Rakefile},
-  %q{TODO},
+  %q{TODO.md},
   %q{bin/rib},
   %q{bin/rib-all},
   %q{bin/rib-auto},
@@ -69,7 +77,6 @@ Gem::Specification.new do |s|
   %q{lib/rib/zore/anchor.rb},
   %q{lib/rib/zore/edit.rb},
   %q{rib.gemspec},
-  %q{screenshot.png},
   %q{task/.gitignore},
   %q{task/gemgem.rb},
   %q{test/core/test_completion.rb},
@@ -87,7 +94,7 @@ Gem::Specification.new do |s|
   %q{README}]
   s.require_paths = [%q{lib}]
   s.rubygems_version = %q{1.8.7}
-  s.summary = %q{ripl plugins collection, take you want, leave you don't.}
+  s.summary = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell}
   s.test_files = [
   %q{test/core/test_completion.rb},
   %q{test/core/test_history.rb},
