@@ -71,6 +71,8 @@ module Rib::Multiline
     end
   end
 
+
+
   private
   def multiline_buffer
     @multiline_buffer ||= []

@@ -6,7 +6,7 @@ module Rib::Edit
   include Rib::Plugin
   Shell.use(self)
 
-  module EditImp
+  module Imp
     def edit
       return if Rib::Edit.disabled?
       file = Tempfile.new(['rib.edit', '.rb'])
@@ -29,5 +29,5 @@ module Rib::Edit
     end
   end
 
-  Rib.extend(EditImp)
+  Rib.extend(Imp)
 end

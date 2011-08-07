@@ -22,9 +22,9 @@ module Rib::Underscore
     bound_object.instance_variable_set(:@__rib_result__, super)
   end
 
-  def print_eval_error e
+  def print_eval_error err
     return super if Underscore.disabled?
-    bound_object.instance_variable_set(:@__rib_exception__, e)
+    bound_object.instance_variable_set(:@__rib_exception__, err)
     super
   end
 

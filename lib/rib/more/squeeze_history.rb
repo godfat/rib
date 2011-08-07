@@ -21,23 +21,20 @@ module Rib::SqueezeHistory
   # write squeezed history
   def write_history
     return super if SqueezeHistory.disabled?
-    config[:history] = P.squeeze_history(history)
+    config[:history] = squeezed_history
     super
   end
 
 
 
-  module Imp
-    def squeeze_history history
-      history.to_a.inject([]){ |result, item|
-        if result.last == item || item.strip == ''
-          result
-        else
-          result << item
-        end
-      }
-    end
+  private
+  def squeezed_history
+    history.to_a.inject([]){ |result, item|
+      if result.last == item || item.strip == ''
+        result
+      else
+        result << item
+      end
+    }
   end
-
-  Plugin.extend(Imp)
 end

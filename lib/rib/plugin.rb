@@ -1,8 +1,6 @@
 
 module Rib; end
 module Rib::Plugin
-  Rib::P = self
-
   def self.included mod
     mod.send(:include, Rib)
 

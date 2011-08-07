@@ -52,7 +52,7 @@ module Rib::Anchor
     end.inspect[0..9]
   end
 
-  module AnchorImp
+  module Imp
     def anchor obj_or_binding
       return if Rib::Anchor.disabled?
 
@@ -81,5 +81,5 @@ module Rib::Anchor
     end
   end
 
-  Rib.extend(AnchorImp)
+  Rib.extend(Imp)
 end
