@@ -6,6 +6,8 @@ module Rib::Readline
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   def before_loop
     return super if Readline.disabled?
     config[:history] = ::Readline::HISTORY

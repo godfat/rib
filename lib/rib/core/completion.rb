@@ -5,6 +5,8 @@ module Rib::Completion
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   def before_loop
     return super if Completion.disabled?
      config[:completion]                ||= {}
@@ -13,6 +15,8 @@ module Rib::Completion
     Rib.silence{Bond.start(config[:completion])}
     super
   end
+
+
 
   private
   def ripl_plugins

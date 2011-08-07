@@ -33,7 +33,6 @@ module Rib::History
   # The history data
   def history; config[:history] ||= []; end
 
-  protected
   # Read config[:history_file] into #history, handled in history_file plugin
   def read_history
     return super if History.disabled?
@@ -48,6 +47,9 @@ module Rib::History
       f.puts(history.to_a.last(config[:history_size]).join("\n")) }
   end
 
+
+
+  private
   def history_file_path
     config[:history_file_path] ||= File.expand_path(config[:history_file])
   end

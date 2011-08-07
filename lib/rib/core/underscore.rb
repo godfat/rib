@@ -8,6 +8,8 @@ module Rib::Underscore
   IVAR = {:_  => :@__rib_result__,
           :__ => :@__rib_exception__}
 
+  # --------------- Rib API ---------------
+
   def before_loop
     return super if Underscore.disabled?
     eliminate_warnings
@@ -25,6 +27,14 @@ module Rib::Underscore
     bound_object.instance_variable_set(:@__rib_exception__, e)
     super
   end
+
+  # --------------- Plugin API ---------------
+
+  def bound_object
+    config[:bound_object] ||= eval_binding.eval('self', __FILE__, __LINE__)
+  end
+
+
 
   private
   def eliminate_warnings
@@ -47,9 +57,5 @@ module Rib::Underscore
     else
       class << bound_object; self; end
     end
-  end
-
-  def bound_object
-    @bound_object ||= eval_binding.eval('self', __FILE__, __LINE__)
   end
 end
