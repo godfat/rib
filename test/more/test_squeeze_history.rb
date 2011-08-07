@@ -6,7 +6,7 @@ describe Rib::SqueezeHistory do
   behaves_like :rib
 
   before do
-    Rib::HistoryFile.enable
+    Rib::History.enable
     Rib::SqueezeHistory.enable
     @history = "/tmp/test_rib_#{rand}"
     @shell   = Rib::Shell.new(:history_file => @history).before_loop

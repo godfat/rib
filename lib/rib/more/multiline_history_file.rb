@@ -14,8 +14,8 @@ module Rib::MultilineHistoryFile
   def read_history
     return super if MultilineHistoryFile.disabled?
     buffer = []
-    File.exist?(history_file) && history.empty? &&
-      IO.readlines(history_file).each{ |line|
+    File.exist?(history_file_path) && history.empty? &&
+      IO.readlines(history_file_path).each{ |line|
         if line.end_with?(
              "#{config[:multiline_history_file_token]}\n")
           buffer << line[0...

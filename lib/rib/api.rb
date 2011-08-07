@@ -3,22 +3,12 @@ module Rib; end
 module Rib::API
   # Called before shell starts looping
   def before_loop
-    read_history
     self
   end
 
   # Called after shell finishes looping
   def after_loop
-    write_history
     self
-  end
-
-  # Read config[:history_file] into #history, handled in history_file plugin
-  def read_history
-  end
-
-  # Write #history into config[:history_file], handled in history_file plugin
-  def write_history
   end
 
   # Handle interrupt (control-c)
@@ -33,8 +23,6 @@ module Rib::API
   def eval_binding ; config[:binding]       ; end
   # The line number for next evaluation
   def line         ; config[:line]          ; end
-  # The history data
-  def history      ; config[:history] ||= []; end
 
   # Main loop
   def in_loop

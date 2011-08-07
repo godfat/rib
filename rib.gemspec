@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-07}
+  s.date = %q{2011-08-08}
   s.description = %q{ripl plugins collection, take you want, leave you don't.}
   s.email = [%q{godfat (XD) godfat.org}]
   s.executables = [
@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
   %q{lib/rib/app/ramaze.rb},
   %q{lib/rib/core.rb},
   %q{lib/rib/core/completion.rb},
-  %q{lib/rib/core/history_file.rb},
+  %q{lib/rib/core/history.rb},
   %q{lib/rib/core/readline.rb},
   %q{lib/rib/core/underscore.rb},
   %q{lib/rib/debug.rb},
@@ -73,7 +73,7 @@ Gem::Specification.new do |s|
   %q{task/.gitignore},
   %q{task/gemgem.rb},
   %q{test/core/test_completion.rb},
-  %q{test/core/test_history_file.rb},
+  %q{test/core/test_history.rb},
   %q{test/core/test_readline.rb},
   %q{test/core/test_underscore.rb},
   %q{test/more/test_color.rb},
@@ -90,7 +90,7 @@ Gem::Specification.new do |s|
   s.summary = %q{ripl plugins collection, take you want, leave you don't.}
   s.test_files = [
   %q{test/core/test_completion.rb},
-  %q{test/core/test_history_file.rb},
+  %q{test/core/test_history.rb},
   %q{test/core/test_readline.rb},
   %q{test/core/test_underscore.rb},
   %q{test/more/test_color.rb},
