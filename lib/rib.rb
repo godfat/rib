@@ -54,7 +54,8 @@ module Rib
       File.exist?(rc = File.expand_path(config[:config])) &&
       require(rc)
   rescue Exception => e
-    Rib.warn("Error loading #{config[:config]}\n  #{e}")
+    Rib.warn("Error loading #{config[:config]}\n" \
+             "  #{Rib::API.format_error(e)}")
   end
 
   # Say (print to $stdout, with colors in the future, maybe)
