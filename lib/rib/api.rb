@@ -47,10 +47,12 @@ module Rib::API
     self.error_raised = nil
     input = get_input
     throw(:rib_exit, input) if config[:exit].include?(input)
-    if input.strip == ''
-      eval_input(input)
-    else
-      print_result(eval_input(input))
+    catch(:rib_skip) do
+      if input.strip == ''
+        eval_input(input)
+      else
+        print_result(eval_input(input))
+      end
     end
   rescue Interrupt
     handle_interrupt
