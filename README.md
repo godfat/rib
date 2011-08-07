@@ -34,7 +34,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
 
 ## SYNOPSIS:
 
-![Screenshot](https://github.com/godfat/ripl-rc/raw/master/screenshot.png)
+![Screenshot](https://github.com/godfat/ripl-rc/raw/ripl/screenshot.png)
 
 ### As an interactive shell
 
