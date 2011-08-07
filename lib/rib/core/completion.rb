@@ -8,7 +8,7 @@ module Rib::Completion
   def before_loop
     return super if Completion.disabled?
      config[:completion]                ||= {}
-     config[:completion][:eval_binding] ||= lambda{ config[:binding] }
+     config[:completion][:eval_binding] ||= method(:eval_binding).to_proc
     (config[:completion][:gems]         ||= []).concat(ripl_plugins)
     Rib.silence{Bond.start(config[:completion])}
     super
