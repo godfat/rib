@@ -44,6 +44,7 @@ module Rib::API
         print_result(eval_input(input))
       end
     end
+    self
   rescue Interrupt
     handle_interrupt
   end

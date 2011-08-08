@@ -34,6 +34,7 @@ module Rib::Multiline
       super
       multiline_buffer.clear
     end
+    self
   end
 
   def loop_eval input
