@@ -26,27 +26,28 @@ describe Rib::Shell do
       else
         mock(@shell).get_input{ str }
       end
-      @shell.loop_once.should.eq nil
+      @shell.loop_once
     end
 
     should 'handles ctrl+c' do
       mock(@shell).handle_interrupt
-      input{ raise Interrupt }
+      input{ raise Interrupt }.should.eq nil
     end
 
     should 'prints result' do
       mock(@shell).puts('=> "mm"')
-      input('"m" * 2')
+      input('"m" * 2').should.eq @shell
     end
 
     should 'error in print_result' do
       mock(Rib).warn(/Error while printing result.*BOOM/m)
-      input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
+      input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj').
+      should.eq @shell
     end
 
     should 'print error from eval' do
       mock(@shell).puts(/RuntimeError/)
-      input('raise "blah"')
+      input('raise "blah"').should.eq @shell
     end
   end
 
