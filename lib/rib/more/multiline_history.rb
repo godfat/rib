@@ -1,4 +1,5 @@
 
+require 'rib/core/history'   # dependency
 require 'rib/more/multiline' # dependency
 
 module Rib::MultilineHistory
