@@ -9,3 +9,5 @@
 * Documentation
 
 * Reduce test time (by remove stupid @shell.should.eq @shell)
+* Fix Rubinius weird Runtime BOOM error
+* Fix Rubinius multiline regexp
