@@ -8,6 +8,11 @@ module Rib::MultilineHistory
 
   # --------------- Rib API ---------------
 
+  def before_loop
+    @multiline_trash = 0
+    super
+  end
+
   def loop_eval input
     return super if MultilineHistory.disabled?
     value = super
@@ -17,7 +22,7 @@ module Rib::MultilineHistory
   else
     if multiline_buffer.size > 1
       # so multiline editing is considering done here
-      (multiline_buffer.size + (@multiline_trash || 0)).times{ history.pop }
+      (multiline_buffer.size + @multiline_trash).times{ history.pop }
       history << "\n" + multiline_buffer.join("\n")
     end
     value
