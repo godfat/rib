@@ -7,3 +7,5 @@
 * Multiline tests
 * More and more tests
 * Documentation
+
+* Reduce test time (by remove stupid @shell.should.eq @shell)
