@@ -22,6 +22,7 @@ module Rib::Multiline
       "syntax error, unexpected \\$end",
       # rubinius
       "expecting '.+'( or '.+')*",
+      "missing '.+' for '.+' started on line \\d+",
       # jruby
       "syntax error, unexpected end-of-file",
     ].join('|'))
