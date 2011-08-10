@@ -4,6 +4,7 @@ shared :setup_multiline do
     @shell = Rib::Shell.new(
       :binding => Object.new.instance_eval{binding}).before_loop
     stub(@shell).print
+    stub(@shell).puts
   end
 
   def setup_input str
@@ -51,6 +52,14 @@ shared :multiline do
   should 'begin' do
     check <<-RUBY
       begin
+      end
+    RUBY
+  end
+
+  should 'begin with RuntimeError' do
+    check <<-RUBY
+      begin
+        raise 'multiline raised an error'
       end
     RUBY
   end
