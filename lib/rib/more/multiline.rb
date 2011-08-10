@@ -6,6 +6,12 @@ module Rib::Multiline
   include Rib::Plugin
   Shell.use(self)
 
+  engine = if Object.const_defined?(:RUBY_ENGINE)
+             RUBY_ENGINE
+           else
+             'ruby'
+           end
+
   # test those:
   # ruby -e '"'
   # ruby -e '{'
@@ -15,17 +21,26 @@ module Rib::Multiline
   # ruby -e 'class C'
   # ruby -e 'def f'
   # ruby -e 'begin'
-  ERROR_REGEXP = Regexp.new(
-    [ # string or regexp
-      "unterminated \\w+ meets end of file",
-      # mri and rubinius
-      "syntax error, unexpected \\$end",
-      # rubinius
-      "expecting '.+'( or '.+')*",
-      "missing '.+' for '.+' started on line \\d+",
-      # jruby
-      "syntax error, unexpected end-of-file",
-    ].join('|'))
+  ERROR_REGEXP = case engine
+    when 'ruby' ; Regexp.new(
+                    [ # string or regexp
+                      "unterminated \\w+ meets end of file",
+                      # mri and rubinius
+                      "syntax error, unexpected \\$end"]           .join('|'))
+    when 'rbx'  ; Regexp.new(
+                    [ # string or regexp
+                      "unterminated \\w+ meets end of file",
+                      # mri and rubinius
+                      "syntax error, unexpected \\$end"    ,
+                      # rubinius
+                      "expecting '.+'( or '.+')*"          ,
+                      "missing '.+' for '.+' started on line \\d+"].join('|'))
+    when 'jruby'; Regexp.new(
+                    [ # string or regexp
+                      "unterminated \\w+ meets end of file",
+                      # jruby
+                      "syntax error, unexpected end-of-file"]      .join('|'))
+    end
 
   # --------------- Rib API ---------------
 
