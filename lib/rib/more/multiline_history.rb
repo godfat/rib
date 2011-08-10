@@ -15,17 +15,10 @@ module Rib::MultilineHistory
 
   def loop_eval input
     return super if MultilineHistory.disabled?
-    value = super
-  rescue Exception
-    # might be multiline editing, ignore
-    raise
-  else
-    if multiline_buffer.size > 1
-      # so multiline editing is considering done here
-      (multiline_buffer.size + @multiline_trash).times{ history.pop }
-      history << "\n" + multiline_buffer.join("\n")
-    end
-    value
+    super
+  ensure
+    # SyntaxError might mean we're multiline editing
+    handle_multiline unless $!.kind_of?(SyntaxError)
   end
 
   def handle_interrupt
@@ -35,5 +28,16 @@ module Rib::MultilineHistory
       @multiline_trash  += 1
     end
     super
+  end
+
+
+
+  private
+  def handle_multiline
+    if multiline_buffer.size > 1
+      # so multiline editing is considering done here
+      (multiline_buffer.size + @multiline_trash).times{ history.pop }
+      history << "\n" + multiline_buffer.join("\n")
+    end
   end
 end
