@@ -46,7 +46,7 @@ module Rib::Multiline
 
   def print_eval_error err
     return super if Multiline.disabled?
-    if multiline?(err)
+    if err.is_a?(SyntaxError) && err.message =~ ERROR_REGEXP
       throw :rib_multiline
     else
       super
@@ -71,12 +71,6 @@ module Rib::Multiline
       super
       throw :rib_multiline
     end
-  end
-
-  # --------------- Plugin API ---------------
-
-  def multiline? err
-    err.is_a?(SyntaxError) && err.message =~ ERROR_REGEXP
   end
 
 
