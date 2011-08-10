@@ -14,6 +14,17 @@ shared :rib do
   after do
     RR.verify
   end
+
+  def for_each_plugin
+    Rib.disable_plugins
+    yield
+
+    Rib.plugins.each{ |plugin|
+      Rib.disable_plugins
+      plugin.enable
+      yield
+    }
+  end
 end
 
 module Kernel

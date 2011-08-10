@@ -3,7 +3,10 @@ require 'rib/test'
 require 'rib/test/multiline'
 require 'rib/more/multiline'
 
-shared :multiline_check do
+describe Rib::Multiline do
+  behaves_like :rib
+  behaves_like :setup_multiline
+
   def check str
     lines = str.split("\n")
     lines[0...-1].each{ |line|
@@ -12,21 +15,9 @@ shared :multiline_check do
     }
     input_done(lines.last)
   end
-  behaves_like :multiline
-end
 
-describe Rib::Multiline do
-  behaves_like :rib
-  behaves_like :setup_multiline
-
-  Rib.disable_plugins
-  Rib::Multiline.enable
-  behaves_like :multiline_check
-
-  Rib.plugins.each{ |plugin|
-    Rib.disable_plugins
+  for_each_plugin do
     Rib::Multiline.enable
-    plugin.enable
-    behaves_like :multiline_check
-  }
+    behaves_like :multiline
+  end
 end
