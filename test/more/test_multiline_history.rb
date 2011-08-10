@@ -13,7 +13,8 @@ describe Rib::MultilineHistory do
 
     setup_shell
 
-    @shell.history.replace(['old history'])
+    @shell.history.clear
+    @shell.history << 'old history'
     with_history(str, 'old history')
   end
 

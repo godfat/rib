@@ -8,7 +8,9 @@ shared :setup_multiline do
 
   def setup_input str
     if Rib.const_defined?(:Readline) && Rib::Readline.enabled?
-      mock(::Readline).readline(is_a(String), true){ str.chomp }
+      mock(::Readline).readline(is_a(String), true){
+        (::Readline::HISTORY << str.chomp)[-1]
+      }
     else
       mock($stdin).gets{ str.chomp }
     end
