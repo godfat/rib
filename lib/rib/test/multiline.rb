@@ -1,10 +1,5 @@
 
-shared :multiline do
-  before do
-    Rib::Multiline.enable
-    setup_shell
-  end
-
+shared :setup_multiline do
   def setup_shell
     @shell = Rib::Shell.new(
       :binding => Object.new.instance_eval{binding}).before_loop
@@ -20,6 +15,13 @@ shared :multiline do
     mock($stdin).gets{ str }
     mock(@shell).print_result(anything)
     @shell.loop_once.should.eq @shell
+  end
+end
+
+shared :multiline do
+  before do
+    Rib::Multiline.enable
+    setup_shell
   end
 
   should 'def f' do

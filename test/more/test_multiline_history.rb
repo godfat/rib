@@ -5,6 +5,7 @@ require 'rib/more/multiline_history'
 
 describe Rib::MultilineHistory do
   behaves_like :rib
+  behaves_like :setup_multiline
 
   before do
     Rib::History.enable

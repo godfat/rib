@@ -5,6 +5,7 @@ require 'rib/more/multiline'
 
 describe Rib::Multiline do
   behaves_like :rib
+  behaves_like :setup_multiline
 
   def test str
     lines = str.split("\n")
