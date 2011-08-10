@@ -8,6 +8,7 @@
 * More and more tests
 * Documentation
 
-* Reduce test time (by remove stupid @shell.should.eq @shell)
+* Reduce test time (by remove stupid @shell.should.eq @shell,
+  and remove Rib.plugins.each(&:disable) in before block
 * Fix Rubinius weird Runtime BOOM error
 * Fix Rubinius multiline regexp
