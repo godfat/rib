@@ -6,6 +6,7 @@ describe Rib::Underscore do
   behaves_like :rib
 
   before do
+    Rib.disable_plugins
     Rib::Underscore.enable
   end
 

@@ -6,6 +6,7 @@ describe Rib::SqueezeHistory do
   behaves_like :rib
 
   before do
+    Rib.disable_plugins
     Rib::History.enable
     Rib::SqueezeHistory.enable
     @history = "/tmp/test_rib_#{rand}"

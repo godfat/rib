@@ -6,6 +6,7 @@ describe Rib::Readline do
   behaves_like :rib
 
   before do
+    Rib.disable_plugins
     Rib::Readline.enable
     @shell = Rib::Shell.new.before_loop
   end

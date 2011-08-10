@@ -6,13 +6,21 @@ shared :setup_multiline do
     stub(@shell).print
   end
 
+  def setup_input str
+    if Rib.const_defined?(:Readline) && Rib::Readline.enabled?
+      mock(::Readline).readline(is_a(String), true){ str.chomp }
+    else
+      mock($stdin).gets{ str.chomp }
+    end
+  end
+
   def input str
-    mock($stdin).gets{ str }
+    setup_input(str)
     mock.proxy(@shell).throw(:rib_multiline)
   end
 
   def input_done str
-    mock($stdin).gets{ str }
+    setup_input(str)
     mock(@shell).print_result(anything)
     @shell.loop_once.should.eq @shell
   end
@@ -20,12 +28,11 @@ end
 
 shared :multiline do
   before do
-    Rib::Multiline.enable
     setup_shell
   end
 
   should 'def f' do
-    test <<-RUBY
+    check <<-RUBY
       def f
         1
       end
@@ -33,70 +40,70 @@ shared :multiline do
   end
 
   should 'class C' do
-    test <<-RUBY
+    check <<-RUBY
       class C
       end
     RUBY
   end
 
   should 'begin' do
-    test <<-RUBY
+    check <<-RUBY
       begin
       end
     RUBY
   end
 
   should 'do end' do
-    test <<-RUBY
+    check <<-RUBY
       [].each do
       end
     RUBY
   end
 
   should 'block brace' do
-    test <<-RUBY
+    check <<-RUBY
       [].each{
       }
     RUBY
   end
 
   should 'hash' do
-    test <<-RUBY
+    check <<-RUBY
       {
       }
     RUBY
   end
 
   should 'hash value' do
-    test <<-RUBY
+    check <<-RUBY
       {1 =>
        2}
     RUBY
   end
 
   should 'array' do
-    test <<-RUBY
+    check <<-RUBY
       [
       ]
     RUBY
   end
 
   should 'group' do
-    test <<-RUBY
+    check <<-RUBY
       (
       )
     RUBY
   end
 
   should 'string double quote' do
-    test <<-RUBY
+    check <<-RUBY
       "
       "
     RUBY
   end
 
   should 'string single quote' do
-    test <<-RUBY
+    check <<-RUBY
       '
       '
     RUBY

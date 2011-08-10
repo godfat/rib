@@ -6,6 +6,7 @@ describe Rib::Shell do
   behaves_like :rib
 
   before do
+    Rib.disable_plugins
     @shell = Rib::Shell.new
   end
 

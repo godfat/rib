@@ -6,6 +6,7 @@ describe Rib::History do
   behaves_like :rib
 
   before do
+    Rib.disable_plugins
     Rib::History.enable
     @history_file = "/tmp/test_rib_#{rand}"
     @shell        = Rib::Shell.new(:history_file => @history_file).before_loop

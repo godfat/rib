@@ -3,16 +3,8 @@ require 'rib/test'
 require 'rib/test/multiline'
 require 'rib/more/multiline_history'
 
-describe Rib::MultilineHistory do
-  behaves_like :rib
-  behaves_like :setup_multiline
-
-  before do
-    Rib::History.enable
-    Rib::MultilineHistory.enable
-  end
-
-  def test str
+shared :multiline_history_check do
+  def check str
     @shell.history.clear
     with_history(str)
 
@@ -34,6 +26,17 @@ describe Rib::MultilineHistory do
     input_done(lines.last)
     @shell.history.should.eq prefix + ["\n#{lines.join("\n")}"]
   end
-
   behaves_like :multiline
+end
+
+describe Rib::MultilineHistory do
+  behaves_like :rib
+  behaves_like :setup_multiline
+
+  Rib.disable_plugins
+  Rib::History.enable
+  Rib::Multiline.enable
+  Rib::MultilineHistory.enable
+
+  behaves_like :multiline_history_check
 end
