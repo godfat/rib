@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-08}
+  s.date = %q{2011-08-12}
   s.description = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell
 
 Rib is based on the design of [ripl][] and the work of [ripl-rc][], some of
@@ -72,6 +72,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{lib/rib/runner.rb},
   %q{lib/rib/shell.rb},
   %q{lib/rib/test.rb},
+  %q{lib/rib/test/multiline.rb},
   %q{lib/rib/version.rb},
   %q{lib/rib/zore.rb},
   %q{lib/rib/zore/anchor.rb},
@@ -84,6 +85,8 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{test/core/test_readline.rb},
   %q{test/core/test_underscore.rb},
   %q{test/more/test_color.rb},
+  %q{test/more/test_multiline.rb},
+  %q{test/more/test_multiline_history.rb},
   %q{test/more/test_squeeze_history.rb},
   %q{test/test_api.rb},
   %q{test/test_plugin.rb},
@@ -101,6 +104,8 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{test/core/test_readline.rb},
   %q{test/core/test_underscore.rb},
   %q{test/more/test_color.rb},
+  %q{test/more/test_multiline.rb},
+  %q{test/more/test_multiline_history.rb},
   %q{test/more/test_squeeze_history.rb},
   %q{test/test_api.rb},
   %q{test/test_plugin.rb},
