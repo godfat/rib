@@ -4,11 +4,10 @@
   is the number of plugins. This would test all the *combination* of
   plugins usage, but not for *permutations*.
 * Runner tests
-* Multiline tests
-* More and more tests
 * Documentation
 
 * Reduce test time (by remove stupid @shell.should.eq @shell,
   and remove Rib.plugins.each(&:disable) in before block
 * Fix Rubinius weird Runtime BOOM error
-* Fix Rubinius multiline regexp
+
+* Implement exception_spy
