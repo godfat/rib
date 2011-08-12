@@ -18,7 +18,7 @@ module Rib::MultilineHistory
     super
   ensure
     # SyntaxError might mean we're multiline editing
-    handle_multiline unless $!.kind_of?(SyntaxError)
+    handle_multiline unless multiline?($!)
   end
 
   def handle_interrupt
