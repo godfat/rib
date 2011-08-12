@@ -124,4 +124,17 @@ shared :multiline do
       '
     RUBY
   end
+
+  should 'be hash treated as a block SyntaxError' do
+    check <<-RUBY, SyntaxError
+      puts { :x => 10 }.class
+    RUBY
+  end
+
+  should 'begin with SyntaxError' do
+    check <<-RUBY, SyntaxError
+      begin
+        s-y n
+    RUBY
+  end
 end

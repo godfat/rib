@@ -28,7 +28,12 @@ describe Rib::MultilineHistory do
       result
     }
     input_done(lines.last, err)
-    @shell.history.to_a.should.eq prefix + ["\n#{lines.join("\n")}"]
+    history = if lines.size == 1
+                lines.first
+              else
+                "\n#{lines.join("\n")}"
+              end
+    @shell.history.to_a.should.eq prefix + [history]
   end
 
   for_each_plugin do
