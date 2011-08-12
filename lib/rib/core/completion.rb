@@ -12,7 +12,7 @@ module Rib::Completion
      config[:completion]                ||= {}
      config[:completion][:eval_binding] ||= method(:eval_binding).to_proc
     (config[:completion][:gems]         ||= []).concat(ripl_plugins)
-    Rib.silence{Bond.start(config[:completion])} unless Bond.started?
+    Rib.silence{Bond.start(config[:completion]) unless Bond.started?}
     super
   end
 
