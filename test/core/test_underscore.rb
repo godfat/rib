@@ -13,13 +13,17 @@ describe Rib::Underscore do
   def setup bound=Object.new
     @shell = Rib::Shell.new(
       :binding => bound.instance_eval{binding}).before_loop
+    stub(@shell).puts
   end
 
   should 'set _' do
     setup
-    @shell.eval_input('_').should.eq nil
-    @shell.eval_input('10 ** 2')
-    @shell.eval_input('_').should.eq 100
+    mock(@shell).get_input{'_'}
+    mock(@shell).get_input{'10**2'}
+    mock(@shell).get_input{'_'}
+    @shell.loop_once.should.eq [nil, nil]
+    @shell.loop_once
+    @shell.loop_once.should.eq [100, nil]
   end
 
   should 'not set _ if already there' do
@@ -28,15 +32,20 @@ describe Rib::Underscore do
       'hey'
     end
     setup(bound)
-    @shell.eval_input('_').should.eq 'hey'
-    @shell.eval_input('10 ** 2')
-    @shell.eval_input('_').should.eq 'hey'
+    mock(@shell).get_input{'_'}
+    mock(@shell).get_input{'10**2'}
+    mock(@shell).get_input{'_'}
+    @shell.loop_once.should.eq ['hey', nil]
+    @shell.loop_once
+    @shell.loop_once.should.eq ['hey', nil]
   end
 
   should 'set __' do
     setup
     stub(@shell).puts
-    @shell.eval_input('XD')
-    @shell.eval_input('__').should.kind_of?(NameError)
+    mock(@shell).get_input{'XD'}
+    mock(@shell).get_input{'__'}
+    @shell.loop_once
+    @shell.loop_once.first.should.kind_of?(NameError)
   end
 end

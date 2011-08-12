@@ -34,17 +34,19 @@ module Rib::API
 
   # Loop iteration: REPL
   def loop_once
-    self.error_raised = nil
-    input = get_input
+    input, result, err = get_input, nil, nil
     throw(:rib_exit, input) if config[:exit].include?(input)
     catch(:rib_skip) do
-      if input.strip == ''
-        eval_input(input)
+      result, err = eval_input(input)
+      if err
+        print_eval_error(err)
+      elsif input.strip != ''
+        print_result(result)
       else
-        print_result(eval_input(input))
+        # print nothing for blank input
       end
     end
-    self
+    [result, err]
   rescue Interrupt
     handle_interrupt
   end
@@ -61,10 +63,9 @@ module Rib::API
 
   # Evaluate the input using #loop_eval and handle it
   def eval_input input
-    loop_eval(input)
+    [loop_eval(input), nil]
   rescue Exception => e
-    self.error_raised = true
-    print_eval_error(e)
+    [nil, e]
   ensure
     config[:line] += 1
   end
@@ -76,7 +77,7 @@ module Rib::API
 
   # Print result using #format_result
   def print_result result
-    puts(format_result(result)) unless error_raised
+    puts(format_result(result))
   rescue StandardError, SyntaxError => e
     Rib.warn("Error while printing result:\n  #{format_error(e)}")
   end

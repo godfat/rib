@@ -13,7 +13,8 @@ describe Rib::Shell do
   describe '#loop' do
     def input str
       mock(@shell).get_input{str}
-      @shell.loop.should.eq @shell
+      @shell.loop
+      true.should.eq true
     end
     should 'exit'   do                    input('exit') end
     should 'quit'   do                    input('quit') end
@@ -28,27 +29,27 @@ describe Rib::Shell do
         mock(@shell).get_input{ str }
       end
       @shell.loop_once
+      true.should.eq true
     end
 
     should 'handles ctrl+c' do
       mock(@shell).handle_interrupt
-      input{ raise Interrupt }.should.eq nil
+      input{ raise Interrupt }
     end
 
     should 'prints result' do
       mock(@shell).puts('=> "mm"')
-      input('"m" * 2').should.eq @shell
+      input('"m" * 2')
     end
 
     should 'error in print_result' do
       mock(Rib).warn(/Error while printing result.*BOOM/m)
-      input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj').
-      should.eq @shell
+      input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
     end
 
     should 'print error from eval' do
       mock(@shell).puts(/RuntimeError/)
-      input('raise "blah"').should.eq @shell
+      input('raise "blah"')
     end
   end
 
@@ -70,9 +71,10 @@ describe Rib::Shell do
     end
 
     should 'print error and increments line' do
-      mock(@shell).puts(/^SyntaxError:/)
-      @shell.eval_input('{').should.eq nil
-      @shell.config[:line]  .should.eq @line + 1
+      result, err = @shell.eval_input('{')
+      result.should.eq nil
+      err.should.kind_of?(SyntaxError)
+      @shell.config[:line].should.eq @line + 1
     end
   end
 

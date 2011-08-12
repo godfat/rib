@@ -22,10 +22,15 @@ shared :setup_multiline do
     mock.proxy(@shell).throw(:rib_multiline)
   end
 
-  def input_done str
+  def input_done str, err=nil
     setup_input(str)
-    mock(@shell).print_result(anything)
-    @shell.loop_once.should.eq @shell
+    if err
+      mock(@shell).print_eval_error(is_a(err))
+    else
+      mock(@shell).print_result(anything)
+    end
+    @shell.loop_once
+    true.should.eq true
   end
 end
 
@@ -57,7 +62,7 @@ shared :multiline do
   end
 
   should 'begin with RuntimeError' do
-    check <<-RUBY
+    check <<-RUBY, RuntimeError
       begin
         raise 'multiline raised an error'
       end

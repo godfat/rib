@@ -42,5 +42,4 @@ class Rib::Shell
 
   protected
   attr_writer :config
-  attr_accessor :error_raised
 end

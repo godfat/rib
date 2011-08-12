@@ -17,9 +17,10 @@ module Rib::Underscore
     super
   end
 
-  def loop_eval input
+  def print_result result
     return super if Underscore.disabled?
-    bound_object.instance_variable_set(:@__rib_result__, super)
+    bound_object.instance_variable_set(:@__rib_result__, result)
+    super
   end
 
   def print_eval_error err
