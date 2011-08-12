@@ -15,35 +15,37 @@ shared :rib do
     RR.verify
   end
 
-  def for_each_plugin &block
-    Rib.disable_plugins
+  def test_for *plugins, &block
+    rest = Rib.plugins - plugins
+    Rib.enable_plugins(plugins)
+    Rib.disable_plugins(rest)
     yield
 
     case ENV['TEST_LEVEL']
       when '0'
       when '1'
-        Rib.plugins.each{ |plugin|
-          Rib.disable_plugins
-          plugin.enable
+        rest.each{ |target|
+          target.enable
           yield
+          target.disable
         }
       when '2'
-        Rib.plugins.combination(2).each{ |plugins|
-          Rib.disable_plugins
-          plugins.each(&:enable)
+        rest.combination(2).each{ |targets|
+          Rib.enable_plugins(targets)
           yield
+          Rib.disable_plugins(targets)
         }
       when '3'
-        rec_for_each_plugin(&block)
+        rec_test_for(rest, &block)
     end
   end
 
-  def rec_for_each_plugin plugins=Rib.plugins, &block
-    return yield if plugins.empty?
-    plugins[0].enable
-    rec_for_each_plugin(plugins[1..-1], &block)
-    plugins[0].disable
-    rec_for_each_plugin(plugins[1..-1], &block)
+  def rec_test_for rest, &block
+    return yield if rest.empty?
+    rest[0].enable
+    rec_test_for(rest[1..-1], &block)
+    rest[0].disable
+    rec_test_for(rest[1..-1], &block)
   end
 end
 

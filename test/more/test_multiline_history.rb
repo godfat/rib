@@ -36,10 +36,7 @@ describe Rib::MultilineHistory do
     @shell.history.to_a.should.eq prefix + [history]
   end
 
-  for_each_plugin do
-    Rib::History.enable
-    Rib::Multiline.enable
-    Rib::MultilineHistory.enable
+  test_for Rib::History, Rib::Multiline, Rib::MultilineHistory do
     behaves_like :multiline
   end
 end

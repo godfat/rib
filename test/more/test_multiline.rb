@@ -16,8 +16,7 @@ describe Rib::Multiline do
     input_done(lines.last, err)
   end
 
-  for_each_plugin do
-    Rib::Multiline.enable
+  test_for Rib::Multiline do
     behaves_like :multiline
   end
 end
