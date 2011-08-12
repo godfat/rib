@@ -35,7 +35,7 @@ shared :rib do
           yield
           Rib.disable_plugins(targets)
         }
-      when '3'
+      else
         rec_test_for(rest, &block)
     end
   end
