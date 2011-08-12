@@ -2,20 +2,7 @@
 require 'rib/test'
 require 'rib/core/history'
 
-describe Rib::History do
-  behaves_like :rib
-
-  before do
-    Rib.disable_plugins
-    Rib::History.enable
-    @history_file = "/tmp/test_rib_#{rand}"
-    @shell        = Rib::Shell.new(:history_file => @history_file).before_loop
-  end
-
-  after do
-    FileUtils.rm_f(@history_file)
-  end
-
+shared :history do
   should '#after_loop save history' do
     inputs = %w[blih blah]
     @shell.history.replace(inputs)
@@ -54,5 +41,22 @@ describe Rib::History do
     shell = Rib::Shell.dup
     shell.use(mod)
     shell.new.before_loop.after_loop.history.should.eq ['pong_write_history']
+  end
+end
+
+describe Rib::History do
+  behaves_like :rib
+
+  before do
+    @history_file = "/tmp/test_rib_#{rand}"
+    @shell        = Rib::Shell.new(:history_file => @history_file).before_loop
+  end
+
+  after do
+    FileUtils.rm_f(@history_file)
+  end
+
+  test_for Rib::History do
+    behaves_like :history
   end
 end
