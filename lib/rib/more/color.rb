@@ -58,8 +58,6 @@ module Rib::Color
     end
   end
 
-  # --------------- Plugin API ---------------
-
   # override StripBacktrace#get_error
   def get_error err, backtrace=err.backtrace
     return super if Color.disabled?
