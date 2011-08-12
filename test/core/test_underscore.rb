@@ -2,20 +2,7 @@
 require 'rib/test'
 require 'rib/core/underscore'
 
-describe Rib::Underscore do
-  behaves_like :rib
-
-  before do
-    Rib.disable_plugins
-    Rib::Underscore.enable
-  end
-
-  def setup bound=Object.new
-    @shell = Rib::Shell.new(
-      :binding => bound.instance_eval{binding}).before_loop
-    stub(@shell).puts
-  end
-
+shared :underscore do
   should 'set _' do
     setup
     mock(@shell).get_input{'_'}
@@ -47,5 +34,19 @@ describe Rib::Underscore do
     mock(@shell).get_input{'__'}
     @shell.loop_once
     @shell.loop_once.first.should.kind_of?(NameError)
+  end
+end
+
+describe Rib::Underscore do
+  behaves_like :rib
+
+  def setup bound=Object.new
+    @shell = Rib::Shell.new(
+      :binding => bound.instance_eval{binding}).before_loop
+    stub(@shell).puts
+  end
+
+  test_for Rib::Underscore do
+    behaves_like :underscore
   end
 end
