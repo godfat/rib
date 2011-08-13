@@ -8,12 +8,12 @@ describe Rib::MultilineHistory do
   behaves_like :setup_multiline
 
   def check str, err=nil
-    @shell.history.clear
+    clear_history(@shell.history)
     with_history(str, err)
 
     setup_shell
 
-    @shell.history.clear
+    clear_history(@shell.history)
     @shell.history << 'old history'
     with_history(str, err, 'old history')
   end
