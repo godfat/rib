@@ -48,6 +48,17 @@ shared :rib do
     rest[0].disable
     rec_test_for(rest[1..-1], &block)
   end
+
+  def readline?
+    Rib.constants.map(&:to_s).include?('Readline') &&
+    Rib::Readline.enabled?
+  end
+
+  def stub_readline
+    stub(::Readline).readline(is_a(String), true){
+      (::Readline::HISTORY << str.chomp)[-1]
+    }
+  end
 end
 
 module Kernel

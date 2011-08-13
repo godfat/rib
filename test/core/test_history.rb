@@ -5,7 +5,8 @@ require 'rib/core/history'
 shared :history do
   should '#after_loop save history' do
     inputs = %w[blih blah]
-    @shell.history.replace(inputs)
+    @shell.history.clear
+    @shell.history.push(*inputs)
     @shell.after_loop
     File.read(@history_file).should.eq "#{inputs.join("\n")}\n"
   end
@@ -48,6 +49,10 @@ describe Rib::History do
   behaves_like :rib
 
   before do
+    if readline?
+      ::Readline::HISTORY.clear
+      stub_readline
+    end
     @history_file = "/tmp/test_rib_#{rand}"
     @shell        = Rib::Shell.new(:history_file => @history_file).before_loop
   end
