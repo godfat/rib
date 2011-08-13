@@ -25,28 +25,38 @@ shared :rib do
     case ENV['TEST_LEVEL']
       when '0'
       when '1'
-        rest.each{ |target|
-          target.enable
-          yield
-          target.disable
-        }
+        test_level1(rest, block)
       when '2'
-        rest.combination(2).each{ |targets|
-          Rib.enable_plugins(targets)
-          yield
-          Rib.disable_plugins(targets)
-        }
-      else
-        rec_test_for(rest, &block)
+        test_level2(rest, block)
+      when '3'
+        test_level3(rest, block)
+      else # test_level3 is too slow because of rr (i guess)
+        test_level2(rest, block)
     end
   end
 
-  def rec_test_for rest, &block
-    return yield if rest.empty?
+  def test_level1 rest, block
+    rest.each{ |target|
+      target.enable
+      block.call
+      target.disable
+    }
+  end
+
+  def test_level2 rest, block
+    rest.combination(2).each{ |targets|
+      Rib.enable_plugins(targets)
+      block.call
+      Rib.disable_plugins(targets)
+    }
+  end
+
+  def test_level3 rest, block
+    return block.call if rest.empty?
     rest[0].enable
-    rec_test_for(rest[1..-1], &block)
+    test_level3(rest[1..-1], block)
     rest[0].disable
-    rec_test_for(rest[1..-1], &block)
+    test_level3(rest[1..-1], block)
   end
 
   def readline?
