@@ -101,19 +101,23 @@ file. To see a list of overridable API, please read [api.rb][]
 
 #### Basic configuration
 
+<pre>
 Rib.config[:config]        | The path where config should be located
 Rib.config[:name]          | The name of this shell
 Rib.config[:result_prompt] | Default is "=>"
 Rib.config[:prompt]        | Default is ">>"
 Rib.config[:binding]       | Context, default: TOPLEVEL_BINDING
 Rib.config[:exit]          | Commands to exit, default [nil, 'exit', 'quit']
+</pre>
 
 #### Plugin specific configuration
 
+<pre>
 Rib.config[:completion]    | Completion: Bond config
 Rib.config[:history_file]  | Default is "~/.rib/config/history.rb"
 Rib.config[:history_size]  | Default is 500
 Rib.config[:color]         | A hash of Class => :color mapping
+</pre>
 
 ### As a debugging/interacting tool
 
