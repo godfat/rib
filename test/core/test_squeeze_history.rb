@@ -1,6 +1,6 @@
 
 require 'rib/test'
-require 'rib/more/squeeze_history'
+require 'rib/core/squeeze_history'
 
 shared :squeeze_history do
   should 'after_loop saves squeezed history' do
