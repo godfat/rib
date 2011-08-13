@@ -15,7 +15,8 @@ task 'gem:spec' do
     %w[bond
        hirb
        bacon
-       rr]  .each{ |g| s.add_development_dependency(g) }
+       rr
+       rake].each{ |g| s.add_development_dependency(g) }
   end
 
   Gemgem.write
