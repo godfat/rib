@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'rib/runner'
-# load rc before app to prvent your bundler (if any) kicks in
-Rib.require_config
+# create the shell before app to prvent your bundler (if any) kicks in
+Rib.shell
 require 'rib/app/ramaze'
 # load the app
 Rib::Ramaze.load
