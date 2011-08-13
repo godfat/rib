@@ -121,16 +121,19 @@ be simple, lightweight and modular so that everyone could customize Rib.
       s.add_development_dependency(%q<hirb>, [">= 0"])
       s.add_development_dependency(%q<bacon>, [">= 0"])
       s.add_development_dependency(%q<rr>, [">= 0"])
+      s.add_development_dependency(%q<rake>, [">= 0"])
     else
       s.add_dependency(%q<bond>, [">= 0"])
       s.add_dependency(%q<hirb>, [">= 0"])
       s.add_dependency(%q<bacon>, [">= 0"])
       s.add_dependency(%q<rr>, [">= 0"])
+      s.add_dependency(%q<rake>, [">= 0"])
     end
   else
     s.add_dependency(%q<bond>, [">= 0"])
     s.add_dependency(%q<hirb>, [">= 0"])
     s.add_dependency(%q<bacon>, [">= 0"])
     s.add_dependency(%q<rr>, [">= 0"])
+    s.add_dependency(%q<rake>, [">= 0"])
   end
 end
