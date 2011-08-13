@@ -82,33 +82,52 @@ this into your config file:
 You can also write your plugins there. Here's another example:
 
     require 'rib/core'
+    require 'pp'
     Rib.config[:prompt] = '$ '
 
     module RibPP
-      include Rib::Plugin
-      Rib::Shell.use(self)
+      Rib::Shell.send(:include, self)
 
       def format_result result
-        require 'pp'
         result_prompt + result.pretty_inspect
       end
     end
 
-So that we override the original behaviour to pretty_inspect the result. You
-can also build your own gem and then simply require it in your config file.
+So that we override the original format_result to pretty_inspect the result.
+You can also build your own gem and then simply require it in your config
+file. To see a list of overridable API, please read [api.rb][]
+
+[api.rb]: https://github.com/godfat/rib/blob/master/lib/rib/api.rb
+
+#### Basic configuration
+
+Rib.config[:config]        | The path where config should be located
+Rib.config[:name]          | The name of this shell
+Rib.config[:result_prompt] | Default is "=>"
+Rib.config[:prompt]        | Default is ">>"
+Rib.config[:binding]       | Context, default: TOPLEVEL_BINDING
+Rib.config[:exit]          | Commands to exit, default [nil, 'exit', 'quit']
+
+#### Plugin specific configuration
+
+Rib.config[:completion]    | Completion: Bond config
+Rib.config[:history_file]  | Default is "~/.rib/config/history.rb"
+Rib.config[:history_size]  | Default is 500
+Rib.config[:color]         | A hash of Class => :color mapping
 
 ### As a debugging/interacting tool
 
 Rib could be used as a kind of debugging tool which you can set break point
 in the source program.
 
-    require 'rib/rc'     # This would load your ~/.config/rib/config.rb
-    require 'rib/anchor' # If you enabled this in config, then not needed.
+    require 'rib/config' # This would load your ~/.config/rib/config.rb
+    require 'rib/anchor' # If you enabled this in config, then needed not.
     Rib.anchor binding   # This would give you an interactive shell
                          # when your program has been executed here.
+    Rib.anchor 123       # You can also anchor on an object.
 
-    # But this might be called in a loop, you might only want to
-    # enter the shell under certain circumstance, then you'll need:
+But this might be called in a loop, you might only want to
+enter the shell under certain circumstance, then you'll do:
 
     require 'rib/debug'
     Rib.enable_anchor do
@@ -117,7 +136,19 @@ in the source program.
 
     Rib.anchor binding # No effect (no-op) outside the block
 
-Edit in place
+Anchor could also be nested. The level would be shown on the prompt,
+starting from 1.
+
+### In place editing
+
+Whenever you called:
+
+    Rib.edit
+
+Rib would open an editor according to $EDITOR (`ENV['EDITOR']`) for you.
+After save and leave the editor, Rib would evaluate what you had input.
+This also works inside an anchor. To use it, require either rib/more/edit
+or rib/more or rib/all.
 
 ### As a shell framework
 
@@ -125,22 +156,10 @@ The essence is:
 
     require 'rib'
 
-All others are optional. The core plugins are lying in `rib/core/*.rb`,
-and more plugins are lying in `rib/more/*.rb`. There are also so-called
-zore plugins which are lying in `rib/zore/*.rb`, which are used as special
-Rib command, such as `Rib.anchor` and `Rib.edit`. You can simply get
-
-* All
-* App
-
-Another one is local binding inside a method:
-
-    Ripl.anchor binding
-
-Then you can look through local variables inside a method
-with an interactive environment. Anchor could be nested, too.
-You can anchor another object inside a Rib session. The number
-shown in prompt is the level of anchors, starting from 1.
+All others are optional. The core plugins are lying in `rib/core/*.rb`, and
+more plugins are lying in `rib/more/*.rb`. You can read `rib/app/ramaze.rb`
+and `bin/rib-ramaze` as a Rib App reference implementation, because it's very
+simple, simpler than rib-rails.
 
 ## LICENSE:
 
