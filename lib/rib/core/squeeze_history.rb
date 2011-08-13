@@ -7,12 +7,17 @@ module Rib::SqueezeHistory
 
   # --------------- Rib API ---------------
 
-  # squeeze history on memory too
-  def eval_input input
+  # squeeze history in memory too
+  def loop_once
     return super if SqueezeHistory.disabled?
-    history.pop if input.strip == '' ||
-                  (history.size > 1 && input == history.to_a[-2])
-                  # EditLine is really broken, to_a is needed for it
+    begin
+      input, last_input = history[-1], history[-2]
+    rescue IndexError # EditLine is really broken, to_a is needed for it
+      array = history.to_a
+      input, last_input = array[-1], array[-2]
+    end
+    history.pop if input.to_s.strip == '' ||
+                  (history.size > 1 && input == last_input)
     super
   end
 
