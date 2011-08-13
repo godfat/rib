@@ -48,6 +48,7 @@ module Rib::Runner
   def command_descriptions
     @command_descriptions ||=
     {'all'    => 'Load all recommended plugins'                ,
+     'min'    => 'Run the minimum essence'                     ,
      'auto'   => 'Run as Rails or Ramaze console (auto-detect)',
      'rails'  => 'Run as Rails console'                        ,
      'ramaze' => 'Run as Ramaze console'                       }

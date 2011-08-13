@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'rib/runner'
+Rib.shells << Rib::Shell.new(Rib.config)
+Rib::Runner.run(ARGV)

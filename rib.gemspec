@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-13}
+  s.date = %q{2011-08-14}
   s.description = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell
 
 Rib is based on the design of [ripl][] and the work of [ripl-rc][], some of
@@ -22,6 +22,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{rib},
   %q{rib-all},
   %q{rib-auto},
+  %q{rib-min},
   %q{rib-rails},
   %q{rib-ramaze}]
   s.extra_rdoc_files = [
@@ -45,6 +46,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{bin/rib},
   %q{bin/rib-all},
   %q{bin/rib-auto},
+  %q{bin/rib-min},
   %q{bin/rib-rails},
   %q{bin/rib-ramaze},
   %q{lib/rib.rb},
@@ -53,41 +55,40 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{lib/rib/app/auto.rb},
   %q{lib/rib/app/rails.rb},
   %q{lib/rib/app/ramaze.rb},
+  %q{lib/rib/config.rb},
   %q{lib/rib/core.rb},
   %q{lib/rib/core/completion.rb},
   %q{lib/rib/core/history.rb},
   %q{lib/rib/core/multiline.rb},
   %q{lib/rib/core/readline.rb},
+  %q{lib/rib/core/squeeze_history.rb},
+  %q{lib/rib/core/strip_backtrace.rb},
   %q{lib/rib/core/underscore.rb},
   %q{lib/rib/debug.rb},
   %q{lib/rib/dep/hirb.rb},
   %q{lib/rib/more.rb},
+  %q{lib/rib/more/anchor.rb},
   %q{lib/rib/more/color.rb},
+  %q{lib/rib/more/edit.rb},
   %q{lib/rib/more/multiline_history.rb},
   %q{lib/rib/more/multiline_history_file.rb},
-  %q{lib/rib/more/squeeze_history.rb},
-  %q{lib/rib/more/strip_backtrace.rb},
   %q{lib/rib/plugin.rb},
-  %q{lib/rib/rc.rb},
   %q{lib/rib/runner.rb},
   %q{lib/rib/shell.rb},
   %q{lib/rib/test.rb},
   %q{lib/rib/test/multiline.rb},
   %q{lib/rib/version.rb},
-  %q{lib/rib/zore.rb},
-  %q{lib/rib/zore/anchor.rb},
-  %q{lib/rib/zore/edit.rb},
   %q{rib.gemspec},
   %q{task/.gitignore},
   %q{task/gemgem.rb},
   %q{test/core/test_completion.rb},
   %q{test/core/test_history.rb},
+  %q{test/core/test_multiline.rb},
   %q{test/core/test_readline.rb},
+  %q{test/core/test_squeeze_history.rb},
   %q{test/core/test_underscore.rb},
   %q{test/more/test_color.rb},
-  %q{test/more/test_multiline.rb},
   %q{test/more/test_multiline_history.rb},
-  %q{test/more/test_squeeze_history.rb},
   %q{test/test_api.rb},
   %q{test/test_plugin.rb},
   %q{test/test_shell.rb}]
@@ -101,12 +102,12 @@ be simple, lightweight and modular so that everyone could customize Rib.
   s.test_files = [
   %q{test/core/test_completion.rb},
   %q{test/core/test_history.rb},
+  %q{test/core/test_multiline.rb},
   %q{test/core/test_readline.rb},
+  %q{test/core/test_squeeze_history.rb},
   %q{test/core/test_underscore.rb},
   %q{test/more/test_color.rb},
-  %q{test/more/test_multiline.rb},
   %q{test/more/test_multiline_history.rb},
-  %q{test/more/test_squeeze_history.rb},
   %q{test/test_api.rb},
   %q{test/test_plugin.rb},
   %q{test/test_shell.rb}]
