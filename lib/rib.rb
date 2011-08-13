@@ -24,7 +24,11 @@ module Rib
   # need a clean shell which does not load rc file, use Shell.new instead.
   def shell
     shells.last || begin
-      require_rc
+      if File.exist?(File.expand_path(config[:config]))
+        require_rc
+      else # for those who don't have a config, we use core plugins
+        require 'rib/core'
+      end
       (shells << Shell.new(config)).last
     end
   end
