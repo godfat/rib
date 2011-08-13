@@ -46,11 +46,12 @@ module Rib::Multiline
 
   def loop_once
     return super if Multiline.disabled?
+    result = nil
     catch(:rib_multiline) do
-      super
+      result = super
       multiline_buffer.clear
     end
-    self
+    result
   end
 
   def loop_eval input
