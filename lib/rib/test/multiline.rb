@@ -10,7 +10,9 @@ shared :setup_multiline do
   def setup_input str
     if readline?
       mock(::Readline).readline(is_a(String), true){
-        (::Readline::HISTORY << str.chomp)[-1]
+        result = str.chomp
+        ::Readline::HISTORY << result
+        result
       }
     else
       mock($stdin).gets{ str.chomp }
