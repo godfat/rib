@@ -79,6 +79,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{lib/rib/test/multiline.rb},
   %q{lib/rib/version.rb},
   %q{rib.gemspec},
+  %q{screenshot.png},
   %q{task/.gitignore},
   %q{task/gemgem.rb},
   %q{test/core/test_completion.rb},
