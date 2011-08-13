@@ -16,6 +16,7 @@ shared :rib do
   end
 
   def test_for *plugins, &block
+    require 'rib/all' # exhaustive tests
     rest = Rib.plugins - plugins
     Rib.enable_plugins(plugins)
     Rib.disable_plugins(rest)
