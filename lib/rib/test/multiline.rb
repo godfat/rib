@@ -27,7 +27,7 @@ shared :setup_multiline do
     if err
       mock(@shell).print_eval_error(is_a(err))
     else
-      mock(@shell).print_result(anything)
+      mock(@shell).print_result(is_a(Object))
     end
     @shell.loop_once
     true.should.eq true
