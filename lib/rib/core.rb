@@ -11,7 +11,7 @@ require 'rib/core/strip_backtrace'
 # upon input
 require 'rib/core/readline'
 require 'rib/core/multiline'
-require 'rib/more/squeeze_history'
+require 'rib/core/squeeze_history'
 
 # special tools
 require 'rib/core/underscore'
