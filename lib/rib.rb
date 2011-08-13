@@ -24,7 +24,7 @@ module Rib
   # need a clean shell which does not load rc file, use Shell.new instead.
   def shell
     shells.last || begin
-      if File.exist?(File.expand_path(config[:config]))
+      if File.exist?(config_path)
         require_rc
       else # for those who don't have a config, we use core plugins
         require 'rib/core'
@@ -54,12 +54,15 @@ module Rib
   # Load (actually require) ~/.config/rib/config.rb if exists.
   # This might emit warnings if there's some error while loading it.
   def require_rc
-    config[:config] &&
-      File.exist?(rc = File.expand_path(config[:config])) &&
-      require(rc)
+    File.exist?(rc = config_path) && require(rc)
   rescue Exception => e
     Rib.warn("Error loading #{config[:config]}\n" \
              "  #{Rib::API.format_error(e)}")
+  end
+
+  # The config path where Rib tries to load upon Rib.shell
+  def config_path
+    File.expand_path(config[:config]) if config[:config]
   end
 
   # Say (print to $stdout, with colors in the future, maybe)
