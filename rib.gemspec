@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-12}
+  s.date = %q{2011-08-13}
   s.description = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell
 
 Rib is based on the design of [ripl][] and the work of [ripl-rc][], some of
@@ -56,13 +56,13 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{lib/rib/core.rb},
   %q{lib/rib/core/completion.rb},
   %q{lib/rib/core/history.rb},
+  %q{lib/rib/core/multiline.rb},
   %q{lib/rib/core/readline.rb},
   %q{lib/rib/core/underscore.rb},
   %q{lib/rib/debug.rb},
   %q{lib/rib/dep/hirb.rb},
   %q{lib/rib/more.rb},
   %q{lib/rib/more/color.rb},
-  %q{lib/rib/more/multiline.rb},
   %q{lib/rib/more/multiline_history.rb},
   %q{lib/rib/more/multiline_history_file.rb},
   %q{lib/rib/more/squeeze_history.rb},

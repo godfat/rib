@@ -1,6 +1,6 @@
 
 require 'rib/core/history'   # dependency
-require 'rib/more/multiline' # dependency
+require 'rib/core/multiline' # dependency
 
 module Rib::MultilineHistory
   include Rib::Plugin

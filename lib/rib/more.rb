@@ -8,5 +8,4 @@ require 'rib/more/strip_backtrace'
 require 'rib/more/color'
 
 # upon input
-require 'rib/more/multiline'
 require 'rib/more/multiline_history'

@@ -1,7 +1,7 @@
 
 require 'rib/test'
 require 'rib/test/multiline'
-require 'rib/more/multiline'
+require 'rib/core/multiline'
 
 describe Rib::Multiline do
   behaves_like :rib
