@@ -33,6 +33,7 @@ module Rib::MultilineHistoryFile
 
   def write_history
     return super if MultilineHistoryFile.disabled?
+    # TODO: hisotroy.map is MRI 1.9+
     config[:history] = history.to_a.map{ |line|
       line.gsub("\n", "#{config[:multiline_history_file_token]}\n")
     }

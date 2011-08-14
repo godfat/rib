@@ -36,6 +36,7 @@ module Rib::MultilineHistory
   def handle_multiline
     if multiline_buffer.size > 1
       # so multiline editing is considering done here
+      # TODO: there's no history.pop(size)
       (multiline_buffer.size + @multiline_trash).times{ history.pop }
       history << "\n" + multiline_buffer.join("\n")
     end

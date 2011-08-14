@@ -5,8 +5,10 @@ require 'rib/core/history'
 shared :history do
   should '#after_loop save history' do
     inputs = %w[blih blah]
+    # TODO: history.replace(input) is MRI 1.9+
     clear_history(@shell.history)
     @shell.history.push(*inputs)
+
     @shell.after_loop
     File.read(@history_file).should.eq "#{inputs.join("\n")}\n"
   end

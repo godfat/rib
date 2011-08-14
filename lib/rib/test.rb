@@ -70,6 +70,7 @@ shared :rib do
     }
   end
 
+  # TODO: history.clear is MRI 1.9+
   def clear_history history
     if history.respond_to?(:clear)
       history.clear
