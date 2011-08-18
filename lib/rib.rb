@@ -54,7 +54,10 @@ module Rib
   # Load (actually require) ~/.config/rib/config.rb if exists.
   # This might emit warnings if there's some error while loading it.
   def require_config
-    config_path && require(config_path)
+    return unless config_path
+    result = require(config_path)
+    Rib.say("Config loaded from: #{config_path}") if $VERBOSE && result
+    result
   rescue Exception => e
     Rib.warn("Error loading #{config[:config]}\n" \
              "  #{Rib::API.format_error(e)}")

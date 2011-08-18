@@ -14,12 +14,14 @@ module Rib::History
     config[:history_size] ||= 500
     FileUtils.mkdir_p(File.dirname(history_file_path))
     read_history
+    Rib.say("History read from: #{history_file_path}") if $VERBOSE
     super
   end
 
   def after_loop
     return super if History.disabled?
     write_history
+    Rib.say("History wrote to: #{history_file_path}") if $VERBOSE
     super
   end
 
