@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rib}
-  s.version = "0.9.0"
+  s.version = "0.9.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-14}
+  s.date = %q{2011-08-19}
   s.description = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell
 
 Rib is based on the design of [ripl][] and the work of [ripl-rc][], some of
@@ -65,7 +65,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{lib/rib/core/strip_backtrace.rb},
   %q{lib/rib/core/underscore.rb},
   %q{lib/rib/debug.rb},
-  %q{lib/rib/dep/hirb.rb},
+  %q{lib/rib/extra/hirb.rb},
   %q{lib/rib/more.rb},
   %q{lib/rib/more/anchor.rb},
   %q{lib/rib/more/color.rb},
@@ -73,6 +73,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{lib/rib/more/multiline_history.rb},
   %q{lib/rib/more/multiline_history_file.rb},
   %q{lib/rib/plugin.rb},
+  %q{lib/rib/ripl.rb},
   %q{lib/rib/runner.rb},
   %q{lib/rib/shell.rb},
   %q{lib/rib/test.rb},
