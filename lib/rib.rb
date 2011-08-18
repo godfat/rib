@@ -6,7 +6,7 @@ module Rib
   # All default Rib configs, would be passed to Shell.new in Rib.shell,
   # but calling Shell.new directly won't bring this in.
   def config
-    @config ||= {:config => '~/.config/rib/config.rb', :name => 'rib'}
+    @config ||= {:config => File.join(home, 'config.rb'), :name => 'rib'}
   end
 
   # All shells in the memory
@@ -17,6 +17,17 @@ module Rib
   # All shared variables for all shells
   def vars
     @vars   ||= {}
+  end
+
+  # Rib.home is where Rib storing things
+  def home
+    ENV['RIB_HOME'] ||= begin
+      ['~/.rib', '~/.config/rib'].find{ |path|
+        p = File.expand_path(path)
+        File.exist?(File.join(p, 'config.rb')) ||
+        File.exist?(File.join(p, 'history.rb'))
+      } || '~/.rib'
+    end
   end
 
   # Convenient shell accessor, which would just give you current last shell

@@ -10,7 +10,7 @@ module Rib::History
 
   def before_loop
     return super if History.disabled?
-    config[:history_file] ||= '~/.config/rib/history.rb'
+    config[:history_file] ||= File.join(Rib.home, 'history.rb')
     config[:history_size] ||= 500
     FileUtils.mkdir_p(File.dirname(history_file_path))
     read_history
