@@ -6,14 +6,36 @@ module Rib::Autoindent
   include Rib::Plugin
   Shell.use(self)
 
+  # begin block could be simpler, because it should also trigger
+  # SyntaxError, otherwise indention would be wiped out.
+  # but end block should be exactly match, because we don't have
+  # SyntaxError information, also triggering SyntaxError doesn't
+  # mean it's not an end block, thinking about nested multiline!
   BLOCK_REGEXP = {
-    /begin/                => /(end)|else|rescue/,
-    /if/                   => /(end)|else|elsif/ ,
-    /case/                 => /(end)|when/       ,
-    /do/                   => /(end)/            ,
-    /def \S+/              => /(end)/            ,
-    /class \S+(\s+\<\S+)?/ => /(end)/            ,
-    /\{/                   => /(\})/
+    # rescue Expression? (=> VariableName)?
+    # consider cases:
+    # rescue
+    # rescue=>e
+    # rescue => e
+    # rescue =>e
+    # rescue E=>e
+    # rescue E
+    # rescue E => e
+    # rescue E=> e
+    # rescue E =>e
+    /^begin$/        => /^(end)$|^else$|^rescue\s*((\w+)?\s*(=>\s*\w+)?)?$/,
+    # elsif Expression
+    # consider cases:
+    # elsif(true)
+    # elsif true
+    # elsif true == true
+    # elsif (a = true) && false
+    /^if/            => /^(end)$|^else$|^elsif\W/,
+    /^case/          => /^(end)$|^when\W/        ,
+    /^def/           => /^(end)$/                ,
+    /^class/         => /^(end)$/                ,
+    /do( *\|.*\|)?$/ => /^(end)$/                ,
+    /\{( *\|.*\|)?$/ => /^(\})$/
   }
 
   # --------------- Rib API ---------------
