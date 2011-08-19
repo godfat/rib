@@ -23,21 +23,21 @@ module Rib::Autoindent
     # rescue E => e
     # rescue E=> e
     # rescue E =>e
-    /^begin$/        => /^(end)\W?|^else$|^rescue *((\w+)? *(=> *\w+)?)?$/,
+    /^begin$/        => /^(end)\b|^else$|^rescue *((\w+)? *(=> *\w+)?)?$/,
     # elsif Expression
     # consider cases:
     # elsif(true)
     # elsif true
     # elsif true == true
     # elsif (a = true) && false
-    /^if/            => /^(end)\W?|^else$|^elsif\W/,
-    /^case/          => /^(end)\W?|^when\W/        ,
-    /^def/           => /^(end)\W?/                ,
-    /^class/         => /^(end)\W?/                ,
-    /^while/         => /^(end)\W?/                ,
-    /^until/         => /^(end)\W?/                ,
-    /do( *\|.*\|)?$/ => /^(end)\W?/                ,
-    /\{( *\|.*\|)?$/ => /^(\})\W?/
+    /^if/            => /^(end)\b|^else$|^elsif\b/,
+    /^case/          => /^(end)\b|^when\b/        ,
+    /^def/           => /^(end)\b/                ,
+    /^class/         => /^(end)\b/                ,
+    /^while/         => /^(end)\b/                ,
+    /^until/         => /^(end)\b/                ,
+    /do( *\|.*\|)?$/ => /^(end)\b/                ,
+    /\{( *\|.*\|)?$/ => /^(\})\b/
   }
 
   # --------------- Rib API ---------------
