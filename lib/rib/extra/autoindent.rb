@@ -34,6 +34,7 @@ module Rib::Autoindent
     /^case/          => /^(end)\b|^when\b/        ,
     /^def/           => /^(end)\b/                ,
     /^class/         => /^(end)\b/                ,
+    /^module/        => /^(end)\b/                ,
     /^while/         => /^(end)\b/                ,
     /^until/         => /^(end)\b/                ,
     /do( *\|.*\|)?$/ => /^(end)\b/                ,
