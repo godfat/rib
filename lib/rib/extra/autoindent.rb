@@ -31,6 +31,7 @@ module Rib::Autoindent
     # elsif true == true
     # elsif (a = true) && false
     /^if/            => /^(end)\b|^else$|^elsif\b/,
+    /^unless/        => /^(end)\b|^else$|^elsif\b/,
     /^case/          => /^(end)\b|^when\b/        ,
     /^def/           => /^(end)\b/                ,
     /^class/         => /^(end)\b/                ,
