@@ -11,16 +11,17 @@ module Rib::Autoindent
     /def \S+/ => /end/
   }
 
+  # --------------- Rib API ---------------
+
   def before_loop
     return super if Autoindent.disabled?
-    config[:autoindent_stack] ||= []
-    config[:autoindent_space] ||= '  '
+    config[:autoindent_spaces] ||= '  '
     super
   end
 
   def get_input
     return super if Autoindent.disabled?
-    config[:autoindent_stack].clear if multiline_buffer.empty?
+    autoindent_stack.clear if multiline_buffer.empty?
     Thread.new do
       sleep(0.01)
       ::Readline.line_buffer = current_autoindent
@@ -46,18 +47,25 @@ module Rib::Autoindent
     }
 
     if down
-      config[:autoindent_stack] << down
+      autoindent_stack << down
       nil
-    elsif up == BLOCK_REGEXP[config[:autoindent_stack].last]
-      config[:autoindent_stack].pop
+    elsif up == BLOCK_REGEXP[autoindent_stack.last]
+      autoindent_stack.pop
       new_input = "#{current_autoindent}#{input}"
       puts("\e[1A\e[K#{prompt}#{new_input}")
       new_input
     end
   end
 
+
+
+  private
   def current_autoindent
-    config[:autoindent_space] * config[:autoindent_stack].size
+    config[:autoindent_spaces] * autoindent_stack.size
+  end
+
+  def autoindent_stack
+    @autoindent_stack ||= []
   end
 end
 
