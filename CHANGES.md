@@ -10,6 +10,7 @@
   would be set to `~/.rib`, the same goes to `~/.config/rib`.
   In short, by default `RIB_HOME` is `~/.rib`, but the old `~/.config/rib`
   still works.
+* [rib/extra/autoindent]
 
 ## Rib 0.9.0 -- 2011-08-14
 

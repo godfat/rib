@@ -65,6 +65,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{lib/rib/core/strip_backtrace.rb},
   %q{lib/rib/core/underscore.rb},
   %q{lib/rib/debug.rb},
+  %q{lib/rib/extra/autoindent.rb},
   %q{lib/rib/extra/hirb.rb},
   %q{lib/rib/more.rb},
   %q{lib/rib/more/anchor.rb},
@@ -120,12 +121,14 @@ be simple, lightweight and modular so that everyone could customize Rib.
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<bond>, [">= 0"])
       s.add_development_dependency(%q<hirb>, [">= 0"])
+      s.add_development_dependency(%q<readline_buffer>, [">= 0"])
       s.add_development_dependency(%q<bacon>, [">= 0"])
       s.add_development_dependency(%q<rr>, [">= 0"])
       s.add_development_dependency(%q<rake>, [">= 0"])
     else
       s.add_dependency(%q<bond>, [">= 0"])
       s.add_dependency(%q<hirb>, [">= 0"])
+      s.add_dependency(%q<readline_buffer>, [">= 0"])
       s.add_dependency(%q<bacon>, [">= 0"])
       s.add_dependency(%q<rr>, [">= 0"])
       s.add_dependency(%q<rake>, [">= 0"])
@@ -133,6 +136,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
   else
     s.add_dependency(%q<bond>, [">= 0"])
     s.add_dependency(%q<hirb>, [">= 0"])
+    s.add_dependency(%q<readline_buffer>, [">= 0"])
     s.add_dependency(%q<bacon>, [">= 0"])
     s.add_dependency(%q<rr>, [">= 0"])
     s.add_dependency(%q<rake>, [">= 0"])
