@@ -34,8 +34,8 @@ module Rib::Autoindent
 
   def loop_eval input
     return super if Autoindent.disabled?
-    if s = handle_autoindent(input.strip)
-      super(s || input)
+    if indented = handle_autoindent(input.strip)
+      super(indented)
     else
       super
     end
