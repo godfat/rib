@@ -5,6 +5,8 @@ module Rib::Hirb
   include Rib::Plugin
   Shell.use(self)
 
+  # --------------- Rib API ---------------
+
   def format_result result
     return super if Hirb.disabled?
     ::Hirb::View.view_or_page_output(result) || super

@@ -37,6 +37,8 @@ module Rib::Autoindent
     end
   end
 
+  # --------------- Plugin API ---------------
+
   def handle_autoindent input
     down, up = BLOCK_REGEXP.find{ |d, u|
       break [d  , nil] if input =~ d
