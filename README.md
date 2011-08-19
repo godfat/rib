@@ -6,6 +6,7 @@ by Lin Jen-Shin ([godfat](http://godfat.org))
 
 * [github](https://github.com/godfat/rib)
 * [rubygems](http://rubygems.org/gems/rib)
+* [rdoc](http://rdoc.info/github/godfat/rib)
 
 ## DESCRIPTION:
 
