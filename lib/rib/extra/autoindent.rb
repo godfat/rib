@@ -63,8 +63,8 @@ module Rib::Autoindent
 
 
   private
-  def current_autoindent
-    config[:autoindent_spaces] * autoindent_stack.size
+  def current_autoindent size=autoindent_stack.size
+    config[:autoindent_spaces] * size
   end
 
   def autoindent_stack
