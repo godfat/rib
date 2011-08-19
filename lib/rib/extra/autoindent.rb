@@ -7,8 +7,11 @@ module Rib::Autoindent
   Shell.use(self)
 
   BLOCK_REGEXP = {
-    /begin/   => /end/,
-    /def \S+/ => /end/
+    /begin/                => /end/,
+    /do/                   => /end/,
+    /def \S+/              => /end/,
+    /class \S+(\s+\<\S+)?/ => /end/,
+    /\{/                   => /\}/
   }
 
   # --------------- Rib API ---------------
