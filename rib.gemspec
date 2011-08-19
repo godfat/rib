@@ -25,12 +25,6 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{rib-min},
   %q{rib-rails},
   %q{rib-ramaze}]
-  s.extra_rdoc_files = [
-  %q{CONTRIBUTORS},
-  %q{LICENSE},
-  %q{CHANGES.md},
-  %q{TODO.md},
-  %q{CONTRIBUTORS}]
   s.files = [
   %q{.gitignore},
   %q{.gitmodules},
@@ -39,7 +33,6 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{CONTRIBUTORS},
   %q{Gemfile},
   %q{LICENSE},
-  %q{README},
   %q{README.md},
   %q{Rakefile},
   %q{TODO.md},
@@ -96,9 +89,6 @@ be simple, lightweight and modular so that everyone could customize Rib.
   %q{test/test_plugin.rb},
   %q{test/test_shell.rb}]
   s.homepage = %q{https://github.com/godfat/rib}
-  s.rdoc_options = [
-  %q{--main},
-  %q{README}]
   s.require_paths = [%q{lib}]
   s.rubygems_version = %q{1.8.7}
   s.summary = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell}
