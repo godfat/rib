@@ -7,11 +7,11 @@ module Rib::Autoindent
   Shell.use(self)
 
   BLOCK_REGEXP = {
-    /begin/                => /end/,
-    /do/                   => /end/,
-    /def \S+/              => /end/,
-    /class \S+(\s+\<\S+)?/ => /end/,
-    /\{/                   => /\}/
+    /begin/                => /(end)|rescue/,
+    /do/                   => /(end)/       ,
+    /def \S+/              => /(end)/       ,
+    /class \S+(\s+\<\S+)?/ => /(end)/       ,
+    /\{/                   => /(\})/
   }
 
   # --------------- Rib API ---------------
@@ -44,22 +44,25 @@ module Rib::Autoindent
   # --------------- Plugin API ---------------
 
   def handle_autoindent input
-    down, up = BLOCK_REGEXP.find{ |d, u|
-      break [d  , nil] if input =~ d
-      break [nil,   u] if input =~ u
-    }
-
-    if down
-      autoindent_stack << down
+    down, up = BLOCK_REGEXP.find{ |key,  _| input =~ key }
+    if up
+      autoindent_stack << up
       nil
-    elsif up == BLOCK_REGEXP[autoindent_stack.last]
-      autoindent_stack.pop
-      new_input = "#{current_autoindent}#{input}"
-      puts("\e[1A\e[K#{prompt}#{new_input}")
-      new_input
+    elsif input =~ autoindent_stack.last
+      if $1
+        autoindent_stack.pop
+        handle_last_line(input)
+      else
+        handle_last_line(input, current_autoindent(autoindent_stack.size-1))
+      end
     end
   end
 
+  def handle_last_line input, indent=current_autoindent
+    new_input = "#{indent}#{input}"
+    puts("\e[1A\e[K#{prompt}#{new_input}")
+    new_input
+  end
 
 
   private
