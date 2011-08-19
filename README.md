@@ -39,7 +39,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
 
 ### As an interactive shell
 
-As IRB (reads `~/.config/rib/config.rb` writes `~/.config/rib/history.rb`)
+As IRB (reads `~/.rib/config.rb` writes `~/.rib/history.rb`)
 
     rib
 
@@ -64,18 +64,23 @@ As a fully featured app console (yes, some commands could be used together)
 
     rib all auto # or `rib auto all`, the order doesn't really matter
 
-You can customize Rib's behaviour by setting `~/.config/rib/config.rb` (by
-default). Since it's merely a Ruby script which would be loaded into memory
-before launching Rib shell session, You can put any customization or monkey
-patch there. Personally, I use all plugins provided by Rib.
+You can customize Rib's behaviour by setting a config file located at
+`~/.rib/config.rb` or `~/.config/rib/config.rb`, or `$RIB_HOME/config.rb` by
+setting `$RIB_HOME` environment variable. Since it's merely a Ruby script
+which would be loaded into memory before launching Rib shell session, You can
+put any customization or monkey patch there. Personally, I use all plugins
+provided by Rib.
 
 <https://github.com/godfat/dev-tool/blob/master/.config/rib/config.rb>
 
 As you can see, putting `require 'rib/all'` into config file is exactly the
 same as running `rib all` without a config file. What `rib all` would do is
-merely require the file, and that file is also merely requiring all plugins.
-Suppose you only want to use the core plugins and color plugin, you'll put
-this into your config file:
+merely require the file, and that file is also merely requiring all plugins,
+but without **extra plugins**, which you should enable them one by one. This
+is because most extra plugins are depending on other gems, or hard to work
+with other plugins, or having strong personal tastes, so you won't want to
+enable them all. Suppose you only want to use the core plugins and color
+plugin, you'll put this into your config file:
 
     require 'rib/core'
     require 'rib/more/color'
@@ -98,12 +103,27 @@ So that we override the original format_result to pretty_inspect the result.
 You can also build your own gem and then simply require it in your config
 file. To see a list of overridable API, please read [api.rb][]
 
+Currently, there are two **extra plugins**.
+
+* `require 'rib/extra/autoindent'` This plugin is depending on:
+
+  1. [readline_buffer][]
+  2. readline plugin
+  3. multiline plugin
+
+* `require 'rib/extra/hirb'` This plugin is depending on:
+
+  1. [hirb][]
+
 [api.rb]: https://github.com/godfat/rib/blob/master/lib/rib/api.rb
+[readline_buffer]: https://github.com/godfat/readline_buffer
+[hirb]: https://github.com/cldwalker/hirb
 
 #### Basic configuration
 
 Rib.config                 | Functionality
--------------------------- | --------------------------------------
+-------------------------- | -------------------------------------------------
+ENV['RIB_HOME']            | Specify where Rib should store config and history
 Rib.config[:config]        | The path where config should be located
 Rib.config[:name]          | The name of this shell
 Rib.config[:result_prompt] | Default is "=>"
@@ -114,7 +134,7 @@ Rib.config[:exit]          | Commands to exit, default [nil, 'exit', 'quit']
 #### Plugin specific configuration
 
 Rib.config                     | Functionality
------------------------------- | --------------------------------------
+------------------------------ | ---------------------------------------------
 Rib.config[:completion]        | Completion: Bond config
 Rib.config[:history_file]      | Default is "~/.rib/config/history.rb"
 Rib.config[:history_size]      | Default is 500
