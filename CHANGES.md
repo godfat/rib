@@ -1,6 +1,6 @@
 # Rib CHANGES
 
-## Rib 0.9.1 --
+## Rib 0.9.1 -- 2011-08-19
 
 * [extra/autoindent] Autoindent plugin help you indent multiline editing.
   Note: This plugin is depending on [readline_buffer][], thus GNU Readline.
