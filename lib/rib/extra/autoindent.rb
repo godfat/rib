@@ -23,7 +23,7 @@ module Rib::Autoindent
     # rescue E => e
     # rescue E=> e
     # rescue E =>e
-    /^begin$/        => /^(end)$|^else$|^rescue\s*((\w+)?\s*(=>\s*\w+)?)?$/,
+    /^begin$/        => /^(end)$|^else$|^rescue *((\w+)? *(=> *\w+)?)?$/,
     # elsif Expression
     # consider cases:
     # elsif(true)
