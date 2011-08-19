@@ -1,5 +1,5 @@
 
-require 'rib/core/history'
+require 'rib/core/history' # dependency
 
 module Rib::SqueezeHistory
   include Rib::Plugin
