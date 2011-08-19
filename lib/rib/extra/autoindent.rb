@@ -27,6 +27,8 @@ module Rib::Autoindent
     autoindent_stack.clear if multiline_buffer.empty?
     Thread.new do
       sleep(0.01)
+      # this should be called after ::Readline.readline, but it's blocking,
+      # and i don't know if there's any hook to do this, so here we use thread
       ::Readline.line_buffer = current_autoindent
     end
     super
@@ -44,15 +46,15 @@ module Rib::Autoindent
   # --------------- Plugin API ---------------
 
   def handle_autoindent input
-    down, up = BLOCK_REGEXP.find{ |key,  _| input =~ key }
+    _, up = BLOCK_REGEXP.find{ |key,  _| input =~ key }
     if up
       autoindent_stack << up
       nil
     elsif input =~ autoindent_stack.last
-      if $1
+      if $1 # e.g. end, }, etc
         autoindent_stack.pop
         handle_last_line(input)
-      else
+      else # e.g. elsif, rescue, etc
         handle_last_line(input, current_autoindent(autoindent_stack.size-1))
       end
     end
