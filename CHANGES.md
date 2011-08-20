@@ -1,5 +1,9 @@
 # Rib CHANGES
 
+## Rib 0.9.2 -- ?
+
+* [extra/autoindent] It has been greatly improved. A lot more accurate.
+
 ## Rib 0.9.1 -- 2011-08-19
 
 * [extra/autoindent] Autoindent plugin help you indent multiline editing.
