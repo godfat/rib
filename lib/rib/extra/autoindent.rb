@@ -52,6 +52,10 @@ module Rib::Autoindent
     /do( *\|.*\|)?$/ => /^(end)\b/                ,
     /\{( *\|.*\|)?$/ => /^(\})\B/                 ,
     # those are too hard to deal with, so we use syntax error to double check
+    # what about this then?
+    # v = if true
+    #     else
+    #     end
   }
 
   # --------------- Rib API ---------------
