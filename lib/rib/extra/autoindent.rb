@@ -40,13 +40,18 @@ module Rib::Autoindent
     /^until/         => /^(end)\b/                ,
     # consider cases:
     # 'do
-    # "do
+    # ' do
+    # "' do
     # /do
     # '{
-    # "{
-    # /{
-    /[^'"\/]do( *\|.*\|)?$/ => /^(end)\b/         ,
-    /[^'"\/]\{( *\|.*\|)?$/ => /^(\})\B/          ,
+    # %q{
+    # %q| do
+    # hey, two lines are even harder!
+    # "
+    # begin
+    /do( *\|.*\|)?$/ => /^(end)\b/                ,
+    /\{( *\|.*\|)?$/ => /^(\})\B/                 ,
+    # those are too hard to deal with, so we use syntax error to double check
   }
 
   # --------------- Rib API ---------------
@@ -59,43 +64,73 @@ module Rib::Autoindent
 
   def get_input
     return super if Autoindent.disabled?
+    # this is only a fix in case we don't autoindent correctly
+    # if we're autoindenting 100% correct, then this is a useless check
     autoindent_stack.clear if multiline_buffer.empty?
+
+    # this should be called after ::Readline.readline, but it's blocking,
+    # and i don't know if there's any hook to do this, so here we use thread
     Thread.new do
       sleep(0.01)
-      # this should be called after ::Readline.readline, but it's blocking,
-      # and i don't know if there's any hook to do this, so here we use thread
       ::Readline.line_buffer = current_autoindent
     end
+
     super
   end
 
-  def loop_eval input
+  def eval_input raw_input
     return super if Autoindent.disabled?
-    if indented = handle_autoindent(input.strip)
-      super(indented)
-    else
-      super
-    end
+    input  = raw_input.strip
+    indent = detect_autoindent(input)
+    result, err = if indent.first.to_s.start_with?('left')
+                    super(handle_last_line(input))
+                  else
+                    super
+                  end
+    handle_autoindent(input, indent, err)
+    [result, err]
   end
 
   # --------------- Plugin API ---------------
 
-  def handle_autoindent input
-    _, up = BLOCK_REGEXP.find{ |key,  _| input =~ key }
-    if up
-      autoindent_stack << up
-      nil
+  def detect_autoindent input
+    _, backmark = BLOCK_REGEXP.find{ |key,  _| input =~ key }
+    if backmark # e.g. begin
+      [:right, backmark]
     elsif input =~ autoindent_stack.last
-      if $1 # e.g. end, }, etc
-        autoindent_stack.pop
-        handle_last_line(input)
-      else # e.g. elsif, rescue, etc
-        handle_last_line(input, current_autoindent(autoindent_stack.size-1))
+      if $1     # e.g. end, }, etc
+        [:left_end]
+      else      # e.g. elsif, rescue, etc
+        [:left_tmp]
       end
+    else
+      [:stay]
     end
   end
 
-  def handle_last_line input, indent=current_autoindent
+  def handle_autoindent input, indent, err
+    case indent.first
+    when :right    # we need to go deeper
+      if multiline?(err)
+        if err.message =~ /unterminated \w+ meets end of file/
+          # skip if we're in the middle of a string or regexp
+        else
+          # indent.last is the way (input regexp matches) to go back
+          autoindent_stack << indent.last
+        end
+      end
+
+    when :left_end # we need to go back
+      # could happen in either multiline or not
+      autoindent_stack.pop
+
+    when :left_tmp # temporarily go back
+      handle_last_line(input) if multiline?(err)
+    end
+  end
+
+  def handle_last_line input,
+                       indent=current_autoindent(autoindent_stack.size-1)
     new_input = "#{indent}#{input}"
     puts("\e[1A\e[K#{prompt}#{new_input}")
     new_input
