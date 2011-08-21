@@ -76,7 +76,8 @@ module Rib::Autoindent
     # and i don't know if there's any hook to do this, so here we use thread
     Thread.new do
       sleep(0.01)
-      ::Readline.line_buffer = current_autoindent
+      ::Readline.line_buffer = current_autoindent if
+        ::Readline.line_buffer.empty?
     end
 
     super
