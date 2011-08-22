@@ -4,7 +4,7 @@
 
 * [extra/autoindent] It has been greatly improved. A lot more accurate.
 * [extra/autoindent] Fixed a bug when you're typing too fast upon rib
-                     launching, it might eat your input.
+                     launching, it might eat your input. Thanks bootleq.
 
 ## Rib 0.9.1 -- 2011-08-19
 
