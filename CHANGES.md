@@ -1,6 +1,6 @@
 # Rib CHANGES
 
-## Rib 0.9.2 -- ?
+## Rib 0.9.2 -- 2011-08-25
 
 * [extra/autoindent] It has been greatly improved. A lot more accurate.
 * [extra/autoindent] Fixed a bug when you're typing too fast upon rib

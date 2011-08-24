@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rib}
-  s.version = "0.9.1"
+  s.version = "0.9.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Lin Jen-Shin (godfat)}]
-  s.date = %q{2011-08-21}
+  s.date = %q{2011-08-25}
   s.description = %q{Ruby-Interactive-ruBy -- Yet another interactive Ruby shell
 
 Rib is based on the design of [ripl][] and the work of [ripl-rc][], some of
