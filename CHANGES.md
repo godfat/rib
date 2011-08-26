@@ -1,5 +1,16 @@
 # Rib CHANGES
 
+## Rib 0.9.3 -- ?
+
+* [rib] Calling `Rib.shell` would no longer automatically `require 'rib/core'`
+        anymore. This is too messy. We should only do this in `bin/rib`.
+        See: commit:7a97441afeecae80f5493f4e8a4a6ba3044e2c33
+
+            require 'rib/more/anchor'
+            Rib.anchor 123
+
+        Should no longer crashed... Thanks Andrew.
+
 ## Rib 0.9.2 -- 2011-08-25
 
 * [extra/autoindent] It has been greatly improved. A lot more accurate.
