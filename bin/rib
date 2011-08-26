@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 
 require 'rib/runner'
+require 'rib/core'
 Rib::Runner.run(ARGV)
