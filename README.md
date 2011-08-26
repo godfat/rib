@@ -146,8 +146,9 @@ Rib.config[:autoindent_spaces] | How to indent? Default is two spaces: '  '
 Rib could be used as a kind of debugging tool which you can set break point
 in the source program.
 
-    require 'rib/config' # This would load your ~/.config/rib/config.rb
-    require 'rib/anchor' # If you enabled this in config, then needed not.
+    require 'rib/config' # This would load your Rib config
+    require 'rib/more/anchor'
+                         # If you enabled anchor in config, then needed not
     Rib.anchor binding   # This would give you an interactive shell
                          # when your program has been executed here.
     Rib.anchor 123       # You can also anchor on an object.
