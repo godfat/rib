@@ -1,6 +1,6 @@
 # Rib CHANGES
 
-## Rib 0.9.3 -- ?
+## Rib 0.9.3 -- 2011-08-28
 
 * [rib] Calling `Rib.shell` would no longer automatically `require 'rib/core'`
         anymore. This is too messy. We should only do this in `bin/rib`.
