@@ -15,34 +15,48 @@ module Rib::Rails
       Rib::Rails.load_rails3
     else
       Rib::Rails.load_rails2
-      puts("Loading #{::Rails.env} environment (Rails #{::Rails.version})")
     end
   end
 
   def load_rails2
+    optparse_env
+    Rib.silence{
+      # rails 2 is so badly written
+      require 'stringio'
+       stderr = $stderr
+      $stderr = StringIO.new
+      Object.const_set('RAILS_ENV', ENV['RAILS_ENV'])
+      $stderr = stderr
+    }
+
+    # copied from commands/console
     ['./config/environment',
      'console_app'         ,
      'console_with_helpers'].each{ |f| require f }
+
+    optparse_rails
   end
 
   def load_rails3
-    # begin copied from rails/commands/console
+    optparse_env
+
+    # copied from rails/commands
+    require './config/application'
+    ::Rails.application.require_environment!
+
+    optparse_rails
+  end
+
+  # copied from rails/commands/console
+  def optparse_env
     # Has to set the RAILS_ENV before config/application is required
     if ARGV.first && !ARGV.first.index("-") && env = ARGV.shift # has to shift the env ARGV so IRB doesn't freak
       ENV['RAILS_ENV'] = %w(production development test).detect {|e| e =~ /^#{env}/} || env
     end
-    # end copied from rails/commands/console
-
-    # begin copied from rails/commands
-    require './config/application'
-    ::Rails.application.require_environment!
-    # end copied from rails/commands
-
-    optparse_rails3
   end
 
   # copied from rails/commands/console
-  def optparse_rails3 app=::Rails.application
+  def optparse_rails
     require 'optparse'
     options = {}
 
@@ -53,8 +67,14 @@ module Rib::Rails
       opt.parse!(ARGV)
     end
 
-    app.sandbox = options[:sandbox]
-    app.load_console
+      # rails 3
+    if ::Rails.respond_to?(:application) && (app = ::Rails.application)
+      app.sandbox = options[:sandbox]
+      app.load_console
+    else
+      # rails 2
+      require 'console_sandbox' if options[:sandbox]
+    end
 
     if options[:debugger]
       begin
