@@ -1,5 +1,20 @@
 # Rib CHANGES
 
+## Rib 0.9.4 -- 2011-09-01
+
+* [rib-rails] So now we replicated what Rails did for its console, both for
+  Rails 2 and Rails 3. You can now fully use `rib rails` or `rib auto` as
+  `rails console` or `./script/console` in respect to Rails 2 or 3. For
+  example, it works for:
+
+      rib auto production
+      rib rails production
+      rib auto test --debugger # remember to add ruby-debug(19)? to Gemfile
+      rib auto test --sandbox
+      rib rails test --debugger --sandbox
+
+  It should also make Rails 3 print SQL log to stdout. Thanks tka.
+
 ## Rib 0.9.3 -- 2011-08-28
 
 * [rib] Calling `Rib.shell` would no longer automatically `require 'rib/core'`
