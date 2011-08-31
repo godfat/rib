@@ -46,11 +46,14 @@ As IRB (reads `~/.rib/config.rb` writes `~/.rib/history.rb`)
 As Rails console
 
     rib rails
-    # You could also run in production and pass arguments normally as you'd do
-    # in `rails console` or `./script/console`
+
+You could also run in production and pass arguments normally as you'd do in
+`rails console` or `./script/console`
+
     rib rails production --sandbox --debugger
-    # Note: You might need to add ruby-debug or ruby-debug19 to your Gemfile
-    #       if you're passing --debugger and using bundler together.
+
+Note: You might need to add ruby-debug or ruby-debug19 to your Gemfile if
+you're passing --debugger and using bundler together.
 
 As Ramaze console
 
@@ -60,8 +63,11 @@ As a console for whichever the app in the current path
 it should be (for now, it's either Rails or Ramaze)
 
     rib auto
-    # If you're trying to use `rib auto` for a Rails app, you could also
-    # pass arugments as if you were using `rib rails`
+
+If you're trying to use `rib auto` for a Rails app, you could also pass
+arguments as if you were using `rib rails`. `rib auto` is merely passing
+arguments.
+
     rib auto production --sandbox --debugger
 
 As a fully featured interactive Ruby shell (as ripl-rc)
