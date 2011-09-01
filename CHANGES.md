@@ -1,5 +1,9 @@
 # Rib CHANGES
 
+## Rib 0.9.5 -- ?
+
+* [rib-rails] Fixed Rails 3 (sandbox) and Rails 2 (env) console
+
 ## Rib 0.9.4 -- 2011-09-01
 
 * [rib-rails] So now we replicated what Rails did for its console, both for
