@@ -13,10 +13,10 @@ class Rib::Shell
   attr_reader :config
   def initialize(config={})
     self.config = {
-      :result_prompt => '=> '                    ,
-      :prompt        => '>> '                    ,
-      :binding       => TOPLEVEL_BINDING         ,
-      :exit          => [nil, 'exit', 'quit']    ,
+      :result_prompt => '=> '                ,
+      :prompt        => '>> '                ,
+      :binding       => TOPLEVEL_BINDING     ,
+      :exit          => [nil, 'exit', 'quit'],
       :line          => 1
     }.merge(config)
     @running = false
