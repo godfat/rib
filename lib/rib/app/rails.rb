@@ -61,7 +61,7 @@ module Rib::Rails
     options = {}
 
     OptionParser.new do |opt|
-      opt.banner = "Usage: console [environment] [options]"
+      opt.banner = "Usage: rib rails [environment] [options]"
       opt.on('-s', '--sandbox', 'Rollback database modifications on exit.') { |v| options[:sandbox] = v }
       opt.on("--debugger", 'Enable ruby-debugging for the console.') { |v| options[:debugger] = v }
       opt.parse!(ARGV)
