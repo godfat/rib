@@ -2,6 +2,8 @@
 require 'rib/shell'
 
 module Rib
+  autoload :VERSION, 'rib/version'
+
   module_function
   # All default Rib configs, would be passed to Shell.new in Rib.shell,
   # but calling Shell.new directly won't bring this in.
