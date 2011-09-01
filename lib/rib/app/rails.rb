@@ -69,8 +69,14 @@ module Rib::Rails
 
       # rails 3
     if ::Rails.respond_to?(:application) && (app = ::Rails.application)
-      app.sandbox = options[:sandbox]
-      app.load_console
+      # rails 3.1
+      if app.respond_to?(:sandbox)
+        app.sandbox = options[:sandbox]
+        app.load_console
+      # rails 3.0
+      else
+        app.load_console(options[:sandbox])
+      end
     else
       # rails 2
       require 'console_sandbox' if options[:sandbox]
