@@ -74,11 +74,13 @@ module Rib::Runner
       when /-e=?(.+)?/, /--eval=?(.+)?/
         eval($1 || argv.shift, binding, __FILE__, __LINE__)
 
-      when '-d', '--debug'
+      when /-d/, '--debug'
         $DEBUG = true
+        argv.unshift("-#{arg[2..-1]}") if arg.size > 2
 
-      when '-w', '--warn'
+      when /-w/, '--warn'
         $-w, $VERBOSE = true, true
+        argv.unshift("-#{arg[2..-1]}") if arg.size > 2
 
       when /-I=?(.+)?/, /--include=?(.+)?/
         paths = ($1 || argv.shift).split(':')
@@ -90,14 +92,15 @@ module Rib::Runner
       when /-c=?(.+)?/, /--config=?(.+)?/
         Rib.config[:config] = $1 || argv.shift
 
-      when '-n', '--no-config'
+      when /-n/, '--no-config'
         Rib.config.delete(:config)
+        argv.unshift("-#{arg[2..-1]}") if arg.size > 2
 
-      when '-h', '--help'
+      when /-h/, '--help'
         puts(help)
         exit
 
-      when '-v', '--version'
+      when /-v/, '--version'
         require 'rib/version'
         puts(Rib::VERSION)
         exit
