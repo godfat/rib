@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
 require 'rib/runner'
-require 'rib/core'
+Rib.config[:mimic_irb] = true
 Rib::Runner.run(ARGV)
