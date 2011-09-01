@@ -3,7 +3,9 @@
 ## Rib 0.9.5 -- ?
 
 * [rib-rails] Fixed Rails3 (sandbox) and Rails2 (env) console. Thanks bootleq
-* [rib-min]   Fixed not being really minimum
+* [rib-min] Fixed not being really minimum
+* [rib] Now you can run it with `rib -wdIlib`, isn't it convenient?
+  It's equivalent to `rib -w -d -I lib` or `rib -w -d -I=lib`
 
 ## Rib 0.9.4 -- 2011-09-01
 
