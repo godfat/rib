@@ -25,7 +25,7 @@ module Rib::Rails
       require 'stringio'
        stderr = $stderr
       $stderr = StringIO.new
-      Object.const_set('RAILS_ENV', ENV['RAILS_ENV'])
+      Object.const_set('RAILS_ENV', ENV['RAILS_ENV'] || 'development')
       $stderr = stderr
     }
 
