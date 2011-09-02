@@ -12,12 +12,6 @@ task 'gem:spec' do
     s.version     = Rib::VERSION
 
     %w[].each{ |g| s.add_runtime_dependency(g) }
-    %w[bond
-       hirb
-       readline_buffer
-       bacon
-       rr
-       rake].each{ |g| s.add_development_dependency(g) }
   end
 
   Gemgem.write
