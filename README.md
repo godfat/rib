@@ -184,6 +184,7 @@ starting from 1.
 
 Whenever you called:
 
+    require 'rib/more/edit'
     Rib.edit
 
 Rib would open an editor according to $EDITOR (`ENV['EDITOR']`) for you.
