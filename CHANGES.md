@@ -1,6 +1,6 @@
 # Rib CHANGES
 
-## Rib 0.9.5 -- ?
+## Rib 0.9.5 -- 2011-09-03
 
 * [rib-rails] Fixed Rails3 (sandbox) and Rails2 (env) console. Thanks bootleq
 * [rib-min] Fixed not being really minimum
