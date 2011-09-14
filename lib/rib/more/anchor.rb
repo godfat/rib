@@ -53,16 +53,16 @@ module Rib::Anchor
   end
 
   module Imp
-    def anchor obj_or_binding
+    def anchor obj_or_binding, opts={}
       return if Rib::Anchor.disabled?
 
       if Rib.shell.running?
         Rib.shells << Rib::Shell.new(
           Rib.shell.config.merge( :binding => obj_or_binding,
-                                  :anchor  => true          ))
+                                  :anchor  => true          ).merge(opts))
       else
           Rib.shell.config.merge!(:binding => obj_or_binding,
-                                  :anchor  => true          )
+                                  :anchor  => true          ).merge(opts)
       end
 
       Rib.shell.loop
