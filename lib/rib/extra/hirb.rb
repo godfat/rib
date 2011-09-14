@@ -18,9 +18,10 @@ begin
     require 'hirb'
     ::Hirb.enable
   }
-rescue LoadError
-  Rib.warn("Please install hirb to use hirb plugin:\n",
-           "    gem install hirb\n",
+rescue LoadError => e
+  Rib.warn("Error: #{e}"                              ,
+           "Please install hirb to use hirb plugin:\n",
+           "    gem install hirb\n"                   ,
            "Or add hirb to Gemfile if that's the case")
   Rib::Hirb.disable
 end

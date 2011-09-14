@@ -5,7 +5,7 @@ module Rib::Rails
   def load
     load_rails
   rescue LoadError => e
-    Rib.abort("Is this a Rails app?\n  #{e}")
+    Rib.abort("Error: #{e}", "Is this a Rails app?")
   end
 
   def load_rails

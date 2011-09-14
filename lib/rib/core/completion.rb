@@ -26,9 +26,10 @@ end
 
 begin
   Rib.silence{require 'bond'}
-rescue LoadError
-  Rib.warn("Please install bond to use completion plugin:\n",
-           "    gem install bond\n",
-           "Or add bond to Gemfile if that's the case")
+rescue LoadError => e
+  Rib.warn("Error: #{e}"                                    ,
+           "Please install bond to use completion plugin:\n",
+           "    gem install bond\n"                         ,
+           "Or add bond to Gemfile if that's the case"      )
   Rib::Completion.disable
 end

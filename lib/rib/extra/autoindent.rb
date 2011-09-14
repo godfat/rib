@@ -155,9 +155,10 @@ end
 
 begin
   require 'readline_buffer'
-rescue LoadError
-  Rib.warn("Please install readline_buffer to use autoindent plugin:\n",
-           "    gem install readline_buffer\n",
-           "Or add readline_buffer to Gemfile if that's the case")
+rescue LoadError => e
+  Rib.warn("Error: #{e}"                                               ,
+           "Please install readline_buffer to use autoindent plugin:\n",
+           "    gem install readline_buffer\n"                         ,
+           "Or add readline_buffer to Gemfile if that's the case"      )
   Rib::Autoindent.disable
 end

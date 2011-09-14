@@ -5,7 +5,7 @@ module Rib::Ramaze
   def load
     load_ramaze
   rescue LoadError => e
-    Rib.abort("Is this a Ramaze app?\n  #{e}")
+    Rib.abort("Error: #{e}", "Is this a Ramaze app?")
   end
 
   def load_ramaze

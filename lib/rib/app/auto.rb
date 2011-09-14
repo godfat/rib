@@ -16,7 +16,7 @@ module Rib::Auto
       begin
         app.load
       rescue LoadError => e
-        Rib.warn("Is this a #{app} app?\n  #{e}")
+        Rib.warn("Error: #{e}", "Is this a #{app} app?")
       end
     else
       Rib.warn("No app found")
