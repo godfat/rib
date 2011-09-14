@@ -18,7 +18,7 @@ module Rib::Anchor
 
   def prompt
     return super if Rib::Anchor.disabled?
-    return super unless config[:anchor]
+    return super unless config[:prompt_anchor]
 
     level = "(#{Rib.shells.size - 1})"
     if Rib.const_defined?(:Color) &&
@@ -58,11 +58,13 @@ module Rib::Anchor
 
       if Rib.shell.running?
         Rib.shells << Rib::Shell.new(
-          Rib.shell.config.merge( :binding => obj_or_binding,
-                                  :anchor  => true          ).merge(opts))
+          Rib.shell.config.merge( :binding       => obj_or_binding,
+                                  :prompt_anchor => true         ).
+                           merge(opts))
       else
-          Rib.shell.config.merge!(:binding => obj_or_binding,
-                                  :anchor  => true          ).merge(opts)
+          Rib.shell.config.merge!(:binding       => obj_or_binding,
+                                  :prompt_anchor => true         ).
+                           merge!(opts)
       end
 
       Rib.shell.loop
