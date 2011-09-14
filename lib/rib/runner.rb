@@ -39,7 +39,7 @@ module Rib::Runner
     @command_names ||=
     Gem.path.map{ |path|
       Dir["#{path}/bin/*"].map{ |f|
-        (File.executable?(f) && File.basename(f) =~ /^rib\-(\w+)$/ && $1) ||
+        (File.executable?(f) && File.basename(f) =~ /^rib\-(.+)$/ && $1) ||
          nil    # a trick to make false to be nil and then
       }.compact # this compact could eliminate them
     }.flatten
