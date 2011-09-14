@@ -32,14 +32,17 @@ module Rib::Runner
 
   def commands
      @commands ||=
-      command_names.map{ |n| [n, command_descriptions[n] || ' '] }
+      command_paths.map{ |path|
+        name = File.basename(path)[/^rib\-(.+)$/, 1]
+        [name, command_descriptions[name]      ||
+               command_descriptions_find(path) || ' '] }
   end
 
-  def command_names
-    @command_names ||=
+  def command_paths
+    @command_paths ||=
     Gem.path.map{ |path|
       Dir["#{path}/bin/*"].map{ |f|
-        (File.executable?(f) && File.basename(f) =~ /^rib\-(.+)$/ && $1) ||
+        (File.executable?(f) && File.basename(f) =~ /^rib\-.+$/ && f) ||
          nil    # a trick to make false to be nil and then
       }.compact # this compact could eliminate them
     }.flatten
@@ -52,6 +55,12 @@ module Rib::Runner
      'auto'   => 'Run as Rails or Ramaze console (auto-detect)',
      'rails'  => 'Run as Rails console'                        ,
      'ramaze' => 'Run as Ramaze console'                       }
+  end
+
+  # Extract the text below __END__ in the bin file as the description
+  def command_descriptions_find path
+    File.read(path) =~ /Gem\.bin_path\(['"](.+)['"], ['"](.+)['"],/
+    File.read(Gem.bin_path($1, $2))[/\n__END__\n(.+)$/m, 1].strip
   end
 
   def run argv=ARGV
