@@ -84,7 +84,7 @@ module Rib::Color
   end
 
   def color rgb
-    "\x1b[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
+    "\e[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
   end
 
   def   black &block; color(30, &block); end
