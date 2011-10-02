@@ -8,8 +8,8 @@ desc 'Generate gemspec'
 task 'gem:spec' do
   Gemgem.spec = Gemgem.create do |s|
     require 'rib/version'
-    s.name        = 'rib'
-    s.version     = Rib::VERSION
+    s.name    = 'rib'
+    s.version = Rib::VERSION
 
     %w[].each{ |g| s.add_runtime_dependency(g) }
   end
