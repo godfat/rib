@@ -95,5 +95,5 @@ module Rib::Color
   def magenta &block; color(35, &block); end
   def    cyan &block; color(36, &block); end
   def   white &block; color(37, &block); end
-  def   reset &block; color('', &block); end
+  def   reset &block; color( 0, &block); end
 end
