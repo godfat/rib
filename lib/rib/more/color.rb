@@ -84,7 +84,7 @@ module Rib::Color
   end
 
   def color rgb
-    "\e[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
+    "\e[#{rgb}m" + if block_given? then "#{yield}#{reset}" else '' end
   end
 
   def   black &block; color(30, &block); end
