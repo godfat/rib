@@ -97,3 +97,13 @@ module Rib::Color
   def   white &block; color(37, &block); end
   def   reset &block; color( 0, &block); end
 end
+
+begin
+  require 'win32console' if defined?(Gem) && Gem.win_platform?
+rescue LoadError => e
+  Rib.warn("Error: #{e}"                                                  ,
+           "Please install win32console to use color plugin on Windows:\n",
+           "    gem install win32console\n"                               ,
+           "Or add win32console to Gemfile if that's the case"            )
+  Rib::Color.disable
+end
