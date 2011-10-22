@@ -18,11 +18,11 @@ describe Rib::Color do
     @color.send(:format_color,
       [{0 => :a}, 'b', [nil, {false => Object}], {true => Exception.new}]).
         should.eq \
-          "\e[34m[\e[m\e[34m{\e[m\e[31m0\e[m\e[34m=>\e[m\e[36m:a\e[m\e[" \
-          "34m}\e[m\e[34m, \e[m\e[32m\"b\"\e[m\e[34m, \e[m\e[34m[\e[m\e" \
-          "[35mnil\e[m\e[34m, \e[m\e[34m{\e[m\e[35mfalse\e[m\e[34m=>\e[" \
-          "m\e[33mObject\e[m\e[34m}\e[m\e[34m]\e[m\e[34m, \e[m\e[34m{\e" \
-          "[m\e[35mtrue\e[m\e[34m=>\e[m\e[35m#<Exception: Exception>\e[" \
-          "m\e[34m}\e[m\e[34m]\e[m"
+          "\e[34m[\e[0m\e[34m{\e[0m\e[31m0\e[0m\e[34m=>\e[0m\e[36m:a\e[0m\e" \
+          "[34m}\e[0m\e[34m, \e[0m\e[32m\"b\"\e[0m\e[34m, \e[0m\e[34m[\e[0m" \
+          "\e[35mnil\e[0m\e[34m, \e[0m\e[34m{\e[0m\e[35mfalse\e[0m\e[34m=>"  \
+          "\e[0m\e[33mObject\e[0m\e[34m}\e[0m\e[34m]\e[0m\e[34m, \e[0m\e[34m"\
+          "{\e[0m\e[35mtrue\e[0m\e[34m=>\e[0m\e[35m#<Exception: Exception>"  \
+          "\e[0m\e[34m}\e[0m\e[34m]\e[0m"
   end
 end
