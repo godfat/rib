@@ -1,5 +1,20 @@
 # Rib CHANGES
 
+## Rib 0.9.9 -- ?
+
+### Bugs fixes
+
+* [more/color] Fixed Windows coloring support.
+* [more/color] Properly reset ANSI sequence.
+
+### Enhancement
+
+* [commands] Extract commands description under `__END__` in the commands.
+  Please read [rib-rest-core][] as an example.
+* [rib] Always show original errors if anything is wrong.
+
+[rib-rest-core]: https://github.com/cardinalblue/rest-core/blob/rest-core-0.7.0/bin/rib-rest-core#L21-22
+
 ## Rib 0.9.5 -- 2011-09-03
 
 * [rib-rails] Fixed Rails3 (sandbox) and Rails2 (env) console. Thanks bootleq
