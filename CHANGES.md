@@ -1,6 +1,6 @@
 # Rib CHANGES
 
-## Rib 0.9.9 -- ?
+## Rib 0.9.9 -- 2011-10-26
 
 ### Bugs fixes
 
