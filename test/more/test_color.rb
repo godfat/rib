@@ -5,16 +5,14 @@ require 'rib/more/color'
 describe Rib::Color do
   behaves_like :rib
 
-  before do
+  should 'give correct color' do
     @color = Class.new do
       include Rib::Color
       def colors
         @colors ||= Rib::Shell.new.before_loop.config[:color]
       end
     end.new
-  end
 
-  should 'give correct color' do
     @color.send(:format_color,
       [{0 => :a}, 'b', [nil, {false => Object}], {true => Exception.new}]).
         should.eq \
