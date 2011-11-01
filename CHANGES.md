@@ -1,5 +1,11 @@
 # CHANGES
 
+## Rib 1.0.0 -- ?
+
+### Bugs fixes
+
+* [more/color] Fixed a bug for displaying `1/0`. Fixed #4, thanks @bootleq
+
 ## Rib 0.9.9 -- 2011-10-26
 
 ### Bugs fixes
