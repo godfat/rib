@@ -62,18 +62,22 @@ module Rib::Color
   def get_error err, backtrace=err.backtrace
     return super if Color.disabled?
     [format_color(err, "#{err.class.to_s}: #{err.message}"),
-     backtrace.map{ |b|
-       path, msgs = b.split(':', 2)
-       dir , file = ::File.split(path)
-       msg = msgs.sub(/(\d+):/){red{$1}+':'}.sub(/`.+?'/){green{$&}}
-
-       "#{dir+'/'}#{yellow{file}}:#{msg}"
-     }]
+     colorize_backtrace(backtrace)]
   end
 
 
 
   module_function
+  def colorize_backtrace backtrace
+    backtrace.map{ |b|
+      path, msgs = b.split(':', 2)
+      dir , file = ::File.split(path)
+      msg = msgs.sub(/(\d+):/){red{$1}+':'}.sub(/`.+?'/){green{$&}}
+
+      "#{dir+'/'}#{yellow{file}}:#{msg}"
+    }
+  end
+
   def find_color colors, value
     (colors.sort{ |(k1, v1), (k2, v2)|
       # Class <=> Class
