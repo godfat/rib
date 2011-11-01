@@ -29,7 +29,7 @@ describe Rib::Color do
     begin
       line = __LINE__; 1/0
     rescue ZeroDivisionError => e
-      Rib::Color.colorize_backtrace(e.backtrace).first.should.eq \
+      Rib::Color.colorize_backtrace(e.backtrace).first.should.end_with? \
         "test/more/#{Rib::Color.yellow{'test_color.rb'}}:" \
         "#{Rib::Color.red{line}}:in #{Rib::Color.green{"`/'"}}"
     end
