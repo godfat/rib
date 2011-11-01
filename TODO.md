@@ -1,4 +1,4 @@
-# Rib TODO
+# TODO
 
 * Runner tests
 * Documentation

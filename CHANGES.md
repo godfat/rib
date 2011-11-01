@@ -1,4 +1,4 @@
-# Rib CHANGES
+# CHANGES
 
 ## Rib 0.9.9 -- 2011-10-26
 
