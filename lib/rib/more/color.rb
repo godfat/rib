@@ -63,11 +63,11 @@ module Rib::Color
     return super if Color.disabled?
     [format_color(err, "#{err.class.to_s}: #{err.message}"),
      backtrace.map{ |b|
-       path, rest = ::File.split(b)
-       name, msgs = rest.split(':', 2)
+       path, msgs = b.split(':', 2)
+       dir , file = ::File.split(path)
        msg = msgs.sub(/(\d+):/){red{$1}+':'}.sub(/`.+?'/){green{$&}}
 
-       "#{path+'/'}#{yellow{name}}:#{msg}"
+       "#{dir+'/'}#{yellow{file}}:#{msg}"
      }]
   end
 
