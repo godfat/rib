@@ -27,11 +27,11 @@ describe Rib::Color do
   # regression test
   should "colorize errors with `/' inside" do
     begin
-      1/0
+      line = __LINE__; 1/0
     rescue ZeroDivisionError => e
       Rib::Color.colorize_backtrace(e.backtrace).first.should.eq \
         "test/more/#{Rib::Color.yellow{'test_color.rb'}}:" \
-        "#{Rib::Color.red{32}}:in #{Rib::Color.green{"`/'"}}"
+        "#{Rib::Color.red{line}}:in #{Rib::Color.green{"`/'"}}"
     end
   end
 end
