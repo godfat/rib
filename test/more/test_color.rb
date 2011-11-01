@@ -25,4 +25,15 @@ describe Rib::Color do
           "{\e[0m\e[35mtrue\e[0m\e[34m=>\e[0m\e[35m#<Exception: Exception>"  \
           "\e[0m\e[34m}\e[0m\e[34m]\e[0m"
   end
+
+  # regression test
+  should "colorize errors with `/' inside" do
+    begin
+      1/0
+    rescue ZeroDivisionError => e
+      Rib::Color.colorize_backtrace(e.backtrace).first.should.eq \
+        "test/more/#{Rib::Color.yellow{'test_color.rb'}}:" \
+        "#{Rib::Color.red{32}}:in #{Rib::Color.green{"`/'"}}"
+    end
+  end
 end
