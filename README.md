@@ -5,7 +5,7 @@ by Lin Jen-Shin ([godfat](http://godfat.org))
 ## LINKS:
 
 * [github](https://github.com/godfat/rib)
-* [rubygems](http://rubygems.org/gems/rib)
+* [rubygems](https://rubygems.org/gems/rib)
 * [rdoc](http://rdoc.info/github/godfat/rib)
 
 ## DESCRIPTION:
