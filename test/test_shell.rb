@@ -16,9 +16,11 @@ describe Rib::Shell do
       @shell.loop
       true.should.eq true
     end
-    should 'exit'   do                    input('exit') end
-    should 'quit'   do                    input('quit') end
-    should 'ctrl+d' do mock(@shell).puts; input(nil)    end
+    should 'exit'      do                               input('exit' ) end
+    should 'also exit' do                               input(' exit') end
+    should 'ctrl+d'    do mock(@shell).puts           ; input(nil)     end
+    should ':q'        do @shell.config[:exit] << ':q'; input(':q')    end
+    should '\q'        do @shell.config[:exit] << '\q'; input('\q')    end
   end
 
   describe '#loop_once' do
