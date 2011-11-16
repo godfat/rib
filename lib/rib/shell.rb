@@ -16,7 +16,7 @@ class Rib::Shell
       :result_prompt => '=> '           ,
       :prompt        => '>> '           ,
       :binding       => TOPLEVEL_BINDING,
-      :exit          => [nil, 'exit']   ,
+      :exit          => [nil]           ,
       :line          => 1               }.merge(config)
     @running = false
   end
