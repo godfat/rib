@@ -64,6 +64,8 @@ module Rib::API
   # Evaluate the input using #loop_eval and handle it
   def eval_input input
     [loop_eval(input), nil]
+  rescue SystemExit
+    throw(:rib_exit, input)
   rescue Exception => e
     [nil, e]
   ensure
