@@ -1,4 +1,5 @@
 
+require 'rib/core/history'   # otherwise the order might be wrong
 require 'rib/core/readline'  # dependency
 require 'rib/core/multiline' # dependency
 
