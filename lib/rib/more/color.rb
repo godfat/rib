@@ -8,18 +8,7 @@ module Rib::Color
   # --------------- Rib API ---------------
 
   def before_loop
-    config[:color] ||= {
-      Numeric    => :red    ,
-      String     => :green  ,
-      Symbol     => :cyan   ,
-      Array      => :blue   ,
-      Hash       => :blue   ,
-      NilClass   => :magenta,
-      TrueClass  => :magenta,
-      FalseClass => :magenta,
-      Exception  => :magenta,
-      Object     => :yellow
-    }
+    colors
     super
   end
 
@@ -30,7 +19,19 @@ module Rib::Color
 
   # --------------- Plugin API ---------------
 
-  def colors; config[:color]; end
+  def colors
+    config[:color] ||= {
+      Numeric    => :red    ,
+      String     => :green  ,
+      Symbol     => :cyan   ,
+      Array      => :blue   ,
+      Hash       => :blue   ,
+      NilClass   => :magenta,
+      TrueClass  => :magenta,
+      FalseClass => :magenta,
+      Exception  => :magenta,
+      Object     => :yellow }
+  end
 
   def format_color result, display=result.inspect
     case result

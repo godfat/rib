@@ -62,7 +62,7 @@ module Rib::Autoindent
 
   def before_loop
     return super if Autoindent.disabled?
-    config[:autoindent_spaces] ||= '  '
+    autoindent_spaces
     super
   end
 
@@ -145,7 +145,11 @@ module Rib::Autoindent
 
   private
   def current_autoindent size=autoindent_stack.size
-    config[:autoindent_spaces] * size
+    autoindent_spaces * size
+  end
+
+  def autoindent_spaces
+    config[:autoindent_spaces] ||= '  '
   end
 
   def autoindent_stack

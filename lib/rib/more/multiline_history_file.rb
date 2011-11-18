@@ -9,7 +9,7 @@ module Rib::MultilineHistoryFile
 
   def before_loop
     return super if MultilineHistoryFile.disabled?
-    config[:multiline_history_file_token] ||= ' '
+    multiline_history_file_token
     super
   end
 
@@ -23,7 +23,7 @@ module Rib::MultilineHistoryFile
         if line.end_with?(
              "#{config[:multiline_history_file_token]}\n")
           buffer << line[0...
-               -config[:multiline_history_file_token].size-1] + "\n"
+                         -multiline_history_file_token.size-1] + "\n"
         else
           history << (buffer.join + line).chomp
           buffer = []
@@ -38,5 +38,12 @@ module Rib::MultilineHistoryFile
       line.gsub("\n", "#{config[:multiline_history_file_token]}\n")
     }
     super
+  end
+
+
+
+  private
+  def multiline_history_file_token
+    config[:multiline_history_file_token] ||= ' '
   end
 end

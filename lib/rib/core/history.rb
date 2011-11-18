@@ -10,8 +10,8 @@ module Rib::History
 
   def before_loop
     return super if History.disabled?
-    config[:history_file] ||= File.join(Rib.home, 'history.rb')
-    config[:history_size] ||= 500
+    history_file
+    history_size
     FileUtils.mkdir_p(File.dirname(history_file_path))
     read_history
     Rib.say("History read from: #{history_file_path}") if $VERBOSE
@@ -46,13 +46,21 @@ module Rib::History
   def write_history
     return super if History.disabled?
     File.open(history_file_path, 'w'){ |f|
-      f.puts(history.to_a.last(config[:history_size]).join("\n")) }
+      f.puts(history.to_a.last(history_size).join("\n")) }
   end
 
 
 
   private
+  def history_file
+    config[:history_file]      ||= File.join(Rib.home, 'history.rb')
+  end
+
   def history_file_path
-    config[:history_file_path] ||= File.expand_path(config[:history_file])
+    config[:history_file_path] ||= File.expand_path(history_file)
+  end
+
+  def history_size
+    config[:history_size] ||= 500
   end
 end
