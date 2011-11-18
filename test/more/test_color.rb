@@ -26,12 +26,20 @@ describe Rib::Color do
 
   # regression test
   should "colorize errors with `/' inside" do
+    i = if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+          1
+        else
+          0
+        end
+
     begin
       line = __LINE__; 1/0
     rescue ZeroDivisionError => e
-      Rib::Color.colorize_backtrace(e.backtrace).first.should.end_with? \
-        "test/more/#{Rib::Color.yellow{'test_color.rb'}}:" \
-        "#{Rib::Color.red{line}}:in #{Rib::Color.green{"`/'"}}"
+      msg = "test/more/#{Rib::Color.yellow{'test_color.rb'}}:" \
+            "#{Rib::Color.red{line}}:in #{Rib::Color.green}"
+      Rib::Color.colorize_backtrace(e.backtrace)[i].should =~ \
+        Regexp.new(
+          "#{Regexp.escape(msg)}`.+'#{Regexp.escape(Rib::Color.reset)}")
     end
   end
 end
