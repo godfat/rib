@@ -143,7 +143,7 @@ Rib.config[:name]          | The name of this shell
 Rib.config[:result_prompt] | Default is "=>"
 Rib.config[:prompt]        | Default is ">>"
 Rib.config[:binding]       | Context, default: TOPLEVEL_BINDING
-Rib.config[:exit]          | Commands to exit, default [nil, 'exit', 'quit']
+Rib.config[:exit]          | Commands to exit, default [nil] # control+d
 
 #### Plugin specific configuration
 
