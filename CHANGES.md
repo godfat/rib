@@ -1,5 +1,25 @@
 # CHANGES
 
+## Rib 1.0.1 -- 2011-12-15
+
+### Incompatible changes
+
+* [rib] Keyword `quit` to exit rib is removed, preferring `exit`.
+
+### Bugs fixes
+
+* [rib] Now you exit rib with ` exit`. Thanks @ayamomiji
+* [rib] Fixed -e, --eval binding. It should be TOPLEVEL_BINDING
+
+### Enhancement
+
+* [core/history, more/color, more/multiline_history_file, extra/autoindent]
+  Make sure values are initialized even if before_loop is called later.
+  This helps us enable plugins on the fly.
+
+* [extra/autoindent] Now it depends on history plugin as well. This is not
+  really needed, but would help to reduce plugins ordering issue.
+
 ## Rib 1.0.0 -- 2011-11-05
 
 ### Bugs fixes
