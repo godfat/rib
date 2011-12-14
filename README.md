@@ -205,8 +205,8 @@ simple, simpler than rib-rails.
 
 ## Other plugins and apps
 
-* [rest-more][] `rib rest-core`
-* [rib-heroku][] `rib heroku`
+* [rest-more][] `rib rest-core` Run as interactive rest-core client
+* [rib-heroku][] `rib heroku` Run console on Heroku Cedar with your config
 
 [rest-more]: https://github.com/cardinalblue/rest-more
 [rib-heroku]: https://github.com/godfat/rib-heroku
