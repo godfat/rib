@@ -22,6 +22,7 @@ module Rib::Runner
        'Require the library, before executing your script'           ],
 
      ['rib options:'     , ''                                        ],
+     ['-s, --stdin'      , 'Evaluate codes from $stdin'              ],
      ['-c, --config FILE', 'Load config from FILE'                   ],
      ['-n, --no-config'  , 'Suppress loading ~/.config/rib/config.rb'],
      ['-h, --help'       , 'Print this message'                      ],
@@ -97,6 +98,9 @@ module Rib::Runner
 
       when /^-r=?(.+)?/, /^--require=?(.+)?/
         require($1 || argv.shift)
+
+      when /^-s/, '--stdin'
+        eval($stdin.read, TOPLEVEL_BINDING, __FILE__, __LINE__)
 
       when /^-c=?(.+)?/, /^--config=?(.+)?/
         Rib.config[:config] = $1 || argv.shift
