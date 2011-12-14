@@ -24,8 +24,8 @@ module Rib::MultilineHistory
   def handle_interrupt
     return super if MultilineHistory.disabled?
     if multiline_buffer.size > 1
-      @multiline_trash ||= 0
-      @multiline_trash  += 1
+      multiline_trash
+      @multiline_trash += 1
     end
     super
   end
@@ -37,8 +37,12 @@ module Rib::MultilineHistory
     if multiline_buffer.size > 1
       # so multiline editing is considering done here
       # TODO: there's no history.pop(size)
-      (multiline_buffer.size + @multiline_trash).times{ history.pop }
+      (multiline_buffer.size + multiline_trash).times{ history.pop }
       history << "\n" + multiline_buffer.join("\n")
     end
+  end
+
+  def multiline_trash
+    @multiline_trash ||= 0
   end
 end
