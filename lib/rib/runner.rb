@@ -81,7 +81,7 @@ module Rib::Runner
     until argv.empty?
       case arg = argv.shift
       when /^-e=?(.+)?/, /^--eval=?(.+)?/
-        eval($1 || argv.shift, binding, __FILE__, __LINE__)
+        eval($1 || argv.shift, TOPLEVEL_BINDING, __FILE__, __LINE__)
 
       when /^-d/, '--debug'
         $DEBUG = true
