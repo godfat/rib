@@ -203,6 +203,14 @@ more plugins are lying in `rib/more/*.rb`. You can read `rib/app/ramaze.rb`
 and `bin/rib-ramaze` as a Rib App reference implementation, because it's very
 simple, simpler than rib-rails.
 
+## Other plugins and apps
+
+* [rest-more][] `rib rest-core`
+* [rib-heroku][] `rib heroku`
+
+[rest-more]: https://github.com/cardinalblue/rest-more
+[rib-heroku]: https://github.com/godfat/rib-heroku
+
 ## CONTRIBUTORS:
 
 * Andrew Liu (@eggegg)
