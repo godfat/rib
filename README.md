@@ -203,6 +203,15 @@ more plugins are lying in `rib/more/*.rb`. You can read `rib/app/ramaze.rb`
 and `bin/rib-ramaze` as a Rib App reference implementation, because it's very
 simple, simpler than rib-rails.
 
+## CONTRIBUTORS:
+
+* Andrew Liu (@eggegg)
+* ayaya (@ayamomiji)
+* Lin Jen-Shin (@godfat)
+* Mr. Big Cat (@miaout17)
+* @bootleq
+* @tka
+
 ## LICENSE:
 
 Apache License 2.0
