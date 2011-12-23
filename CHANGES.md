@@ -1,5 +1,12 @@
 # CHANGES
 
+## Rib 1.0.2 -- 2011-12-24
+
+### Bugs fixes
+
+* [more/multiline_history] Make sure values are initialized even if
+  before_loop is called later. This helps us enable plugins on the fly.
+
 ## Rib 1.0.1 -- 2011-12-15
 
 ### Incompatible changes
