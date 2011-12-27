@@ -78,7 +78,7 @@ module Rib::Autoindent
     Thread.new do
       sleep(0.01)
       ::Readline.line_buffer = current_autoindent if
-        ::Readline.line_buffer.empty?
+        ::Readline.line_buffer && ::Readline.line_buffer.empty?
     end
 
     super
