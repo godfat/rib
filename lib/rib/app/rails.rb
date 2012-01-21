@@ -98,6 +98,11 @@ module Rib::Rails
     else
       puts "Loading #{::Rails.env} environment (Rails #{::Rails.version})"
     end
+
+    # rails 3.2
+    if ::Rails.const_defined?(:ConsoleMethods)
+      Object.send(:include, ::Rails::ConsoleMethods)
+    end
   end
 
   def rails?
