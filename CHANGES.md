@@ -1,5 +1,12 @@
 # CHANGES
 
+## Rib 1.0.3 -- 2012-01-21
+
+### Bugs fixes
+
+* [rib-rails] Fixed sandbox mode.
+* [rib-rails] Bring back `reload!`, `new_session`, and `app` for Rails 3.2.0
+
 ## Rib 1.0.2 -- 2011-12-24
 
 ### Bugs fixes
