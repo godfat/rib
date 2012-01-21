@@ -93,10 +93,10 @@ module Rib::Rails
     end
 
     if options[:sandbox]
-      puts "Loading #{Rails.env} environment in sandbox (Rails #{Rails.version})"
+      puts "Loading #{::Rails.env} environment in sandbox (Rails #{::Rails.version})"
       puts "Any modifications you make will be rolled back on exit"
     else
-      puts "Loading #{Rails.env} environment (Rails #{Rails.version})"
+      puts "Loading #{::Rails.env} environment (Rails #{::Rails.version})"
     end
   end
 

@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2011-12-24"
+  s.date = "2012-01-21"
   s.description = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell\n\nRib is based on the design of [ripl][] and the work of [ripl-rc][], some of\nthe features are also inspired by [pry][]. The aim of Rib is to be fully\nfeatured and yet very easy to opt-out or opt-in other features. It shall\nbe simple, lightweight and modular so that everyone could customize Rib.\n\n[ripl]: https://github.com/cldwalker/ripl\n[ripl-rc]: https://github.com/godfat/ripl-rc\n[pry]: https://github.com/pry/pry"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = [
@@ -80,7 +80,7 @@ Gem::Specification.new do |s|
   "test/test_shell.rb"]
   s.homepage = "https://github.com/godfat/rib"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.13"
+  s.rubygems_version = "1.8.15"
   s.summary = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell"
   s.test_files = [
   "test/core/test_completion.rb",
