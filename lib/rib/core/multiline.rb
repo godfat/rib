@@ -35,8 +35,8 @@ module Rib::Multiline
                       "unterminated \\w+ meets end of file",
                       # mri and rubinius
                       "syntax error, unexpected \\$end"    ,
-                      "unexpected (#{BINARY_OP.join('|')}), expecting \\$end"]
-                                                                   .join('|'))
+                      "unexpected (#{BINARY_OP.join('|')}), expecting \\$end"
+                                                                  ].join('|'))
     when 'rbx'  ; Regexp.new(
                     [ # string or regexp
                       "unterminated \\w+ meets end of file",
