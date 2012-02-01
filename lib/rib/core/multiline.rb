@@ -21,12 +21,22 @@ module Rib::Multiline
   # ruby -e 'class C'
   # ruby -e 'def f'
   # ruby -e 'begin'
+  # ruby -e 'eval "1+1.to_i +"'
+  # ruby -e 'eval "1+1.to_i -"'
+  # ruby -e 'eval "1+1.to_i *"'
+  # ruby -e 'eval "1+1.to_i /"'
+  # ruby -e 'eval "1+1.to_i &"'
+  # ruby -e 'eval "1+1.to_i |"'
+  # ruby -e 'eval "1+1.to_i ^"'
+  BINARY_OP = %w[tUPLUS tUMINUS tSTAR tREGEXP_BEG tAMPER]
   ERROR_REGEXP = case engine
     when 'ruby' ; Regexp.new(
                     [ # string or regexp
                       "unterminated \\w+ meets end of file",
                       # mri and rubinius
-                      "syntax error, unexpected \\$end"]           .join('|'))
+                      "syntax error, unexpected \\$end"    ,
+                      "unexpected (#{BINARY_OP.join('|')}), expecting \\$end"]
+                                                                   .join('|'))
     when 'rbx'  ; Regexp.new(
                     [ # string or regexp
                       "unterminated \\w+ meets end of file",

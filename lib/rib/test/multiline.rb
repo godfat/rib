@@ -137,4 +137,53 @@ shared :multiline do
         s-y n
     RUBY
   end
+
+  should 'binary operator +' do
+    check <<-RUBY
+      1/1.to_i +
+      1
+    RUBY
+  end
+
+  should 'binary operator -' do
+    check <<-RUBY
+      1*1.to_i -
+      1
+    RUBY
+  end
+
+  should 'binary operator *' do
+    check <<-RUBY
+      1-1.to_i *
+      1
+    RUBY
+  end
+
+  should 'binary operator /' do
+    check <<-RUBY
+      1+1.to_i /
+      1
+    RUBY
+  end
+
+  should 'binary operator |' do
+    check <<-RUBY
+      1+1.to_i |
+      1
+    RUBY
+  end
+
+  should 'binary operator &' do
+    check <<-RUBY
+      1+1.to_i &
+      1
+    RUBY
+  end
+
+  should 'binary operator ^' do
+    check <<-RUBY
+      1+1.to_i ^
+      1
+    RUBY
+  end
 end
