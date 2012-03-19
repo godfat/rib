@@ -1,5 +1,15 @@
 # CHANGES
 
+## Rib 1.0.4 -- 2012-03-20
+
+* [core/multiline] Fixed a corner case:
+  ``` ruby
+      1/1.to_i +
+      1
+  ```
+
+* [rib] Do not crash because of a loop error. Try to relaunch the shell.
+
 ## Rib 1.0.3 -- 2012-01-21
 
 ### Bugs fixes
