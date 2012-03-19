@@ -1,5 +1,7 @@
 # TODO
 
+* Fix whenever Color.enabled? but StripBacktrace.disabled?
+
 * Runner tests
 * Documentation
 * Implement exception_spy
