@@ -79,7 +79,7 @@ module Rib::Runner
   def loop
     Rib.shell.loop
   rescue Exception
-    Rib.warn("Resetting the shell and retrying...")
+    Rib.warn("Relaunching a new shell...")
     Rib.shells.pop
     Rib.shells << Rib::Shell.new(Rib.config)
     retry
