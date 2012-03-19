@@ -73,7 +73,16 @@ module Rib::Runner
     # not any other Rib command
     Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
     require 'rib/core' if Rib.config.delete(:mimic_irb)
+    loop
+  end
+
+  def loop
     Rib.shell.loop
+  rescue Exception
+    Rib.warn("Resetting the shell and retrying...")
+    Rib.shells.pop
+    Rib.shells << Rib::Shell.new(Rib.config)
+    retry
   end
 
   def parse argv
