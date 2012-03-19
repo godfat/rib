@@ -3,6 +3,7 @@
 ## Rib 1.0.4 -- 2012-03-20
 
 * [core/multiline] Fixed a corner case:
+
   ``` ruby
       1/1.to_i +
       1
