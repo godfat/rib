@@ -7,7 +7,7 @@ module Rib::StripBacktrace
 
   # --------------- Rib API ---------------
 
-  # strip backtrace until ripl
+  # strip backtrace until rib
   def format_error err
     return super if StripBacktrace.disabled?
     message, backtrace = get_error(err, strip_backtrace(err))
