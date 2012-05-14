@@ -1,5 +1,10 @@
 # CHANGES
 
+## Rib 1.0.5 -- 2012-05-15
+
+* [app/rails] Fixed SystemStackError issue. It's because ConsoleMethods
+  should not pollute the Object, redefining `app` method.
+
 ## Rib 1.0.4 -- 2012-03-20
 
 * [core/multiline] Fixed a corner case:
