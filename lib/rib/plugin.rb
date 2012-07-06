@@ -10,11 +10,15 @@ module Rib::Plugin
       def enable
         self.disabled = false
         if block_given? then yield else enabled? end
+      ensure
+        self.disabled = true if block_given?
       end
 
       def disable
         self.disabled = true
         if block_given? then yield else enabled? end
+      ensure
+        self.disabled = false if block_given?
       end
 
       def enabled?
