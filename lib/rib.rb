@@ -1,5 +1,4 @@
 
-require 'rib/backport'
 require 'rib/shell'
 
 module Rib
