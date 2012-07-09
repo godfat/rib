@@ -3,7 +3,7 @@ require 'rib'
 require 'tempfile'
 
 module Rib::Edit
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   module Imp

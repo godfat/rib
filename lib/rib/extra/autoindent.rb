@@ -4,7 +4,7 @@ require 'rib/core/readline'  # dependency
 require 'rib/core/multiline' # dependency
 
 module Rib::Autoindent
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   # begin block could be simpler, because it should also trigger

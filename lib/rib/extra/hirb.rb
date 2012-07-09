@@ -2,7 +2,7 @@
 require 'rib'
 
 module Rib::Hirb
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------

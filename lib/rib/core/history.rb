@@ -3,7 +3,7 @@ require 'rib'
 require 'fileutils'
 
 module Rib::History
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------

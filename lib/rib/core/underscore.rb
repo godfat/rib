@@ -2,7 +2,7 @@
 require 'rib'
 
 module Rib::Underscore
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   IVAR = {:_  => :@__rib_result__,

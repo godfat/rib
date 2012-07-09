@@ -2,7 +2,7 @@
 require 'rib/more/multiline_history'
 
 module Rib::MultilineHistoryFile
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------

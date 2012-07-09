@@ -1,34 +1,32 @@
 
 module Rib; end
 module Rib::Plugin
-  def self.included mod
+  attr_accessor :disabled
+
+  def enable
+    self.disabled = false
+    if block_given? then yield else enabled? end
+  ensure
+    self.disabled = true if block_given?
+  end
+
+  def disable
+    self.disabled = true
+    if block_given? then yield else enabled? end
+  ensure
+    self.disabled = false if block_given?
+  end
+
+  def enabled?
+    !disabled
+  end
+
+  def disabled?
+    !!disabled
+  end
+
+  def self.extended mod
     mod.send(:include, Rib)
-
-    class << mod
-      attr_accessor :disabled
-
-      def enable
-        self.disabled = false
-        if block_given? then yield else enabled? end
-      ensure
-        self.disabled = true if block_given?
-      end
-
-      def disable
-        self.disabled = true
-        if block_given? then yield else enabled? end
-      ensure
-        self.disabled = false if block_given?
-      end
-
-      def enabled?
-        !disabled
-      end
-
-      def disabled?
-        !!disabled
-      end
-    end
 
     snake_name = mod.name.sub(/(\w+::)+?(\w+)$/, '\2').
       gsub(/([A-Z][a-z]*)/, '\\1_').downcase[0..-2]

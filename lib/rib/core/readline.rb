@@ -3,7 +3,7 @@ require 'rib'
 require 'readline'
 
 module Rib::Readline
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------

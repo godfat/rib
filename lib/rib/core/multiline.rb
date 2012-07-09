@@ -3,7 +3,7 @@ require 'rib'
 
 # from https://github.com/janlelis/ripl-multi_line
 module Rib::Multiline
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   engine = if Object.const_defined?(:RUBY_ENGINE)

@@ -3,7 +3,7 @@ require 'rib/core/history'   # dependency
 require 'rib/core/multiline' # dependency
 
 module Rib::MultilineHistory
-  include Rib::Plugin
+  extend Rib::Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------

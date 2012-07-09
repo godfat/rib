@@ -46,7 +46,7 @@ module Rib
   # All plugins which have been loaded into the memory regardless
   # it's enabled or not.
   def plugins
-    Shell.ancestors[1..-1].select{ |a| a < Plugin }
+    Shell.ancestors[1..-1].select{ |a| a.singleton_class < Plugin }
   end
 
   # Convenient way to disable all plugins in the memory.
