@@ -47,12 +47,6 @@ module Rib::Plugin
       RUBY
     }).join("\n")
 
-    meta_rib = if respond_to?(:singleton_class)
-                 Rib.singleton_class
-               else
-                 class << Rib; self; end
-               end
-
-    meta_rib.module_eval(code, __FILE__, __LINE__)
+    Rib.singleton_class.module_eval(code, __FILE__, __LINE__)
   end
 end
