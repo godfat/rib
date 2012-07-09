@@ -80,7 +80,7 @@ module Rib::Color
   end
 
   def find_color colors, value
-    (colors.sort{ |(k1, v1), (k2, v2)|
+    (colors.sort{ |(k1, _), (k2, _)|
       # Class <=> Class
       if    k1 < k2 then -1
       elsif k1 > k2 then  1
