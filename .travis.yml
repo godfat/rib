@@ -1,4 +1,6 @@
-script: 'git submodule update --init; bundle exec rake test'
+before_install: 'git submodule update --init'
+script: 'ruby -r bundler/setup -S rake test'
+
 rvm:
   - 1.9.2
   - 1.9.3
