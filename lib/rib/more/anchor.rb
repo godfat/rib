@@ -68,18 +68,10 @@ module Rib::Anchor
       end
 
       Rib.shell.loop
+      Rib::Skip
 
-    # we can't use ensure block here because we need to do something
-    # (i.e. throw :rib_skip) if there's no exception. this can't be
-    # done via ensure because then we don't know if there's an
-    # exception or not, and ensure block is always executed last
-    rescue
+    ensure
       Rib.shells.pop
-      raise
-    else
-      # only skip printing anchor result while there's another shell running
-      Rib.shells.pop
-      throw :rib_skip if Rib.shell.running?
     end
   end
 

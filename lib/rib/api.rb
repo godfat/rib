@@ -36,15 +36,13 @@ module Rib::API
   def loop_once
     input, result, err = get_input, nil, nil
     throw(:rib_exit, input) if config[:exit].include?(input)
-    catch(:rib_skip) do
-      result, err = eval_input(input)
-      if err
-        print_eval_error(err)
-      elsif input.strip != ''
-        print_result(result)
-      else
-        # print nothing for blank input
-      end
+    result, err = eval_input(input)
+    if err
+      print_eval_error(err)
+    elsif input.strip != '' && result != Rib::Skip
+      print_result(result)
+    else
+      # print nothing for blank input
     end
     [result, err]
   rescue Interrupt
