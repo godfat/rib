@@ -1,5 +1,15 @@
 # CHANGES
 
+## Rib 1.1.0 -- 2012-07-18
+
+* Support for Ruby 1.8 is dropped.
+* Now `Rib::Plugin` should be extended to the module, instead of included.
+  This fits more naturally with Ruby, but not really compatible with Ruby 1.8?
+* [more/anchor] Fixed a bug where you run rib in top level while anchor in
+  the other source, exit from the inner shell would break from the original
+  call. Now you can safely exit from the inner shell and keep doing the
+  original work.
+
 ## Rib 1.0.5 -- 2012-05-15
 
 * [app/rails] Fixed SystemStackError issue. It's because ConsoleMethods
