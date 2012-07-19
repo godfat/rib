@@ -50,6 +50,8 @@ module Rib::Multiline
                     [ # string or regexp
                       "unterminated \\w+ meets end of file",
                       # jruby
+                      "syntax error, unexpected" \
+                      " t(UPLUS|UMINUS|STAR|REGEXP_BEG|AMPER)",
                       "syntax error, unexpected end-of-file"]      .join('|'))
     end
 
