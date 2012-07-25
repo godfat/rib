@@ -87,7 +87,7 @@ module Rib::Multiline
     if multiline_buffer.empty?
       super
     else
-      mprompt = '| '[0, config[:prompt].size]
+      mprompt = multiline_prompt[0, config[:prompt].size]
       "#{' '*(config[:prompt].size-mprompt.size)}#{mprompt}"
     end
   end
@@ -109,6 +109,9 @@ module Rib::Multiline
     err.is_a?(SyntaxError) && err.message =~ ERROR_REGEXP
   end
 
+  def multiline_prompt
+    config[:multiline_prompt] ||= '| '
+  end
 
 
   private
