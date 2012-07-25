@@ -39,6 +39,15 @@ shared :multiline do
     setup_shell
   end
 
+  should 'work with no prompt' do
+    @shell.config[:prompt] = ''
+    check <<-RUBY
+      def f
+        0
+      end
+    RUBY
+  end
+
   should 'def f' do
     check <<-RUBY
       def f
