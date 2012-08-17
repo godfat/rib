@@ -15,10 +15,16 @@ module Rib::Debugger
     ::Debugger.handler = self
     bound_object.extend(Imp)
     @debugger_state ||= config[:debugger_state]
+    @debugger_watch ||= config[:debugger_watch]
+    bound_object.display(debugger_watch.shift) until debugger_watch.empty?
     super
   end
 
   # --------------- Plugin API ---------------
+
+  def debugger_watch
+    @debugger_watch ||= []
+  end
 
   def debugger_state
     @debugger_state ||= config[:debugger_state] ||
@@ -46,7 +52,8 @@ module Rib::Debugger
       :debugger_context => context,
       :debugger_file    => file   ,
       :debugger_line    => line   ,
-      :debugger_state   => @debugger_state)
+      :debugger_state   => @debugger_state,
+      :debugger_watch   => @debugger_watch)
   rescue Exception => e
     Rib.warn("Error while calling at_line:\n  #{format_error(e)}")
   end
@@ -56,6 +63,11 @@ module Rib::Debugger
       ::Debugger.handler = Rib.shell
       ::Debugger.start
       ::Debugger.current_context.stop_frame = 0
+    end
+
+    # You can `Rib.watch` a number of expressions before calling `Rib.debug`
+    def watch *strs
+      Rib.shell.debugger_watch.concat(strs)
     end
 
     def step times=1
