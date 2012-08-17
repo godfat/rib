@@ -48,6 +48,11 @@ module Rib::Debugger
   # Callback for the debugger
   def at_line context, file, line
     puts "#{file}:#{line}"
+    if @debugger_state
+      @debugger_state.context = context
+      @debugger_state.file    = file
+      @debugger_state.line    = line
+    end
     Rib.anchor(context.frame_binding(0), :prompt_anchor => false,
       :debugger_context => context,
       :debugger_file    => file   ,
