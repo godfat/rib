@@ -14,26 +14,29 @@ module Rib::Debugger
     return super if Debugger.disabled?
     ::Debugger.handler = self
     bound_object.extend(Imp)
+    @debugger_state ||= config[:debugger_state]
     super
   end
 
   # --------------- Plugin API ---------------
 
   def debugger_state
-    @debugger_state ||= ::Debugger::CommandProcessor::State.new{ |s|
-      commands = ::Debugger::Command.commands.select{ |cmd|
-        cmd.event                                                      &&
-        (!config[:debugger_context].dead? || cmd.allow_in_post_mortem) &&
-        !ExcludedCommands.include?([cmd.help_command].flatten.first)
-      }
+    @debugger_state ||= config[:debugger_state] ||
+      ::Debugger::CommandProcessor::State.new{ |s|
+        commands = ::Debugger::Command.commands.select{ |cmd|
+          cmd.event                                                      &&
+          (!config[:debugger_context].dead? || cmd.allow_in_post_mortem) &&
+          !ExcludedCommands.include?([cmd.help_command].flatten.first)
+        }
 
-      s.context = config[:debugger_context]
-      s.file    = config[:debugger_file]
-      s.line    = config[:debugger_line]
-      s.binding = config[:debugger_context].frame_binding(0)
-      s.interface = ::Debugger::LocalInterface.new
-      s.commands  = commands
-    }
+        s.context = config[:debugger_context]
+        s.file    = config[:debugger_file]
+        s.line    = config[:debugger_line]
+        s.binding = config[:debugger_context].frame_binding(0)
+        s.display = []
+        s.interface = ::Debugger::LocalInterface.new
+        s.commands  = commands
+      }
   end
 
   # Callback for the debugger
@@ -42,7 +45,8 @@ module Rib::Debugger
     Rib.anchor(context.frame_binding(0), :prompt_anchor => false,
       :debugger_context => context,
       :debugger_file    => file   ,
-      :debugger_line    => line   )
+      :debugger_line    => line   ,
+      :debugger_state   => @debugger_state)
   rescue Exception => e
     Rib.warn("Error while calling at_line:\n  #{format_error(e)}")
   end
@@ -56,6 +60,7 @@ module Rib::Debugger
 
     def step times=1
       ::Debugger.current_context.step(times)
+      display
       throw :rib_exit, Rib::Skip
     end
 
@@ -67,10 +72,18 @@ module Rib::Debugger
       RUBY
     }
 
+    def display *args
+      if args.empty?
+        debugger_execute('display', args, 'Display')
+      else
+        debugger_execute('display', args, 'AddDisplay')
+      end
+    end
+
     def debugger_execute command, args=[], name=command.capitalize
       const = "#{name}Command"
       arg = if args.empty? then '' else " #{args.join(' ')}" end
-      cmd = ::Debugger.const_get(const).new(Rib.shell.debugger_state.dup)
+      cmd = ::Debugger.const_get(const).new(Rib.shell.debugger_state)
       cmd.match("#{command}#{arg}\n")
       cmd.execute
       Rib::Skip
