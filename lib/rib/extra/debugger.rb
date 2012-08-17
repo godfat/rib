@@ -30,8 +30,8 @@ module Rib::Debugger
       s.context = config[:debugger_context]
       s.file    = config[:debugger_file]
       s.line    = config[:debugger_line]
-      s.binding = config[:debugger_context].frame_binding(0),
-      s.interface = ::Debugger::LocalInterface.new,
+      s.binding = config[:debugger_context].frame_binding(0)
+      s.interface = ::Debugger::LocalInterface.new
       s.commands  = commands
     }
   end
