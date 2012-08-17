@@ -6,7 +6,7 @@ module Rib::Debugger
   Shell.use(self)
 
   ExcludedCommands = %w[irb quit exit backtrace eval p pp ps]
-   WrappedCommands = %w[help list where]
+   WrappedCommands = %w[help list where edit]
 
   # --------------- Rib API ---------------
 
