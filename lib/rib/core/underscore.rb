@@ -29,12 +29,6 @@ module Rib::Underscore
     super
   end
 
-  # --------------- Plugin API ---------------
-
-  def bound_object
-    config[:bound_object] ||= eval_binding.eval('self', __FILE__, __LINE__)
-  end
-
 
 
   private

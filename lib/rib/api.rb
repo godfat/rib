@@ -25,6 +25,10 @@ module Rib::API
   def eval_binding ; config[:binding]       ; end
   # The line number for next evaluation
   def line         ; config[:line]          ; end
+  # The object for the current binding
+  def bound_object
+    config[:bound_object] ||= eval_binding.eval('self', __FILE__, __LINE__)
+  end
 
   # Main loop
   def in_loop
