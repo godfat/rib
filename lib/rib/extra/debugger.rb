@@ -41,8 +41,10 @@ module Rib::Debugger
     puts "#{file}:#{line}"
     Rib.anchor(context.frame_binding(0), :prompt_anchor => false,
       :debugger_context => context,
-      :debugger_file    => file,
-      :debugger_line    => line)
+      :debugger_file    => file   ,
+      :debugger_line    => line   )
+  rescue Exception => e
+    Rib.warn("Error while calling at_line:\n  #{format_error(e)}")
   end
 
   module Imp
