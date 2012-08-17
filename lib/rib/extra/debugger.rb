@@ -5,36 +5,38 @@ module Rib::Debugger
   extend Rib::Plugin
   Shell.use(self)
 
+  ExcludedCommands = %w[irb quit exit backtrace eval p pp ps]
+   WrappedCommands = %w[help list where]
+
   # --------------- Rib API ---------------
 
   def before_loop
     return super if Debugger.disabled?
     ::Debugger.handler = self
     bound_object.extend(Imp)
-
-    context = config[:debugger_context]
-    state, commands = ::Debugger::CommandProcessor.new.send(
-      :always_run, context, config[:debugger_file], config[:debugger_line], 1)
-
-    bound_object.singleton_class.
-      send(:define_method, :method_missing) do |msg, *args, &block|
-        if cmd = commands.find{ |c| c.match("#{msg}\n") }
-          if context.dead? && cmd.class.need_context
-            super(msg, *args, &block)
-          else
-            cmd.execute
-            Rib::Skip
-          end
-        else
-          super(msg, *args, &block)
-        end
-      end
-
-    bound_object.help
-
     super
   end
 
+  # --------------- Plugin API ---------------
+
+  def debugger_state
+    @debugger_state ||= ::Debugger::CommandProcessor::State.new{ |s|
+      commands = ::Debugger::Command.commands.select{ |cmd|
+        cmd.event                                                      &&
+        (!config[:debugger_context].dead? || cmd.allow_in_post_mortem) &&
+        !ExcludedCommands.include?([cmd.help_command].flatten.first)
+      }
+
+      s.context = config[:debugger_context]
+      s.file    = config[:debugger_file]
+      s.line    = config[:debugger_line]
+      s.binding = config[:debugger_context].frame_binding(0),
+      s.interface = ::Debugger::LocalInterface.new,
+      s.commands  = commands
+    }
+  end
+
+  # Callback for the debugger
   def at_line context, file, line
     puts "#{file}:#{line}"
     Rib.anchor(context.frame_binding(0), :prompt_anchor => false,
@@ -54,6 +56,23 @@ module Rib::Debugger
       ::Debugger.current_context.step(times)
       throw :rib_exit, Rib::Skip
     end
+
+    WrappedCommands.each{ |cmd|
+      module_eval <<-RUBY
+        def #{cmd} *args
+          debugger_execute('#{cmd}', args)
+        end
+      RUBY
+    }
+
+    def debugger_execute command, args=[], name=command.capitalize
+      const = "#{name}Command"
+      arg = if args.empty? then '' else " #{args.join(' ')}" end
+      cmd = ::Debugger.const_get(const).new(Rib.shell.debugger_state.dup)
+      cmd.match("#{command}#{arg}\n")
+      cmd.execute
+      Rib::Skip
+    end
   end
 
   Rib.extend(Imp)
@@ -61,7 +80,7 @@ end
 
 begin
   Rib.silence{ require 'debugger' }
-  Kernel.module_eval{ private :debugger }
+  require 'rib/patch/debugger'
 rescue LoadError => e
   Rib.warn("Error: #{e}"                                      ,
            "Please install debugger to use debugger plugin:\n",
