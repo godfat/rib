@@ -99,10 +99,12 @@ module Rib::Debugger
         debugger_execute('display', args, 'AddDisplay')
       end
     end
+    alias_method :disp, :display
 
     def list *args
       debugger_execute('list', args, 'List', Rib.shell.debugger_state.dup)
     end
+    alias_method :ls, :list
 
     def debugger_execute command, args=[], name=command.capitalize,
                          state=Rib.shell.debugger_state
