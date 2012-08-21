@@ -6,7 +6,7 @@ module Rib::Debugger
   Shell.use(self)
 
   ExcludedCommands = %w[irb quit exit backtrace eval p pp ps]
-   WrappedCommands = %w[help list where edit reload]
+   WrappedCommands = %w[help where edit reload]
 
   # --------------- Rib API ---------------
 
@@ -100,10 +100,15 @@ module Rib::Debugger
       end
     end
 
-    def debugger_execute command, args=[], name=command.capitalize
+    def list *args
+      debugger_execute('list', args, 'List', Rib.shell.debugger_state.dup)
+    end
+
+    def debugger_execute command, args=[], name=command.capitalize,
+                         state=Rib.shell.debugger_state
       const = "#{name}Command"
       arg = if args.empty? then '' else " #{args.join(' ')}" end
-      cmd = ::Debugger.const_get(const).new(Rib.shell.debugger_state)
+      cmd = ::Debugger.const_get(const).new(state)
       cmd.match("#{command}#{arg}\n")
       cmd.execute
       Rib::Skip
