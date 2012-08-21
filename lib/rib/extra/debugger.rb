@@ -47,7 +47,7 @@ module Rib::Debugger
 
   # Callback for the debugger
   def at_line context, file, line
-    puts "#{file}:#{line}"
+    Rib.say("#{file}:#{line}")
     if @debugger_state
       @debugger_state.context = context
       @debugger_state.file    = file
