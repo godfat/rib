@@ -47,12 +47,14 @@ module Rib::Debugger
 
   # Callback for the debugger
   def at_line context, file, line
+    return if Rib::Debugger.disabled?
     Rib.say("#{file}:#{line}")
     if @debugger_state
       @debugger_state.context = context
       @debugger_state.file    = file
       @debugger_state.line    = line
     end
+    Rib::Anchor.enable
     Rib.anchor(context.frame_binding(0), :prompt_anchor => false,
       :debugger_context => context,
       :debugger_file    => file   ,
@@ -65,6 +67,7 @@ module Rib::Debugger
 
   module Imp
     def debug
+      return if Rib::Debugger.disabled?
       ::Debugger.handler = Rib.shell
       ::Debugger.start
       ::Debugger.current_context.stop_frame = 0
