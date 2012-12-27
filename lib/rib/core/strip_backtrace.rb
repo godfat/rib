@@ -10,7 +10,12 @@ module Rib::StripBacktrace
   # strip backtrace until rib
   def format_error err
     return super if StripBacktrace.disabled?
-    message, backtrace = get_error(err, strip_backtrace(err))
+    backtrace = if err.kind_of?(SyntaxError)
+                  []
+                else
+                  err.backtrace
+                end
+    message, backtrace = get_error(err, strip_backtrace(backtrace))
     "#{message}\n  #{backtrace.join("\n  ")}"
   end
 
@@ -36,10 +41,8 @@ module Rib::StripBacktrace
     backtrace.map{ |path| path.sub(Dir.pwd, '.') }
   end
 
-  def strip_lib_backtrace err
-    return [] if err.kind_of?(SyntaxError)
-    err.backtrace[
-      0..
-      err.backtrace.rindex{ |l| l =~ /\(#{name}\):\d+:in `.+?'/ } || -1]
+  def strip_lib_backtrace backtrace
+    backtrace[
+      0..backtrace.rindex{ |l| l =~ /\(#{name}\):\d+:in `.+?'/ } || -1]
   end
 end
