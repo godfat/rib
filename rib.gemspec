@@ -57,7 +57,6 @@ Gem::Specification.new do |s|
   "lib/rib/more/multiline_history.rb",
   "lib/rib/more/multiline_history_file.rb",
   "lib/rib/plugin.rb",
-  "lib/rib/ripl.rb",
   "lib/rib/runner.rb",
   "lib/rib/shell.rb",
   "lib/rib/test.rb",
