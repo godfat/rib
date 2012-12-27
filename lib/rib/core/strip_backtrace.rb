@@ -23,9 +23,9 @@ module Rib::StripBacktrace
 
 
 
-  private
-  def strip_backtrace err
-    strip_home_backtrace(strip_cwd_backtrace(strip_lib_backtrace(err)))
+  module_function
+  def strip_backtrace backtrace
+    strip_home_backtrace(strip_cwd_backtrace(strip_lib_backtrace(backtrace)))
   end
 
   def strip_home_backtrace backtrace
