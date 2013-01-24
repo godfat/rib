@@ -77,12 +77,20 @@ module Rib::Runner
   end
 
   def loop
-    Rib.shell.loop
-  rescue Exception
-    Rib.warn("Relaunching a new shell...")
-    Rib.shells.pop
-    Rib.shells << Rib::Shell.new(Rib.config)
-    retry
+    retry_times = 5
+    begin
+      Rib.shell.loop
+    rescue Exception => e
+      if retry_times <= 0
+        Rib.warn("Error: #{e}. Too many retries, give up.")
+      else
+        Rib.warn("Error: #{e}. Relaunching a new shell... ##{retry_times}")
+        Rib.shells.pop
+        Rib.shells << Rib::Shell.new(Rib.config)
+        retry_times -= 1
+        retry
+      end
+    end
   end
 
   def parse argv
