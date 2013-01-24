@@ -47,8 +47,21 @@ module Rib::Debugger
 
   # Callback for the debugger
   def at_line context, file, line
-    return if Rib::Debugger.disabled?
-    Rib.say("#{file}:#{line}")
+    return if Debugger.disabled?
+    path = "#{file}:#{line}:in #{caller[1][/`.+?'/]}"
+    msg0 = if Rib.const_defined?(:StripBacktrace) && StripBacktrace.enabled?
+             StripBacktrace.strip_backtrace([path])
+           else
+             [path]
+           end
+    msg1 = if Rib.const_defined?(:Color) && Color.enabled?
+             Color.colorize_backtrace(msg0)
+           else
+             [msg0].flatten
+           end
+
+    Rib.say(msg1.first)
+
     if @debugger_state
       @debugger_state.context = context
       @debugger_state.file    = file
@@ -61,6 +74,7 @@ module Rib::Debugger
       :debugger_line    => line   ,
       :debugger_state   => @debugger_state,
       :debugger_watch   => @debugger_watch)
+    ::Debugger.stop
   rescue Exception => e
     Rib.warn("Error while calling at_line:\n  #{format_error(e)}")
   end
