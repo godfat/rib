@@ -81,12 +81,16 @@ module Rib::Runner
   rescue Exception => e
     if retry_times <= 0
       Rib.warn("Error: #{e}. Too many retries, give up.")
-    else
+    elsif Rib.shells.last.running?
       Rib.warn("Error: #{e}. Relaunching a new shell... ##{retry_times}")
+      Rib.warn("Backtrace: #{e.backtrace}") if $VERBOSE
       Rib.shells.pop
       Rib.shells << Rib::Shell.new(Rib.config)
       retry_times -= 1
       retry
+    else
+      Rib.warn("Error: #{e}. Closing.")
+      Rib.warn("Backtrace: #{e.backtrace}") if $VERBOSE
     end
   end
 
