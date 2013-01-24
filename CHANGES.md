@@ -1,5 +1,15 @@
 # CHANGES
 
+## Rib 1.1.1 -- 2013-01-25
+
+* Fixed some multiline issue with Rubinius and JRuby.
+* Properly indent for multiline prompt.
+* Removed ripl compatibility layer.
+* Only retry 5 times upon failures. This prevents from infinite retries.
+* Don't retry on quiting.
+* Added a half-baked debugger support. Try it with:
+  `require 'rib/extra/debugger'; Rib.debug`
+
 ## Rib 1.1.0 -- 2012-07-18
 
 * Support for Ruby 1.8 is dropped.
