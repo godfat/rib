@@ -1,5 +1,9 @@
 # CHANGES
 
+## Rib 1.1.2 -- 2013-04-02
+
+* [core/multiline] Ruby 2.0 compatibility.
+
 ## Rib 1.1.1 -- 2013-01-25
 
 * Fixed some multiline issue with Rubinius and JRuby.
