@@ -29,13 +29,18 @@ module Rib::Multiline
   # ruby -e 'eval "1+1.to_i |"'
   # ruby -e 'eval "1+1.to_i ^"'
   BINARY_OP = %w[tUPLUS tUMINUS tSTAR tREGEXP_BEG tAMPER]
+  RUBY20_IO = %w[unary+ unary-  *     tREGEXP_BEG &].
+              map(&Regexp.method(:escape))
   ERROR_REGEXP = case engine
     when 'ruby' ; Regexp.new(
                     [ # string or regexp
                       "unterminated \\w+ meets end of file",
                       # mri and rubinius
+                      "unexpected (#{BINARY_OP.join('|')}), expecting \\$end",
                       "syntax error, unexpected \\$end"    ,
-                      "unexpected (#{BINARY_OP.join('|')}), expecting \\$end"
+                      # ruby 2.0
+                      "syntax error, unexpected end-of-input",
+                      "syntax error, unexpected (#{RUBY20_IO.join('|')}),"
                                                                   ].join('|'))
     when 'rbx'  ; Regexp.new(
                     [ # string or regexp
