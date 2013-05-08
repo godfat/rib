@@ -41,7 +41,7 @@ module Rib::API
     result, err = eval_input(input)
     if err
       print_eval_error(err)
-    elsif input.strip != '' && result != Rib::Skip
+    elsif input.strip != ''
       print_result(result)
     else
       # print nothing for blank input
@@ -79,7 +79,7 @@ module Rib::API
 
   # Print result using #format_result
   def print_result result
-    puts(format_result(result))
+    puts(format_result(result)) if result != Rib::Skip
   rescue StandardError, SyntaxError => e
     Rib.warn("Error while printing result:\n  #{format_error(e)}")
   end

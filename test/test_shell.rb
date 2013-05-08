@@ -49,6 +49,11 @@ describe Rib::Shell do
       input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
     end
 
+    should 'not crash if user input is a blackhole' do
+      mock(Rib).warn(/Error while printing result/)
+      input('Rib::Blackhole')
+    end
+
     should 'print error from eval' do
       mock(@shell).puts(/RuntimeError/)
       input('raise "blah"')

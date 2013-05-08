@@ -1,5 +1,9 @@
 # CHANGES
 
+## Rib 1.1.3 -- 2013-05-08
+
+* Fixed a bug where if user input doesn't respond to `==` would crash rib.
+
 ## Rib 1.1.2 -- 2013-04-02
 
 * [core/multiline] Ruby 2.0 compatibility.
