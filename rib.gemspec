@@ -80,6 +80,7 @@ Gem::Specification.new do |s|
   "test/test_plugin.rb",
   "test/test_shell.rb"]
   s.homepage = "https://github.com/godfat/rib"
+  s.licenses = ["Apache License 2.0"]
   s.require_paths = ["lib"]
   s.rubygems_version = "2.0.3"
   s.summary = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell"
