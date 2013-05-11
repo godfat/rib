@@ -41,10 +41,10 @@ module Rib::API
     result, err = eval_input(input)
     if err
       print_eval_error(err)
-    elsif input.strip != ''
+    elsif input.strip != '' && !equal_rib_skip(result)
       print_result(result)
     else
-      # print nothing for blank input
+      # print nothing for blank input or Rib::Skip
     end
     [result, err]
   rescue Interrupt
@@ -79,7 +79,7 @@ module Rib::API
 
   # Print result using #format_result
   def print_result result
-    puts(format_result(result)) if result != Rib::Skip
+    puts(format_result(result))
   rescue StandardError, SyntaxError => e
     Rib.warn("Error while printing result:\n  #{format_error(e)}")
   end
@@ -99,5 +99,12 @@ module Rib::API
   # Format error raised in #loop_eval
   def format_error err
     "#{err.class}: #{err.message}\n    #{err.backtrace.join("\n    ")}"
+  end
+
+  private
+  def equal_rib_skip result
+    result == Rib::Skip
+  rescue Exception
+    # do nothing, it cannot respond to == correctly, it can't be Rib::Skip
   end
 end
