@@ -23,7 +23,7 @@ be simple, lightweight and modular so that everyone could customize Rib.
 
 ## REQUIREMENTS:
 
-* Tested with MRI (official CRuby) 1.9.2, 1.9.3, Rubinius and JRuby.
+* Tested with MRI (official CRuby) 1.9.3, 2.0.0, Rubinius and JRuby.
 * All gem dependencies are optional, but it's highly recommended to use
   Rib with [bond][] for tab completion.
 
