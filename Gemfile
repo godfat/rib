@@ -5,7 +5,7 @@ gemspec
 
 gem 'rake'
 gem 'bacon'
-gem 'rr'
+gem 'muack'
 
 gem 'bond'
 gem 'hirb'

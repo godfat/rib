@@ -29,7 +29,7 @@ shared :underscore do
 
   should 'set __' do
     setup
-    stub(@shell).puts(is_a(String))
+    stub(@shell).puts.with_any_args
     mock(@shell).get_input{'XD'}
     mock(@shell).get_input{'__'}
     @shell.loop_once

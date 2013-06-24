@@ -1,9 +1,9 @@
 
 require 'bacon'
-require 'rr'
+require 'muack'
 require 'fileutils'
 Bacon.summary_on_exit
-include RR::Adapters::RRMethods
+include Muack::API
 
 require 'rib'
 
@@ -12,7 +12,7 @@ shared :rib do
   end
 
   after do
-    RR.verify
+    Muack.verify
   end
 
   def test_for *plugins, &block

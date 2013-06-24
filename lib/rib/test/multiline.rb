@@ -3,8 +3,8 @@ shared :setup_multiline do
   def setup_shell
     @shell = Rib::Shell.new(
       :binding => Object.new.instance_eval{binding}).before_loop
-    stub(@shell).print
-    stub(@shell).puts
+    stub(@shell).print.with_any_args
+    stub(@shell).puts .with_any_args
   end
 
   def setup_input str
@@ -19,7 +19,7 @@ shared :setup_multiline do
 
   def input str
     setup_input(str)
-    mock.proxy(@shell).throw(:rib_multiline)
+    mock_proxy(@shell).throw(:rib_multiline)
   end
 
   def input_done str, err=nil
