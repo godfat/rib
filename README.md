@@ -1,4 +1,4 @@
-# Rib
+# Rib [![Build Status](https://secure.travis-ci.org/godfat/rib.png?branch=master)](http://travis-ci.org/godfat/rib)
 
 by Lin Jen-Shin ([godfat](http://godfat.org))
 
