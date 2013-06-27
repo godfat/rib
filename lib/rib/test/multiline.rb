@@ -19,7 +19,7 @@ shared :setup_multiline do
 
   def input str
     setup_input(str)
-    mock_proxy(@shell).throw(:rib_multiline)
+    mock(@shell).throw(:rib_multiline).proxy
   end
 
   def input_done str, err=nil
