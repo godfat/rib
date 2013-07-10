@@ -3,7 +3,7 @@ module Rib; end
 module Rib::Auto
   module_function
   def load
-    app, name = %w[ramaze rails].find{ |name|
+    app, name = %w[ramaze rails rack].find{ |name|
       require "rib/app/#{name}"
       app = Rib.const_get(name.capitalize)
       if app.send("#{name}?")

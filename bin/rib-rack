@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'rib/runner'
+# create the shell before app to prvent your bundler (if any) kicks in
+Rib.shell
+# we need to require anything before loading the app,
+# and both `rib auto` (true) and `rib-auto` (nil) should work
+require 'rib/core' if Rib.config.delete(:mimic_irb) != false
+require 'rib/app/rack'
+# load the app
+Rib::Rack.load
+Rib::Runner.run(ARGV)

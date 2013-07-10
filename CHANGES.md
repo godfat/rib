@@ -1,5 +1,11 @@
 # CHANGES
 
+## Rib 1.1.4 -- 2013-07-11
+
+* Further fixed a bug for displaying a BasicObject. Rib should never crash.
+* Added `rib-rack` executable which could load the app in config.ru,
+  accessible from calling `app` in the console. Also works for `rib-auto`
+
 ## Rib 1.1.3 -- 2013-05-08
 
 * Fixed a bug where if user input doesn't respond to `==` would crash rib.

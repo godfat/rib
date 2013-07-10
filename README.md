@@ -59,8 +59,12 @@ As Ramaze console
 
     rib ramaze
 
+As Rack console
+
+    rib rack
+
 As a console for whichever the app in the current path
-it should be (for now, it's either Rails or Ramaze)
+it should be (for now, it's either Rails, Ramaze or Rack)
 
     rib auto
 
