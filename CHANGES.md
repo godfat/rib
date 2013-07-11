@@ -1,5 +1,10 @@
 # CHANGES
 
+## Rib 1.1.5 -- 2013-07-11
+
+* Fixed `rib -h` with commands don't have a description.
+* Added a description for `rib rack`
+
 ## Rib 1.1.4 -- 2013-07-11
 
 * Further fixed a bug for displaying a BasicObject. Rib should never crash.

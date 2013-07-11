@@ -54,13 +54,14 @@ module Rib::Runner
      'min'    => 'Run the minimum essence'                     ,
      'auto'   => 'Run as Rails or Ramaze console (auto-detect)',
      'rails'  => 'Run as Rails console'                        ,
-     'ramaze' => 'Run as Ramaze console'                       }
+     'ramaze' => 'Run as Ramaze console'                       ,
+     'rack'   => 'Run as Rack console'                         }
   end
 
   # Extract the text below __END__ in the bin file as the description
   def command_descriptions_find path
     File.read(path) =~ /Gem\.bin_path\(['"](.+)['"], ['"](.+)['"],/
-    File.read(Gem.bin_path($1, $2))[/\n__END__\n(.+)$/m, 1].strip
+    (File.read(Gem.bin_path($1, $2))[/\n__END__\n(.+)$/m, 1] || '').strip
   end
 
   def run argv=ARGV
@@ -148,7 +149,7 @@ module Rib::Runner
     "Usage: #{Rib.config[:name]}"                    \
     " [ruby OPTIONS] [rib OPTIONS] [rib COMMANDS]\n" +
     options.map{ |(name, desc)|
-      if desc.empty?
+      if name.end_with?(':')
         name
       else
         sprintf("  %-*s  %-*s", maxn, name, maxd, desc)
