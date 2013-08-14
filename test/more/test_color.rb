@@ -5,15 +5,15 @@ require 'rib/more/color'
 describe Rib::Color do
   behaves_like :rib
 
-  should 'give correct color' do
-    @color = Class.new do
-      include Rib::Color
-      def colors
-        @colors ||= Rib::Shell.new.before_loop.config[:color]
-      end
-    end.new
+  color = Class.new do
+    include Rib::Color
+    def colors
+      @colors ||= Rib::Shell.new.before_loop.config[:color]
+    end
+  end.new
 
-    @color.send(:format_color,
+  should 'give correct color' do
+    color.send(:format_color,
       [{0 => :a}, 'b', [nil, {false => Object}], {true => Exception.new}]).
         should.eq \
           "\e[34m[\e[0m\e[34m{\e[0m\e[31m0\e[0m\e[34m=>\e[0m\e[36m:a\e[0m\e" \
@@ -22,6 +22,17 @@ describe Rib::Color do
           "\e[0m\e[33mObject\e[0m\e[34m}\e[0m\e[34m]\e[0m\e[34m, \e[0m\e[34m"\
           "{\e[0m\e[35mtrue\e[0m\e[34m=>\e[0m\e[35m#<Exception: Exception>"  \
           "\e[0m\e[34m}\e[0m\e[34m]\e[0m"
+  end
+
+  should 'inspect recursive array and hash just like built-in inspect' do
+    a = []
+    a << a
+    h = {}
+    h[0] = h
+    color.send(:format_color, [a, h]).should.eq \
+      "\e[34m[\e[0m\e[34m[\e[0m\e[34m[...]\e[0m\e[34m]\e[0m\e[34m, \e[0m" \
+      "\e[34m{\e[0m\e[31m0\e[0m\e[34m=>\e[0m\e[34m{...}\e[0m\e[34m}\e[0m" \
+      "\e[34m]\e[0m"
   end
 
   # regression test

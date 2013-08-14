@@ -40,14 +40,20 @@ module Rib::Color
       when Symbol ; send(colors[Symbol ]){ display }
 
       when Array  ; send(colors[Array  ]){ '['     }   +
-                      result.map{ |e   | format_color(e) }.
+                      result.map{ |e   | if e.object_id == result.object_id
+                                           send(colors[Array]){'[...]'}
+                                         else
+                                           format_color(e); end }.
                join(send(colors[Array  ]){ ', '    })  +
                     send(colors[Array  ]){ ']'     }
 
       when Hash   ; send(colors[Hash   ]){ '{'     }   +
                       result.map{ |k, v| format_color(k) +
                     send(colors[Hash   ]){ '=>'    }   +
-                                         format_color(v) }.
+                                         if v.object_id == result.object_id
+                                           send(colors[Hash]){'{...}'}
+                                         else
+                                           format_color(v); end }.
                join(send(colors[Hash   ]){ ', '    }) +
                     send(colors[Hash   ]){ '}'     }
 
