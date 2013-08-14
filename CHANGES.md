@@ -1,5 +1,9 @@
 # CHANGES
 
+## Rib 1.1.6 -- 2013-08-14
+
+* [more/color] Fixed inspecting recursive array and hash.
+
 ## Rib 1.1.5 -- 2013-07-11
 
 * Fixed `rib -h` with commands don't have a description.
