@@ -89,4 +89,5 @@ end
 Rib::Blackhole = Object.new
 b = Rib::Blackhole.singleton_class
 b.instance_methods(true).each{ |m|
-  b.send(:undef_method, m) unless [:object_id, :__send__].include?(m) }
+  b.send(:undef_method, m) unless
+    [:object_id, :__send__, :__id__].include?(m) }
