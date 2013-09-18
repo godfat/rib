@@ -11,7 +11,7 @@ shared :squeeze_history do
 
   should 'loop_once squeeze history' do
     times = @input.size
-    stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'")[-1] }
+    stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'").last }
     stub(@shell).print_result.with_any_args
     times.times{ @shell.loop_once }
     @shell.history.to_a.should.eq %w[foo bar foo bar].map{ |i| "'#{i}'" }
@@ -21,7 +21,7 @@ shared :squeeze_history do
     Rib::SqueezeHistory.disable
     times = @input.size
     input = @input.dup
-    stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'")[-1] }
+    stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'").last }
     stub(@shell).print_result.with_any_args
     times.times{ @shell.loop_once }
     @shell.history.to_a.should.eq input.map{ |i| "'#{i}'" }

@@ -66,7 +66,7 @@ shared :rib do
 
   def stub_readline
     stub(::Readline).readline(is_a(String), true){
-      (::Readline::HISTORY << str.chomp)[-1]
+      (::Readline::HISTORY << str.chomp).last
     }
   end
 end
