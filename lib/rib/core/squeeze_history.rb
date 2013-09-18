@@ -11,7 +11,6 @@ module Rib::SqueezeHistory
   def loop_once
     return super if SqueezeHistory.disabled?
     begin
-      # TODO: history[-1] is MRI 1.9+
       input, last_input = history[-1], history[-2]
     rescue IndexError # EditLine is really broken, to_a is needed for it
       array = history.to_a
@@ -35,7 +34,6 @@ module Rib::SqueezeHistory
 
   private
   def squeezed_history
-    # TODO: history.inject is MRI 1.9+
     history.to_a.inject([]){ |result, item|
       if result.last == item || item.strip == ''
         result
