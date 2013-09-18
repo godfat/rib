@@ -104,11 +104,11 @@ module Rib::Runner
 
       when /^-d/, '--debug'
         $DEBUG = true
-        argv.unshift("-#{arg[2..-1]}") if arg.size > 2
+        parse_next(argv, arg)
 
       when /^-w/, '--warn'
         $-w, $VERBOSE = true, true
-        argv.unshift("-#{arg[2..-1]}") if arg.size > 2
+        parse_next(argv, arg)
 
       when /^-I=?(.+)?/, /^--include=?(.+)?/
         paths = ($1 || argv.shift).split(':')
@@ -122,7 +122,7 @@ module Rib::Runner
 
       when /^-n/, '--no-config'
         Rib.config.delete(:config)
-        argv.unshift("-#{arg[2..-1]}") if arg.size > 2
+        parse_next(argv, arg)
 
       when /^-h/, '--help'
         puts(help)
@@ -141,6 +141,10 @@ module Rib::Runner
       end
     end
     unused
+  end
+
+  def parse_next argv, arg
+    argv.unshift("-#{arg[2..-1]}") if arg.size > 2
   end
 
   def help
