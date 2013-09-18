@@ -18,14 +18,14 @@ shared :squeeze_history do
   end
 
   should 'be disabled if disabled' do
-    Rib::SqueezeHistory.disable
-    times = @input.size
-    input = @input.dup
-    stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'").last }
-    stub(@shell).print_result.with_any_args
-    times.times{ @shell.loop_once }
-    @shell.history.to_a.should.eq input.map{ |i| "'#{i}'" }
-    Rib::SqueezeHistory.enable
+    Rib::SqueezeHistory.disable do
+      times = @input.size
+      input = @input.dup
+      stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'").last }
+      stub(@shell).print_result.with_any_args
+      times.times{ @shell.loop_once }
+      @shell.history.to_a.should.eq input.map{ |i| "'#{i}'" }
+    end
   end
 end
 
