@@ -36,7 +36,7 @@ describe Rib::SqueezeHistory do
     @history = "/tmp/test_rib_#{rand}"
     @shell   = Rib::Shell.new(:history_file => @history).before_loop
     @input   = %w[foo bar bar foo bar]
-    clear_history(@shell.history)
+    @shell.history.clear
   end
 
   after do

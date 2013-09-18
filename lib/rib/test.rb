@@ -69,15 +69,6 @@ shared :rib do
       (::Readline::HISTORY << str.chomp)[-1]
     }
   end
-
-  # TODO: history.clear is MRI 1.9+
-  def clear_history history
-    if history.respond_to?(:clear)
-      history.clear
-    else
-      history.pop until history.empty?
-    end
-  end
 end
 
 module Kernel

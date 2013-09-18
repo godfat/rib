@@ -5,8 +5,7 @@ require 'rib/core/history'
 shared :history do
   should '#after_loop save history' do
     inputs = %w[blih blah]
-    # TODO: history.replace(input) is MRI 1.9+
-    clear_history(@shell.history)
+    @shell.history.clear
     @shell.history.push(*inputs)
 
     @shell.after_loop
@@ -52,7 +51,7 @@ describe Rib::History do
 
   before do
     if readline?
-      clear_history(::Readline::HISTORY)
+      ::Readline::HISTORY.clear
       stub_readline
     end
     @history_file = "/tmp/test_rib_#{rand}"
