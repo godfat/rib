@@ -19,3 +19,9 @@ module Rib::Readline
     ::Readline.readline(prompt, true)
   end
 end
+
+unless ::Readline::HISTORY.respond_to?(:last)
+  def (::Readline::HISTORY).last
+    self[-1]
+  end
+end
