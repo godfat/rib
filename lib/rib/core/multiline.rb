@@ -48,6 +48,7 @@ module Rib::Multiline
                       # mri and rubinius
                       "syntax error, unexpected \\$end"    ,
                       # rubinius
+                      "expecting keyword_end"              ,
                       "expecting \\$end"                   ,
                       "expecting '.+'( or '.+')*"          ,
                       "missing '.+' for '.+' started on line \\d+"].join('|'))
