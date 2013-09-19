@@ -148,8 +148,9 @@ module Rib::Runner
   end
 
   def help
-    maxn = options.transpose.first.map(&:size).max
-    maxd = options.transpose.last .map(&:size).max
+    optt = options.transpose
+    maxn = optt.first.map(&:size).max
+    maxd = optt.last .map(&:size).max
     "Usage: #{Rib.config[:name]}"                    \
     " [ruby OPTIONS] [rib OPTIONS] [rib COMMANDS]\n" +
     options.map{ |(name, desc)|
