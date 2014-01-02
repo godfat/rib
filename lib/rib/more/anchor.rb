@@ -62,6 +62,9 @@ module Rib::Anchor
     # @return [Rib::Skip] This is the mark telling Rib do not print anything.
     #   It's only used internally in Rib.
     # @see Rib::Shell#initialize
+    # @example
+    #   Rib.anchor binding
+    #   Rib.anchor 123
     def anchor obj_or_binding, opts={}
       return if Rib::Anchor.disabled?
 
