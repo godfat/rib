@@ -53,6 +53,15 @@ module Rib::Anchor
   end
 
   module Imp
+    # Enter an interactive Rib shell based on a particular context.
+    #
+    # @api public
+    # @param obj_or_binding [Object, Binding] The context of the shell.
+    # @param opts [Hash] The config hash passed to the newly created shell.
+    #   See {Rib::Shell#initialize} for all possible options.
+    # @return [Rib::Skip] This is the mark telling Rib do not print anything.
+    #   It's only used internally in Rib.
+    # @see Rib::Shell#initialize
     def anchor obj_or_binding, opts={}
       return if Rib::Anchor.disabled?
 

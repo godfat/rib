@@ -11,6 +11,30 @@ class Rib::Shell
   end
 
   attr_reader :config
+
+  # Create a new shell.
+  #
+  # @api public
+  # @param config [Hash] The config of the shell.
+  # @option config [String] :config ('~/.rib/config.rb')
+  #   The path to Rib config file.
+  # @option config [String] :name ('rib')
+  #   The name of the shell. Used for Rib application.
+  # @option config [String] :result_prompt ('=> ')
+  # @option config [String] :prompt ('>> ')
+  # @option config [Binding, Object] :binding (TOPLEVEL_BINDING)
+  #   The context of the shell. Could be an Object.
+  # @option config [Array<String>] :exit ([nil])
+  #   The keywords to exit the shell. `nil` means EOF (ctrl+d).
+  # @option config [Fixnum] :line (1) The beginning of line number.
+  # @option config [String] :history_file ('~/.rib/config/history.rb')
+  #   (Only if {Rib::History} plugin is used) The path to history file.
+  # @option config [Fixnum] :history_size (500)
+  #   (Only if {Rib::History} plugin is used) Maximum numbers of history.
+  # @option config [Hash<Class, Symbol>] :color (...)
+  #   (Only if {Rib::Color} plugin is used) Data type colors mapping.
+  # @option config [String] :autoindent_spaces ('  ')
+  #   (Only if {Rib::Autoindent} plugin is used) The indented string.
   def initialize(config={})
     self.config = {
       :result_prompt => '=> '           ,
