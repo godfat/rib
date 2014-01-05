@@ -16,4 +16,5 @@ end
 
 platforms :rbx do
   gem 'rubysl-singleton' # used in rake
+  gem 'rubysl-readline'  # we need readline extension
 end
