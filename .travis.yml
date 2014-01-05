@@ -4,5 +4,10 @@ script: 'ruby -r bundler/setup -S rake test'
 rvm:
   - 1.9.3
   - 2.0.0
-  - rbx-2.1.1
-  - jruby-head
+  - 2.1.0
+  - rbx
+  - jruby
+
+matrix:
+  allow_failures:
+    - rvm: jruby
