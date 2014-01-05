@@ -29,7 +29,7 @@ shared :underscore do
 
   should 'set __' do
     setup
-    stub(@shell).puts.with_any_args
+    stub(@shell).puts{}.with_any_args
     mock(@shell).get_input{'XD'}
     mock(@shell).get_input{'__'}
     @shell.loop_once
@@ -43,7 +43,7 @@ describe Rib::Underscore do
   def setup bound=Object.new
     @shell = Rib::Shell.new(
       :binding => bound.instance_eval{binding}).before_loop
-    stub(@shell).puts(is_a(String))
+    stub(@shell).puts(is_a(String)){}
   end
 
   test_for Rib::Underscore do

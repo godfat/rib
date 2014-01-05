@@ -18,7 +18,7 @@ describe Rib::Shell do
     end
     should 'exit'      do                               input('exit' ) end
     should 'also exit' do                               input(' exit') end
-    should 'ctrl+d'    do mock(@shell).puts           ; input(nil)     end
+    should 'ctrl+d'    do mock(@shell).puts{}         ; input(nil)     end
     should ':q'        do @shell.config[:exit] << ':q'; input(':q')    end
     should '\q'        do @shell.config[:exit] << '\q'; input('\q')    end
   end
@@ -35,27 +35,27 @@ describe Rib::Shell do
     end
 
     should 'handles ctrl+c' do
-      mock(@shell).handle_interrupt
+      mock(@shell).handle_interrupt{}
       input{ raise Interrupt }
     end
 
     should 'prints result' do
-      mock(@shell).puts('=> "mm"')
+      mock(@shell).puts('=> "mm"'){}
       input('"m" * 2')
     end
 
     should 'error in print_result' do
-      mock(Rib).warn(match(/Error while printing result.*BOOM/m))
+      mock(Rib).warn(match(/Error while printing result.*BOOM/m)){}
       input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
     end
 
     should 'not crash if user input is a blackhole' do
-      mock(Rib).warn(match(/Error while printing result/))
+      mock(Rib).warn(match(/Error while printing result/)){}
       input('Rib::Blackhole')
     end
 
     should 'print error from eval' do
-      mock(@shell).puts(match(/RuntimeError/))
+      mock(@shell).puts(match(/RuntimeError/)){}
       input('raise "blah"')
     end
   end
@@ -87,8 +87,8 @@ describe Rib::Shell do
 
   should 'call after_loop even if in_loop raises' do
     mock(@shell).loop_once{ raise 'boom' }
-    mock(Rib).warn(is_a(String))
-    mock(@shell).after_loop
+    mock(Rib).warn(is_a(String)){}
+    mock(@shell).after_loop{}
     lambda{@shell.loop}.should.raise(RuntimeError)
   end
 end
