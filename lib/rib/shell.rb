@@ -69,12 +69,11 @@ class Rib::Shell
   # Avoid namespace pollution from rubygems bin stub.
   # To be specific, version and str.
   def new_private_binding
-    context = Object.new
-    def context.__rib_binding__
-      binding
-    end
-    binding = context.__rib_binding__
-    context.singleton_class.__send__(:remove_method, :__rib_binding__)
-    binding
+    TOPLEVEL_BINDING.eval <<-RUBY
+    def main; binding; end # anyway to define <main> method?
+    ret = main
+    Object.send(:remove_method, 'main') # never pollute anything
+    ret
+    RUBY
   end
 end
