@@ -101,7 +101,7 @@ module Rib::Rails
 
     # rails 3.2
     if ::Rails.const_defined?(:ConsoleMethods)
-      Rib.shell.config[:binding].eval('extend ::Rails::ConsoleMethods')
+      Rib.shell.eval_binding.eval('extend ::Rails::ConsoleMethods')
     end
   end
 

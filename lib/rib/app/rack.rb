@@ -15,7 +15,7 @@ module Rib::Rack
     Rib.abort("Error: Cannot find config.ru") unless rack?
     app, _ = Rack::Builder.parse_file('config.ru')
     self.app = app
-    Rib.shell.config[:binding].eval('def app; Rib::Rack.app; end')
+    Rib.shell.eval_binding.eval('def app; Rib::Rack.app; end')
     Rib.say("Access your app via :app method")
   end
 
