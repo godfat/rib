@@ -79,7 +79,7 @@ module Rib::Runner
 
   def loop retry_times=5
     Rib.shell.loop
-  rescue Exception => e
+  rescue => e
     if retry_times <= 0
       Rib.warn("Error: #{e}. Too many retries, give up.")
     elsif Rib.shells.last.running?
