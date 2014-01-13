@@ -66,7 +66,7 @@ module Rib::Runner
 
   def run argv=ARGV
     (@running_commands ||= []) << Rib.config[:name]
-    unused = parse(argv)
+    unused, e = parse(argv)
     # if it's running a Rib command, the loop would be inside Rib itself
     # so here we only parse args for the command
     return if @running_commands.pop != 'rib'
@@ -74,6 +74,7 @@ module Rib::Runner
     # not any other Rib command
     Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
     require 'rib/core' if Rib.config.delete(:mimic_irb)
+    Rib.shell.eval_binding.eval(e, __FILE__, __LINE__)
     loop
   end
 
@@ -96,11 +97,11 @@ module Rib::Runner
   end
 
   def parse argv
-    unused = []
+    unused, e = [], ''
     until argv.empty?
       case arg = argv.shift
       when /^-e=?(.+)?/, /^--eval=?(.+)?/
-        eval($1 || argv.shift, TOPLEVEL_BINDING, __FILE__, __LINE__)
+        e = $1 || argv.shift || ''
 
       when /^-d/, '--debug'
         $DEBUG = true
@@ -140,7 +141,7 @@ module Rib::Runner
         unused << arg
       end
     end
-    unused
+    [unused, e]
   end
 
   def parse_next argv, arg

@@ -91,4 +91,8 @@ describe Rib::Shell do
     mock(@shell).after_loop{}
     lambda{@shell.loop}.should.raise(RuntimeError)
   end
+
+  should 'have empty binding' do
+    @shell.eval_input('local_variables').first.should.empty
+  end
 end

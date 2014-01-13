@@ -22,7 +22,7 @@ class Rib::Shell
   #   The name of the shell. Used for Rib application.
   # @option config [String] :result_prompt ('=> ')
   # @option config [String] :prompt ('>> ')
-  # @option config [Binding, Object] :binding (TOPLEVEL_BINDING)
+  # @option config [Binding, Object] :binding (new_private_binding)
   #   The context of the shell. Could be an Object.
   # @option config [Array<String>] :exit ([nil])
   #   The keywords to exit the shell. `nil` means EOF (ctrl+d).
@@ -36,12 +36,11 @@ class Rib::Shell
   # @option config [String] :autoindent_spaces ('  ')
   #   (Only if {Rib::Autoindent} plugin is used) The indented string.
   def initialize(config={})
-    self.config = {
-      :result_prompt => '=> '           ,
-      :prompt        => '>> '           ,
-      :binding       => TOPLEVEL_BINDING,
-      :exit          => [nil]           ,
-      :line          => 1               }.merge(config)
+    config[:binding] ||= new_private_binding
+    self.config = {:result_prompt => '=> ',
+                   :prompt        => '>> ',
+                   :exit          => [nil],
+                   :line          => 1    }.merge(config)
     @running = false
   end
 
@@ -65,4 +64,17 @@ class Rib::Shell
 
   protected
   attr_writer :config
+
+  private
+  # Avoid namespace pollution from rubygems bin stub.
+  # To be specific, version and str.
+  def new_private_binding
+    context = Object.new
+    def context.__rib_binding__
+      binding
+    end
+    binding = context.__rib_binding__
+    context.singleton_class.__send__(:remove_method, :__rib_binding__)
+    binding
+  end
 end
