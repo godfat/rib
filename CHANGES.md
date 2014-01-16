@@ -1,5 +1,15 @@
 # CHANGES
 
+## Rib 1.2.0 -- 2014-01-17
+
+* We no longer really eval on TOPLEVEL_BINDING, but a private binding
+  derived from TOPLEVEL_BINDING. This is due to RubyGems bin stub would
+  actually pollute TOPLEVEL_BINDING, leaving `str` and `version` as
+  local variables. I would like to avoid them, thus introducing this change.
+  Please let me know if this breaks anything, thanks!
+
+* [core/multiline] Fixed a multiline detection for Rubinius.
+
 ## Rib 1.1.6 -- 2013-08-14
 
 * [more/color] Fixed inspecting recursive array and hash.
