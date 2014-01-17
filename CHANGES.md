@@ -1,5 +1,15 @@
 # CHANGES
 
+## Rib 1.2.1 -- ?
+
+* Fixed a bug where it cannot properly elegantly handle errors when loading
+  the config file.
+
+* [extra/paging] This plugin would try to use $PAGER and by default less to
+  paginate for output which cannot fit in a screen.
+
+* [more/edit] Now by default it would pick vim if $EDITOR is not set.
+
 ## Rib 1.2.0 -- 2014-01-17
 
 * We no longer really eval on TOPLEVEL_BINDING, but a private binding
