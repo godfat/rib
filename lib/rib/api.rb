@@ -104,7 +104,7 @@ module Rib::API
   private
   def equal_rib_skip result
     result == Rib::Skip
-  rescue Exception
+  rescue
     # do nothing, it cannot respond to == correctly, it can't be Rib::Skip
   end
 end

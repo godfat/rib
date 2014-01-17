@@ -68,7 +68,7 @@ module Rib
     result = require(config_path)
     Rib.say("Config loaded from: #{config_path}") if $VERBOSE && result
     result
-  rescue Exception => e
+  rescue StandardError, LoadError, SyntaxError => e
     Rib.warn("Error loading #{config[:config]}\n" \
              "  #{Rib::API.format_error(e)}")
   end
