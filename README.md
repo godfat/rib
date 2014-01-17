@@ -100,22 +100,26 @@ with other plugins, or having strong personal tastes, so you won't want to
 enable them all. Suppose you only want to use the core plugins and color
 plugin, you'll put this into your config file:
 
-    require 'rib/core'
-    require 'rib/more/color'
+``` ruby
+require 'rib/core'
+require 'rib/more/color'
+```
 
 You can also write your plugins there. Here's another example:
 
-    require 'rib/core'
-    require 'pp'
-    Rib.config[:prompt] = '$ '
+``` ruby
+require 'rib/core'
+require 'pp'
+Rib.config[:prompt] = '$ '
 
-    module RibPP
-      Rib::Shell.send(:include, self)
+module RibPP
+  Rib::Shell.send(:include, self)
 
-      def format_result result
-        result_prompt + result.pretty_inspect
-      end
-    end
+  def format_result result
+    result_prompt + result.pretty_inspect
+  end
+end
+```
 
 So that we override the original format_result to pretty_inspect the result.
 You can also build your own gem and then simply require it in your config
@@ -248,22 +252,26 @@ or having conflicted semantics.
 Rib could be used as a kind of debugging tool which you can set break point
 in the source program.
 
-    require 'rib/config' # This would load your Rib config
-    require 'rib/more/anchor'
-                         # If you enabled anchor in config, then needed not
-    Rib.anchor binding   # This would give you an interactive shell
-                         # when your program has been executed here.
-    Rib.anchor 123       # You can also anchor on an object.
+``` ruby
+require 'rib/config' # This would load your Rib config
+require 'rib/more/anchor'
+                     # If you enabled anchor in config, then needed not
+Rib.anchor binding   # This would give you an interactive shell
+                     # when your program has been executed here.
+Rib.anchor 123       # You can also anchor on an object.
+```
 
 But this might be called in a loop, you might only want to
 enter the shell under certain circumstance, then you'll do:
 
-    require 'rib/debug'
-    Rib.enable_anchor do
-      # Only `Rib.anchor` called in the block would launch a shell
-    end
+``` ruby
+require 'rib/debug'
+Rib.enable_anchor do
+  # Only `Rib.anchor` called in the block would launch a shell
+end
 
-    Rib.anchor binding # No effect (no-op) outside the block
+Rib.anchor binding # No effect (no-op) outside the block
+```
 
 Anchor could also be nested. The level would be shown on the prompt,
 starting from 1.
@@ -272,8 +280,10 @@ starting from 1.
 
 Whenever you called:
 
-    require 'rib/more/edit'
-    Rib.edit
+``` ruby
+require 'rib/more/edit'
+Rib.edit
+```
 
 Rib would open an editor according to `$EDITOR` (`ENV['EDITOR']`) for you.
 By default it would pick vim if no `$EDITOR` was set. After save and leave
@@ -284,7 +294,9 @@ an anchor. To use it, require either rib/more/edit or rib/more or rib/all.
 
 The essence is:
 
-    require 'rib'
+``` ruby
+require 'rib'
+```
 
 All others are optional. The core plugins are lying in `rib/core/*.rb`, and
 more plugins are lying in `rib/more/*.rb`. You can read `rib/app/ramaze.rb`
