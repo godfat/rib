@@ -121,21 +121,7 @@ So that we override the original format_result to pretty_inspect the result.
 You can also build your own gem and then simply require it in your config
 file. To see a list of overridable API, please read [api.rb][]
 
-Currently, there are two **extra plugins**.
-
-* `require 'rib/extra/autoindent'` This plugin is depending on:
-
-  1. [readline_buffer][]
-  2. readline plugin
-  3. multiline plugin
-
-* `require 'rib/extra/hirb'` This plugin is depending on:
-
-  1. [hirb][]
-
 [api.rb]: https://github.com/godfat/rib/blob/master/lib/rib/api.rb
-[readline_buffer]: https://github.com/godfat/readline_buffer
-[hirb]: https://github.com/cldwalker/hirb
 
 #### Basic configuration
 
@@ -158,6 +144,104 @@ Rib.config[:history_file]      | Default is "~/.rib/config/history.rb"
 Rib.config[:history_size]      | Default is 500
 Rib.config[:color]             | A hash of Class => :color mapping
 Rib.config[:autoindent_spaces] | How to indent? Default is two spaces: '  '
+
+#### List of core plugins
+
+``` ruby
+require 'rib/core' # You get all of the followings:
+```
+
+* `require 'rib/core/completion'`
+
+  Completion from [bond][].
+
+* `require 'rib/core/history'`
+
+  Remember history in a history file.
+
+* `require 'rib/core/strip_backtrace'`
+
+  Strip backtrace before Rib.
+
+* `require 'rib/core/readline'`
+
+  Readline support.
+
+* `require 'rib/core/multiline'`
+
+  You can interpret multiple lines.
+
+* `require 'rib/core/squeeze_history'`
+
+  Remove duplicated input from history.
+
+* `require 'rib/core/underscore'`
+
+  Save the last result in `_` and the last exception in `__`.
+
+#### List of more plugins
+
+``` ruby
+require 'rib/more' # You get all of the followings:
+```
+
+* `require 'rib/more/multiline_history_file'`
+
+  Not only readline could have multiline history, but also the history file.
+
+* `require 'rib/more/color'`
+
+  Class based colorizing.
+
+* `require 'rib/more/multiline_history'`
+
+  Make readline aware of multiline history.
+
+* `require 'rib/more/anchor'`
+
+  See _As a debugging/interacting tool_.
+
+* `require 'rib/more/edit'`
+
+  See _In place editing_.
+
+### List of extra plugins
+
+There's no `require 'rib/extra'` for extra plugins because they might not
+be doing what you would expect or want, or having an external dependency,
+or having conflicted semantics.
+
+* `require 'rib/extra/autoindent'` This plugin is depending on:
+
+  1. [readline_buffer][]
+  2. readline plugin
+  3. multiline plugin
+
+  Which would autoindent your input.
+
+* `require 'rib/extra/hirb'` This plugin is depending on:
+
+  1. [hirb][]
+
+  Which would print the result with hirb.
+
+* `require 'rib/extra/debugger'` This plugin is depending on:
+
+  1. [debugger][]
+
+  Which introduces `Rib.debug`, which would do similar things as
+  `Rib.anchor` but only more powerful. However, this is not well
+  tested and might not work well. Please let me know if you have
+  any issue using it, thanks!
+
+* `require 'rib/extra/paging'` This plugin is depending on `less`.
+
+  Which would pass the result to `less` (or `$PAGER` if set) if
+  the result string is longer than the screen.
+
+[readline_buffer]: https://github.com/godfat/readline_buffer
+[hirb]: https://github.com/cldwalker/hirb
+[debugger]: https://github.com/cldwalker/debugger
 
 ### As a debugging/interacting tool
 
@@ -191,10 +275,10 @@ Whenever you called:
     require 'rib/more/edit'
     Rib.edit
 
-Rib would open an editor according to $EDITOR (`ENV['EDITOR']`) for you.
-After save and leave the editor, Rib would evaluate what you had input.
-This also works inside an anchor. To use it, require either rib/more/edit
-or rib/more or rib/all.
+Rib would open an editor according to `$EDITOR` (`ENV['EDITOR']`) for you.
+By default it would pick vim if no `$EDITOR` was set. After save and leave
+the editor, Rib would evaluate what you had input. This also works inside
+an anchor. To use it, require either rib/more/edit or rib/more or rib/all.
 
 ### As a shell framework
 
