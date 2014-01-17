@@ -13,9 +13,10 @@ module Rib::Edit
       file.puts(Rib.vars[:edit])
       file.close
 
-      system("#{ENV['EDITOR']} #{file.path}")
+      shell = Rib.shell
+      system("#{shell.editor} #{file.path}")
 
-      if (shell = Rib.shell).running?
+      if shell.running?
         shell.send(:multiline_buffer).pop
       else
         shell.before_loop
@@ -27,6 +28,10 @@ module Rib::Edit
       file.close
       file.unlink
     end
+  end
+
+  def editor
+    ENV['EDITOR'] || 'vim'
   end
 
   Rib.extend(Imp)
