@@ -100,6 +100,7 @@ module Rib::API
   def format_error err
     "#{err.class}: #{err.message}\n    #{err.backtrace.join("\n    ")}"
   end
+  module_function :format_error
 
   private
   def equal_rib_skip result
