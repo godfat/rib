@@ -1,6 +1,6 @@
 # CHANGES
 
-## Rib 1.2.1 -- ?
+## Rib 1.2.1 -- 2014-01-18
 
 * Fixed a bug where it cannot properly elegantly handle errors when loading
   the config file.
