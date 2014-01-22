@@ -25,7 +25,7 @@ module Rib::Paging
   def one_screen? output
     cols, lines = `tput cols`.to_i, `tput lines`.to_i
     output.count("\n") <= lines &&
-    output.gsub(/\e\[[^m]*m/, '').size <= cols * lines
+      output.gsub(/\e\[[^m]*m/, '').size <= cols * lines
   end
 
   def page_result output
