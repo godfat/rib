@@ -1,5 +1,16 @@
 # CHANGES
 
+## Rib 1.2.2 -- 2014-01-23
+
+* From now on, we support project specific config file located on
+  "./.rib/config.rb". Note that if there's a project specific config file,
+  your home config would not be loaded at all. The history file would also
+  be put into "./.rib/history.rb". You might want to ignore it from your
+  repository to avoid leaking confidential information.
+
+* [extra/paging] Now we strip ANSI sequences before calculating if we need
+  a pager. This should make it much more accurate.
+
 ## Rib 1.2.1 -- 2014-01-18
 
 * Fixed a bug where it cannot properly elegantly handle errors when loading
