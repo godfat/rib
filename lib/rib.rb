@@ -24,10 +24,15 @@ module Rib
     @vars   ||= {}
   end
 
-  # Rib.home is where Rib storing things
+  # Rib.home is where Rib storing things. By default, it goes to '~/.rib',
+  # or somewhere containing a 'config.rb' or 'history.rb' in the order of
+  # './.rib' (project specific config), or '~/.rib' (home config), or
+  # '~/.config/rib' (home config, residing in ~/.config)
+  #
+  # @api public
   def home
     ENV['RIB_HOME'] ||= begin
-      ['~/.rib', '~/.config/rib'].find{ |path|
+      ['./.rib', '~/.rib', '~/.config/rib'].find{ |path|
         p = File.expand_path(path)
         File.exist?(File.join(p, 'config.rb')) ||
         File.exist?(File.join(p, 'history.rb'))
