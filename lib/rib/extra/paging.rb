@@ -24,7 +24,8 @@ module Rib::Paging
   # `less -X` would mess up the buffers, so it's not desired, either.
   def one_screen? output
     cols, lines = `tput cols`.to_i, `tput lines`.to_i
-    output.count("\n") <= lines && output.size <= cols * lines
+    output.count("\n") <= lines &&
+    output.gsub(/\e\[[^m]*m/, '').size <= cols * lines
   end
 
   def page_result output
