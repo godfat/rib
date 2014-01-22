@@ -13,7 +13,7 @@ module Rib::Runner
       'Set debugging flags (set $DEBUG to true)'                     ],
 
      ['-w, --warn'                                                    ,
-       'Turn warnings on for your script (set $-w to true)'          ],
+       'Turn warnings on (set $-w and $VERBOSE to true)'             ],
 
      ['-I, --include PATH'                                            ,
        'Specify $LOAD_PATH (may be used more than once)'             ],
