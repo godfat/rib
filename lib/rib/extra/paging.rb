@@ -32,8 +32,8 @@ module Rib::Paging
     less = IO.popen(pager, 'w')
     less.write(output)
     less.close_write
-  rescue Errno::EPIPE => e
-    Rib.warn("Error while paging result:\n  #{format_error(e)}")
+  rescue Errno::EPIPE
+    # less quit without consuming all the input
   end
 
   def pager
