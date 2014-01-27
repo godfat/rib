@@ -40,3 +40,10 @@ module Rib::Paging
     ENV['PAGER'] || 'less -R'
   end
 end
+
+pager = ENV['PAGER'] || 'less'
+
+if `which #{pager}`.empty?
+  Rib.warn("#{pager} is not available, disabling Rib::Paging")
+  Rib::Paging.disable
+end
