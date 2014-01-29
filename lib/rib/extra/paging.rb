@@ -10,6 +10,7 @@ module Rib::Paging
   # Print result if the it fits one screen,
   # paging it through a pager otherwise.
   def print_result result
+    return super if Paging.disabled?
     output = format_result(result)
     if one_screen?(output)
       puts output
