@@ -1,5 +1,10 @@
 # CHANGES
 
+## Rib 1.2.3 -- 2014-02-08
+
+* [extra/paging] Properly disable paging if less or ENV['PAGER'] is not
+  available.
+
 ## Rib 1.2.2 -- 2014-01-23
 
 * From now on, we support project specific config file located on
