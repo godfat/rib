@@ -69,6 +69,7 @@ class Rib::Shell
   # Avoid namespace pollution from rubygems bin stub.
   # To be specific, version and str.
   def new_private_binding
+    # TODO: what if main method is already defined!?
     TOPLEVEL_BINDING.eval <<-RUBY
     def main; binding; end # anyway to define <main> method?
     ret = main
