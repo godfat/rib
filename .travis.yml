@@ -4,7 +4,7 @@ script: 'ruby -r bundler/setup -S rake test'
 rvm:
   - 1.9.3
   - 2.0.0
-  - 2.1.0
+  - ruby
   - rbx
   - jruby
 
