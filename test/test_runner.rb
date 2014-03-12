@@ -33,12 +33,22 @@ describe Rib::Runner do
     Rib::Runner.run(%w[-e]).should.eq @shell
   end
 
-  should 'min -e' do
+  def verify_app_e argv
      input('a')
     output('1')
-    argv = %w[min -ea=1]
-    mock(Rib::Runner).which_bin('rib-min'){ 'rib-min' }
-    mock(Rib::Runner).load('rib-min'){ Rib::Runner.run(argv) }
+    conf = {:name => 'rib'}
+    min  = 'rib-min'
+    mock(Rib::Runner).which_bin(min){ min }
+    mock(Rib::Runner).load(min){ Rib::Runner.run(argv) }
+    stub(Rib).config{ conf }
     Rib::Runner.run(argv).should.eq @shell
+  end
+
+  should 'min -e' do
+    verify_app_e(%w[min -ea=1])
+  end
+
+  should '-e min' do
+    verify_app_e(%w[-ea=1 min])
   end
 end
