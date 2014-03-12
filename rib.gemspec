@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: rib 1.2.4 ruby lib
+# stub: rib 1.2.5 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rib"
-  s.version = "1.2.4"
+  s.version = "1.2.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]

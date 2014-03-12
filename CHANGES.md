@@ -1,5 +1,9 @@
 # CHANGES
 
+## Rib 1.2.5 -- 2014-03-13
+
+* Fixed binding. Sorry my bad.
+
 ## Rib 1.2.4 -- 2014-03-13
 
 * Fixed a regression introduced in 1.2.0. Now `rib all -e 'p 123'` should
