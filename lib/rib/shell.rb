@@ -69,7 +69,7 @@ class Rib::Shell
   # Avoid namespace pollution from rubygems bin stub.
   # To be specific, version and str.
   def new_private_binding
-    TOPLEVEL_BINDING.instance_eval do
+    TOPLEVEL_BINDING.eval <<-RUBY
       singleton_class.module_eval do
         Rib.warn("Removing existing main...") if method_defined?(:main)
         def main; binding; end # any way to define <main> method?
@@ -77,6 +77,6 @@ class Rib::Shell
       ret = main
       singleton_class.send(:remove_method, 'main') # never pollute anything
       ret
-    end
+    RUBY
   end
 end
