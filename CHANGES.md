@@ -1,5 +1,14 @@
 # CHANGES
 
+## Rib 1.2.4 -- 2014-03-13
+
+* Fixed a regression introduced in 1.2.0. Now `rib all -e 'p 123'` should
+  work properly. Previously -e is ignored after rib apps.
+* Fixed a long standing Windows issue, where `rib all` did not work because
+  there's no `which` on Windows. Now we fall back to `where`.
+* Warn on removing main method on `TOPLEVEL_BINDING`. Not sure if this
+  would happen, but at least we could have a warning.
+
 ## Rib 1.2.3 -- 2014-02-08
 
 * [extra/paging] Properly disable paging if less or ENV['PAGER'] is not
