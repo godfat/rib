@@ -99,4 +99,16 @@ describe Rib::Shell do
   should 'have empty binding' do
     shell.eval_input('local_variables').first.should.empty
   end
+
+  should 'not pollute main' do
+    shell.eval_input('main').first.should.eq 'rib'
+  end
+
+  should 'warn on removing main' do
+    TOPLEVEL_BINDING.singleton_class.module_eval do
+      def main; end
+    end
+    mock(Rib).warn(is_a(String)){}
+    shell.eval_input('main').first.should.eq 'rib'
+  end
 end

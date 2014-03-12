@@ -77,6 +77,10 @@ module Kernel
   end
 end
 
+def main
+  'rib'
+end
+
 Rib::Blackhole = Object.new
 b = Rib::Blackhole.singleton_class
 b.instance_methods(true).each{ |m|

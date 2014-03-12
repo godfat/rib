@@ -69,12 +69,14 @@ class Rib::Shell
   # Avoid namespace pollution from rubygems bin stub.
   # To be specific, version and str.
   def new_private_binding
-    # TODO: what if main method is already defined!?
-    TOPLEVEL_BINDING.eval <<-RUBY
-    def main; binding; end # anyway to define <main> method?
-    ret = main
-    Object.send(:remove_method, 'main') # never pollute anything
-    ret
-    RUBY
+    TOPLEVEL_BINDING.instance_eval do
+      singleton_class.module_eval do
+        Rib.warn("Removing existing main...") if method_defined?(:main)
+        def main; binding; end # any way to define <main> method?
+      end
+      ret = main
+      singleton_class.send(:remove_method, 'main') # never pollute anything
+      ret
+    end
   end
 end
