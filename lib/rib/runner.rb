@@ -70,7 +70,7 @@ module Rib::Runner
     # if it's running a Rib command, the loop would be inside Rib itself
     # so here we only parse args for the command
     return if @running_commands.pop != 'rib'
-    # by comming to this line, it means now we're running Rib main loop,
+    # by coming to this line, it means now we're running Rib main loop,
     # not any other Rib command
     Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
     require 'rib/core' if Rib.config.delete(:mimic_irb)
