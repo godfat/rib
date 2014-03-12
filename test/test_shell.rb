@@ -7,40 +7,44 @@ describe Rib::Shell do
 
   before do
     Rib.disable_plugins
-    @shell = Rib::Shell.new
+    @shell = nil
+  end
+
+  def shell
+    @shell ||= Rib::Shell.new
   end
 
   describe '#loop' do
     def input str
-      mock(@shell).get_input{str}
-      @shell.loop
+      mock(shell).get_input{str}
+      shell.loop
       true.should.eq true
     end
     should 'exit'      do                               input('exit' ) end
     should 'also exit' do                               input(' exit') end
-    should 'ctrl+d'    do mock(@shell).puts{}         ; input(nil)     end
-    should ':q'        do @shell.config[:exit] << ':q'; input(':q')    end
-    should '\q'        do @shell.config[:exit] << '\q'; input('\q')    end
+    should 'ctrl+d'    do mock(shell).puts{}         ; input(nil)     end
+    should ':q'        do shell.config[:exit] << ':q'; input(':q')    end
+    should '\q'        do shell.config[:exit] << '\q'; input('\q')    end
   end
 
   describe '#loop_once' do
     def input str=nil
       if block_given?
-        mock(@shell).get_input{ yield }
+        mock(shell).get_input{ yield }
       else
-        mock(@shell).get_input{ str }
+        mock(shell).get_input{ str }
       end
-      @shell.loop_once
+      shell.loop_once
       true.should.eq true
     end
 
     should 'handles ctrl+c' do
-      mock(@shell).handle_interrupt{}
+      mock(shell).handle_interrupt{}
       input{ raise Interrupt }
     end
 
     should 'prints result' do
-      mock(@shell).puts('=> "mm"'){}
+      mock(shell).puts('=> "mm"'){}
       input('"m" * 2')
     end
 
@@ -55,44 +59,44 @@ describe Rib::Shell do
     end
 
     should 'print error from eval' do
-      mock(@shell).puts(match(/RuntimeError/)){}
+      mock(shell).puts(match(/RuntimeError/)){}
       input('raise "blah"')
     end
   end
 
   describe '#prompt' do
     should 'be changeable' do
-      @shell.config[:prompt] = '> '
-      @shell.prompt.should.eq  '> '
+      shell.config[:prompt] = '> '
+      shell.prompt.should.eq  '> '
     end
   end
 
   describe '#eval_input' do
     before do
-      @line = @shell.config[:line]
+      @line = shell.config[:line]
     end
 
     should 'line' do
-      @shell.eval_input('10 ** 2')
-      @shell.config[:line].should.eq @line + 1
+      shell.eval_input('10 ** 2')
+      shell.config[:line].should.eq @line + 1
     end
 
     should 'print error and increments line' do
-      result, err = @shell.eval_input('{')
+      result, err = shell.eval_input('{')
       result.should.eq nil
       err.should.kind_of?(SyntaxError)
-      @shell.config[:line].should.eq @line + 1
+      shell.config[:line].should.eq @line + 1
     end
   end
 
   should 'call after_loop even if in_loop raises' do
-    mock(@shell).loop_once{ raise 'boom' }
+    mock(shell).loop_once{ raise 'boom' }
     mock(Rib).warn(is_a(String)){}
-    mock(@shell).after_loop{}
-    lambda{@shell.loop}.should.raise(RuntimeError)
+    mock(shell).after_loop{}
+    lambda{shell.loop}.should.raise(RuntimeError)
   end
 
   should 'have empty binding' do
-    @shell.eval_input('local_variables').first.should.empty
+    shell.eval_input('local_variables').first.should.empty
   end
 end
