@@ -165,7 +165,7 @@ module Rib::Runner
 
   def load_command command
     bin  = "rib-#{command}"
-    path = `which #{bin}`.strip
+    path = which_bin(bin)
     if path == ''
       Rib.warn(
         "Can't find #{bin} in $PATH. Please make sure it is installed,",
@@ -175,5 +175,9 @@ module Rib::Runner
       Rib.config[:name] = bin
       load(path)
     end
+  end
+
+  def which_bin bin # handle windows here
+    `which #{bin}`.strip
   end
 end
