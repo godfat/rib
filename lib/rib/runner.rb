@@ -169,7 +169,7 @@ module Rib::Runner
     if path == ''
       Rib.warn(
         "Can't find #{bin} in $PATH. Please make sure it is installed,",
-        "or is there any typo? You can try this to install it:\n"         ,
+        "or is there any typo? You can try this to install it:\n"      ,
         "    gem install #{bin}")
     else
       Rib.config[:name] = bin
@@ -179,5 +179,7 @@ module Rib::Runner
 
   def which_bin bin # handle windows here
     `which #{bin}`.strip
+  rescue Errno::ENOENT # probably a windows platform, try where
+    `where #{bin}`.lines.first.strip
   end
 end
