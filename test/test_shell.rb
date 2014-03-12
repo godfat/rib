@@ -105,10 +105,16 @@ describe Rib::Shell do
   end
 
   should 'warn on removing main' do
-    TOPLEVEL_BINDING.singleton_class.module_eval do
-      def main; end
-    end
+    TOPLEVEL_BINDING.eval <<-RUBY
+      singleton_class.module_eval do
+        def main; end
+      end
+    RUBY
     mock(Rib).warn(is_a(String)){}
     shell.eval_input('main').first.should.eq 'rib'
+  end
+
+  should 'be main' do
+    shell.eval_input('self.inspect').first.should.eq 'main'
   end
 end
