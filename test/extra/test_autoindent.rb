@@ -5,6 +5,7 @@ require 'rib/extra/autoindent'
 describe Rib::Autoindent do
   behaves_like :rib
 
+  Rib::Multiline.enable
   Rib::Autoindent.enable
 
   autoindent = Class.new do
