@@ -24,21 +24,21 @@ module Rib::Autoindent
     # rescue E => e
     # rescue E=> e
     # rescue E =>e
-    /^begin$/        => /^(end)\b|^else$|^rescue *((\w+)? *(=> *\w+)?)?$/,
+    /^begin$/          => /^(end)\b|^else$|^rescue *((\w+)? *(=> *\w+)?)?$/,
     # elsif Expression
     # consider cases:
     # elsif(true)
     # elsif true
     # elsif true == true
     # elsif (a = true) && false
-    /^if/            => /^(end)\b|^else$|^elsif\b/,
-    /^unless/        => /^(end)\b|^else$|^elsif\b/,
-    /^case/          => /^(end)\b|^when\b/        ,
-    /^def/           => /^(end)\b/                ,
-    /^class/         => /^(end)\b/                ,
-    /^module/        => /^(end)\b/                ,
-    /^while/         => /^(end)\b/                ,
-    /^until/         => /^(end)\b/                ,
+    /^if\b/            => /^(end)\b|^else$|^elsif\b/,
+    /^unless\b/        => /^(end)\b|^else$|^elsif\b/,
+    /^case\b/          => /^(end)\b|^else$|when\b/  ,
+    /^def\b/           => /^(end)\b/                ,
+    /^class\b/         => /^(end)\b/                ,
+    /^module\b/        => /^(end)\b/                ,
+    /^while\b/         => /^(end)\b/                ,
+    /^until\b/         => /^(end)\b/                ,
     # consider cases:
     # 'do
     # ' do
