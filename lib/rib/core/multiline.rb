@@ -49,8 +49,11 @@ module Rib::Multiline
                       "syntax error, unexpected \\$end"    ,
                       # rubinius
                       "expecting keyword_end"              ,
+                      "expecting keyword_then"             ,
+                      "expecting keyword_when"             ,
+                      "expecting keyword_do_cond"          ,
                       "expecting \\$end"                   ,
-                      "expecting '?.+'?( or '.+')*"        ,
+                      "expecting '.+'( or '.+')*"          ,
                       "missing '.+' for '.+' started on line \\d+"].join('|'))
     when 'jruby'; Regexp.new(
                     [ # string or regexp
