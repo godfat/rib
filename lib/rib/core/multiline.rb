@@ -50,7 +50,7 @@ module Rib::Multiline
                       # rubinius
                       "expecting keyword_end"              ,
                       "expecting \\$end"                   ,
-                      "expecting '.+'( or '.+')*"          ,
+                      "expecting '?.+'?( or '.+')*"        ,
                       "missing '.+' for '.+' started on line \\d+"].join('|'))
     when 'jruby'; Regexp.new(
                     [ # string or regexp
