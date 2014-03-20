@@ -1,5 +1,11 @@
 # CHANGES
 
+## Rib 1.2.6 -- ?
+
+* [extra/autoindent] Now `module_function` would indent correctly.
+* [extra/autoindent] Now `else` in `case` would indent correctly.
+* [extra/autoindent] Fixed printing end clause twice. (performance fix)
+
 ## Rib 1.2.5 -- 2014-03-13
 
 * Fixed binding. Sorry my bad.
