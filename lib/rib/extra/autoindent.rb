@@ -88,11 +88,7 @@ module Rib::Autoindent
     return super if Autoindent.disabled?
     input  = raw_input.strip
     indent = detect_autoindent(input)
-    result, err = if indent.first.to_s.start_with?('left')
-                    super(handle_last_line(input))
-                  else
-                    super
-                  end
+    result, err = super
     handle_autoindent(input, indent, err)
     [result, err]
   end
@@ -128,6 +124,7 @@ module Rib::Autoindent
 
     when :left_end # we need to go back
       # could happen in either multiline or not
+      handle_last_line(input)
       autoindent_stack.pop
 
     when :left_tmp # temporarily go back
