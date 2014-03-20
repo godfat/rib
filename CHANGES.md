@@ -5,6 +5,8 @@
 * [extra/autoindent] Now `module_function` would indent correctly.
 * [extra/autoindent] Now `else` in `case` would indent correctly.
 * [extra/autoindent] Fixed printing end clause twice. (performance fix)
+* [extra/multiline] Fixed in some cases it's not recognized as multiline
+  in Rubinius (rbx).
 
 ## Rib 1.2.5 -- 2014-03-13
 
