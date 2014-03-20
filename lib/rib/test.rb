@@ -3,7 +3,7 @@ require 'bacon'
 require 'muack'
 require 'fileutils'
 Bacon.summary_on_exit
-include Muack::API
+Bacon::Context.__send__(:include, Muack::API)
 
 require 'rib'
 
