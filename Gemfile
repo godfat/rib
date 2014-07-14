@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake'
-gem 'bacon'
+gem 'pork'
 gem 'muack'
 
 gem 'bond'
