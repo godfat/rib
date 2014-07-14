@@ -4,8 +4,8 @@ require 'rib/test/multiline'
 require 'rib/more/multiline_history'
 
 describe Rib::MultilineHistory do
-  behaves_like :rib
-  behaves_like :setup_multiline
+  paste :rib
+  paste :setup_multiline
 
   def check str, err=nil
     @shell.history.clear
@@ -37,6 +37,6 @@ describe Rib::MultilineHistory do
   end
 
   test_for Rib::History, Rib::Multiline, Rib::MultilineHistory do
-    behaves_like :multiline
+    paste :multiline
   end
 end

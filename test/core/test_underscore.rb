@@ -2,8 +2,8 @@
 require 'rib/test'
 require 'rib/core/underscore'
 
-shared :underscore do
-  should 'set _' do
+copy :underscore do
+  would 'set _' do
     setup
     mock(@shell).get_input{'_'}
     mock(@shell).get_input{'10**2'}
@@ -13,7 +13,7 @@ shared :underscore do
     @shell.loop_once.should.eq [100, nil]
   end
 
-  should 'not set _ if already there' do
+  would 'not set _ if already there' do
     bound = Object.new
     def bound._
       'hey'
@@ -27,7 +27,7 @@ shared :underscore do
     @shell.loop_once.should.eq ['hey', nil]
   end
 
-  should 'set __' do
+  would 'set __' do
     setup
     stub(@shell).puts{}.with_any_args
     mock(@shell).get_input{'XD'}
@@ -38,7 +38,7 @@ shared :underscore do
 end
 
 describe Rib::Underscore do
-  behaves_like :rib
+  paste :rib
 
   def setup bound=Object.new
     @shell = Rib::Shell.new(
@@ -47,6 +47,6 @@ describe Rib::Underscore do
   end
 
   test_for Rib::Underscore do
-    behaves_like :underscore
+    paste :underscore
   end
 end

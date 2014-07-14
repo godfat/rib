@@ -3,7 +3,7 @@ require 'rib/test'
 require 'rib/shell'
 
 describe Rib::Shell do
-  behaves_like :rib
+  paste :rib
 
   before do
     Rib.disable_plugins
@@ -20,11 +20,11 @@ describe Rib::Shell do
       shell.loop
       true.should.eq true
     end
-    should 'exit'      do                               input('exit' ) end
-    should 'also exit' do                               input(' exit') end
-    should 'ctrl+d'    do mock(shell).puts{}         ; input(nil)     end
-    should ':q'        do shell.config[:exit] << ':q'; input(':q')    end
-    should '\q'        do shell.config[:exit] << '\q'; input('\q')    end
+    would 'exit'      do                               input('exit' ) end
+    would 'also exit' do                               input(' exit') end
+    would 'ctrl+d'    do mock(shell).puts{}         ; input(nil)     end
+    would ':q'        do shell.config[:exit] << ':q'; input(':q')    end
+    would '\q'        do shell.config[:exit] << '\q'; input('\q')    end
   end
 
   describe '#loop_once' do
@@ -38,34 +38,34 @@ describe Rib::Shell do
       true.should.eq true
     end
 
-    should 'handles ctrl+c' do
+    would 'handles ctrl+c' do
       mock(shell).handle_interrupt{}
       input{ raise Interrupt }
     end
 
-    should 'prints result' do
+    would 'prints result' do
       mock(shell).puts('=> "mm"'){}
       input('"m" * 2')
     end
 
-    should 'error in print_result' do
+    would 'error in print_result' do
       mock(Rib).warn(match(/Error while printing result.*BOOM/m)){}
       input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
     end
 
-    should 'not crash if user input is a blackhole' do
+    would 'not crash if user input is a blackhole' do
       mock(Rib).warn(match(/Error while printing result/)){}
       input('Rib::Blackhole')
     end
 
-    should 'print error from eval' do
+    would 'print error from eval' do
       mock(shell).puts(match(/RuntimeError/)){}
       input('raise "blah"')
     end
   end
 
   describe '#prompt' do
-    should 'be changeable' do
+    would 'be changeable' do
       shell.config[:prompt] = '> '
       shell.prompt.should.eq  '> '
     end
@@ -76,12 +76,12 @@ describe Rib::Shell do
       @line = shell.config[:line]
     end
 
-    should 'line' do
+    would 'line' do
       shell.eval_input('10 ** 2')
       shell.config[:line].should.eq @line + 1
     end
 
-    should 'print error and increments line' do
+    would 'print error and increments line' do
       result, err = shell.eval_input('{')
       result.should.eq nil
       err.should.kind_of?(SyntaxError)
@@ -89,22 +89,22 @@ describe Rib::Shell do
     end
   end
 
-  should 'call after_loop even if in_loop raises' do
+  would 'call after_loop even if in_loop raises' do
     mock(shell).loop_once{ raise 'boom' }
     mock(Rib).warn(is_a(String)){}
     mock(shell).after_loop{}
     lambda{shell.loop}.should.raise(RuntimeError)
   end
 
-  should 'have empty binding' do
-    shell.eval_input('local_variables').first.should.empty
+  would 'have empty binding' do
+    shell.eval_input('local_variables').first.should.empty?
   end
 
-  should 'not pollute main' do
+  would 'not pollute main' do
     shell.eval_input('main').first.should.eq 'rib'
   end
 
-  should 'warn on removing main' do
+  would 'warn on removing main' do
     TOPLEVEL_BINDING.eval <<-RUBY
       singleton_class.module_eval do
         def main; end
@@ -114,7 +114,7 @@ describe Rib::Shell do
     shell.eval_input('main').first.should.eq 'rib'
   end
 
-  should 'be main' do
+  would 'be main' do
     shell.eval_input('self.inspect').first.should.eq 'main'
   end
 end

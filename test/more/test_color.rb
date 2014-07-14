@@ -3,7 +3,7 @@ require 'rib/test'
 require 'rib/more/color'
 
 describe Rib::Color do
-  behaves_like :rib
+  paste :rib
 
   color = Class.new do
     include Rib::Color
@@ -12,7 +12,7 @@ describe Rib::Color do
     end
   end.new
 
-  should 'give correct color' do
+  would 'give correct color' do
     color.send(:format_color,
       [{0 => :a}, 'b', [nil, {false => Object}], {true => Exception.new}]).
         should.eq \
@@ -24,7 +24,7 @@ describe Rib::Color do
           "\e[0m\e[34m}\e[0m\e[34m]\e[0m"
   end
 
-  should 'inspect recursive array and hash just like built-in inspect' do
+  would 'inspect recursive array and hash just like built-in inspect' do
     a = []
     a << a
     h = {}
@@ -36,7 +36,7 @@ describe Rib::Color do
   end
 
   # regression test
-  should "colorize errors with `/' inside" do
+  would "colorize errors with `/' inside" do
     i = if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
           1
         else

@@ -3,7 +3,7 @@ require 'rib/test'
 require 'rib/all'
 
 describe Rib::Plugin do
-  behaves_like :rib
+  paste :rib
 
   before do
     @names = Dir[File.expand_path(
@@ -12,7 +12,7 @@ describe Rib::Plugin do
     @mods  = Rib.plugins
   end
 
-  should 'have shortcut methods' do
+  would 'have shortcut methods' do
     @names.each{ |name|
       %w[enable disable].each{ |meth|
         Rib.respond_to?("#{meth}_#{name}").should == true
@@ -23,7 +23,7 @@ describe Rib::Plugin do
     }
   end
 
-  should 'be the same as mod methods' do
+  would 'be the same as mod methods' do
     @mods.shuffle.take(@mods.size/2).each(&:disable)
     @names.each{ |name|
       %w[enabled? disabled?].each{ |meth|

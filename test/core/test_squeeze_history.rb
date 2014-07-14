@@ -2,14 +2,14 @@
 require 'rib/test'
 require 'rib/core/squeeze_history'
 
-shared :squeeze_history do
-  should 'after_loop saves squeezed history' do
+copy :squeeze_history do
+  would 'after_loop saves squeezed history' do
     @shell.history.push(*@input)
     @shell.after_loop
     File.read(@history).should.eq %w[foo bar foo bar].join("\n") + "\n"
   end
 
-  should 'loop_once squeeze history' do
+  would 'loop_once squeeze history' do
     times = @input.size
     stub(@shell).get_input{ (@shell.history << "'#{@input.shift}'").last }
     stub(@shell).print_result{}.with_any_args
@@ -17,7 +17,7 @@ shared :squeeze_history do
     @shell.history.to_a.should.eq %w[foo bar foo bar].map{ |i| "'#{i}'" }
   end
 
-  should 'be disabled if disabled' do
+  would 'be disabled if disabled' do
     Rib::SqueezeHistory.disable do
       times = @input.size
       input = @input.dup
@@ -30,7 +30,7 @@ shared :squeeze_history do
 end
 
 describe Rib::SqueezeHistory do
-  behaves_like :rib
+  paste :rib
 
   before do
     @history = "/tmp/test_rib_#{rand}"
@@ -44,6 +44,6 @@ describe Rib::SqueezeHistory do
   end
 
   test_for Rib::History, Rib::SqueezeHistory do
-    behaves_like :squeeze_history
+    paste :squeeze_history
   end
 end

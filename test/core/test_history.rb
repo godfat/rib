@@ -2,8 +2,8 @@
 require 'rib/test'
 require 'rib/core/history'
 
-shared :history do
-  should '#after_loop save history' do
+copy :history do
+  would '#after_loop save history' do
     inputs = %w[blih blah]
     @shell.history.clear
     @shell.history.push(*inputs)
@@ -12,18 +12,18 @@ shared :history do
     File.read(@history_file).should.eq "#{inputs.join("\n")}\n"
   end
 
-  should '#before_loop load previous history' do
+  would '#before_loop load previous history' do
     File.open(@history_file, 'w'){ |f| f.write "check\nthe\nmike" }
     @shell.before_loop
     @shell.history.to_a.should.eq %w[check the mike]
   end
 
-  should '#before_loop have empty history if no history file exists' do
+  would '#before_loop have empty history if no history file exists' do
     @shell.before_loop
     @shell.history.to_a.should.eq []
   end
 
-  should '#read_history be accessible to plugins in #before_loop' do
+  would '#read_history be accessible to plugins in #before_loop' do
     mod = Module.new do
       def read_history
         config[:history] = ['pong_read_history']
@@ -34,7 +34,7 @@ shared :history do
     shell.new.before_loop.history.should.eq ['pong_read_history']
   end
 
-  should '#write_history be accessible to plugins in #after_loop' do
+  would '#write_history be accessible to plugins in #after_loop' do
     mod = Module.new do
       def write_history
         config[:history] = ['pong_write_history']
@@ -47,7 +47,7 @@ shared :history do
 end
 
 describe Rib::History do
-  behaves_like :rib
+  paste :rib
 
   before do
     if readline?
@@ -63,6 +63,6 @@ describe Rib::History do
   end
 
   test_for Rib::History do
-    behaves_like :history
+    paste :history
   end
 end

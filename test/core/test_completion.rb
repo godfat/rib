@@ -3,7 +3,7 @@ require 'rib/test'
 require 'rib/core/completion'
 
 describe Rib::Completion do
-  behaves_like :rib
+  paste :rib
 
   before do
     @completion = Class.new do
@@ -11,7 +11,7 @@ describe Rib::Completion do
     end.new
   end
 
-  should 'find correct ripl plugins' do
+  would 'find correct ripl plugins' do
     $LOADED_FEATURES << '/dir/ripl/some_plugin.rb'
     @completion.send(:ripl_plugins).should.eq ['ripl/some_plugin.rb']
   end

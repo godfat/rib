@@ -1,5 +1,5 @@
 
-shared :setup_multiline do
+copy :setup_multiline do
   def setup_shell
     @shell = Rib::Shell.new(
       :binding => Object.new.instance_eval{binding}).before_loop
@@ -34,12 +34,12 @@ shared :setup_multiline do
   end
 end
 
-shared :multiline do
+copy :multiline do
   before do
     setup_shell
   end
 
-  should 'work with no prompt' do
+  would 'work with no prompt' do
     @shell.config[:prompt] = ''
     check <<-RUBY
       def f
@@ -48,7 +48,7 @@ shared :multiline do
     RUBY
   end
 
-  should 'def f' do
+  would 'def f' do
     check <<-RUBY
       def f
         1
@@ -56,21 +56,21 @@ shared :multiline do
     RUBY
   end
 
-  should 'class C' do
+  would 'class C' do
     check <<-RUBY
       class C
       end
     RUBY
   end
 
-  should 'begin' do
+  would 'begin' do
     check <<-RUBY
       begin
       end
     RUBY
   end
 
-  should 'begin with RuntimeError' do
+  would 'begin with RuntimeError' do
     check <<-RUBY, RuntimeError
       begin
         raise 'multiline raised an error'
@@ -78,118 +78,118 @@ shared :multiline do
     RUBY
   end
 
-  should 'do end' do
+  would 'do end' do
     check <<-RUBY
       [].each do
       end
     RUBY
   end
 
-  should 'block brace' do
+  would 'block brace' do
     check <<-RUBY
       [].each{
       }
     RUBY
   end
 
-  should 'hash' do
+  would 'hash' do
     check <<-RUBY
       {
       }
     RUBY
   end
 
-  should 'hash value' do
+  would 'hash value' do
     check <<-RUBY
       {1 =>
        2}
     RUBY
   end
 
-  should 'array' do
+  would 'array' do
     check <<-RUBY
       [
       ]
     RUBY
   end
 
-  should 'group' do
+  would 'group' do
     check <<-RUBY
       (
       )
     RUBY
   end
 
-  should 'string double quote' do
+  would 'string double quote' do
     check <<-RUBY
       "
       "
     RUBY
   end
 
-  should 'string single quote' do
+  would 'string single quote' do
     check <<-RUBY
       '
       '
     RUBY
   end
 
-  should 'be hash treated as a block SyntaxError' do
+  would 'be hash treated as a block SyntaxError' do
     check <<-RUBY, SyntaxError
       puts { :x => 10 }.class
     RUBY
   end
 
-  should 'begin with SyntaxError' do
+  would 'begin with SyntaxError' do
     check <<-RUBY, SyntaxError
       begin
         s-y n
     RUBY
   end
 
-  should 'binary operator +' do
+  would 'binary operator +' do
     check <<-RUBY
       1/1.to_i +
       1
     RUBY
   end
 
-  should 'binary operator -' do
+  would 'binary operator -' do
     check <<-RUBY
       1*1.to_i -
       1
     RUBY
   end
 
-  should 'binary operator *' do
+  would 'binary operator *' do
     check <<-RUBY
       1-1.to_i *
       1
     RUBY
   end
 
-  should 'binary operator /' do
+  would 'binary operator /' do
     check <<-RUBY
       1+1.to_i /
       1
     RUBY
   end
 
-  should 'binary operator |' do
+  would 'binary operator |' do
     check <<-RUBY
       1+1.to_i |
       1
     RUBY
   end
 
-  should 'binary operator &' do
+  would 'binary operator &' do
     check <<-RUBY
       1+1.to_i &
       1
     RUBY
   end
 
-  should 'binary operator ^' do
+  would 'binary operator ^' do
     check <<-RUBY
       1+1.to_i ^
       1

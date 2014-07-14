@@ -3,7 +3,7 @@ require 'rib/test'
 require 'rib/extra/autoindent'
 
 describe Rib::Autoindent do
-  behaves_like :rib
+  paste :rib
 
   Rib::Multiline.enable
   Rib::Autoindent.enable
@@ -34,7 +34,7 @@ describe Rib::Autoindent do
     @indent.stack_size.should.eq size
   end
 
-  should 'begin rescue else end' do
+  would 'begin rescue else end' do
     @indent.stack_size.should.eq 0
     ri('begin'         , 1)
     ri(  '1'           , 1)
@@ -52,7 +52,7 @@ describe Rib::Autoindent do
     le('end while nil' , 0)
   end
 
-  should 'if elsif else end' do
+  would 'if elsif else end' do
     ri('if true'       , 1)
     ri(  'if false'    , 2)
     ri(    '1'         , 2)
@@ -70,7 +70,7 @@ describe Rib::Autoindent do
     le('end'           , 0)
   end
 
-  should 'unless else end' do
+  would 'unless else end' do
     ri('unless 1'      , 1)
     ri(  'unless 1'    , 2)
     ri(    '1'         , 2)
@@ -80,7 +80,7 @@ describe Rib::Autoindent do
     le('end'           , 0)
   end
 
-  should 'case when else end' do
+  would 'case when else end' do
     ri('case 1'        , 1)
     le('when 1'        , 1)
     ri(  '1'           , 1)
@@ -92,21 +92,21 @@ describe Rib::Autoindent do
     le('end'           , 0)
   end
 
-  should 'def end' do
+  would 'def end' do
     ri('def f a'       , 1)
     ri(  'if a'        , 2)
     le(  'end'         , 1)
     le('end'           , 0)
   end
 
-  should 'class Object end' do
+  would 'class Object end' do
     ri('class Object'  , 1)
     ri(  'if true'     , 2)
     le(  'end'         , 1)
     le('end'           , 0)
   end
 
-  should 'module Rib end' do
+  would 'module Rib end' do
     ri('module Rib'    , 1)
     ri(  'module_function', 1)
     ri(  'if true'     , 2)
@@ -114,21 +114,21 @@ describe Rib::Autoindent do
     le('end'           , 0)
   end
 
-  should 'while end' do
+  would 'while end' do
     ri('while false'   , 1)
     ri(  'if true'     , 2)
     le(  'end'         , 1)
     le('end'           , 0)
   end
 
-  should 'until end' do
+  would 'until end' do
     ri('until true'    , 1)
     ri(  'if true'     , 2)
     le(  'end'         , 1)
     le('end'           , 0)
   end
 
-  should 'do end' do
+  would 'do end' do
     ri("to_s''do"      , 1)
     ri(  "to_s '' do"  , 2)
     le(  'end'         , 1)

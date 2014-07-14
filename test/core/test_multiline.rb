@@ -4,8 +4,8 @@ require 'rib/test/multiline'
 require 'rib/core/multiline'
 
 describe Rib::Multiline do
-  behaves_like :rib
-  behaves_like :setup_multiline
+  paste :rib
+  paste :setup_multiline
 
   def check str, err=nil
     lines = str.split("\n")
@@ -17,6 +17,6 @@ describe Rib::Multiline do
   end
 
   test_for Rib::Multiline do
-    behaves_like :multiline
+    paste :multiline
   end
 end

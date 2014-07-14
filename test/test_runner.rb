@@ -3,7 +3,7 @@ require 'rib/test'
 require 'rib/runner'
 
 describe Rib::Runner do
-  behaves_like :rib
+  paste :rib
 
   before do
     Rib.disable_plugins
@@ -21,13 +21,13 @@ describe Rib::Runner do
     mock(@shell).puts{}
   end
 
-  should '-e' do
+  would '-e' do
      input('a')
     output('1')
     Rib::Runner.run(%w[-ea=1]).should.eq @shell
   end
 
-  should '-e nothing' do
+  would '-e nothing' do
      input
     output
     Rib::Runner.run(%w[-e]).should.eq @shell
@@ -44,11 +44,11 @@ describe Rib::Runner do
     Rib::Runner.run(argv).should.eq @shell
   end
 
-  should 'min -e' do
+  would 'min -e' do
     verify_app_e(%w[min -ea=1])
   end
 
-  should '-e min' do
+  would '-e min' do
     verify_app_e(%w[-ea=1 min])
   end
 end
