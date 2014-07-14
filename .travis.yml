@@ -7,5 +7,9 @@ rvm:
   - rbx-2
   - jruby
 
+matrix:
+  allow_failures:
+    - rvm: jruby
+
 script: 'ruby -r bundler/setup -S rake test'
 sudo: false
