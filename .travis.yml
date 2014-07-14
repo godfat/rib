@@ -1,13 +1,11 @@
-before_install: 'git submodule update --init'
-script: 'ruby -r bundler/setup -S rake test'
 
+language: ruby
 rvm:
   - 1.9.3
   - 2.0.0
   - ruby
-  - rbx
+  - rbx-2
   - jruby
 
-matrix:
-  allow_failures:
-    - rvm: jruby
+script: 'ruby -r bundler/setup -S rake test'
+sudo: false
