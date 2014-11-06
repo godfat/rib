@@ -1,6 +1,6 @@
 # CHANGES
 
-## Rib 1.2.6 -- ?
+## Rib 1.2.6 -- 2014-11-07
 
 * [extra/autoindent] Now `module_function` would indent correctly.
 * [extra/autoindent] Now `else` in `case` would indent correctly.
