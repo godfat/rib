@@ -18,8 +18,9 @@ copy :rib do
   singleton_class.module_eval do
     def test_for *plugins, &block
       require 'rib/all' # exhaustive tests
+      rest = Rib.plugins - plugins
+
       before do
-        rest = Rib.plugins - plugins
         Rib.enable_plugins(plugins)
         Rib.disable_plugins(rest)
       end
