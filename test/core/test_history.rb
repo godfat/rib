@@ -49,20 +49,21 @@ end
 describe Rib::History do
   paste :rib
 
-  before do
-    if readline?
-      ::Readline::HISTORY.clear
-      stub_readline
-    end
-    @history_file = "/tmp/test_rib_#{rand}"
-    @shell        = Rib::Shell.new(:history_file => @history_file).before_loop
-  end
-
-  after do
-    FileUtils.rm_f(@history_file)
-  end
-
   test_for Rib::History do
+    before do
+      if readline?
+        ::Readline::HISTORY.clear
+        stub_readline
+      end
+      @history_file = "/tmp/test_rib_#{rand}"
+      @shell        = Rib::Shell.new(
+        :history_file => @history_file).before_loop
+    end
+
+    after do
+      FileUtils.rm_f(@history_file)
+    end
+
     paste :history
   end
 end

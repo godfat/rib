@@ -32,18 +32,18 @@ end
 describe Rib::SqueezeHistory do
   paste :rib
 
-  before do
-    @history = "/tmp/test_rib_#{rand}"
-    @shell   = Rib::Shell.new(:history_file => @history).before_loop
-    @input   = %w[foo bar bar foo bar]
-    @shell.history.clear
-  end
-
-  after do
-    FileUtils.rm_f(@history)
-  end
-
   test_for Rib::History, Rib::SqueezeHistory do
+    before do
+      @history = "/tmp/test_rib_#{rand}"
+      @shell   = Rib::Shell.new(:history_file => @history).before_loop
+      @input   = %w[foo bar bar foo bar]
+      @shell.history.clear
+    end
+
+    after do
+      FileUtils.rm_f(@history)
+    end
+
     paste :squeeze_history
   end
 end

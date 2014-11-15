@@ -5,9 +5,6 @@ require 'rib/extra/autoindent'
 describe Rib::Autoindent do
   paste :rib
 
-  Rib::Multiline.enable
-  Rib::Autoindent.enable
-
   autoindent = Class.new do
     include Rib::Autoindent, Rib::Multiline, Rib::API
     def config
@@ -19,6 +16,8 @@ describe Rib::Autoindent do
   end
 
   before do
+    Rib::Multiline.enable
+    Rib::Autoindent.enable
     @indent = autoindent.new
     mock(@indent).puts(match(/^\e/)).times(0)
   end

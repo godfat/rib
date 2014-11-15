@@ -16,11 +16,11 @@ end
 describe Rib::Readline do
   paste :rib
 
-  before do
-    @shell = Rib::Shell.new.before_loop
-  end
-
   test_for Rib::Readline do
+    before do
+      @shell = Rib::Shell.new.before_loop
+    end
+
     paste :readline
   end
 end

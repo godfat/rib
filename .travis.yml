@@ -11,5 +11,5 @@ matrix:
   allow_failures:
     - rvm: jruby
 
+install: 'bundle install --retry=3'
 script: 'ruby -r bundler/setup -S rake test'
-sudo: false
