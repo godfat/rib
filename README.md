@@ -193,6 +193,10 @@ require 'rib/more' # You get all of the followings:
 
   Not only readline could have multiline history, but also the history file.
 
+* `require 'rib/more/bottomup_backtrace'`
+
+  Show backtrace bottom-up instead of the regular top-down.
+
 * `require 'rib/more/color'`
 
   Class based colorizing.
@@ -324,7 +328,7 @@ simple, simpler than rib-rails.
 
 Apache License 2.0
 
-Copyright (c) 2011-2014, Lin Jen-Shin (godfat)
+Copyright (c) 2011-2015, Lin Jen-Shin (godfat)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -3,6 +3,7 @@
 require 'rib/more/multiline_history_file'
 
 # upon formatting output
+require 'rib/more/bottomup_backtrace'
 require 'rib/more/color'
 
 # upon input

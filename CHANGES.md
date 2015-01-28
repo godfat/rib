@@ -1,5 +1,10 @@
 # CHANGES
 
+## Rib 1.2.7 -- 2015-01-28
+
+* [more/bottomup_backtrace] A new plugin which prints the backtrace bottom-up.
+  Ref: <http://yellerapp.com/posts/2015-01-22-upside-down-stacktraces.html>
+
 ## Rib 1.2.6 -- 2014-11-07
 
 * [extra/autoindent] Now `module_function` would indent correctly.
