@@ -17,6 +17,12 @@ module Rib::Color
     config[:result_prompt] + format_color(result)
   end
 
+  def get_error err
+    return super if Color.disabled?
+    message, backtrace = super
+    [format_color(err, message), colorize_backtrace(backtrace)]
+  end
+
   # --------------- Plugin API ---------------
 
   def colors
@@ -63,13 +69,6 @@ module Rib::Color
                     send(colors[Object      ]){ display }
                     end
     end
-  end
-
-  # override StripBacktrace#get_error
-  def get_error err
-    return super if Color.disabled?
-    message, backtrace = super
-    [format_color(err, message), colorize_backtrace(backtrace)]
   end
 
 

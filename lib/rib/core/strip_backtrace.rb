@@ -14,8 +14,6 @@ module Rib::StripBacktrace
     "#{message}\n  #{backtrace.join("\n  ")}"
   end
 
-  # --------------- Plugin API ---------------
-
   def get_error err
     return super if StripBacktrace.disabled?
     ["#{err.class}: #{err.message}", strip_backtrace(err.backtrace)]
