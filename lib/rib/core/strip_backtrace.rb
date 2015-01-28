@@ -10,11 +10,6 @@ module Rib::StripBacktrace
   # strip backtrace until rib
   def format_error err
     return super if StripBacktrace.disabled?
-    backtrace = if err.kind_of?(SyntaxError)
-                  []
-                else
-                  err.backtrace
-                end
     message, backtrace = get_error(err)
     "#{message}\n  #{backtrace.join("\n  ")}"
   end
