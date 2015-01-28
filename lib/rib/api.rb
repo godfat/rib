@@ -96,11 +96,18 @@ module Rib::API
     result_prompt + result.inspect
   end
 
-  # Format error raised in #loop_eval
+  # Format error raised in #loop_eval with #get_error
   def format_error err
-    "#{err.class}: #{err.message}\n    #{err.backtrace.join("\n    ")}"
+    message, backtrace = get_error(err)
+    "#{message}\n    #{backtrace.join("\n    ")}"
   end
   module_function :format_error
+
+  # Get error message and backtrace from a particular error
+  def get_error err
+    ["#{err.class}: #{err.message}", err.backtrace]
+  end
+  module_function :get_error
 
   private
   def equal_rib_skip result

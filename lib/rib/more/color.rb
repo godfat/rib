@@ -66,10 +66,10 @@ module Rib::Color
   end
 
   # override StripBacktrace#get_error
-  def get_error err, backtrace=err.backtrace
+  def get_error err
     return super if Color.disabled?
-    [format_color(err, "#{err.class.to_s}: #{err.message}"),
-     colorize_backtrace(backtrace)]
+    message, backtrace = super
+    [format_color(err, message), colorize_backtrace(backtrace)]
   end
 
 
