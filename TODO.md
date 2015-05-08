@@ -1,5 +1,7 @@
 # TODO
 
+* make that `rib auto` or `rib rack` accept an argument to locate the app
+
 * Fix whenever Color.enabled? but StripBacktrace.disabled?
 
 * Runner tests
