@@ -49,17 +49,17 @@ describe Rib::Shell do
     end
 
     would 'error in print_result' do
-      mock(Rib).warn(match(/Error while printing result.*BOOM/m)){}
+      mock(Rib).warn(matching(/Error while printing result.*BOOM/m)){}
       input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
     end
 
     would 'not crash if user input is a blackhole' do
-      mock(Rib).warn(match(/Error while printing result/)){}
+      mock(Rib).warn(matching(/Error while printing result/)){}
       input('Rib::Blackhole')
     end
 
     would 'print error from eval' do
-      mock(shell).puts(match(/RuntimeError/)){}
+      mock(shell).puts(matching(/RuntimeError/)){}
       input('raise "blah"')
     end
   end

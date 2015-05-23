@@ -19,7 +19,7 @@ describe Rib::Autoindent do
     Rib::Multiline.enable
     Rib::Autoindent.enable
     @indent = autoindent.new
-    mock(@indent).puts(match(/^\e/)).times(0)
+    mock(@indent).puts(matching(/^\e/)).times(0)
   end
 
   def ri input, size
@@ -28,7 +28,7 @@ describe Rib::Autoindent do
   end
 
   def le input, size
-    mock(@indent).puts(match(/^\e/)){}
+    mock(@indent).puts(matching(/^\e/)){}
     @indent.eval_input(input)
     @indent.stack_size.should.eq size
   end
