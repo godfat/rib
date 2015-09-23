@@ -47,7 +47,7 @@ pager = ENV['PAGER'] || 'less'
 if `which #{pager}`.empty?
   Rib.warn("#{pager} is not available, disabling Rib::Paging")
   Rib::Paging.disable
-elsif ENV['TERM'] == 'dumb'
+elsif ENV['TERM'] == 'dumb' || ENV['TERM'].nil?
   Rib.warn("Your terminal is dumb, disabling Rib::Paging")
   Rib::Paging.disable
 end
