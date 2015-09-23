@@ -1,5 +1,9 @@
 # CHANGES
 
+## Rib 1.2.8 -- 2015-09-23
+
+* [extra/paging] Disable paging if your terminal is dumb. (e.g. on Heroku)
+
 ## Rib 1.2.7 -- 2015-01-28
 
 * [more/bottomup_backtrace] A new plugin which prints the backtrace bottom-up.
