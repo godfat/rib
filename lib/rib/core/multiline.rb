@@ -63,7 +63,7 @@ module Rib::Multiline
                       " t(UPLUS|UMINUS|STAR|REGEXP_BEG|AMPER)",
                       "syntax error, unexpected end-of-file",
                       # jruby 9.0.4.0
-                      "formal argument must be local variable"     .join('|'))
+                      "formal argument must be local variable"    ].join('|'))
     end
 
   # --------------- Rib API ---------------
