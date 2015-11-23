@@ -1,11 +1,11 @@
-
+sudo: false
 language: ruby
 rvm:
   - 2.0
   - 2.1
   - 2.2
   - rbx-2
-  - jruby-9.0.0.0
+  - jruby-9.0
 
 install: 'bundle install --retry=3'
 script: 'ruby -r bundler/setup -S rake test'
