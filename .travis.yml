@@ -12,4 +12,4 @@ before_install:
   - rvm reload
   - rvm use --install $TRAVIS_RUBY_VERSION --binary --latest
 install: 'bundle install --retry=3'
-script: 'ruby -vr bundler/setup -S rake test'
+script: 'ruby -r bundler/setup -S rake test'
