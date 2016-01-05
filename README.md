@@ -252,6 +252,9 @@ or having conflicted semantics.
   Which would pass the result to `less` (or `$PAGER` if set) if
   the result string is longer than the screen.
 
+* `require 'rib/extra/spring'` in your `~/.spring.rb`
+  for [Rails Spring](https://github.com/rails/spring) support.
+
 [readline_buffer]: https://github.com/godfat/readline_buffer
 [hirb]: https://github.com/cldwalker/hirb
 [debugger]: https://github.com/cldwalker/debugger
