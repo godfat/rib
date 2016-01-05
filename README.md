@@ -89,7 +89,7 @@ which would be loaded into memory before launching Rib shell session, You can
 put any customization or monkey patch there. Personally, I use all plugins
 provided by Rib.
 
-<https://github.com/godfat/dev-tool/blob/master/.config/rib/config.rb>
+My Personal [~/.config/rib/config](https://github.com/godfat/dev-tool/blob/master/.config/rib/config.rb)
 
 As you can see, putting `require 'rib/all'` into config file is exactly the
 same as running `rib all` without a config file. What `rib all` would do is
