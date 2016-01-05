@@ -247,7 +247,7 @@ or having conflicted semantics.
   tested and might not work well. Please let me know if you have
   any issue using it, thanks!
 
-* `require 'rib/extra/paging'` This plugin is depending on `less`.
+* `require 'rib/extra/paging'` This plugin is depending on `less` and `tput`.
 
   Which would pass the result to `less` (or `$PAGER` if set) if
   the result string is longer than the screen.
