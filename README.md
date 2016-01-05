@@ -55,6 +55,11 @@ You could also run in production and pass arguments normally as you'd do in
 Note: You might need to add ruby-debug or ruby-debug19 to your Gemfile if
 you're passing --debugger and using bundler together.
 
+For [Rails Spring](https://github.com/rails/spring) support, put this line
+in your `~/.spring.rb`:
+
+    require 'rib/extra/spring'
+
 As Ramaze console
 
     rib ramaze
