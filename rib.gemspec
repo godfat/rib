@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: rib 1.2.9 ruby lib
+# stub: rib 1.2.91 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rib"
-  s.version = "1.2.9"
+  s.version = "1.2.91"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2015-09-23"
+  s.date = "2016-01-06"
   s.description = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell\n\nRib is based on the design of [ripl][] and the work of [ripl-rc][], some of\nthe features are also inspired by [pry][]. The aim of Rib is to be fully\nfeatured and yet very easy to opt-out or opt-in other features. It shall\nbe simple, lightweight and modular so that everyone could customize Rib.\n\n[ripl]: https://github.com/cldwalker/ripl\n[ripl-rc]: https://github.com/godfat/ripl-rc\n[pry]: https://github.com/pry/pry"
   s.email = ["godfat (XD) godfat.org"]
   s.executables = [
@@ -56,6 +56,7 @@ Gem::Specification.new do |s|
   "lib/rib/extra/autoindent.rb",
   "lib/rib/extra/hirb.rb",
   "lib/rib/extra/paging.rb",
+  "lib/rib/extra/spring.rb",
   "lib/rib/more.rb",
   "lib/rib/more/anchor.rb",
   "lib/rib/more/bottomup_backtrace.rb",
@@ -88,7 +89,7 @@ Gem::Specification.new do |s|
   "test/test_shell.rb"]
   s.homepage = "https://github.com/godfat/rib"
   s.licenses = ["Apache License 2.0"]
-  s.rubygems_version = "2.4.8"
+  s.rubygems_version = "2.5.1"
   s.summary = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell"
   s.test_files = [
   "test/core/test_completion.rb",

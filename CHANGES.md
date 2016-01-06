@@ -1,5 +1,12 @@
 # CHANGES
 
+## Rib 1.2.91 -- 2016-01-06
+
+* [core/multiline] Fixed a case for JRuby 9.0.4.0.
+* [extra/paging] Disable paging if `tput` is not found.
+* [extra/spring] Require `rib/extra/spring` in your `~/.spring` to enable
+  Rails Spring support. #11 (thanks @swrobel)
+
 ## Rib 1.2.9 -- 2015-09-23
 
 * [extra/paging] Disable paging if your terminal is nil. (e.g. on Heroku)
