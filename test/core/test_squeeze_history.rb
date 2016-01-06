@@ -41,7 +41,7 @@ describe Rib::SqueezeHistory do
     end
 
     after do
-      FileUtils.rm_f(@history)
+      FileUtils.rm_f(@history) if Rib::History.enabled?
     end
 
     paste :squeeze_history
