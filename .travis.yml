@@ -5,11 +5,11 @@ rvm:
   - 2.2
   - 2.3.0
   - rbx
-  - jruby-9.0.5.0
+  - jruby-9
 
 before_install:
   - rvm get head
   - rvm reload
   - rvm use --install $TRAVIS_RUBY_VERSION --binary --latest
-install: 'bundle install --retry=3'
+install: 'gem install bundler; bundle install --retry=3'
 script: 'ruby -r bundler/setup -S rake test'
