@@ -10,5 +10,5 @@ Gemgem.init(dir) do |s|
   require 'rib/version'
   s.name    = 'rib'
   s.version = Rib::VERSION
-  %w[].each{ |g| s.add_runtime_dependency(g) }
+  s.files.delete('screenshot.png')
 end
