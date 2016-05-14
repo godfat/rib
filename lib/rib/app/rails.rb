@@ -9,9 +9,9 @@ module Rib::Rails
   end
 
   def load_rails
-    require './config/boot'
+    require path_for('boot')
 
-    if File.exist?('./config/application.rb')
+    if File.exist?(path_for('application.rb'))
       Rib::Rails.load_rails3
     else
       Rib::Rails.load_rails2
@@ -30,8 +30,8 @@ module Rib::Rails
     }
 
     # copied from commands/console
-    ['./config/environment',
-     'console_app'         ,
+    [path_for('environment'),
+     'console_app',
      'console_with_helpers'].each{ |f| require f }
 
     optparse_rails
@@ -41,7 +41,7 @@ module Rib::Rails
     optparse_env
 
     # copied from rails/commands
-    require './config/application'
+    require path_for('application')
     ::Rails.application.require_environment!
 
     optparse_rails
@@ -106,7 +106,11 @@ module Rib::Rails
   end
 
   def rails?
-    File.exist?('./config/boot.rb')    &&
-    File.exist?('./config/environment.rb')
+    File.exist?(path_for('boot.rb')) &&
+      File.exist?(path_for('environment.rb'))
+  end
+
+  def path_for file
+    "#{Rib.config[:prefix]}/config/#{file}"
   end
 end

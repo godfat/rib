@@ -11,7 +11,9 @@ module Rib
   #
   # @api public
   def config
-    @config ||= {:config => File.join(home, 'config.rb'), :name => 'rib'}
+    @config ||= {:name => 'rib',
+                 :config => File.join(home, 'config.rb'),
+                 :prefix => '.'}
   end
 
   # All shells in the memory

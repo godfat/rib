@@ -1,7 +1,5 @@
 # TODO
 
-* make that `rib auto` or `rib rack` accept an argument to locate the app
-
 * Runner tests
 * Documentation
 * Implement exception_spy

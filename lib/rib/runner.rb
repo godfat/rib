@@ -23,6 +23,7 @@ module Rib::Runner
 
      ['rib options:'     , ''                                        ],
      ['-c, --config FILE', 'Load config from FILE'                   ],
+     ['-p, --prefix PATH', 'Prefix to locate the app. Default to .'  ],
      ['-n, --no-config'  , 'Suppress loading ~/.config/rib/config.rb'],
      ['-h, --help'       , 'Print this message'                      ],
      ['-v, --version'    , 'Print the version'                       ]] +
@@ -120,6 +121,9 @@ module Rib::Runner
 
       when /^-c=?(.+)?/, /^--config=?(.+)?/
         Rib.config[:config] = $1 || argv.shift
+
+      when /^-p=?(.+)?/, /^--prefix=?(.+)?/
+        Rib.config[:prefix] = $1 || argv.shift
 
       when /^-n/, '--no-config'
         Rib.config.delete(:config)
