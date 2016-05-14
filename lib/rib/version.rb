@@ -1,4 +1,4 @@
 
 module Rib
-  VERSION = '1.2.91'
+  VERSION = '1.3.0'
 end
