@@ -67,14 +67,14 @@ module Rib::Runner
   def run argv=ARGV
     (@running_commands ||= []) << Rib.config[:name]
     unused = parse(argv)
-    # if it's running a Rib command, the loop would be inside Rib itself
-    # so here we only parse args for the command
-    return if @running_commands.pop != 'rib'
-    # by coming to this line, it means now we're running Rib main loop,
-    # not any other Rib command
-    Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
-    require 'rib/core' if Rib.config.delete(:mimic_irb)
-    loop
+    # we only want to run the loop if we're running the rib command,
+    # otherwise, it must be a rib app, which we only want to parse
+    # the arguments and proceed (this is recursive!)
+    if @running_commands.pop == 'rib'
+      Rib.warn("Unused arguments: #{unused.inspect}") unless unused.empty?
+      require 'rib/core' if Rib.config.delete(:mimic_irb)
+      loop
+    end
   end
 
   def loop retry_times=5
