@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2016-05-14"
+  s.date = "2016-06-28"
   s.description = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell\n\nRib is based on the design of [ripl][] and the work of [ripl-rc][], some of\nthe features are also inspired by [pry][]. The aim of Rib is to be fully\nfeatured and yet very easy to opt-out or opt-in other features. It shall\nbe simple, lightweight and modular so that everyone could customize Rib.\n\n[ripl]: https://github.com/cldwalker/ripl\n[ripl-rc]: https://github.com/godfat/ripl-rc\n[pry]: https://github.com/pry/pry".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.executables = [

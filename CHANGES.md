@@ -1,5 +1,11 @@
 # CHANGES
 
+## Rib 1.3.0 -- 2016-06-28
+
+* Now `rib` would accept `-p` or `--prefix` to allow setting where we want to
+  load the application. This is useful when we don't want to `cd` into a
+  directory and `rib auto` or `rib rails` from there.
+
 ## Rib 1.2.91 -- 2016-01-06
 
 * [core/multiline] Fixed a case for JRuby 9.0.4.0.
