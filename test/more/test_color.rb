@@ -40,15 +40,14 @@ describe Rib::Color do
     i = case RUBY_ENGINE
         when 'jruby'
           1
-        when 'rbx'
-          2
         else
           0
         end
+    error = Class.new(Exception)
 
     begin
-      line = __LINE__; 1/0
-    rescue ZeroDivisionError => e
+      line = __LINE__; raise error
+    rescue error => e
       msg = "test/more/#{Rib::Color.yellow{'test_color.rb'}}:" \
             "#{Rib::Color.red{line}}:in #{Rib::Color.green}"
       Rib::Color.colorize_backtrace(e.backtrace)[i].should =~ \
