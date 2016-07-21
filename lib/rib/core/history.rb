@@ -45,8 +45,8 @@ module Rib::History
   # Write #history into config[:history_file], handled in history_file plugin
   def write_history
     return super if History.disabled?
-    File.open(history_file_path, 'w'){ |f|
-      f.puts(history.to_a.last(history_size).join("\n")) }
+    history_text = "#{history.to_a.last(history_size).join("\n")}\n"
+    File.write(history_file_path, history_text)
   end
 
 
