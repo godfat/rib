@@ -56,7 +56,7 @@ describe Rib::History do
         ::Readline::HISTORY.clear
         stub_readline
       end
-      @tempfile = Tempfile.new
+      @tempfile     = Tempfile.new
       @history_file = @tempfile.path
       @shell        = Rib::Shell.new(
         :history_file => @history_file).before_loop

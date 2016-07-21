@@ -1,6 +1,7 @@
 
 require 'rib/test'
 require 'rib/core/squeeze_history'
+require 'tempfile'
 
 copy :squeeze_history do
   would 'after_loop saves squeezed history' do
@@ -34,14 +35,15 @@ describe Rib::SqueezeHistory do
 
   test_for Rib::History, Rib::SqueezeHistory do
     before do
-      @history = "/tmp/test_rib_#{rand}"
-      @shell   = Rib::Shell.new(:history_file => @history).before_loop
-      @input   = %w[foo bar bar foo bar]
+      @tempfile = Tempfile.new
+      @history  = @tempfile.path
+      @shell    = Rib::Shell.new(:history_file => @history).before_loop
+      @input    = %w[foo bar bar foo bar]
       @shell.history.clear
     end
 
     after do
-      FileUtils.rm_f(@history) if Rib::History.enabled?
+      @tempfile.unlink
     end
 
     paste :squeeze_history
