@@ -37,12 +37,6 @@ describe Rib::Color do
 
   # regression test
   would "colorize errors with `/' inside" do
-    i = case RUBY_ENGINE
-        when 'jruby'
-          1
-        else
-          0
-        end
     error = Class.new(Exception)
 
     begin
@@ -50,7 +44,7 @@ describe Rib::Color do
     rescue error => e
       msg = "test/more/#{Rib::Color.yellow{'test_color.rb'}}:" \
             "#{Rib::Color.red{line}}:in #{Rib::Color.green}"
-      Rib::Color.colorize_backtrace(e.backtrace)[i].should =~ \
+      Rib::Color.colorize_backtrace(e.backtrace).first.should =~ \
         Regexp.new(
           "#{Regexp.escape(msg)}`.+'#{Regexp.escape(Rib::Color.reset)}")
     end
