@@ -1,6 +1,7 @@
 
 require 'rib/test'
 require 'rib/core/history'
+require 'tempfile'
 
 copy :history do
   would '#after_loop save history' do
@@ -13,7 +14,7 @@ copy :history do
   end
 
   would '#before_loop load previous history' do
-    File.open(@history_file, 'w'){ |f| f.write "check\nthe\nmike" }
+    File.write(@history_file, "check\nthe\nmike")
     @shell.before_loop
     @shell.history.to_a.should.eq %w[check the mike]
   end
@@ -55,13 +56,14 @@ describe Rib::History do
         ::Readline::HISTORY.clear
         stub_readline
       end
-      @history_file = "/tmp/test_rib_#{rand}"
+      @tempfile = Tempfile.new
+      @history_file = @tempfile.path
       @shell        = Rib::Shell.new(
         :history_file => @history_file).before_loop
     end
 
     after do
-      FileUtils.rm_f(@history_file)
+      @tempfile.unlink
     end
 
     paste :history

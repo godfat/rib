@@ -1,7 +1,6 @@
 
 require 'pork/auto'
 require 'muack'
-require 'fileutils'
 
 Pork::Executor.__send__(:include, Muack::API)
 
