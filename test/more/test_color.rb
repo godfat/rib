@@ -37,8 +37,11 @@ describe Rib::Color do
 
   # regression test
   would "colorize errors with `/' inside" do
-    i = if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+    i = case RUBY_ENGINE
+        when 'jruby'
           1
+        when 'rbx'
+          2
         else
           0
         end
