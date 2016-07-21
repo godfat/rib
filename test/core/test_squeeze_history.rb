@@ -35,7 +35,7 @@ describe Rib::SqueezeHistory do
 
   test_for Rib::History, Rib::SqueezeHistory do
     before do
-      @tempfile = Tempfile.new
+      @tempfile = Tempfile.new('rib')
       @history  = @tempfile.path
       @shell    = Rib::Shell.new(:history_file => @history).before_loop
       @input    = %w[foo bar bar foo bar]
