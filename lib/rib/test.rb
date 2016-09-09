@@ -2,7 +2,7 @@
 require 'pork/auto'
 require 'muack'
 
-Pork::Executor.__send__(:include, Muack::API)
+Pork::Suite.include(Muack::API)
 
 require 'rib'
 
