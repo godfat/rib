@@ -77,10 +77,10 @@ module Rib::Color
   def colorize_backtrace backtrace
     backtrace.map{ |b|
       path, msgs = b.split(':', 2)
-      dir , file = ::File.split(path)
+      dir, sep, file = path.rpartition('/')
       msg = msgs.sub(/(\d+):/){red{$1}+':'}.sub(/`.+?'/){green{$&}}
 
-      "#{dir+'/'}#{yellow{file}}:#{msg}"
+      "#{dir+sep}#{yellow{file}}:#{msg}"
     }
   end
 

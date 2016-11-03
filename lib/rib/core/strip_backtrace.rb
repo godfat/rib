@@ -22,19 +22,23 @@ module Rib::StripBacktrace
 
   module_function
   def strip_backtrace backtrace
-    strip_home_backtrace(strip_cwd_backtrace(strip_lib_backtrace(backtrace)))
+    strip_home_backtrace(strip_cwd_backtrace(strip_rib_backtrace(backtrace)))
   end
 
   def strip_home_backtrace backtrace
-    backtrace.map{ |path| path.sub(ENV['HOME'], '~') }
+    backtrace.map(&method(:replace_path_prefix).curry[ENV['HOME'], '~/'])
   end
 
   def strip_cwd_backtrace backtrace
-    backtrace.map{ |path| path.sub(Dir.pwd, '.') }
+    backtrace.map(&method(:replace_path_prefix).curry[Dir.pwd, ''])
   end
 
-  def strip_lib_backtrace backtrace
+  def strip_rib_backtrace backtrace
     backtrace[
       0..backtrace.rindex{ |l| l =~ /\(#{name}\):\d+:in `.+?'/ } || -1]
+  end
+
+  def replace_path_prefix prefix, substitute, path
+    path.sub(/\A#{Regexp.escape(prefix)}\//, substitute)
   end
 end

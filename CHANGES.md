@@ -1,5 +1,10 @@
 # CHANGES
 
+## Rib 1.3.1 -- 2016-11-03
+
+* [core/strip_backtrace], [more/color] No longer show `./` for current path.
+  This would be more friendly to some editors like Sublime.
+
 ## Rib 1.3.0 -- 2016-06-28
 
 * Now `rib` would accept `-p` or `--prefix` to allow setting where we want to
