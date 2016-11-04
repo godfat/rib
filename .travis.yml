@@ -12,3 +12,7 @@ before_install:
   - rvm use --install $TRAVIS_RUBY_VERSION --binary --latest
 install: 'gem install bundler; bundle install --retry=3'
 script: 'ruby -r bundler/setup -S rake test'
+
+matrix:
+  allow_failures:
+  - rvm: rbx
