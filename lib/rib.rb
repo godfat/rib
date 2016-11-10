@@ -11,9 +11,7 @@ module Rib
   #
   # @api public
   def config
-    @config ||= {:name => 'rib',
-                 :config => File.join(home, 'config.rb'),
-                 :prefix => '.'}
+    @config ||= {:name => 'rib', :prefix => '.'}
   end
 
   # All shells in the memory
@@ -47,7 +45,7 @@ module Rib
   # @api public
   def shell
     shells.last || begin
-      require_config if config_path
+      require_config if config_path && config_path != Skip
       (shells << Shell.new(config)).last
     end
   end
@@ -83,29 +81,25 @@ module Rib
   #
   # @api public
   def require_config
-    return unless config_path
     result = require(config_path)
     Rib.say("Config loaded from: #{config_path}") if $VERBOSE && result
     result
   rescue StandardError, LoadError, SyntaxError => e
-    Rib.warn("Error loading #{config[:config]}\n" \
+    Rib.warn("Error loading #{config_path}\n" \
              "  #{Rib::API.format_error(e)}")
   end
 
-  # The config path where Rib tries to load upon Rib.shell or
-  # Rib.require_config. It is depending on where Rib.home was discovered
-  # if no specific config path was specified via -c or --config command
-  # line option. See also Rib.config.
+  # The config path where Rib tries to load upon Rib.shell.
+  # It is depending on where Rib.home was discovered if
+  # no specific config path was specified via -c or --config command
   #
   # @api public
   def config_path
-    return nil unless config[:config]
-    path = File.expand_path(config[:config])
-    if File.exist?(path)
-      path
-    else
-      nil
-    end
+    @config_path ||= File.join(home, 'config.rb')
+  end
+
+  def config_path= new_path
+    @config_path = new_path
   end
 
   # Say (print to $stdout, with colors in the future, maybe)

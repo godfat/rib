@@ -207,7 +207,6 @@ rib commands:
 Rib.config                 | Functionality
 -------------------------- | -------------------------------------------------
 ENV['RIB_HOME']            | Specify where Rib should store config and history
-Rib.config[:config]        | The path where config should be located
 Rib.config[:name]          | The name of this shell
 Rib.config[:result_prompt] | Default is "=>"
 Rib.config[:prompt]        | Default is ">>"

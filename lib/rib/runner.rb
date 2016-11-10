@@ -120,13 +120,13 @@ module Rib::Runner
         require($1 || argv.shift)
 
       when /^-c=?(.+)?/, /^--config=?(.+)?/
-        Rib.config[:config] = $1 || argv.shift
+        Rib.config_path = $1 || argv.shift
 
       when /^-p=?(.+)?/, /^--prefix=?(.+)?/
         Rib.config[:prefix] = $1 || argv.shift
 
       when /^-n/, '--no-config'
-        Rib.config.delete(:config)
+        Rib.config_path = Rib::Skip
         parse_next(argv, arg)
 
       when /^-h/, '--help'
