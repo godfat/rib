@@ -5,10 +5,8 @@ module Rib::Auto
   def load
     app, name = %w[ramaze rails rack].find{ |name|
       require "rib/app/#{name}"
-      app = Rib.const_get(name.capitalize)
-      if app.send("#{name}?")
-        break app, name
-      end
+      rib = Rib.const_get(name.capitalize)
+      break rib, name if rib.public_send("#{name}?")
     }
 
     if app
