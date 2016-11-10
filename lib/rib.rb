@@ -33,13 +33,11 @@ module Rib
   #
   # @api public
   def home
-    ENV['RIB_HOME'] ||= begin
-      ['./.rib', '~/.rib', '~/.config/rib'].find{ |path|
-        p = File.expand_path(path)
-        File.exist?(File.join(p, 'config.rb')) ||
-        File.exist?(File.join(p, 'history.rb'))
+    ENV['RIB_HOME'] ||= File.expand_path(
+      ["#{config[:prefix]}/.rib", '~/.rib', '~/.config/rib'].find{ |path|
+        File.exist?(File.expand_path(path))
       } || '~/.rib'
-    end
+    )
   end
 
   # Convenient shell accessor, which would just give you current last shell
