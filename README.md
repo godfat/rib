@@ -88,12 +88,15 @@ As a fully featured app console (yes, some commands could be used together)
 
     rib all auto # or `rib auto all`, the order doesn't really matter
 
+#### Customization
+
 You can customize Rib's behaviour by setting a config file located at
-`~/.rib/config.rb` or `~/.config/rib/config.rb`, or `$RIB_HOME/config.rb` by
-setting `$RIB_HOME` environment variable. Since it's merely a Ruby script
-which would be loaded into memory before launching Rib shell session, You can
-put any customization or monkey patch there. Personally, I use all plugins
-provided by Rib.
+`$RIB_HOME/config.rb`, or `./.rib/config.rb`, or `~/.rib/config.rb`, or
+`~/.config/rib/config.rb`, searched by respected order. The default
+would be `~/.rib/config.rb`. Since it's merely a Ruby script which would
+be loaded into memory before launching Rib shell session, You can put any
+customization or monkey patch there. Personally, I use all plugins provided
+by Rib.
 
 My Personal [~/.config/rib/config](https://github.com/godfat/dev-tool/blob/master/.config/rib/config.rb)
 
@@ -132,6 +135,72 @@ You can also build your own gem and then simply require it in your config
 file. To see a list of overridable API, please read [api.rb][]
 
 [api.rb]: https://github.com/godfat/rib/blob/master/lib/rib/api.rb
+
+#### Rib home and history file
+
+Rib home is used to store a config file and a history file, which is
+searched in this order:
+
+* $RIB_HOME
+* ./.rib
+* ~/.rib
+* ~/.config/rib
+
+Rib would stop searching whenever the directory is found. If none could be
+found, the default would be:
+
+* ~/.rib
+
+So the default history file would be located at `~/.rib/history.rb`.
+
+#### Project config and history
+
+Since `./.rib` would be searched before `~/.rib`, you could create project
+level config at the project directory, and the history would also be
+separated from each other, located at the respected `./.rib/history.rb`.
+
+To do this, you don't really have to create a project config. Creating an
+empty directory for the home at the project directory would also work.
+
+#### Project directory and command line options
+
+You could set the project directory by using `-p, --prefix` command line
+option. So consider this:
+
+    cd ~/project
+    rib auto
+
+Would work the same as:
+
+    cd /tmp
+    rib -p ~/project auto
+
+And the project config and history would be located at `~/project/.rib`.
+
+To check for more command line options, run `rib -h`:
+
+```
+Usage: rib [ruby OPTIONS] [rib OPTIONS] [rib COMMANDS]
+ruby options:
+  -e, --eval LINE        Evaluate a LINE of code
+  -d, --debug            Set debugging flags (set $DEBUG to true)
+  -w, --warn             Turn warnings on (set $-w and $VERBOSE to true)
+  -I, --include PATH     Specify $LOAD_PATH (may be used more than once)
+  -r, --require LIBRARY  Require the library, before executing your script
+rib options:
+  -c, --config FILE      Load config from FILE
+  -p, --prefix PATH      Prefix to locate the app. Default to .
+  -n, --no-config        Suppress loading ~/.config/rib/config.rb
+  -h, --help             Print this message
+  -v, --version          Print the version
+rib commands:
+  min                    Run the minimum essence
+  auto                   Run as Rails or Ramaze console (auto-detect)
+  all                    Load all recommended plugins
+  rails                  Run as Rails console
+  rack                   Run as Rack console
+  ramaze                 Run as Ramaze console
+```
 
 #### Basic configuration
 
