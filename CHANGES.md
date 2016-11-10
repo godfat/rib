@@ -5,6 +5,7 @@
 * Search Rib home by directories rather than config/history file.
 * Respect prefix option for detecting Rib home.
 * Update help message for `-n`, which won't load any config.
+* Change `Rib.config[:prefix]` to `Rib.prefix`.
 * [app/rails] Fix loading boot file when using prefix option.
 
 ## Rib 1.3.1 -- 2016-11-03

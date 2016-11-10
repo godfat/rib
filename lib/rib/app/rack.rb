@@ -24,6 +24,6 @@ module Rib::Rack
   end
 
   def configru_path
-    "#{Rib.config[:prefix]}/config.ru"
+    "#{Rib.prefix}/config.ru"
   end
 end
