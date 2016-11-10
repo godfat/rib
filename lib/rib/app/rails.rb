@@ -111,6 +111,6 @@ module Rib::Rails
   end
 
   def path_for file
-    "#{Rib.config[:prefix]}/config/#{file}"
+    File.expand_path("#{Rib.config[:prefix]}/config/#{file}")
   end
 end
