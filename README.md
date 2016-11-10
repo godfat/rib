@@ -160,7 +160,7 @@ level config at the project directory, and the history would also be
 separated from each other, located at the respected `./.rib/history.rb`.
 
 To do this, you don't really have to create a project config. Creating an
-empty directory for the home at the project directory would also work.
+empty directory for Rib home at the project directory would also work.
 
 #### Project directory and command line options
 
