@@ -5,28 +5,28 @@ module Rib::Runner
   module_function
   def options
     @options ||=
-    [['ruby options:'    , ''                                        ],
-     ['-e, --eval LINE'                                               ,
-      'Evaluate a LINE of code'                                      ],
+    [['ruby options:'    , ''                                      ],
+     ['-e, --eval LINE'                                             ,
+      'Evaluate a LINE of code'                                    ],
 
-     ['-d, --debug'                                                   ,
-      'Set debugging flags (set $DEBUG to true)'                     ],
+     ['-d, --debug'                                                 ,
+      'Set debugging flags (set $DEBUG to true)'                   ],
 
-     ['-w, --warn'                                                    ,
-       'Turn warnings on (set $-w and $VERBOSE to true)'             ],
+     ['-w, --warn'                                                  ,
+       'Turn warnings on (set $-w and $VERBOSE to true)'           ],
 
-     ['-I, --include PATH'                                            ,
-       'Specify $LOAD_PATH (may be used more than once)'             ],
+     ['-I, --include PATH'                                          ,
+       'Specify $LOAD_PATH (may be used more than once)'           ],
 
-     ['-r, --require LIBRARY'                                         ,
-       'Require the library, before executing your script'           ],
+     ['-r, --require LIBRARY'                                       ,
+       'Require the library, before executing your script'         ],
 
-     ['rib options:'     , ''                                        ],
-     ['-c, --config FILE', 'Load config from FILE'                   ],
-     ['-p, --prefix PATH', 'Prefix to locate the app. Default to .'  ],
-     ['-n, --no-config'  , 'Suppress loading ~/.config/rib/config.rb'],
-     ['-h, --help'       , 'Print this message'                      ],
-     ['-v, --version'    , 'Print the version'                       ]] +
+     ['rib options:'     , ''                                      ],
+     ['-c, --config FILE', 'Load config from FILE'                 ],
+     ['-p, --prefix PATH', 'Prefix to locate the app. Default to .'],
+     ['-n, --no-config'  , 'Suppress loading any config'           ],
+     ['-h, --help'       , 'Print this message'                    ],
+     ['-v, --version'    , 'Print the version'                     ]] +
 
     [['rib commands:'    , '']] + commands
   end
