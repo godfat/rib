@@ -24,6 +24,6 @@ module Rib::Ramaze
   end
 
   def start_path
-    "#{Rib.prefix}/start.rb"
+    "#{Rib.config[:prefix]}/start.rb"
   end
 end

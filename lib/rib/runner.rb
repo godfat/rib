@@ -123,7 +123,7 @@ module Rib::Runner
         Rib.config[:config] = $1 || argv.shift
 
       when /^-p=?(.+)?/, /^--prefix=?(.+)?/
-        Rib.prefix = $1 || argv.shift
+        Rib.config[:prefix] = $1 || argv.shift
 
       when /^-n/, '--no-config'
         Rib.config.delete(:config)

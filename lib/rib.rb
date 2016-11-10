@@ -11,7 +11,9 @@ module Rib
   #
   # @api public
   def config
-    @config ||= {:name => 'rib', :config => File.join(home, 'config.rb')}
+    @config ||= {:name => 'rib',
+                 :config => File.join(home, 'config.rb'),
+                 :prefix => '.'}
   end
 
   # All shells in the memory
@@ -24,14 +26,6 @@ module Rib
     @vars   ||= {}
   end
 
-  def prefix
-    @prefix ||= '.'
-  end
-
-  def prefix= new_prefix
-    @prefix = new_prefix
-  end
-
   # Rib.home is where Rib storing things. By default, it goes to '~/.rib',
   # or somewhere containing a 'config.rb' or 'history.rb' in the order of
   # './.rib' (project specific config), or '~/.rib' (home config), or
@@ -40,7 +34,7 @@ module Rib
   # @api public
   def home
     ENV['RIB_HOME'] ||= File.expand_path(
-      ["#{prefix}/.rib", '~/.rib', '~/.config/rib'].find{ |path|
+      ["#{config[:prefix]}/.rib", '~/.rib', '~/.config/rib'].find{ |path|
         File.exist?(File.expand_path(path))
       } || '~/.rib'
     )
