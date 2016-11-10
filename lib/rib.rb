@@ -57,7 +57,7 @@ module Rib
   #
   # @api public
   def plugins
-    Shell.ancestors[1..-1].select{ |a| a.singleton_class < Plugin }
+    Shell.ancestors.drop(1).select{ |a| a.singleton_class < Plugin }
   end
 
   # Convenient way to disable all plugins in the memory.
