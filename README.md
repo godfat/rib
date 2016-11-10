@@ -150,7 +150,7 @@ Rib.config[:exit]          | Commands to exit, default [nil] # control+d
 Rib.config                     | Functionality
 ------------------------------ | ---------------------------------------------
 Rib.config[:completion]        | Completion: Bond config
-Rib.config[:history_file]      | Default is "~/.rib/config/history.rb"
+Rib.config[:history_file]      | Default is "~/.rib/history.rb"
 Rib.config[:history_size]      | Default is 500
 Rib.config[:color]             | A hash of Class => :color mapping
 Rib.config[:autoindent_spaces] | How to indent? Default is two spaces: '  '
