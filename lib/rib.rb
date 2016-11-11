@@ -81,7 +81,7 @@ module Rib
   #
   # @api public
   def require_config
-    result = require(config_path)
+    result = require(config_path) if File.exist?(config_path)
     Rib.say("Config loaded from: #{config_path}") if $VERBOSE && result
     result
   rescue StandardError, LoadError, SyntaxError => e
