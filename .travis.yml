@@ -1,18 +1,20 @@
 sudo: false
 language: ruby
-rvm:
-  - 2.2.5
-  - 2.3.1
-  - rbx
-  - jruby-9
 
 before_install:
   - rvm get head
   - rvm reload
   - rvm use --install $TRAVIS_RUBY_VERSION --binary --latest
 install: 'gem install bundler; bundle install --retry=3'
-script: 'ruby -r bundler/setup -S rake test'
+script: 'ruby -vr bundler/setup -S rake test'
 
 matrix:
+  include:
+    - rvm: 2.2.5
+    - rvm: 2.3.1
+    - rvm: jruby-9
+      env: JRUBY_OPTS=--debug
+    - rvm: rbx
+
   allow_failures:
   - rvm: rbx
