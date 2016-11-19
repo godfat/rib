@@ -351,6 +351,7 @@ enter the shell under certain circumstance, then you'll do:
 
 ``` ruby
 require 'rib/debug'
+
 Rib.enable_anchor do
   # Only `Rib.anchor` called in the block would launch a shell
 end
@@ -385,6 +386,7 @@ Whenever you called:
 
 ``` ruby
 require 'rib/more/edit'
+
 Rib.edit
 ```
 
