@@ -380,6 +380,36 @@ It would use the same format for exception backtrace to show current
 call stack for you. Colors, bottom up order, etc, if you're also using
 the corresponding plugins.
 
+Sometimes there are also too stack frames which we don't care about.
+In this case, we could pass arguments to `Rib.caller` in order to filter
+against them. You could either pass:
+
+* A `String` represents the name of the gem you don't care
+* A `Regexp` which would be used to match against paths/methods you don't care
+
+Examples:
+
+``` ruby
+require 'rib/more/caller'
+
+Rib.caller 'activesupport', /rspec/
+```
+
+To remove backtrace from gem _activesupport_ and paths or methods containing
+rspec as part of the name, like things for _rspec_ or _rspec-core_ and so on.
+Note that if a method name also contains rspec then it would also be filtered.
+Just keep that in mind when using regular expression.
+
+Or if you don't care about any gems, only want to see application related
+calls, then try to match against `%r{/gems/}` because gems are often stored
+in a path containing `/gems/`:
+
+```
+Rib.caller %r{/gem/}
+```
+
+Happy debugging.
+
 ### In place editing
 
 Whenever you called:

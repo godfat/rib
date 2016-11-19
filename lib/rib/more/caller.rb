@@ -6,10 +6,10 @@ module Rib::Caller
   Shell.use(self)
 
   module Imp
-    def caller
+    def caller *filters
       return if Rib::Caller.disabled?
 
-      backtrace = Rib.shell.format_backtrace(super.drop(1))
+      backtrace = Rib.shell.format_backtrace(super().drop(1))
 
       lib = %r{\brib-#{Rib::VERSION}/lib/rib/}
       if backtrace.first =~ lib
@@ -18,7 +18,16 @@ module Rib::Caller
         backtrace.pop while backtrace.last =~ lib
       end
 
-      puts backtrace.map{ |l| "  #{l}" }
+      result = filters.map do |f|
+        case f
+        when Regexp
+          f
+        when String
+          %r{\bgems/#{Regexp.escape(f)}\-[\d\.]+/lib/}
+        end
+      end.inject(backtrace, &:grep_v)
+
+      puts result.map{ |l| "  #{l}" }
 
       Rib::Skip
     end
