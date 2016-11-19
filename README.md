@@ -283,6 +283,10 @@ require 'rib/more' # You get all of the followings:
 
   See _As a debugging/interacting tool_.
 
+* `require 'rib/more/caller'`
+
+  See _Current call stack (backtrace, caller)_.
+
 * `require 'rib/more/edit'`
 
   See _In place editing_.
@@ -356,6 +360,24 @@ Rib.anchor binding # No effect (no-op) outside the block
 
 Anchor could also be nested. The level would be shown on the prompt,
 starting from 1.
+
+### Current call stack (backtrace, caller)
+
+Often time we would want to see current call stack whenever we're using
+`Rib.anchor`. We could do that by simply using `caller` but it's barely
+readable because it's just returning an array without any format and
+it also contains backtrace from Rib itself. You could use pretty
+formatting with Rib:
+
+``` ruby
+require 'rib/more/caller'
+
+Rib.caller
+```
+
+It would use the same format for exception backtrace to show current
+call stack for you. Colors, bottom up order, etc, if you're also using
+the corresponding plugins.
 
 ### In place editing
 
