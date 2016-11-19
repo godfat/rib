@@ -380,7 +380,7 @@ It would use the same format for exception backtrace to show current
 call stack for you. Colors, bottom up order, etc, if you're also using
 the corresponding plugins.
 
-Sometimes there are also too stack frames which we don't care about.
+Sometimes there are also too many stack frames which we don't care about.
 In this case, we could pass arguments to `Rib.caller` in order to filter
 against them. You could either pass:
 
