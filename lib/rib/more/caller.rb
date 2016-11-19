@@ -9,7 +9,16 @@ module Rib::Caller
     def caller
       return if Rib::Caller.disabled?
 
-      puts Rib.shell.format_backtrace(super)
+      backtrace = Rib.shell.format_backtrace(super.drop(1))
+
+      lib = %r{\brib-#{Rib::VERSION}/lib/rib/}
+      if backtrace.first =~ lib
+        backtrace.shift while backtrace.first =~ lib
+      elsif backtrace.last =~ lib
+        backtrace.pop while backtrace.last =~ lib
+      end
+
+      puts backtrace.map{ |l| "  #{l}" }
 
       Rib::Skip
     end
