@@ -11,4 +11,5 @@ require 'rib/more/multiline_history'
 
 # special tools
 require 'rib/more/anchor'
+require 'rib/more/caller'
 require 'rib/more/edit'

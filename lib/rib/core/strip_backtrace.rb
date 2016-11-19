@@ -15,14 +15,16 @@ module Rib::StripBacktrace
 
   def get_error err
     return super if StripBacktrace.disabled?
-    ["#{err.class}: #{err.message}", strip_backtrace(err.backtrace)]
+    ["#{err.class}: #{err.message}", format_backtrace(err.backtrace)]
   end
 
 
 
   module_function
-  def strip_backtrace backtrace
-    strip_home_backtrace(strip_cwd_backtrace(strip_rib_backtrace(backtrace)))
+  def format_backtrace backtrace
+    strip_home_backtrace(
+      strip_cwd_backtrace(
+        strip_rib_backtrace(super(backtrace))))
   end
 
   def strip_home_backtrace backtrace

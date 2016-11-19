@@ -105,9 +105,13 @@ module Rib::API
 
   # Get error message and backtrace from a particular error
   def get_error err
-    ["#{err.class}: #{err.message}", err.backtrace]
+    ["#{err.class}: #{err.message}", format_backtrace(err.backtrace)]
   end
   module_function :get_error
+
+  def format_backtrace backtrace
+    backtrace
+  end
 
   private
   def equal_rib_skip result
