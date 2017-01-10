@@ -91,6 +91,10 @@ module Rib::API
     Rib.warn("Error while printing error:\n  #{format_error(e)}")
   end
 
+  def puts str
+    super
+  end
+
   # Format result using #result_prompt
   def format_result result
     result_prompt + result.inspect

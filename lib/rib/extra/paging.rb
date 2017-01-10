@@ -7,15 +7,13 @@ module Rib::Paging
 
   # --------------- Rib API ---------------
 
-  # Print result if the it fits one screen,
-  # paging it through a pager otherwise.
-  def print_result result
+  # Print if the it fits one screen, paging it through a pager otherwise.
+  def puts str=''
     return super if Paging.disabled?
-    output = format_result(result)
-    if one_screen?(output)
-      puts output
+    if one_screen?(str)
+      super
     else
-      page_result(output)
+      page_result(str)
     end
   rescue StandardError, SyntaxError => e
     Rib.warn("Error while printing result:\n  #{format_error(e)}")
@@ -23,15 +21,15 @@ module Rib::Paging
 
   # `less -F` can't cat the output, so we need to detect by ourselves.
   # `less -X` would mess up the buffers, so it's not desired, either.
-  def one_screen? output
+  def one_screen? str
     cols, lines = `tput cols`.to_i, `tput lines`.to_i
-    output.count("\n") <= lines &&
-      output.gsub(/\e\[[^m]*m/, '').size <= cols * lines
+    str.count("\n") <= lines &&
+      str.gsub(/\e\[[^m]*m/, '').size <= cols * lines
   end
 
-  def page_result output
+  def page_result str
     less = IO.popen(pager, 'w')
-    less.write(output)
+    less.write(str)
     less.close_write
   rescue Errno::EPIPE
     # less quit without consuming all the input
