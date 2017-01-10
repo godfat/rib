@@ -27,7 +27,7 @@ module Rib::Caller
         end
       end.inject(backtrace, &:grep_v)
 
-      puts result.map{ |l| "  #{l}" }
+      Rib.shell.puts result.map{ |l| "  #{l}" }.join("\n")
 
       Rib::Skip
     end
