@@ -15,8 +15,6 @@ module Rib::Paging
     else
       page_result(str)
     end
-  rescue StandardError, SyntaxError => e
-    Rib.warn("Error while printing result:\n  #{format_error(e)}")
   end
 
   # `less -F` can't cat the output, so we need to detect by ourselves.
