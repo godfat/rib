@@ -61,16 +61,12 @@ in your `~/.spring.rb`:
 
     require 'rib/extra/spring'
 
-As Ramaze console
-
-    rib ramaze
-
 As Rack console
 
     rib rack
 
 As a console for whichever the app in the current path
-it should be (for now, it's either Rails, Ramaze or Rack)
+it should be (for now, it's either Rails or Rack)
 
     rib auto
 
@@ -195,11 +191,10 @@ rib options:
   -v, --version          Print the version
 rib commands:
   min                    Run the minimum essence
-  auto                   Run as Rails or Ramaze console (auto-detect)
+  auto                   Run as Rails or Rack console (auto-detect)
   all                    Load all recommended plugins
   rails                  Run as Rails console
   rack                   Run as Rack console
-  ramaze                 Run as Ramaze console
 ```
 
 #### Basic configuration
@@ -434,8 +429,8 @@ require 'rib'
 ```
 
 All others are optional. The core plugins are lying in `rib/core/*.rb`, and
-more plugins are lying in `rib/more/*.rb`. You can read `rib/app/ramaze.rb`
-and `bin/rib-ramaze` as a Rib App reference implementation, because it's very
+more plugins are lying in `rib/more/*.rb`. You can read `rib/app/rack.rb`
+and `bin/rib-rack` as a Rib App reference implementation, because it's very
 simple, simpler than rib-rails.
 
 ## Other plugins and apps

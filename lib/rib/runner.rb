@@ -51,12 +51,11 @@ module Rib::Runner
 
   def command_descriptions
     @command_descriptions ||=
-    {'all'    => 'Load all recommended plugins'                ,
-     'min'    => 'Run the minimum essence'                     ,
-     'auto'   => 'Run as Rails or Ramaze console (auto-detect)',
-     'rails'  => 'Run as Rails console'                        ,
-     'ramaze' => 'Run as Ramaze console'                       ,
-     'rack'   => 'Run as Rack console'                         }
+    {'all'    => 'Load all recommended plugins'              ,
+     'min'    => 'Run the minimum essence'                   ,
+     'auto'   => 'Run as Rails or Rack console (auto-detect)',
+     'rails'  => 'Run as Rails console'                      ,
+     'rack'   => 'Run as Rack console'                       }
   end
 
   # Extract the text below __END__ in the bin file as the description
