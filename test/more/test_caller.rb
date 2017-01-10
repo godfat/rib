@@ -7,7 +7,7 @@ describe Rib::Caller do
 
   test_for Rib::Caller do
     would 'puts some backtrace' do
-      mock(Rib).puts(is_a(Array)){ ok }
+      mock(Rib.shell).puts(is_a(String)){ ok }
 
       Rib.caller
     end
