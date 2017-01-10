@@ -1,5 +1,12 @@
 # CHANGES
 
+## Rib 1.5.0 -- ?
+
+* Removed Ramaze direct support. Use Rack instead.
+* Introduced API#format_backtrace
+* Introduced API#puts
+* [more/caller] Added for showing formatted call stack
+
 ## Rib 1.4.0 -- 2016-11-11
 
 * Search Rib home by directories rather than config/history file.
