@@ -10,5 +10,7 @@ Gemgem.init(__dir__) do |s|
   require 'rib/version'
   s.name    = 'rib'
   s.version = Rib::VERSION
-  s.files.delete('screenshot.png')
+  %w[screenshot.png asciicast.json].each do |file|
+    s.files.delete(file)
+  end
 end
