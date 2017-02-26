@@ -1,8 +1,7 @@
 
 copy :setup_multiline do
   def setup_shell
-    @shell = Rib::Shell.new(
-      :binding => Object.new.instance_eval{binding}).before_loop
+    @shell = new_shell
     stub(@shell).print{}.with_any_args
     stub(@shell).puts{} .with_any_args
   end
@@ -30,7 +29,16 @@ copy :setup_multiline do
       mock(@shell).print_result(is_a(Object)){}
     end
     @shell.loop_once
-    true.should.eq true
+    ok
+  end
+
+  def check str, err=nil
+    lines = str.split("\n")
+    lines[0...-1].each{ |line|
+      input(line)
+      @shell.loop_once
+    }
+    input_done(lines.last, err)
   end
 end
 

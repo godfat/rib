@@ -74,7 +74,11 @@ module Rib::API
 
   # Evaluate user input with #eval_binding, name and line
   def loop_eval input
-    eval_binding.eval(input, "(#{name})", line)
+    if eval_binding.kind_of?(Binding)
+      eval_binding.eval(input, "(#{name})", line)
+    else
+      eval_binding.instance_eval(input, "(#{name})", line)
+    end
   end
 
   # Print result using #format_result

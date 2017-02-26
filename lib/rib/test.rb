@@ -7,11 +7,12 @@ Pork::Suite.include(Muack::API)
 require 'rib'
 
 copy :rib do
-  before do
-  end
-
   after do
     Muack.verify
+  end
+
+  def new_shell
+    Rib::Shell.new(:binding => Object.new.instance_eval{binding}).before_loop
   end
 
   singleton_class.module_eval do

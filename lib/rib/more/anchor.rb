@@ -7,15 +7,6 @@ module Rib::Anchor
 
   # --------------- Rib API ---------------
 
-  def loop_eval input
-    return super if Rib::Anchor.disabled?
-    if eval_binding.kind_of?(Binding)
-      super
-    else
-      eval_binding.instance_eval(input, "(#{name})", line)
-    end
-  end
-
   def prompt
     return super if Rib::Anchor.disabled?
     return super unless config[:prompt_anchor]

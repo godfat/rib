@@ -5,6 +5,7 @@
 * Removed Ramaze direct support. Use Rack instead.
 * Introduced API#format_backtrace
 * Introduced API#puts
+* [more/anchor] Fixed multiline support when anchoring on an object
 * [more/caller] Added for showing formatted call stack
 * [core/underscore] This is changed to `core/last_value`, and the API is
   changed to `Rib.last_value` and `Rib.last_exception`. Surely this is less

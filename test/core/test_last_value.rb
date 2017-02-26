@@ -25,7 +25,7 @@ describe Rib::LastValue do
   paste :rib
 
   before do
-    @shell = Rib::Shell.new
+    @shell = new_shell
     stub(@shell).puts(is_a(String)){}
     stub(Rib).shell{ @shell }
   end
