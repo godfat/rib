@@ -248,9 +248,10 @@ require 'rib/core' # You get all of the followings:
 
   Remove duplicated input from history.
 
-* `require 'rib/core/underscore'`
+* `require 'rib/core/last_value'`
 
-  Save the last result in `_` and the last exception in `__`.
+  Save the last result in `Rib.last_value` and the last exception in
+  `Rib.last_exception`.
 
 #### List of more plugins
 

@@ -14,4 +14,4 @@ require 'rib/core/multiline'
 require 'rib/core/squeeze_history'
 
 # special tools
-require 'rib/core/underscore'
+require 'rib/core/last_value'

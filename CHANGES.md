@@ -1,11 +1,19 @@
 # CHANGES
 
-## Rib 1.5.0 -- ?
+## Rib 1.5.0 -- 2016-02-27
 
 * Removed Ramaze direct support. Use Rack instead.
 * Introduced API#format_backtrace
 * Introduced API#puts
 * [more/caller] Added for showing formatted call stack
+* [core/underscore] This is changed to `core/last_value`, and the API is
+  changed to `Rib.last_value` and `Rib.last_exception`. Surely this is less
+  intrusive and more compatible for things like `Rib.anchor 42` because
+  now literal integers are frozen and we cannot define methods on them.
+  Also, using `Rib.last_value` is surely more descriptive. Of course,
+  being able to type `_` is so much easier, but you could just add a plugin
+  which defines `def _; Rib.last_value; end` and keep using `_` for your
+  own taste!
 
 ## Rib 1.4.0 -- 2016-11-11
 
