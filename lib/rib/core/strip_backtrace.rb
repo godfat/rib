@@ -18,10 +18,9 @@ module Rib::StripBacktrace
     ["#{err.class}: #{err.message}", format_backtrace(err.backtrace)]
   end
 
-
-
   module_function
   def format_backtrace backtrace
+    return super if StripBacktrace.disabled?
     strip_home_backtrace(
       strip_cwd_backtrace(
         strip_rib_backtrace(super(backtrace))))
