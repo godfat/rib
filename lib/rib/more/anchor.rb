@@ -22,15 +22,6 @@ module Rib::Anchor
     end
   end
 
-  # --------------- Plugin API ---------------
-
-  # override Underscore#bound_object
-  def bound_object
-    return super if Rib::Anchor.disabled?
-    return super if eval_binding.kind_of?(Binding)
-    eval_binding
-  end
-
 
 
   private
