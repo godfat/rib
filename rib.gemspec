@@ -89,7 +89,7 @@ Gem::Specification.new do |s|
   "test/test_shell.rb".freeze]
   s.homepage = "https://github.com/godfat/rib".freeze
   s.licenses = ["Apache License 2.0".freeze]
-  s.rubygems_version = "2.6.8".freeze
+  s.rubygems_version = "2.6.10".freeze
   s.summary = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell".freeze
   s.test_files = [
   "test/core/test_completion.rb".freeze,
