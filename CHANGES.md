@@ -1,5 +1,11 @@
 # CHANGES
 
+## Rib 1.5.1 -- ?
+
+* [more/beep] This plugin would beep via `print "\a"` when the application
+  was loaded and it's been too long. Configure the time via
+  `Rib.config[:beep_threshold]`, default is 5 seconds.
+
 ## Rib 1.5.0 -- 2016-02-27
 
 * Removed Ramaze direct support. Use Rack instead.

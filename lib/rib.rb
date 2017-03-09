@@ -11,7 +11,7 @@ module Rib
   #
   # @api public
   def config
-    @config ||= {:name => 'rib', :prefix => '.'}
+    @config ||= {:name => 'rib', :prefix => '.', :started_at => Time.now}
   end
 
   # All shells in the memory

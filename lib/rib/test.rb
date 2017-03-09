@@ -11,8 +11,12 @@ copy :rib do
     Muack.verify
   end
 
-  def new_shell
-    Rib::Shell.new(:binding => Object.new.instance_eval{binding}).before_loop
+  def new_shell opts={}
+    shell = Rib::Shell.new(
+      {:binding => Object.new.instance_eval{binding}}.merge(opts)
+    )
+    yield(shell) if block_given?
+    shell.before_loop
   end
 
   singleton_class.module_eval do

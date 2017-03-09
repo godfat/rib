@@ -13,3 +13,6 @@ require 'rib/more/multiline_history'
 require 'rib/more/anchor'
 require 'rib/more/caller'
 require 'rib/more/edit'
+
+# upon application loads
+require 'rib/more/beep'

@@ -217,6 +217,7 @@ Rib.config[:history_file]      | Default is "~/.rib/history.rb"
 Rib.config[:history_size]      | Default is 500
 Rib.config[:color]             | A hash of Class => :color mapping
 Rib.config[:autoindent_spaces] | How to indent? Default is two spaces: '  '
+Rib.config[:beep_threshold]    | When it should beep? Default is 5 seconds
 
 #### List of core plugins
 
@@ -274,6 +275,11 @@ require 'rib/more' # You get all of the followings:
 * `require 'rib/more/multiline_history'`
 
   Make readline aware of multiline history.
+
+* `require 'rib/more/beep'`
+
+  Print "\a" when the application was loaded and it's been too long.
+  Configure the threshold via `Rib.config[:beep_threshold]`.
 
 * `require 'rib/more/anchor'`
 
