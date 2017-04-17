@@ -696,7 +696,7 @@
     ],
     [
       0.05,
-      "NameError: undefined local variable or method `a' for \"rock\":String\u001b[0m\r\n"
+      "\u001b[35mNameError: undefined local variable or method `a' for \"rock\":String\u001b[0m\r\n"
     ],
     [
       0.05,
