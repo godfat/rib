@@ -1,8 +1,8 @@
 
 require 'rib/shell'
+require 'rib/version'
 
 module Rib
-  autoload :VERSION, 'rib/version'
   Skip = Object.new
 
   module_function
