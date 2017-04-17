@@ -60,7 +60,8 @@ module Rib::Runner
 
   # Extract the text below __END__ in the bin file as the description
   def command_descriptions_find path
-    File.read(path) =~ /Gem\.bin_path\(['"](.+)['"], ['"](.+)['"],/
+    # FIXME: Can we do better? This is not reliable
+    File.read(path) =~ /Gem\.activate_bin_path\(['"](.+)['"], ['"](.+)['"],/
     (File.read(Gem.bin_path($1, $2))[/\n__END__\n(.+)$/m, 1] || '').strip
   end
 
