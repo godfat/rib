@@ -190,11 +190,11 @@ rib options:
   -h, --help             Print this message
   -v, --version          Print the version
 rib commands:
-  min                    Run the minimum essence
-  auto                   Run as Rails or Rack console (auto-detect)
   all                    Load all recommended plugins
-  rails                  Run as Rails console
+  auto                   Run as Rails or Rack console (auto-detect)
+  min                    Run the minimum essence
   rack                   Run as Rack console
+  rails                  Run as Rails console
 ```
 
 #### Basic configuration
