@@ -1,5 +1,7 @@
 # TODO
 
+* cleanup the tests. it's so messy right now
+
 * Runner tests
 * Documentation
 * Implement exception_spy

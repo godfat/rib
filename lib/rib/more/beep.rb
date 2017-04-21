@@ -10,7 +10,7 @@ module Rib::Beep
   def before_loop
     super
     return self if Beep.disabled?
-    beep if (Time.now - config[:started_at]) > beep_threshold
+    beep if started_at && (Time.now - started_at) > beep_threshold
     Beep.disable
     self
   end

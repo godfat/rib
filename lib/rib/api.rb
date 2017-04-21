@@ -23,11 +23,13 @@ module Rib::API
   def eval_binding ; config[:binding]       ; end
   # The line number for next evaluation
   def line         ; config[:line]          ; end
+  # When the application loaded
+  def started_at   ; config[:started_at]    ; end
 
   # Main loop
   def in_loop
-    input = catch(:rib_exit){ loop_once while true }
-    puts if input == nil
+    input = catch(:rib_exit){ loop_once while running? }
+    puts if input == nil && running?
   end
 
   # Loop iteration: REPL

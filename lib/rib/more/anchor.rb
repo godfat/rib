@@ -9,7 +9,7 @@ module Rib::Anchor
 
   def prompt
     return super if Rib::Anchor.disabled?
-    return super unless config[:prompt_anchor]
+    return super unless anchor?
 
     level = "(#{Rib.shells.size - 1})"
     if Rib.const_defined?(:Color) &&
@@ -20,6 +20,10 @@ module Rib::Anchor
     else
       "#{prompt_anchor}#{level}#{super}"
     end
+  end
+
+  def anchor?
+    !!config[:prompt_anchor]
   end
 
 
@@ -66,6 +70,11 @@ module Rib::Anchor
 
     ensure
       Rib.shells.pop
+    end
+
+    def stop_anchors
+      Rib.shells.select(&:anchor?).each(&:stop)
+      Rib::Skip
     end
   end
 

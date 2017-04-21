@@ -18,13 +18,22 @@ describe Rib::Shell do
     def input str
       mock(shell).get_input{str}
       shell.loop
-      true.should.eq true
+      ok
     end
-    would 'exit'      do                               input('exit' ) end
-    would 'also exit' do                               input(' exit') end
+
+    would 'exit'      do                              input('exit' ) end
+    would 'also exit' do                              input(' exit') end
     would 'ctrl+d'    do mock(shell).puts{}         ; input(nil)     end
     would ':q'        do shell.config[:exit] << ':q'; input(':q')    end
     would '\q'        do shell.config[:exit] << '\q'; input('\q')    end
+
+    would 'not puts anything if it is not running' do
+      mock(shell).puts.times(0)
+
+      shell.eval_binding.eval('self').instance_variable_set(:@shell, shell)
+
+      input('@shell.stop; throw :rib_exit')
+    end
   end
 
   describe '#loop_once' do
@@ -35,7 +44,7 @@ describe Rib::Shell do
         mock(shell).get_input{ str }
       end
       shell.loop_once
-      true.should.eq true
+      ok
     end
 
     would 'handles ctrl+c' do
@@ -86,6 +95,40 @@ describe Rib::Shell do
       result.should.eq nil
       err.should.kind_of?(SyntaxError)
       shell.config[:line].should.eq @line + 1
+    end
+  end
+
+  describe '#running?' do
+    would 'have complete flow' do
+      expect(shell).not.running?
+
+      mock(shell).get_input do
+        expect(shell).running?
+
+        mock(shell).puts{}
+
+        nil
+      end
+
+      shell.loop
+
+      expect(shell).not.running?
+    end
+  end
+
+  describe '#stop' do
+    would 'stop the loop if it is stopped' do
+      mock(shell).get_input do
+        expect(shell).running?
+
+        shell.stop
+
+        expect(shell).not.running?
+
+        'Rib::Skip'
+      end
+
+      shell.loop
     end
   end
 

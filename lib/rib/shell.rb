@@ -41,21 +41,30 @@ class Rib::Shell
                    :prompt        => '>> ',
                    :exit          => [nil],
                    :line          => 1    }.merge(config)
-    @running = false
+    stop
   end
 
   # Loops shell until user exits
   def loop
     before_loop
-    @running = true
+    start
     in_loop
+    stop
     self
   rescue Exception => e
     Rib.warn("Error while running loop:\n  #{format_error(e)}")
     raise
   ensure
-    @running = false
+
     after_loop
+  end
+
+  def start
+    @running = true
+  end
+
+  def stop
+    @running = false
   end
 
   def running?
