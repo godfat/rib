@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::Caller
-  extend Rib::Plugin
+module Rib; module Caller
+  extend Plugin
   Shell.use(self)
 
   module Imp
@@ -34,4 +34,4 @@ module Rib::Caller
   end
 
   Rib.extend(Imp)
-end
+end; end

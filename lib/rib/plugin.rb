@@ -1,6 +1,5 @@
 
-module Rib; end
-module Rib::Plugin
+module Rib; module Plugin
   attr_accessor :disabled
 
   def enable
@@ -26,7 +25,8 @@ module Rib::Plugin
   end
 
   def self.extended mod
-    mod.send(:include, Rib)
+    # Backward compatibility
+    mod.const_set(:Shell, Rib::Shell)
 
     snake_name = mod.name.sub(/(\w+::)+?(\w+)$/, '\2').
       gsub(/([A-Z][a-z]*)/, '\\1_').downcase[0..-2]
@@ -47,4 +47,4 @@ module Rib::Plugin
 
     Rib.singleton_class.module_eval(code, __FILE__, __LINE__)
   end
-end
+end; end

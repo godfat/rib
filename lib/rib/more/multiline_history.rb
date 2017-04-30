@@ -2,8 +2,8 @@
 require 'rib/core/history'   # dependency
 require 'rib/core/multiline' # dependency
 
-module Rib::MultilineHistory
-  extend Rib::Plugin
+module Rib; module MultilineHistory
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -45,4 +45,4 @@ module Rib::MultilineHistory
   def multiline_trash
     @multiline_trash ||= 0
   end
-end
+end; end

@@ -2,8 +2,8 @@
 require 'rib'
 
 # from https://github.com/janlelis/ripl-multi_line
-module Rib::Multiline
-  extend Rib::Plugin
+module Rib; module Multiline
+  extend Plugin
   Shell.use(self)
 
   engine = if Object.const_defined?(:RUBY_ENGINE)
@@ -129,4 +129,4 @@ module Rib::Multiline
   def multiline_buffer
     @multiline_buffer ||= []
   end
-end
+end; end

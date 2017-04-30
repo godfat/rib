@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::LastValue
-  extend Rib::Plugin
+module Rib; module LastValue
+  extend Plugin
   Shell.use(self)
 
   attr_reader :last_value, :last_exception
@@ -32,4 +32,4 @@ module Rib::LastValue
   end
 
   Rib.extend(Imp)
-end
+end; end

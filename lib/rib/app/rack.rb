@@ -1,6 +1,5 @@
 
-module Rib; end
-module Rib::Rack
+module Rib; module Rack
   singleton_class.module_eval{ attr_accessor :app }
 
   module_function
@@ -26,4 +25,4 @@ module Rib::Rack
   def configru_path
     "#{Rib.config[:prefix]}/config.ru"
   end
-end
+end; end

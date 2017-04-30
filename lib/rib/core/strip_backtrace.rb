@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::StripBacktrace
-  extend Rib::Plugin
+module Rib; module StripBacktrace
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -42,4 +42,4 @@ module Rib::StripBacktrace
   def replace_path_prefix prefix, substitute, path
     path.sub(/\A#{Regexp.escape(prefix)}\//, substitute)
   end
-end
+end; end

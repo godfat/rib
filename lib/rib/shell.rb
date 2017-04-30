@@ -2,8 +2,8 @@
 require 'rib/plugin'
 require 'rib/api'
 
-class Rib::Shell
-  include Rib::API
+module Rib; class Shell
+  include API
   trap('INT'){ raise Interrupt }
 
   def self.use mod
@@ -88,4 +88,4 @@ class Rib::Shell
       ret
     RUBY
   end
-end
+end; end

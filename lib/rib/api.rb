@@ -1,6 +1,5 @@
 
-module Rib; end
-module Rib::API
+module Rib; module API
   # Called before shell starts looping
   def before_loop
     self
@@ -125,4 +124,4 @@ module Rib::API
   rescue
     # do nothing, it cannot respond to == correctly, it can't be Rib::Skip
   end
-end
+end; end

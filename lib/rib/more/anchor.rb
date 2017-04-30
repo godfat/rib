@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::Anchor
-  extend Rib::Plugin
+module Rib; module Anchor
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -79,4 +79,4 @@ module Rib::Anchor
   end
 
   Rib.extend(Imp)
-end
+end; end

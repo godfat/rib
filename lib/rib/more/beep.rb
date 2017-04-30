@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::Beep
-  extend Rib::Plugin
+module Rib; module Beep
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -23,4 +23,4 @@ module Rib::Beep
   def beep_threshold
     config[:beep_threshold] ||= 5
   end
-end
+end; end

@@ -1,6 +1,5 @@
 
-module Rib; end
-module Rib::Rails
+module Rib; module Rails
   module_function
   def load
     load_rails
@@ -113,4 +112,4 @@ module Rib::Rails
   def path_for file
     File.expand_path("#{Rib.config[:prefix]}/config/#{file}")
   end
-end
+end; end

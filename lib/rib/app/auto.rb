@@ -1,6 +1,5 @@
 
-module Rib; end
-module Rib::Auto
+module Rib; module Auto
   module_function
   def load
     app, name = %w[rails rack].find{ |n|
@@ -20,4 +19,4 @@ module Rib::Auto
       Rib.warn("No app found")
     end
   end
-end
+end; end

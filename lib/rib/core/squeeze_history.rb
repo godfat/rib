@@ -1,8 +1,8 @@
 
 require 'rib/core/history' # dependency
 
-module Rib::SqueezeHistory
-  extend Rib::Plugin
+module Rib; module SqueezeHistory
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -42,4 +42,4 @@ module Rib::SqueezeHistory
       end
     }
   end
-end
+end; end

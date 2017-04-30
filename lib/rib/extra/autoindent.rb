@@ -3,8 +3,8 @@ require 'rib/core/history'   # otherwise the order might be wrong
 require 'rib/core/readline'  # dependency
 require 'rib/core/multiline' # dependency
 
-module Rib::Autoindent
-  extend Rib::Plugin
+module Rib; module Autoindent
+  extend Plugin
   Shell.use(self)
 
   # begin block could be simpler, because it should also trigger
@@ -153,7 +153,7 @@ module Rib::Autoindent
   def autoindent_stack
     @autoindent_stack ||= []
   end
-end
+end; end
 
 begin
   require 'readline_buffer'

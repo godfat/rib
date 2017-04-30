@@ -2,8 +2,8 @@
 require 'rib'
 require 'fileutils'
 
-module Rib::History
-  extend Rib::Plugin
+module Rib; module History
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -63,4 +63,4 @@ module Rib::History
   def history_size
     config[:history_size] ||= 500
   end
-end
+end; end

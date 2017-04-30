@@ -2,8 +2,8 @@
 require 'rib'
 require 'readline'
 
-module Rib::Readline
-  extend Rib::Plugin
+module Rib; module Readline
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -24,4 +24,4 @@ unless ::Readline::HISTORY.respond_to?(:last)
   def (::Readline::HISTORY).last
     self[-1]
   end
-end
+end; end

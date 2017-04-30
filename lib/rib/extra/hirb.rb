@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::Hirb
-  extend Rib::Plugin
+module Rib; module Hirb
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -24,4 +24,4 @@ rescue LoadError => e
            "    gem install hirb\n"                   ,
            "Or add hirb to Gemfile if that's the case")
   Rib::Hirb.disable
-end
+end; end

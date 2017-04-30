@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::BottomupBacktrace
-  extend Rib::Plugin
+module Rib; module BottomupBacktrace
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -16,4 +16,4 @@ module Rib::BottomupBacktrace
   def format_backtrace backtrace
     super(backtrace).reverse
   end
-end
+end; end

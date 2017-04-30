@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::Color
-  extend Rib::Plugin
+module Rib; module Color
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -110,7 +110,7 @@ module Rib::Color
   def    cyan &block; color(36, &block); end
   def   white &block; color(37, &block); end
   def   reset &block; color( 0, &block); end
-end
+end; end
 
 begin
   require 'win32console' if defined?(Gem) && Gem.win_platform?

@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::Completion
-  extend Rib::Plugin
+module Rib; module Completion
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -32,4 +32,4 @@ rescue LoadError => e
            "    gem install bond\n"                         ,
            "Or add bond to Gemfile if that's the case"      )
   Rib::Completion.disable
-end
+end; end

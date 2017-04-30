@@ -2,8 +2,8 @@
 require 'rib'
 require 'tempfile'
 
-module Rib::Edit
-  extend Rib::Plugin
+module Rib; module Edit
+  extend Plugin
   Shell.use(self)
 
   module Imp
@@ -35,4 +35,4 @@ module Rib::Edit
   end
 
   Rib.extend(Imp)
-end
+end; end

@@ -1,7 +1,7 @@
 
 require 'rib'
 
-module Rib::Runner
+module Rib; module Runner
   module_function
   def options
     @options ||=
@@ -186,4 +186,4 @@ module Rib::Runner
   rescue Errno::ENOENT # probably a windows platform, try where
     `where #{bin}`.lines.first.strip
   end
-end
+end; end

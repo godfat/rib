@@ -1,8 +1,8 @@
 
 require 'rib'
 
-module Rib::Paging
-  extend Rib::Plugin
+module Rib; module Paging
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -36,7 +36,7 @@ module Rib::Paging
   def pager
     ENV['PAGER'] || 'less -R'
   end
-end
+end; end
 
 pager = ENV['PAGER'] || 'less'
 

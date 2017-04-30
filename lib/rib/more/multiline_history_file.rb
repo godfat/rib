@@ -1,8 +1,8 @@
 
 require 'rib/more/multiline_history'
 
-module Rib::MultilineHistoryFile
-  extend Rib::Plugin
+module Rib; module MultilineHistoryFile
+  extend Plugin
   Shell.use(self)
 
   # --------------- Rib API ---------------
@@ -46,4 +46,4 @@ module Rib::MultilineHistoryFile
   def multiline_history_file_token
     config[:multiline_history_file_token] ||= ' '
   end
-end
+end; end
