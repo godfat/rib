@@ -6,13 +6,20 @@ describe Rib::Completion do
   paste :rib
 
   before do
-    @completion = Class.new do
-      include Rib::Completion
-    end.new
+    Rib::Completion.enable
   end
 
-  would 'find correct ripl plugins' do
-    $LOADED_FEATURES << '/dir/ripl/some_plugin.rb'
-    @completion.send(:ripl_plugins).should.eq ['ripl/some_plugin.rb']
+  would 'start bond' do
+    new_shell do |sh|
+      eval_binding = sh.method(:eval_binding).source_location
+
+      mock(Bond).start(having(eval_binding: is_a(Proc))).peek_args do |*args|
+        expect(args.first[:eval_binding].source_location).eq eval_binding
+
+        args
+      end
+    end
+
+    expect(Bond).started?
   end
 end

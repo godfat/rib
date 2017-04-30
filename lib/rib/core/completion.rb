@@ -9,20 +9,13 @@ module Rib; module Completion
 
   def before_loop
     return super if Completion.disabled?
-     config[:completion]                ||= {}
-     config[:completion][:eval_binding] ||= method(:eval_binding).to_proc
-    (config[:completion][:gems]         ||= []).concat(ripl_plugins)
+    config[:completion]                ||= {}
+    config[:completion][:gems]         ||= []
+    config[:completion][:eval_binding] ||= method(:eval_binding).to_proc
     Rib.silence{Bond.start(config[:completion]) unless Bond.started?}
     super
   end
-
-
-
-  private
-  def ripl_plugins
-    $LOADED_FEATURES.map{ |e| e[/ripl\/[^\/]+$/] }.compact
-  end
-end
+end; end
 
 begin
   Rib.silence{require 'bond'}
@@ -32,4 +25,4 @@ rescue LoadError => e
            "    gem install bond\n"                         ,
            "Or add bond to Gemfile if that's the case"      )
   Rib::Completion.disable
-end; end
+end
