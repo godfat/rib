@@ -71,6 +71,10 @@ module Rib; class Shell
     !!@running
   end
 
+  def warnings
+    @warnings ||= []
+  end
+
   protected
   attr_writer :config
 

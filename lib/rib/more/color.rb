@@ -14,13 +14,18 @@ module Rib; module Color
 
   def format_result result
     return super if Color.disabled?
-    config[:result_prompt] + format_color(result)
+    "#{result_prompt}#{format_color(result)}"
   end
 
   def get_error err
     return super if Color.disabled?
     message, backtrace = super
     [format_color(err, message), format_backtrace(backtrace)]
+  end
+
+  def warn message
+    return super if Color.disabled?
+    super(red{message})
   end
 
   # --------------- Plugin API ---------------
@@ -39,7 +44,7 @@ module Rib; module Color
       Object     => :yellow }
   end
 
-  def format_color result, display=result.inspect
+  def format_color result, display=inspect_result(result)
     case result
       when String ; send(colors[String ]){ display }
       when Numeric; send(colors[Numeric]){ display }
@@ -66,7 +71,7 @@ module Rib; module Color
       else        ; if color = find_color(colors, result)
                     send(color){ display }
                     else
-                    send(colors[Object      ]){ display }
+                    send(colors[Object]){ display }
                     end
     end
   end

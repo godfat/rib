@@ -35,7 +35,9 @@ module Rib; module API
   def loop_once
     input, result, err = get_input, nil, nil
     throw(:rib_exit, input) if config[:exit].include?(input)
+
     result, err = eval_input(input)
+
     if err
       print_eval_error(err)
     elsif input.strip != '' && !equal_rib_skip(result)
@@ -43,6 +45,9 @@ module Rib; module API
     else
       # print nothing for blank input or Rib::Skip
     end
+
+    flush_warnings
+
     [result, err]
   rescue Interrupt
     handle_interrupt
@@ -82,23 +87,38 @@ module Rib; module API
   def print_result result
     puts(format_result(result))
   rescue StandardError, SyntaxError => e
-    Rib.warn("Error while printing result:\n  #{format_error(e)}")
+    warn("Error while printing result:\n  #{format_error(e)}")
   end
 
   # Print evaluated error using #format_error
   def print_eval_error err
     puts(format_error(err))
   rescue StandardError, SyntaxError => e
-    Rib.warn("Error while printing error:\n  #{format_error(e)}")
+    warn("Error while printing error:\n  #{format_error(e)}")
   end
 
   def puts str
     super
   end
 
+  def warn message
+    warnings << message
+  end
+
+  def flush_warnings
+    Rib.warn(warnings.shift) until warnings.empty?
+  end
+
   # Format result using #result_prompt
   def format_result result
-    result_prompt + result.inspect
+    "#{result_prompt}#{inspect_result(result)}"
+  end
+
+  def inspect_result result
+    string = result.inspect
+    warn("#{result.class}#inspect is not returning a string") unless
+      string.kind_of?(String)
+    string
   end
 
   # Format error raised in #loop_eval with #get_error

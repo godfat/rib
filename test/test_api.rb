@@ -12,9 +12,48 @@ describe Rib::API do
           "pong_#{meth}"
         end
       end
-      shell = Rib::Shell.dup
-      shell.use(mod)
-      shell.new.send(meth).should == "pong_#{meth}"
+      klass = Rib::Shell.dup
+      klass.use(mod)
+      klass.new.send(meth).should == "pong_#{meth}"
+    end
+  end
+
+  def shell
+    @shell ||= new_shell
+  end
+
+  would 'emit a warning whenever result is not a string' do
+    object = Class.new{ alias_method :inspect, :object_id }.new
+
+    mock(shell).get_input{'object'}
+    mock(shell).loop_eval('object'){object}
+    mock(shell).puts("=> #{object.object_id}"){}
+    mock($stderr).puts(including("#{object.class}#inspect")){}
+
+    shell.loop_once
+
+    ok
+  end
+
+  describe '#warn' do
+    would 'append a warning message to warnings' do
+      shell.warn('test')
+
+      expect(shell.warnings).eq ['test']
+    end
+  end
+
+  describe '#flush_warnings' do
+    before do
+      shell.warn('test')
+
+      mock($stderr).puts('rib: test'){}
+    end
+
+    would 'warn to $stderr from #warnings' do
+      shell.flush_warnings
+
+      ok
     end
   end
 end
