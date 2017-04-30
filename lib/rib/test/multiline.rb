@@ -1,9 +1,8 @@
 
 copy :setup_multiline do
   def setup_shell
-    @shell = new_shell
-    stub(@shell).print{}.with_any_args
-    stub(@shell).puts{} .with_any_args
+    stub(shell).print{}.with_any_args
+    stub(shell).puts{} .with_any_args
   end
 
   def setup_input str
@@ -18,17 +17,17 @@ copy :setup_multiline do
 
   def input str
     setup_input(str)
-    mock(@shell).throw(:rib_multiline)
+    mock(shell).throw(:rib_multiline)
   end
 
   def input_done str, err=nil
     setup_input(str)
     if err
-      mock(@shell).print_eval_error(is_a(err)){}
+      mock(shell).print_eval_error(is_a(err)){}
     else
-      mock(@shell).print_result(is_a(Object)){}
+      mock(shell).print_result(is_a(Object)){}
     end
-    @shell.loop_once
+    shell.loop_once
     ok
   end
 
@@ -36,7 +35,7 @@ copy :setup_multiline do
     lines = str.split("\n")
     lines[0...-1].each{ |line|
       input(line)
-      @shell.loop_once
+      shell.loop_once
     }
     input_done(lines.last, err)
   end
@@ -48,7 +47,7 @@ copy :multiline do
   end
 
   would 'work with no prompt' do
-    @shell.config[:prompt] = ''
+    shell.config[:prompt] = ''
     check <<-RUBY
       def f
         0

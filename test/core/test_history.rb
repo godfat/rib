@@ -6,22 +6,22 @@ require 'tempfile'
 copy :history do
   would '#after_loop save history' do
     inputs = %w[blih blah]
-    @shell.history.clear
-    @shell.history.push(*inputs)
+    shell.history.clear
+    shell.history.push(*inputs)
 
-    @shell.after_loop
+    shell.after_loop
     File.read(@history_file).should.eq "#{inputs.join("\n")}\n"
   end
 
   would '#before_loop load previous history' do
     File.write(@history_file, "check\nthe\nmike")
-    @shell.before_loop
-    @shell.history.to_a.should.eq %w[check the mike]
+    shell.before_loop
+    shell.history.to_a.should.eq %w[check the mike]
   end
 
   would '#before_loop have empty history if no history file exists' do
-    @shell.before_loop
-    @shell.history.to_a.should.eq []
+    shell.before_loop
+    shell.history.to_a.should.eq []
   end
 
   would '#read_history be accessible to plugins in #before_loop' do
@@ -58,8 +58,8 @@ describe Rib::History do
       end
       @tempfile     = Tempfile.new('rib')
       @history_file = @tempfile.path
-      @shell        = Rib::Shell.new(
-        :history_file => @history_file).before_loop
+
+      shell(:history_file => @history_file)
     end
 
     after do

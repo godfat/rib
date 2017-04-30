@@ -12,13 +12,9 @@ describe Rib::Anchor do
     Rib::Anchor.enable
   end
 
-  def new_shell
-    Rib::Shell.new(:binding => Class.new).before_loop
-  end
-
   describe '#anchor?' do
     would 'give true when anchoring' do
-      shell = Rib.shell
+      stub(Rib).shell{shell}
 
       mock(shell).get_input do
         expect(shell).anchor?

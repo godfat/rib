@@ -8,13 +8,14 @@ describe Rib::MultilineHistory do
   paste :setup_multiline
 
   def check str, err=nil
-    @shell.history.clear
+    shell.history.clear
     with_history(str, err)
 
+    @shell = nil
     setup_shell
 
-    @shell.history.clear
-    @shell.history << 'old history'
+    shell.history.clear
+    shell.history << 'old history'
     with_history(str, err, 'old history')
   end
 
@@ -22,9 +23,9 @@ describe Rib::MultilineHistory do
     lines = str.split("\n")
     lines[0...-1].inject([]){ |result, line|
       input(line)
-      @shell.loop_once
+      shell.loop_once
       result << line
-      @shell.history.to_a.should.eq prefix + result
+      shell.history.to_a.should.eq prefix + result
       result
     }
     input_done(lines.last, err)
@@ -33,7 +34,7 @@ describe Rib::MultilineHistory do
               else
                 "\n#{lines.join("\n")}"
               end
-    @shell.history.to_a.should.eq prefix + [history]
+    shell.history.to_a.should.eq prefix + [history]
   end
 
   test_for Rib::History, Rib::Multiline, Rib::MultilineHistory do

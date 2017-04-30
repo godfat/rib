@@ -5,15 +5,6 @@ require 'rib/shell'
 describe Rib::Shell do
   paste :rib
 
-  before do
-    Rib.disable_plugins
-    @shell = nil
-  end
-
-  def shell
-    @shell ||= Rib::Shell.new
-  end
-
   describe '#loop' do
     def input str
       mock(shell).get_input{str}

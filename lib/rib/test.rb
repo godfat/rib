@@ -7,14 +7,20 @@ Pork::Suite.include(Muack::API)
 require 'rib'
 
 copy :rib do
+  before do
+    Rib.disable_plugins
+  end
+
   after do
     Muack.verify
   end
 
+  def shell opts={}
+    @shell ||= new_shell(opts)
+  end
+
   def new_shell opts={}
-    shell = Rib::Shell.new(
-      {:binding => Object.new.instance_eval{binding}}.merge(opts)
-    )
+    shell = Rib::Shell.new(opts)
     yield(shell) if block_given?
     shell.before_loop
   end

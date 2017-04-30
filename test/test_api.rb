@@ -18,10 +18,6 @@ describe Rib::API do
     end
   end
 
-  def shell
-    @shell ||= new_shell
-  end
-
   would 'emit a warning whenever result is not a string' do
     object = Class.new{ alias_method :inspect, :object_id }.new
 

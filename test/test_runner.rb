@@ -7,30 +7,29 @@ describe Rib::Runner do
 
   before do
     Rib.disable_plugins
-    @shell = Rib::Shell.new
-    mock(Rib).shell{ @shell }.times(2)
+    mock(Rib).shell{ shell }.times(2)
   end
 
   def input *args
-    args.each{ |item| mock(@shell).get_input{ item } }
-    mock(@shell).get_input{}
+    args.each{ |item| mock(shell).get_input{ item } }
+    mock(shell).get_input{}
   end
 
   def output *args
-    args.each{ |item| mock(@shell).puts("=> #{item}"){} }
-    mock(@shell).puts{}
+    args.each{ |item| mock(shell).puts("=> #{item}"){} }
+    mock(shell).puts{}
   end
 
   would '-e' do
      input('a')
     output('1')
-    Rib::Runner.run(%w[-ea=1]).should.eq @shell
+    Rib::Runner.run(%w[-ea=1]).should.eq shell
   end
 
   would '-e nothing' do
      input
     output
-    Rib::Runner.run(%w[-e]).should.eq @shell
+    Rib::Runner.run(%w[-e]).should.eq shell
   end
 
   def verify_app_e argv
@@ -41,7 +40,7 @@ describe Rib::Runner do
     mock(Rib::Runner).which_bin(min){ min }
     mock(Rib::Runner).load(min){ Rib::Runner.run(argv) }
     stub(Rib).config{ conf }
-    Rib::Runner.run(argv).should.eq @shell
+    Rib::Runner.run(argv).should.eq shell
   end
 
   would 'min -e' do
