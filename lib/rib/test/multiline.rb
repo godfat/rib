@@ -1,15 +1,8 @@
 
 copy :setup_multiline do
-  def setup_shell
-    stub(shell).print{}.with_any_args
-    stub(shell).puts{} .with_any_args
-  end
-
   def setup_input str
     if readline?
-      mock(::Readline).readline(is_a(String), true){
-        (::Readline::HISTORY << str.chomp)[-1]
-      }
+      stub_readline(:mock)
     else
       mock($stdin).gets{ str.chomp }
     end
@@ -43,7 +36,7 @@ end
 
 copy :multiline do
   before do
-    setup_shell
+    stub_output
   end
 
   would 'work with no prompt' do

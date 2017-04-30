@@ -25,6 +25,22 @@ copy :rib do
     shell.before_loop
   end
 
+  def stub_output
+    stub(shell).print(is_a(String)){}
+    stub(shell).puts(is_a(String)){}
+  end
+
+  def readline?
+    Rib.constants.map(&:to_s).include?('Readline') &&
+      Rib::Readline.enabled?
+  end
+
+  def stub_readline meth=:stub
+    send(meth, ::Readline).readline(is_a(String), true) do
+      (::Readline::HISTORY << str.chomp).last
+    end
+  end
+
   singleton_class.module_eval do
     def test_for *plugins, &block
       require 'rib/all' # exhaustive tests
@@ -73,17 +89,6 @@ copy :rib do
       rest[0].disable
       test_level3(rest[1..-1], block)
     end
-  end
-
-  def readline?
-    Rib.constants.map(&:to_s).include?('Readline') &&
-    Rib::Readline.enabled?
-  end
-
-  def stub_readline
-    stub(::Readline).readline(is_a(String), true){
-      (::Readline::HISTORY << str.chomp).last
-    }
   end
 end
 

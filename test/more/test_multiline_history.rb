@@ -12,7 +12,7 @@ describe Rib::MultilineHistory do
     with_history(str, err)
 
     @shell = nil
-    setup_shell
+    stub_output
 
     shell.history.clear
     shell.history << 'old history'
