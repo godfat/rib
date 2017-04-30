@@ -25,16 +25,20 @@ describe Rib::MultilineHistory do
       input(line)
       shell.loop_once
       result << line
-      shell.history.to_a.should.eq prefix + result
+
+      expect(shell.history.to_a).eq prefix + result
+
       result
     }
     input_done(lines.last, err)
+
     history = if lines.size == 1
                 lines.first
               else
                 "\n#{lines.join("\n")}"
               end
-    shell.history.to_a.should.eq prefix + [history]
+
+    expect(shell.history.to_a).eq prefix + [history]
   end
 
   test_for Rib::History, Rib::Multiline, Rib::MultilineHistory do

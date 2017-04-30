@@ -34,32 +34,39 @@ describe Rib::Shell do
       else
         mock(shell).get_input{ str }
       end
+
       shell.loop_once
+
       ok
     end
 
     would 'handles ctrl+c' do
       mock(shell).handle_interrupt{}
+
       input{ raise Interrupt }
     end
 
     would 'prints result' do
       mock(shell).puts('=> "mm"'){}
+
       input('"m" * 2')
     end
 
     would 'error in print_result' do
       mock(Rib).warn(matching(/Error while printing result.*BOOM/m)){}
+
       input('obj = Object.new; def obj.inspect; raise "BOOM"; end; obj')
     end
 
     would 'not crash if user input is a blackhole' do
       mock(Rib).warn(matching(/Error while printing result/)){}
+
       input('Rib::Blackhole')
     end
 
     would 'print error from eval' do
       mock(shell).puts(matching(/RuntimeError/)){}
+
       input('raise "blah"')
     end
   end
@@ -67,7 +74,8 @@ describe Rib::Shell do
   describe '#prompt' do
     would 'be changeable' do
       shell.config[:prompt] = '> '
-      shell.prompt.should.eq  '> '
+
+      expect(shell.prompt).eq  '> '
     end
   end
 
@@ -78,14 +86,16 @@ describe Rib::Shell do
 
     would 'line' do
       shell.eval_input('10 ** 2')
-      shell.config[:line].should.eq @line + 1
+
+      expect(shell.config[:line]).eq @line + 1
     end
 
     would 'print error and increments line' do
       result, err = shell.eval_input('{')
-      result.should.eq nil
-      err.should.kind_of?(SyntaxError)
-      shell.config[:line].should.eq @line + 1
+
+      expect(result).eq nil
+      expect(err).kind_of?(SyntaxError)
+      expect(shell.config[:line]).eq @line + 1
     end
   end
 
@@ -127,15 +137,18 @@ describe Rib::Shell do
     mock(shell).loop_once{ raise 'boom' }
     mock(Rib).warn(is_a(String)){}
     mock(shell).after_loop{}
-    lambda{shell.loop}.should.raise(RuntimeError)
+
+    expect.raise(RuntimeError) do
+      shell.loop
+    end
   end
 
   would 'have empty binding' do
-    shell.eval_input('local_variables').first.should.empty?
+    expect(shell.eval_input('local_variables').first).empty?
   end
 
   would 'not pollute main' do
-    shell.eval_input('main').first.should.eq 'rib'
+    expect(shell.eval_input('main').first).eq 'rib'
   end
 
   would 'warn on removing main' do
@@ -144,11 +157,13 @@ describe Rib::Shell do
         def main; end
       end
     RUBY
+
     mock(Rib).warn(is_a(String)){}
-    shell.eval_input('main').first.should.eq 'rib'
+
+    expect(shell.eval_input('main').first).eq 'rib'
   end
 
   would 'be main' do
-    shell.eval_input('self.inspect').first.should.eq 'main'
+    expect(shell.eval_input('self.inspect').first).eq 'main'
   end
 end

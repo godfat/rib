@@ -19,22 +19,27 @@ describe Rib::Autoindent do
     Rib::Multiline.enable
     Rib::Autoindent.enable
     @indent = autoindent.new
+
     mock(@indent).puts(matching(/^\e/)).times(0)
+
+    expect(@indent.stack_size).eq 0
   end
 
   def ri input, size
     @indent.eval_input(input)
-    @indent.stack_size.should.eq size
+
+    expect(@indent.stack_size).eq size
   end
 
   def le input, size
     mock(@indent).puts(matching(/^\e/)){}
+
     @indent.eval_input(input)
-    @indent.stack_size.should.eq size
+
+    expect(@indent.stack_size).eq size
   end
 
   would 'begin rescue else end' do
-    @indent.stack_size.should.eq 0
     ri('begin'         , 1)
     ri(  '1'           , 1)
     le('rescue'        , 1)

@@ -19,7 +19,7 @@ describe Rib::Beep do
   end
 
   def expect_beep shell
-    mock(shell).print("\a")
+    mock(shell).print("\a"){}
   end
 
   def unexpect_beep shell

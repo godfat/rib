@@ -6,7 +6,6 @@ describe Rib::Runner do
   paste :rib
 
   before do
-    Rib.disable_plugins
     mock(Rib).shell{ shell }.times(2)
   end
 
@@ -23,13 +22,15 @@ describe Rib::Runner do
   would '-e' do
      input('a')
     output('1')
-    Rib::Runner.run(%w[-ea=1]).should.eq shell
+
+    expect(Rib::Runner.run(%w[-ea=1])).eq shell
   end
 
   would '-e nothing' do
      input
     output
-    Rib::Runner.run(%w[-e]).should.eq shell
+
+    expect(Rib::Runner.run(%w[-e])).eq shell
   end
 
   def verify_app_e argv
@@ -37,10 +38,12 @@ describe Rib::Runner do
     output('1')
     conf = {:name => 'rib'}
     min  = 'rib-min'
+
     mock(Rib::Runner).which_bin(min){ min }
     mock(Rib::Runner).load(min){ Rib::Runner.run(argv) }
     stub(Rib).config{ conf }
-    Rib::Runner.run(argv).should.eq shell
+
+    expect(Rib::Runner.run(argv)).eq shell
   end
 
   would 'min -e' do

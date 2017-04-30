@@ -14,7 +14,8 @@ describe Rib::API do
       end
       klass = Rib::Shell.dup
       klass.use(mod)
-      klass.new.send(meth).should == "pong_#{meth}"
+
+      expect(klass.new.send(meth)).eq "pong_#{meth}"
     end
   end
 

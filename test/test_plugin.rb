@@ -13,26 +13,28 @@ describe Rib::Plugin do
   end
 
   would 'have shortcut methods' do
-    @names.each{ |name|
-      %w[enable disable].each{ |meth|
-        Rib.respond_to?("#{meth}_#{name}").should == true
-      }
-      %w[enabled? disabled?].each{ |meth|
-        Rib.respond_to?("#{name}_#{meth}").should == true
-      }
-    }
+    @names.each do |name|
+      %w[enable disable].each do |meth|
+        expect(Rib).respond_to?("#{meth}_#{name}")
+      end
+
+      %w[enabled? disabled?].each do |meth|
+        expect(Rib).respond_to?("#{name}_#{meth}")
+      end
+    end
   end
 
   would 'be the same as mod methods' do
     @mods.shuffle.take(@mods.size/2).each(&:disable)
-    @names.each{ |name|
-      %w[enabled? disabled?].each{ |meth|
-        Rib.send("#{name}_#{meth}").should ==
+
+    @names.each do |name|
+      %w[enabled? disabled?].each do |meth|
+        expect(Rib.send("#{name}_#{meth}")).eq \
           @mods.find{ |mod|
             mod.name[/::\w+$/].tr(':', '') ==
             name.gsub(/([^_]+)/){$1.capitalize}.tr('_', '') }.
           send(meth)
-      }
-    }
+      end
+    end
   end
 end
