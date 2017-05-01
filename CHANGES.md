@@ -2,16 +2,18 @@
 
 ## Rib 1.5.2 -- 2017-05-01
 
-* We now require 'rib/version' from the beginning, avoid load error under
+* We now `require 'rib/version'` from the beginning, avoid loading error
   under bundler.
 * Introduced `API#started_at` which is `config[:started_at]` for accessing
   when Rib started.
 * Introduced `API#inspect_result` which would inspect the result. The default
   behaviour would just inspect the result, but if the result is not a string,
   emit a warning. https://github.com/godfat/rib/issues/14
-* Now all warnings would print after the result was printed.
+* Now all warnings would be printed after the result was printed. This would
+  make it easier to spot warnings.
 * [more/color] It would now paint warnings.
 * [more/anchor] Introduced `Rib.stop_anchors` to stop all nested anchors.
+  https://github.com/godfat/rib/issues/13
 * Fixed Rib app detection for newer RubyGems
 
 ### Breaking changes
