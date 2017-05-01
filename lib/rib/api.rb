@@ -105,10 +105,6 @@ module Rib; module API
     warnings << message
   end
 
-  def flush_warnings
-    Rib.warn(warnings.shift) until warnings.empty?
-  end
-
   # Format result using #result_prompt
   def format_result result
     "#{result_prompt}#{inspect_result(result)}"
@@ -143,5 +139,9 @@ module Rib; module API
     result == Rib::Skip
   rescue
     # do nothing, it cannot respond to == correctly, it can't be Rib::Skip
+  end
+
+  def flush_warnings
+    Rib.warn(warnings.shift) until warnings.empty?
   end
 end; end

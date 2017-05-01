@@ -1,5 +1,35 @@
 # CHANGES
 
+## Rib 1.5.2 -- 2017-05-01
+
+* We now require 'rib/version' from the beginning, avoid load error under
+  under bundler.
+* Introduced `API#started_at` which is `config[:started_at]` for accessing
+  when Rib started.
+* Introduced `API#inspect_result` which would inspect the result. The default
+  behaviour would just inspect the result, but if the result is not a string,
+  emit a warning. https://github.com/godfat/rib/issues/14
+* Now all warnings would print after the result was printed.
+* [more/color] It would now paint warnings.
+* [more/anchor] Introduced `Rib.stop_anchors` to stop all nested anchors.
+* Fixed Rib app detection for newer RubyGems
+
+### Breaking changes
+
+* Extending `Rib::Plugin` would no longer automatically also include `Rib`.
+  For compatibility concern, a `const_missing` is now defined in `Rib::Plugin`
+  so that using `Shell` would still refer to `Rib::Shell` for you, considering
+  that this might be a common pattern:
+
+      extend Rib::Plugin
+      Shell.use(self)
+
+  Note that this would be removed in the future, so please take this chance to
+  change it to:
+
+      extend Rib::Plugin
+      Rib::Shell.use(self)
+
 ## Rib 1.5.1 -- 2017-03-09
 
 * [more/beep] This plugin would beep via `print "\a"` when the application

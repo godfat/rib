@@ -48,7 +48,7 @@ describe Rib::API do
     end
 
     would 'warn to $stderr from #warnings' do
-      shell.flush_warnings
+      shell.send(:flush_warnings)
 
       ok
     end

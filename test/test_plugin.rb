@@ -37,4 +37,14 @@ describe Rib::Plugin do
       end
     end
   end
+
+  would 'have backward compatibility for accessing Shell' do
+    mock(Rib).warn(
+      is_a(String), is_a(String), including("#{__FILE__}:47")){ok}
+
+    Module.new.module_eval <<-RUBY, __FILE__, __LINE__ + 1
+      extend Rib::Plugin
+      Shell
+    RUBY
+  end
 end

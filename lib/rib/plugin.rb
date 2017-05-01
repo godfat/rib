@@ -24,9 +24,20 @@ module Rib; module Plugin
     !!disabled
   end
 
+  # Backward compatibility
+  def const_missing mod
+    if Rib.const_defined?(mod)
+      Rib.warn("Using #{mod} is deprecated, please change to Rib::#{mod}",
+               "This compatibility layer would be removed in Rib 1.6+",
+               "Called: #{caller.first}")
+      Rib.const_get(mod)
+    else
+      super
+    end
+  end
+
   def self.extended mod
-    # Backward compatibility
-    mod.const_set(:Shell, Rib::Shell)
+    return unless mod.name
 
     snake_name = mod.name.sub(/(\w+::)+?(\w+)$/, '\2').
       gsub(/([A-Z][a-z]*)/, '\\1_').downcase[0..-2]

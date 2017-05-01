@@ -455,6 +455,7 @@ simple, simpler than rib-rails.
 * Lin Jen-Shin (@godfat)
 * Mr. Big Cat (@miaout17)
 * @bootleq
+* @lulalala
 * @tka
 
 ## LICENSE:
