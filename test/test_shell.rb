@@ -6,8 +6,8 @@ describe Rib::Shell do
   paste :rib
 
   describe '#loop' do
-    def input str
-      mock(shell).get_input{str}
+    def input str=Rib::Skip
+      mock(shell).get_input{if block_given? then yield else str end}
       shell.loop
       ok
     end
@@ -24,6 +24,28 @@ describe Rib::Shell do
       shell.eval_binding.eval('self').instance_variable_set(:@shell, shell)
 
       input('@shell.stop; throw :rib_exit')
+    end
+
+    describe 'trap' do
+      before do
+        @token = Class.new(Exception)
+        @old_trap = trap('INT'){ raise @token }
+        mock(shell).handle_interrupt{ mock(shell).get_input{'exit'} }
+      end
+
+      after do
+        trap('INT', &@old_trap)
+      end
+
+      def interrupt
+        Process.kill('SIGINT', Process.pid)
+      end
+
+      would 'fence and restore ctrl+c interruption' do
+        input{ interrupt }
+
+        expect.raise(@token){ interrupt }
+      end
     end
   end
 

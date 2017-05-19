@@ -12,10 +12,11 @@ matrix:
   include:
     - rvm: 2.2.5
     - rvm: 2.3.2
-    - rvm: 2.4.1
+    - rvm: ruby-head
     - rvm: jruby-9
       env: JRUBY_OPTS=--debug
     - rvm: rbx
 
   allow_failures:
-  - rvm: rbx
+    - rvm: 2.4.1
+    - rvm: rbx

@@ -4,7 +4,6 @@ require 'rib/api'
 
 module Rib; class Shell
   include API
-  trap('INT'){ raise Interrupt }
 
   def self.use mod
     include mod
@@ -47,6 +46,7 @@ module Rib; class Shell
   # Loops shell until user exits
   def loop
     before_loop
+    set_trap
     start
     in_loop
     stop
@@ -55,7 +55,7 @@ module Rib; class Shell
     Rib.warn("Error while running loop:\n  #{format_error(e)}")
     raise
   ensure
-
+    release_trap
     after_loop
   end
 
@@ -77,6 +77,14 @@ module Rib; class Shell
 
   protected
   attr_writer :config
+
+  def set_trap
+    @trap_proc = trap('INT'){ raise Interrupt }
+  end
+
+  def release_trap
+    trap('INT', &@trap_proc) if @trap_proc
+  end
 
   private
   # Avoid namespace pollution from rubygems bin stub.
