@@ -83,7 +83,7 @@ module Rib; class Shell
   end
 
   def release_trap
-    trap('INT', &@trap_proc) if @trap_proc
+    trap('INT', &@trap_proc) if @trap_proc.kind_of?(Proc)
   end
 
   private

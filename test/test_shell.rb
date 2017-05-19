@@ -39,6 +39,7 @@ describe Rib::Shell do
 
       def interrupt
         Process.kill('SIGINT', Process.pid)
+        sleep
       end
 
       would 'fence and restore ctrl+c interruption' do
