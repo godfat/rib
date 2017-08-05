@@ -41,7 +41,7 @@ copy :multiline do
 
   would 'work with no prompt' do
     shell.config[:prompt] = ''
-    check <<-RUBY
+    check <<~RUBY
       def f
         0
       end
@@ -49,7 +49,7 @@ copy :multiline do
   end
 
   would 'def f' do
-    check <<-RUBY
+    check <<~RUBY
       def f
         1
       end
@@ -57,21 +57,21 @@ copy :multiline do
   end
 
   would 'class C' do
-    check <<-RUBY
+    check <<~RUBY
       class C
       end
     RUBY
   end
 
   would 'begin' do
-    check <<-RUBY
+    check <<~RUBY
       begin
       end
     RUBY
   end
 
   would 'begin with RuntimeError' do
-    check <<-RUBY, RuntimeError
+    check <<~RUBY, RuntimeError
       begin
         raise 'multiline raised an error'
       end
@@ -79,125 +79,125 @@ copy :multiline do
   end
 
   would 'do end' do
-    check <<-RUBY
+    check <<~RUBY
       [].each do
       end
     RUBY
   end
 
   would 'block brace' do
-    check <<-RUBY
+    check <<~RUBY
       [].each{
       }
     RUBY
   end
 
   would 'hash' do
-    check <<-RUBY
+    check <<~RUBY
       {
       }
     RUBY
   end
 
   would 'hash value' do
-    check <<-RUBY
+    check <<~RUBY
       {1 =>
        2}
     RUBY
   end
 
   would 'array' do
-    check <<-RUBY
+    check <<~RUBY
       [
       ]
     RUBY
   end
 
   would 'group' do
-    check <<-RUBY
+    check <<~RUBY
       (
       )
     RUBY
   end
 
   would 'string double quote' do
-    check <<-RUBY
+    check <<~RUBY
       "
       "
     RUBY
   end
 
   would 'string single quote' do
-    check <<-RUBY
+    check <<~RUBY
       '
       '
     RUBY
   end
 
   would 'be hash treated as a block SyntaxError' do
-    check <<-RUBY, SyntaxError
+    check <<~RUBY, SyntaxError
       puts { :x => 10 }.class
     RUBY
   end
 
   would 'begin with SyntaxError' do
-    check <<-RUBY, SyntaxError
+    check <<~RUBY, SyntaxError
       begin
         s-y n
     RUBY
   end
 
   would 'binary operator +' do
-    check <<-RUBY
+    check <<~RUBY
       1/1.to_i +
       1
     RUBY
   end
 
   would 'binary operator -' do
-    check <<-RUBY
+    check <<~RUBY
       1*1.to_i -
       1
     RUBY
   end
 
   would 'binary operator *' do
-    check <<-RUBY
+    check <<~RUBY
       1-1.to_i *
       1
     RUBY
   end
 
   would 'binary operator /' do
-    check <<-RUBY
+    check <<~RUBY
       1+1.to_i /
       1
     RUBY
   end
 
   would 'binary operator |' do
-    check <<-RUBY
+    check <<~RUBY
       1+1.to_i |
       1
     RUBY
   end
 
   would 'binary operator &' do
-    check <<-RUBY
+    check <<~RUBY
       1+1.to_i &
       1
     RUBY
   end
 
   would 'binary operator ^' do
-    check <<-RUBY
+    check <<~RUBY
       1+1.to_i ^
       1
     RUBY
   end
 
   would 'backslash at the end' do
-    check <<-RUBY
+    check <<~RUBY
       'nice ' \\
       'shell'
     RUBY
