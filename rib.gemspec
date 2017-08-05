@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: rib 1.5.2 ruby lib
+# stub: rib 1.5.3 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rib".freeze
-  s.version = "1.5.2"
+  s.version = "1.5.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2017-05-01"
+  s.date = "2017-08-05"
   s.description = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell\n\nRib is based on the design of [ripl][] and the work of [ripl-rc][], some of\nthe features are also inspired by [pry][]. The aim of Rib is to be fully\nfeatured and yet very easy to opt-out or opt-in other features. It shall\nbe simple, lightweight and modular so that everyone could customize Rib.\n\n[ripl]: https://github.com/cldwalker/ripl\n[ripl-rc]: https://github.com/godfat/ripl-rc\n[pry]: https://github.com/pry/pry".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.executables = [
@@ -92,7 +92,7 @@ Gem::Specification.new do |s|
   "test/test_shell.rb".freeze]
   s.homepage = "https://github.com/godfat/rib".freeze
   s.licenses = ["Apache-2.0".freeze]
-  s.rubygems_version = "2.6.10".freeze
+  s.rubygems_version = "2.6.12".freeze
   s.summary = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell".freeze
   s.test_files = [
   "test/core/test_completion.rb".freeze,

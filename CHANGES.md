@@ -1,5 +1,13 @@
 # CHANGES
 
+## Rib 1.5.3 -- 2017-08-05
+
+* Now we set trap only when the shell starts, and restore the old trap
+  after the shell stops. This should fix some problems using anchor inside
+  RSpec or Unicorn. They would no longer interfere with them.
+* [core/multiline] Now we support backslash. See:
+  [Using backslash line continuation character results in syntax error](https://github.com/godfat/rib/issues/15)
+
 ## Rib 1.5.2 -- 2017-05-01
 
 * We now `require 'rib/version'` from the beginning, avoid loading error
