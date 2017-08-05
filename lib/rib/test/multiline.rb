@@ -195,4 +195,11 @@ copy :multiline do
       1
     RUBY
   end
+
+  would 'backslash at the end' do
+    check <<-RUBY
+      'nice ' \\
+      'shell'
+    RUBY
+  end
 end

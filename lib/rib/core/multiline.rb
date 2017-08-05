@@ -81,7 +81,11 @@ module Rib; module Multiline
   def loop_eval input
     return super if Multiline.disabled?
     multiline_buffer << input
-    super(multiline_buffer.join("\n"))
+    if input =~ /\\\z/
+      throw :rib_multiline
+    else
+      super(multiline_buffer.join("\n"))
+    end
   end
 
   def print_eval_error err
