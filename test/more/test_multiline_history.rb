@@ -30,7 +30,9 @@ describe Rib::MultilineHistory do
 
       result
     }
-    input_done(lines.last, err)
+    input_done(lines.last, err) do
+      shell.eval_binding.eval(str)
+    end
 
     history = if lines.size == 1
                 lines.first

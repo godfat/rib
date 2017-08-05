@@ -18,7 +18,7 @@ copy :setup_multiline do
     if err
       mock(shell).print_eval_error(is_a(err)){}
     else
-      mock(shell).print_result(is_a(Object)){}
+      mock(shell).print_result(yield){}
     end
     shell.loop_once
     ok
@@ -30,7 +30,9 @@ copy :setup_multiline do
       input(line)
       shell.loop_once
     }
-    input_done(lines.last, err)
+    input_done(lines.last, err) do
+      shell.eval_binding.eval(str)
+    end
   end
 end
 
