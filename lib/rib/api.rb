@@ -97,10 +97,6 @@ module Rib; module API
     warn("Error while printing error:\n  #{format_error(e)}")
   end
 
-  def puts str
-    super
-  end
-
   def warn message
     warnings << message
   end
