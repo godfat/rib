@@ -1,5 +1,9 @@
 # CHANGES
 
+## Rib 1.5.4 -- 2017-10-23
+
+* Removed unnecessary method definition for `puts`
+
 ## Rib 1.5.3 -- 2017-08-05
 
 * Now we set trap only when the shell starts, and restore the old trap
