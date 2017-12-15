@@ -9,7 +9,11 @@ module Rib; module Caller
     def caller *filters
       return if Rib::Caller.disabled?
 
-      backtrace = Rib.shell.format_backtrace(super().drop(1))
+      display_backtrace(super().drop(1), *filters)
+    end
+
+    def display_backtrace raw_backtrace, *filters
+      backtrace = Rib.shell.format_backtrace(raw_backtrace)
 
       lib = %r{\brib-#{Rib::VERSION}/lib/rib/}
       if backtrace.first =~ lib
