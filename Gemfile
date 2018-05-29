@@ -16,8 +16,3 @@ gem 'coveralls', :require => false if ENV['CI']
 platforms :ruby do
   gem 'readline_buffer'
 end
-
-platforms :rbx do
-  gem 'rubysl-singleton' # used in rake
-  gem 'rubysl-readline'  # we need readline extension
-end
