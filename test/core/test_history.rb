@@ -5,10 +5,9 @@ require 'rib/core/history'
 
 describe Rib::History do
   paste :rib
+  paste :setup_history
 
   test_for Rib::History do
-    paste :setup_history
-
     would '#after_loop save history' do
       inputs = %w[blih blah]
       shell.history.push(*inputs)

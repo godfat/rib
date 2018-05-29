@@ -5,10 +5,9 @@ require 'rib/core/squeeze_history'
 
 describe Rib::SqueezeHistory do
   paste :rib
+  paste :setup_history
 
   test_for Rib::History, Rib::SqueezeHistory do
-    paste :setup_history
-
     before do
       @input = %w[foo bar bar foo bar]
     end
