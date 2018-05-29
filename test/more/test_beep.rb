@@ -9,21 +9,24 @@ describe Rib::Beep do
     Rib::Beep.enable
   end
 
-  after do
-    expect(Rib::Beep).disabled?
-  end
-
   def verify delay, threshold=nil, &block
-    new_shell(:started_at => Time.now - delay,
-              :beep_threshold => threshold, &block)
+    shell(:started_at => Time.now - delay,
+          :beep_threshold => threshold, &block)
+
+    stub_output
+    mock(shell).get_input{}
+
+    shell.loop
+
+    ok
   end
 
-  def expect_beep shell
-    mock(shell).print("\a"){}
+  def expect_beep sh
+    mock(sh).print("\a"){}
   end
 
-  def unexpect_beep shell
-    stub(shell).print.with_any_args{ flunk }
+  def unexpect_beep sh
+    stub(sh).print.with_any_args{ flunk }
   end
 
   describe 'beep' do

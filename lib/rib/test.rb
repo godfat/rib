@@ -20,16 +20,17 @@ copy :rib do
   end
 
   def new_shell opts={}
-    shell = Rib::Shell.new(
+    result = Rib::Shell.new(
       {:binding => Object.new.instance_eval{binding}}.
       merge(opts))
-    yield(shell) if block_given?
-    shell.before_loop
+    yield(result) if block_given?
+    result.before_loop
   end
 
   def stub_output
     stub(shell).print(is_a(String)){}
     stub(shell).puts(is_a(String)){}
+    stub(shell).puts{}
   end
 
   def readline?
