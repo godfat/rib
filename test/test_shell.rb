@@ -167,26 +167,24 @@ describe Rib::Shell do
   end
 
   would 'have empty binding' do
-    expect(shell.eval_input('local_variables').first).empty?
+    expect(shell(:binding => nil).eval_input('local_variables').first).empty?
   end
 
   would 'not pollute main' do
-    expect(shell.eval_input('main').first).eq 'rib'
-  end
-
-  would 'warn on removing main' do
-    TOPLEVEL_BINDING.eval <<-RUBY
-      singleton_class.module_eval do
-        def main; end
-      end
-    RUBY
-
-    mock(Rib).warn(is_a(String)){}
-
-    expect(shell.eval_input('main').first).eq 'rib'
+    expect(shell(:binding => nil).eval_input('main').first).eq 'rib'
   end
 
   would 'be main' do
-    expect(shell.eval_input('self.inspect').first).eq 'main'
+    expect(shell(:binding => nil).eval_input('self.inspect').first).eq 'main'
+  end
+
+  would 'warn on removing main' do
+    mock(TOPLEVEL_BINDING.eval('singleton_class')).method_defined?(:main) do
+      true
+    end
+
+    mock(Rib).warn(is_a(String)){}
+
+    expect(shell(:binding => nil).eval_input('main').first).eq 'rib'
   end
 end
