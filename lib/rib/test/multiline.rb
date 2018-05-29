@@ -18,7 +18,7 @@ copy :setup_multiline do
     if err
       mock(shell).print_eval_error(is_a(err)){}
     else
-      mock(shell).print_result(yield){}
+      mock(shell).print_result(is_a(Object)){}
     end
     shell.loop_once
     ok
@@ -30,17 +30,15 @@ copy :setup_multiline do
       input(line)
       shell.loop_once
     }
-    input_done(lines.last, err) do
-      shell.eval_binding.eval(str)
-    end
+    input_done(lines.last, err)
+  end
+
+  before do
+    stub_output
   end
 end
 
 copy :multiline do
-  before do
-    stub_output
-  end
-
   would 'work with no prompt' do
     shell.config[:prompt] = ''
     check <<~RUBY

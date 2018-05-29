@@ -20,7 +20,9 @@ copy :rib do
   end
 
   def new_shell opts={}
-    shell = Rib::Shell.new(opts)
+    shell = Rib::Shell.new(
+      {:binding => Object.new.instance_eval{binding}}.
+      merge(opts))
     yield(shell) if block_given?
     shell.before_loop
   end
@@ -51,9 +53,10 @@ copy :rib do
         Rib.disable_plugins(rest)
       end
 
-      yield
+      describe "enabling #{plugins}" do
+        block.call
 
-      case ENV['TEST_LEVEL']
+        case ENV['TEST_LEVEL']
         when '0'
         when '1'
           test_level1(rest, block)
@@ -63,13 +66,18 @@ copy :rib do
           test_level3(rest, block)
         else # test_level3 is too slow because of rr (i guess)
           test_level2(rest, block)
+        end
       end
     end
 
     def test_level1 rest, block
       rest.each{ |target|
         target.enable
-        block.call
+
+        describe "also enabling #{target}" do
+          block.call
+        end
+
         target.disable
       }
     end
@@ -77,17 +85,31 @@ copy :rib do
     def test_level2 rest, block
       rest.combination(2).each{ |targets|
         Rib.enable_plugins(targets)
-        block.call
+
+        describe "also enabling #{targets.join(', ')}" do
+          block.call
+        end
+
         Rib.disable_plugins(targets)
       }
     end
 
     def test_level3 rest, block
-      return block.call if rest.empty?
-      rest[0].enable
-      test_level3(rest[1..-1], block)
-      rest[0].disable
-      test_level3(rest[1..-1], block)
+      if rest.empty?
+        block.call
+      else
+        rest[0].enable
+
+        describe "also enabling #{rest[0]}" do
+          test_level3(rest[1..-1], block)
+        end
+
+        rest[0].disable
+
+        describe "disabling #{rest[0]}" do
+          test_level3(rest[1..-1], block)
+        end
+      end
     end
   end
 end
