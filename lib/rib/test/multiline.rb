@@ -140,6 +140,12 @@ copy :multiline do
     RUBY
   end
 
+  would 'SyntaxError' do
+    check <<~RUBY, SyntaxError
+      s-y n
+    RUBY
+  end
+
   would 'begin with SyntaxError' do
     check <<~RUBY, SyntaxError
       begin

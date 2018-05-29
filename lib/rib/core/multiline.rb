@@ -59,11 +59,13 @@ module Rib; module Multiline
                     [ # string or regexp
                       "unterminated \\w+ meets end of file",
                       # jruby
-                      "syntax error, unexpected" \
-                      " t(UPLUS|UMINUS|STAR|REGEXP_BEG|AMPER)",
-                      "syntax error, unexpected end-of-file",
+                      "syntax error, unexpected end\\-of\\-file",
                       # jruby 9.0.4.0
-                      "formal argument must be local variable"    ].join('|'))
+                      "formal argument must be local variable",
+                      # jruby 9.2.0.0
+                      "syntax error, unexpected (#{RUBY20_IO.join('|')})",
+                      "syntax error, unexpected '\\W'"
+                                                                  ].join('|'))
     end
 
   # --------------- Rib API ---------------
