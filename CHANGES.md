@@ -1,5 +1,12 @@
 # CHANGES
 
+## Rib 1.5.5 -- ?
+
+* [core/multiline] Support for JRuby 9.2.0.0 is fixed
+* [more/beep] It would now beep every single time when any evaluation took
+  longer than the threshold.
+* [more/caller] It would now properly use the enabled plugins
+
 ## Rib 1.5.4 -- 2017-10-23
 
 * Removed unnecessary method definition for `puts`
