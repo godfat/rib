@@ -313,15 +313,6 @@ or having conflicted semantics.
 
   Which would print the result with hirb.
 
-* `require 'rib/extra/debugger'` This plugin is depending on:
-
-  1. [debugger][]
-
-  Which introduces `Rib.debug`, which would do similar things as
-  `Rib.anchor` but only more powerful. However, this is not well
-  tested and might not work well. Please let me know if you have
-  any issue using it, thanks!
-
 * `require 'rib/extra/paging'` This plugin is depending on `less` and `tput`.
 
   Which would pass the result to `less` (or `$PAGER` if set) if
@@ -332,7 +323,6 @@ or having conflicted semantics.
 
 [readline_buffer]: https://github.com/godfat/readline_buffer
 [hirb]: https://github.com/cldwalker/hirb
-[debugger]: https://github.com/cldwalker/debugger
 
 ### As a debugging/interacting tool
 
