@@ -39,7 +39,7 @@ describe Rib::Autoindent do
     expect(@indent.stack_size).eq size
   end
 
-  would 'begin rescue else end' do
+  would 'begin rescue else ensure end' do
     ri('begin'         , 1)
     ri(  '1'           , 1)
     le('rescue'        , 1)
@@ -53,6 +53,9 @@ describe Rib::Autoindent do
     le('rescue E=> e'  , 1)
     le('rescue E =>e ' , 1)
     le('else'          , 1)
+    ri(  '1'           , 1)
+    le('ensure'        , 1)
+    ri(  '1'           , 1)
     le('end while nil' , 0)
   end
 
