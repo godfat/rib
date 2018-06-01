@@ -179,4 +179,14 @@ describe Rib::Autoindent do
     ri(  '1'           , 1)
     le(')'             , 0)
   end
+
+  would '[]' do
+    ri('['             , 1)
+    ri(  '0'           , 1)
+    ri(  '1'           , 1)
+    ri(  '['           , 2)
+    ri(    '2'         , 2)
+    le(  ']'           , 1)
+    le(']'             , 0)
+  end
 end
