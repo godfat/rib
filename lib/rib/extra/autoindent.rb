@@ -35,7 +35,8 @@ module Rib; module Autoindent
     /^if\b/            => /^(end)\b|^else$|^elsif\b/,
     /^unless\b/        => /^(end)\b|^else$|^elsif\b/,
     /^case\b/          => /^(end)\b|^else$|when\b/  ,
-    /^def\b/           => /^(end)\b/                ,
+    /^def\b/           =>
+      /^(end)\b|^else$|^rescue *((\w+)? *(=> *\w+)?)?$|^ensure$/,
     /^class\b/         => /^(end)\b/                ,
     /^module\b/        => /^(end)\b/                ,
     /^while\b/         => /^(end)\b/                ,
