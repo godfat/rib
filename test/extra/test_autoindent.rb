@@ -125,6 +125,13 @@ describe Rib::Autoindent do
     le('end'           , 0)
   end
 
+  would 'for end' do
+    ri('for x in 1..2' , 1)
+    ri(  'if true'     , 2)
+    le(  'end'         , 1)
+    le('end'           , 0)
+  end
+
   would 'until end' do
     ri('until true'    , 1)
     ri(  'if true'     , 2)
