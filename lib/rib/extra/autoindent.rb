@@ -54,6 +54,7 @@ module Rib; module Autoindent
     # begin
     /do( *\|.*\|)?$/ => /^(end)\b/                ,
     /\{( *\|.*\|)?$/ => /^(\})\B/                 ,
+    /\[$/            => /^(\])\B/                 ,
     # those are too hard to deal with, so we use syntax error to double check
     # what about this then?
     # v = if true
