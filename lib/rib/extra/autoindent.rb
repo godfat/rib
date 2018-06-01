@@ -38,6 +38,7 @@ module Rib; module Autoindent
     /^class\b/         => /^(end)\b/                ,
     /^module\b/        => /^(end)\b/                ,
     /^while\b/         => /^(end)\b/                ,
+    /^for\b/           => /^(end)\b/                ,
     /^until\b/         => /^(end)\b/                ,
     # consider cases:
     # 'do
