@@ -444,6 +444,7 @@ simple, simpler than rib-rails.
 * ayaya (@ayamomiji)
 * Lin Jen-Shin (@godfat)
 * Mr. Big Cat (@miaout17)
+* @alpaca-tc
 * @bootleq
 * @lulalala
 * @tka
