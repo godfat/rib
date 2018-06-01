@@ -132,6 +132,8 @@ file. To see a list of overridable API, please read [api.rb][]
 
 [api.rb]: https://github.com/godfat/rib/blob/master/lib/rib/api.rb
 
+#### Disable enabled plugins
+
 #### Rib home and history file
 
 Rib home is used to store a config file and a history file, which is
@@ -447,6 +449,7 @@ simple, simpler than rib-rails.
 * @alpaca-tc
 * @bootleq
 * @lulalala
+* @MITSUBOSH
 * @tka
 
 ## LICENSE:
