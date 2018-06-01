@@ -24,7 +24,7 @@ module Rib; module Autoindent
     # rescue E => e
     # rescue E=> e
     # rescue E =>e
-    /^begin$/          => /^(end)\b|^else$|^rescue *((\w+)? *(=> *\w+)?)?$/,
+    /^begin$/          => /^(end)\b|^else$|^rescue *((\w+)? *(=> *\w+)?)?$|^ensure$/,
     # elsif Expression
     # consider cases:
     # elsif(true)
