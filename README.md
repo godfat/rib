@@ -134,6 +134,29 @@ file. To see a list of overridable API, please read [api.rb][]
 
 #### Disable enabled plugins
 
+While it's convenient to just `require 'rib/all'`, you might not want to use
+all the plugins. No worries, you don't have to list everything in order to
+not use something. For example, you might not get used to `bottomup_backtrace`
+and don't want to use it. You could put this in your config:
+
+``` ruby
+require 'rib/all'
+
+Rib::BottomupBacktrace.disable
+```
+
+This could disable `bottomup_backtrace` so you get regular top-down backtrace
+with all other plugins. This is particularly useful whenever there's a bug
+in one of the plugins, and you might need to disable some plugins in order to
+debug. You could always enable it again with:
+
+``` ruby
+Rib::BottomupBacktrace.enable
+```
+
+You could do this any time, in the config, or in the shell session. No need to
+restart anything, because it takes effect immediately.
+
 #### Rib home and history file
 
 Rib home is used to store a config file and a history file, which is
