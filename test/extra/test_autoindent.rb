@@ -99,10 +99,20 @@ describe Rib::Autoindent do
     le('end'           , 0)
   end
 
-  would 'def end' do
+  would 'def rescue end' do
     ri('def f a'       , 1)
     ri(  'if a'        , 2)
     le(  'end'         , 1)
+    le('rescue'        , 1)
+    ri(  '1'           , 1)
+    le('rescue=>e'     , 1)
+    le('rescue => e'   , 1)
+    le('rescue =>e'    , 1)
+    le('rescue E=>e '  , 1)
+    le('rescue E'      , 1)
+    le('rescue E => e ', 1)
+    le('rescue E=> e'  , 1)
+    le('rescue E =>e ' , 1)
     le('end'           , 0)
   end
 
