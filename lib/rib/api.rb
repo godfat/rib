@@ -83,6 +83,10 @@ module Rib; module API
     end
   end
 
+  def puts str=''
+    super
+  end
+
   # Print result using #format_result
   def print_result result
     puts(format_result(result))
