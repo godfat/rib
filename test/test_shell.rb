@@ -75,6 +75,14 @@ describe Rib::Shell do
       input('"m" * 2')
     end
 
+    %w[next break].each do |keyword|
+      would "handle #{keyword}" do
+        mock(shell).puts(matching(/^SyntaxError:/)){}
+
+        input(keyword)
+      end
+    end
+
     would 'error in print_result' do
       mock(Rib).warn(matching(/Error while printing result.*BOOM/m)){}
 
