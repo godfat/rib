@@ -20,7 +20,7 @@ module Rib; module Color
   def get_error err
     return super if Color.disabled?
     message, backtrace = super
-    [format_color(err, message), format_backtrace(backtrace)]
+    [format_color(err, message), backtrace]
   end
 
   def warn message
@@ -87,8 +87,8 @@ module Rib; module Color
     backtrace.map{ |b|
       path, msgs = b.split(':', 2)
       dir, sep, file = path.rpartition('/')
-      msgs ||= "#{line}:" # msgs would be nil when input is next/break
-      msg = msgs.sub(/(\d+):/){red{$1}+':'}.sub(/`.+?'/){green{$&}}
+      msgs ||= (line - 1).to_s # msgs would be nil when input is next/break
+      msg = msgs.sub(/(\d+)(:?)/){red{$1}+$2}.sub(/`.+?'/){green{$&}}
 
       "#{dir+sep}#{yellow{file}}:#{msg}"
     }
