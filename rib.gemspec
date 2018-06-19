@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: rib 1.5.5 ruby lib
+# stub: rib 1.6.0 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "rib".freeze
-  s.version = "1.5.5"
+  s.version = "1.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2018-05-31"
+  s.date = "2018-06-20"
   s.description = "Ruby-Interactive-ruBy -- Yet another interactive Ruby shell\n\nRib is based on the design of [ripl][] and the work of [ripl-rc][], some of\nthe features are also inspired by [pry][]. The aim of Rib is to be fully\nfeatured and yet very easy to opt-out or opt-in other features. It shall\nbe simple, lightweight and modular so that everyone could customize Rib.\n\n[ripl]: https://github.com/cldwalker/ripl\n[ripl-rc]: https://github.com/godfat/ripl-rc\n[pry]: https://github.com/pry/pry".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.executables = [
@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   "lib/rib/core/strip_backtrace.rb".freeze,
   "lib/rib/debug.rb".freeze,
   "lib/rib/extra/autoindent.rb".freeze,
+  "lib/rib/extra/byebug.rb".freeze,
   "lib/rib/extra/hirb.rb".freeze,
   "lib/rib/extra/paging.rb".freeze,
   "lib/rib/extra/spring.rb".freeze,

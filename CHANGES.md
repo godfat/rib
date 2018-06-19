@@ -1,11 +1,22 @@
 # CHANGES
 
-## Rib 1.5.5 -- ?
+## Rib 1.6.0 -- 2018-06-20
 
 * [core/multiline] Support for JRuby 9.2.0.0 is fixed
 * [more/beep] It would now beep every single time when any evaluation took
   longer than the threshold.
+* [more/color] Fix whenever the input is just `next` or `break`
+* [more/bottomup_backtrace] This would no longer format backtrace twice
 * [more/caller] It would now properly use the enabled plugins
+* [extra/autoindent] It would now indent with `ensure` for `begin` and `def`.
+  Thanks @MITSUBOSHI https://github.com/godfat/rib/pull/21 and
+  @alpaca-tc https://github.com/godfat/rib/pull/17
+* [extra/autoindent] It would now indent with `for`.
+  Thanks @MITSUBOSHI https://github.com/godfat/rib/pull/18
+* [extra/autoindent] It would now indent with `()` and `[]`.
+  Thanks @MITSUBOSHI https://github.com/godfat/rib/pull/20 and
+  https://github.com/godfat/rib/pull/19
+* [extra/byebug] This is now work-in-progress.
 
 ## Rib 1.5.4 -- 2017-10-23
 
