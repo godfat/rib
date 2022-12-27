@@ -20,8 +20,10 @@ copy :rib do
   end
 
   def new_shell opts={}
+    binding_object = Object.new
     result = Rib::Shell.new(
-      {:binding => Object.new.instance_eval{binding}}.
+      {:binding => binding_object.instance_eval{binding},
+       :binding_object => binding_object}.
       merge(opts))
     yield(result) if block_given?
     result.before_loop

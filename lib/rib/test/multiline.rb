@@ -140,6 +140,8 @@ copy :multiline do
     RUBY
 
     if RUBY_VERSION >= '3.1.0'
+      stub(shell.config[:binding_object]).puts{}
+
       check code
     else
       check code, SyntaxError
