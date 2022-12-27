@@ -135,9 +135,15 @@ copy :multiline do
   end
 
   would 'be hash treated as a block SyntaxError' do
-    check <<~RUBY, SyntaxError
+    code = <<~RUBY
       puts { :x => 10 }.class
     RUBY
+
+    if RUBY_VERSION >= '3.1.0'
+      check code
+    else
+      check code, SyntaxError
+    end
   end
 
   would 'SyntaxError' do
@@ -175,10 +181,16 @@ copy :multiline do
   end
 
   would 'binary operator /' do
-    check <<~RUBY
+    code = <<~RUBY
       1+1.to_i /
       1
     RUBY
+
+    if RUBY_VERSION >= '3.1.0'
+      check code.lines.first, SyntaxError
+    else
+      check code
+    end
   end
 
   would 'binary operator |' do
