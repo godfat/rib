@@ -20,6 +20,8 @@ describe Rib::MultilineHistory do
   end
 
   def with_history str, err, *prefix
+    stub(shell.config[:binding_object]).puts{}
+
     lines = str.split("\n")
     lines[0...-1].inject([]){ |result, line|
       input(line)
