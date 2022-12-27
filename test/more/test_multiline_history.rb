@@ -9,6 +9,7 @@ describe Rib::MultilineHistory do
 
   def check str, err=nil
     shell.history.clear
+    yield if block_given?
     with_history(str, err)
 
     @shell = nil
@@ -16,12 +17,11 @@ describe Rib::MultilineHistory do
 
     shell.history.clear
     shell.history << 'old history'
+    yield if block_given?
     with_history(str, err, 'old history')
   end
 
   def with_history str, err, *prefix
-    stub(shell.config[:binding_object]).puts{}
-
     lines = str.split("\n")
     lines[0...-1].inject([]){ |result, line|
       input(line)

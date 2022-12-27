@@ -25,6 +25,8 @@ copy :setup_multiline do
   end
 
   def check str, err=nil
+    yield if block_given?
+
     lines = str.split("\n")
     lines[0...-1].each{ |line|
       input(line)
@@ -140,9 +142,9 @@ copy :multiline do
     RUBY
 
     if RUBY_VERSION >= '3.1.0'
-      stub(shell.config[:binding_object]).puts{}
-
-      check code
+      check code do
+        stub(shell.config[:binding_object]).puts{}
+      end
     else
       check code, SyntaxError
     end
