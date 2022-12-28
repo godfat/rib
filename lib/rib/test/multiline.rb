@@ -141,7 +141,7 @@ copy :multiline do
       puts { :x => 10 }.class
     RUBY
 
-    if RUBY_VERSION >= '3.1.0'
+    if RUBY_VERSION >= '3.0.0'
       check code do
         stub(shell.config[:binding_object]).puts{}
       end
@@ -190,7 +190,7 @@ copy :multiline do
       1
     RUBY
 
-    if RUBY_VERSION >= '3.1.0'
+    if RUBY_VERSION >= '3.0.0'
       check code.lines.first, SyntaxError
     else
       check code
