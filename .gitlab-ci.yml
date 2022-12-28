@@ -1,0 +1,40 @@
+
+stages:
+  - test
+
+.test:
+  stage: test
+  image: ruby:${RUBY_VERSION}-bullseye
+  variables:
+    GIT_DEPTH: "1"
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_PATHS: task
+    RUBYOPT: --enable-frozen-string-literal
+  before_script:
+    - bundle install --retry=3
+    - unset CI # Coverage doesn't work well with frozen literal
+  script:
+    - ruby -vr bundler/setup -S rake test
+
+ruby:3.0:
+  extends:
+    - .test
+  variables:
+    RUBY_VERSION: '3.0'
+
+ruby:3.1:
+  extends:
+    - .test
+  variables:
+    RUBY_VERSION: '3.1'
+
+ruby:3.2:
+  extends:
+    - .test
+  variables:
+    RUBY_VERSION: '3.2'
+
+jruby:latest:
+  extends:
+    - .test
+  image: jruby:latest

@@ -1,4 +1,4 @@
-# Rib [![Build Status](https://secure.travis-ci.org/godfat/rib.svg?branch=master)](http://travis-ci.org/godfat/rib) [![Coverage Status](https://coveralls.io/repos/github/godfat/rib/badge.svg)](https://coveralls.io/github/godfat/rib) [![Join the chat at https://gitter.im/godfat/rib](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/godfat/rib)
+# Rib [![Pipeline status](https://gitlab.com/godfat/rib/badges/master/pipeline.svg)](https://gitlab.com/godfat/rib/-/pipelines)
 
 by Lin Jen-Shin ([godfat](http://godfat.org))
 
