@@ -8,6 +8,13 @@ module Rib; module Byebug
   extend Plugin
   Shell.use(self)
 
+  def before_loop
+    return super if Rib::Byebug.disabled?
+
+    super
+    # ::Byebug::RibProcessor.start
+  end
+
   module Imp
     def byebug
       return if Rib::Byebug.disabled?
@@ -73,6 +80,8 @@ module Byebug
     end
 
     def resume_rib
+      return if Rib.shell.running?
+
       byebug_binding = frame._binding
 
       print_location
