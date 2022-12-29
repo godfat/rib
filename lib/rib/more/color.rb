@@ -88,7 +88,10 @@ module Rib; module Color
       path, msgs = b.split(':', 2)
       dir, sep, file = path.rpartition('/')
       msgs ||= (line - 1).to_s # msgs would be nil when input is next/break
-      msg = msgs.sub(/(\d+)(:?)/){red{$1}+$2}.sub(/`.+?'/){green{$&}}
+      msg = msgs.sub(/(\d+)(:?)/) do
+        m = Regexp.last_match
+        "#{red{m[1]}}#{m[2]}"
+      end.sub(/`.+?'/){green{Regexp.last_match[0]}}
 
       "#{dir+sep}#{yellow{file}}:#{msg}"
     }
