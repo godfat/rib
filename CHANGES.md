@@ -1,5 +1,17 @@
 # CHANGES
 
+## Rib 1.6.1 -- 2022-12-30
+
+### Bugs fixed
+
+* Fixed `rib rack` for constant resolution.
+
+### Enhancement
+
+* [more/color] Instead of using `$1` and `$2`, use `Regexp.last_match`.
+  It should be the same for MRI, but seems to be working better for JRuby.
+  Perhaps `$1` and `$2` is not thread local on JRuby?
+
 ## Rib 1.6.0 -- 2018-06-20
 
 * [core/multiline] Support for JRuby 9.2.0.0 is fixed
