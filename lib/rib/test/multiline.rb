@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 copy :setup_multiline do
   def setup_input str

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # upon session ends
 require 'rib/more/multiline_history_file'

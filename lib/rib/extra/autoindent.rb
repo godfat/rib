@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rib/core/history'   # otherwise the order might be wrong
 require 'rib/core/readline'  # dependency

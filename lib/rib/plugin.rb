@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Rib; module Plugin
   attr_accessor :disabled

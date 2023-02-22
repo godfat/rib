@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Rib; module Rack
   singleton_class.module_eval{ attr_accessor :app }

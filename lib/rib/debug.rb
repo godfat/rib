@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rib/config'
 require 'rib/more/anchor'
