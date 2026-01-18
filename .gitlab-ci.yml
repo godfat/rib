@@ -16,23 +16,23 @@ stages:
   script:
     - ruby -vr bundler/setup -S rake test
 
-ruby:3.0:
-  extends:
-    - .test
-  variables:
-    RUBY_VERSION: '3.0'
-
-ruby:3.1:
-  extends:
-    - .test
-  variables:
-    RUBY_VERSION: '3.1'
-
 ruby:3.2:
   extends:
     - .test
   variables:
     RUBY_VERSION: '3.2'
+
+ruby:3.3:
+  extends:
+    - .test
+  variables:
+    RUBY_VERSION: '3.3'
+
+ruby:3.4:
+  extends:
+    - .test
+  variables:
+    RUBY_VERSION: '3.4'
 
 jruby:latest:
   extends:
