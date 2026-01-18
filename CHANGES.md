@@ -1,5 +1,11 @@
 # CHANGES
 
+## Rib 1.6.2 -- 2026-01-19
+
+### Bugs fixed
+
+* Fixed multiline and colorization compatibility for prism parser
+
 ## Rib 1.6.1 -- 2022-12-30
 
 ### Bugs fixed

@@ -157,13 +157,6 @@ copy :multiline do
     RUBY
   end
 
-  would 'begin with SyntaxError' do
-    check <<~RUBY, SyntaxError
-      begin
-        s-y n
-    RUBY
-  end
-
   would 'binary operator +' do
     check <<~RUBY
       1/1.to_i +

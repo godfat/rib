@@ -54,7 +54,7 @@ describe Rib::Color do
             "#{Rib::Color.red{line}}:in #{Rib::Color.green}"
       Rib::Color.colorize_backtrace(e.backtrace).first.should =~ \
         Regexp.new(
-          "#{Regexp.escape(msg)}`.+'#{Regexp.escape(Rib::Color.reset)}")
+          "#{Regexp.escape(msg)}(?:`|').+'#{Regexp.escape(Rib::Color.reset)}")
     end
   end
 

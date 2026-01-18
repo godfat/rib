@@ -92,7 +92,7 @@ module Rib; module Color
       msg = msgs.sub(/(\d+)(:?)/) do
         m = Regexp.last_match
         "#{red{m[1]}}#{m[2]}"
-      end.sub(/`.+?'/){green{Regexp.last_match[0]}}
+      end.sub(/(?:`|').+?'/){green{Regexp.last_match[0]}}
 
       "#{dir+sep}#{yellow{file}}:#{msg}"
     }

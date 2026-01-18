@@ -22,6 +22,7 @@ module Rib; module Multiline
   # ruby -e 'class C'
   # ruby -e 'def f'
   # ruby -e 'begin'
+  # ruby -e 'case 1'
   # ruby -e 'eval "1+1.to_i +"'
   # ruby -e 'eval "1+1.to_i -"'
   # ruby -e 'eval "1+1.to_i *"'
@@ -39,8 +40,12 @@ module Rib; module Multiline
                       # mri and rubinius
                       "unexpected (#{BINARY_OP.join('|')}), expecting \\$end",
                       "syntax error, unexpected \\$end"    ,
+                      # prism
+                      "expected an? `.+?` to close the",
+                      "expected a matching `\\)`",
+                      # ruby 2.0 and prism
+                      "unexpected end-of-input",
                       # ruby 2.0
-                      "syntax error, unexpected end-of-input",
                       "syntax error, unexpected (#{RUBY20_IO.join('|')}),"
                                                                   ].join('|'))
     when 'rbx'  ; Regexp.new(
