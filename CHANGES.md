@@ -1,10 +1,18 @@
 # CHANGES
 
+## Rib 1.6.2 -- 2026-01-20
+
+### Bugs fixed
+
+* [core/strip_backtrace] Now it works with backtrace quotes change from
+  `` ` `` to `'`
+
 ## Rib 1.6.2 -- 2026-01-19
 
 ### Bugs fixed
 
-* Fixed multiline and colorization compatibility for prism parser
+* [core/multiline] Now it works with prism parser
+* [more/color] Now it works with backtrace quotes change from `` ` `` to `'`
 
 ## Rib 1.6.1 -- 2022-12-30
 

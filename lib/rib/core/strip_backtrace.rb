@@ -37,7 +37,7 @@ module Rib; module StripBacktrace
 
   def strip_rib_backtrace backtrace
     backtrace[
-      0..backtrace.rindex{ |l| l =~ /\(#{name}\):\d+:in `.+?'/ } || -1]
+      0..backtrace.rindex{ |l| l =~ /\(#{name}\):\d+:in (?:`|').+?'/ } || -1]
   end
 
   def replace_path_prefix prefix, substitute, path
