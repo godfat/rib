@@ -10,7 +10,7 @@ stages:
     GIT_SUBMODULE_PATHS: task
     RUBYOPT: --enable-frozen-string-literal
   before_script:
-    - apk add --no-cache git linux-headers build-base readline-dev
+    - if command -v apk > /dev/null; then apk add --no-cache git linux-headers build-base readline-dev; fi
     - bundle install --retry=3
     - unset CI # Don't run coverage
   script:
