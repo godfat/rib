@@ -12,4 +12,5 @@ gem 'hirb'
 
 platforms :ruby do
   gem 'readline_buffer'
+  gem 'readline-ext'
 end
