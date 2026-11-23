@@ -4,6 +4,7 @@ require 'pork/auto'
 require 'muack'
 
 Pork::Suite.include(Muack::API)
+Pork.I_am_feeling_lucky!
 
 require 'rib'
 
